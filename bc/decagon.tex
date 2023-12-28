@@ -1,0 +1,78 @@
+\documentclass[]{standalone}
+
+\usepackage{../lenses}
+
+\newcommand{\decagonExt}[6]{ % view,color,length, rot,sep,text
+ \ifthenelse{#1>0}{
+  \draw[#2] (0,0) -- (#3,0);
+  \ifthenelse{#1=2}{
+   \draw[black] (#3,0) ++(#4:#5) node{$#6$};
+  }{}
+ }{}
+}
+
+\newcommand{\decagonInt}[5]{ % color, side
+ \begin{scope}[rotate=108]
+  \draw[main] (0,0) -- (#2,0); %1
+  \draw[black] (#2,0) ++(#3:#4) node{$#5$};
+  \begin{scope}[shift={(#2,0)},rotate=36]
+   \draw[main] (0,0) -- (#2,0); %2
+  \end{scope}
+  \begin{scope}[shift={(#2,0)},rotate=-72]
+   \draw[main] (0,0) -- (#2,0); %3
+  \end{scope}
+ \end{scope}
+}
+
+% exterior 0=invisible 1=visible 2=visible + text
+\newcommand{\decagonI}[4][000000]{ % color, side, exterior, interior
+ \definecolor{main}{HTML}{#1}
+ \decagonExt{#3}{main}{#2}{-72}{0.2}{A} %ext 1
+ \begin{scope}[shift={(#2,0)},rotate=36]
+  \decagonExt{#3}{main}{#2}{-72}{0.2}{B} %ext 2 
+  \ifthenelse{#4=1} { \decagonInt{#1}{#2}{-18}{0.3}{K} }{}
+  \begin{scope}[shift={(#2,0)},rotate=36]
+   \decagonExt{#3}{main}{#2}{-72}{0.2}{C} %ext3
+   \begin{scope}[shift={(#2,0)},rotate=36]
+    \decagonExt{#3}{main}{#2}{-72}{0.2}{D} %ext4
+    \ifthenelse{#4=1} { \decagonInt{#1}{#2}{-18}{0.3}{L} }{}
+    \begin{scope}[shift={(#2,0)},rotate=36]
+     \decagonExt{#3}{main}{#2}{-72}{0.2}{E} %ext5
+     \begin{scope}[shift={(#2,0)},rotate=36]
+      \decagonExt{#3}{main}{#2}{-72}{0.2}{F} %ext6
+      \ifthenelse{#4=1} { \decagonInt{#1}{#2}{-18}{0.3}{M} }{}
+      \begin{scope}[shift={(#2,0)},rotate=36]
+       \decagonExt{#3}{main}{#2}{-72}{0.2}{G} %ext7
+       \begin{scope}[shift={(#2,0)},rotate=36]
+        \decagonExt{#3}{main}{#2}{-72}{0.2}{H} %ext8
+        \ifthenelse{#4=1} { \decagonInt{#1}{#2}{-18}{0.3}{N} }{}
+        \begin{scope}[shift={(#2,0)},rotate=36]
+         \decagonExt{#3}{main}{#2}{-72}{0.2}{I} %ext9
+         \begin{scope}[shift={(#2,0)},rotate=36]
+          \decagonExt{#3}{main}{#2}{-72}{0.2}{J} %ext10
+          \ifthenelse{#4=1} { \decagonInt{#1}{#2}{-18}{0.3}{O} }{}
+         \end{scope}
+        \end{scope}
+       \end{scope}
+      \end{scope}
+     \end{scope}
+    \end{scope}
+   \end{scope}
+  \end{scope}
+ \end{scope}
+}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[scale=1.2]
+   \begin{scope}[shift={(0,0)}]
+    \decagonI[FF0000]{1.5}{2}{1} % color,side,ext,int
+    \draw (1,-1) node{$(a)$};
+   \end{scope}
+   \begin{scope}[shift={(6,0)}]
+    \decagonI[008800]{1.5}{0}{1}
+    \draw (1,-1) node{$(b)$};
+   \end{scope}
+  \end{scope}
+ \end{tikzpicture}
+\end{document}
