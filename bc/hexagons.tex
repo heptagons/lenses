@@ -1,0 +1,50 @@
+\documentclass[]{standalone}
+
+\usepackage{../lenses}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[scale=1]
+   \pgfmathsetmacro\side{1}
+
+   \begin{scope}[shift={(0,0)}] % hexagon B
+    \begin{scope}[] \rhombusB{0044FF}{\side} \end{scope};
+    \begin{scope}[shift={(\side,0)},rotate=-36] \rhombusC{880088}{\side} \end{scope};
+    \begin{scope}[rotate=-36] \rhombusB{0044FF}{\side} \end{scope};
+    \draw(0,0) ++(180:0.3) node{$B_1$};
+    \draw(\side,0) ++(0:0.45) node{$O$};
+    \begin{scope}[rotate=36] \draw(\side,0) ++(108:0.3) node{$B_2$};
+     \begin{scope}[shift={(\side,0)},rotate=-36] \draw(\side,0) ++(36:0.3) node{$B_3$};
+      \begin{scope}[shift={(\side,0)},rotate=-36] \draw(\side,0) ++(18:0.3) node{$B_4$};
+       \begin{scope}[shift={(\side,0)},rotate=-108] \draw(\side,0) ++(108:0.3) node{$B_5$};
+        \begin{scope}[shift={(\side,0)},rotate=-36] \draw(\side,0) ++(36:0.3) node{$B_6$};
+        \end{scope}
+       \end{scope}
+      \end{scope}
+     \end{scope}
+    \end{scope}
+    \draw (1.5,-2.5) node{$(a)$};
+   \end{scope}
+   
+   \begin{scope}[shift={(5,0)}] % hexagon C
+    \begin{scope}[] \rhombusC{880088}{\side} \end{scope};
+    \begin{scope}[rotate=-72] \rhombusC{880088}{\side} \end{scope};
+    \begin{scope}[rotate=-72,shift={(\side,0)}, rotate=144] \rhombusB{0044FF}{\side} \end{scope};
+    \draw(0,0) ++(180:0.3) node{$O$};
+    \draw(0.5,0) ++(180:0.15) node{$C_1$};
+    \begin{scope}[rotate=72] \draw(\side,0) ++(72:0.3) node{$C_2$};
+     \begin{scope}[shift={(\side,0)},rotate=-72] \draw(\side,0) ++(18:0.3) node{$C_3$};
+      \begin{scope}[shift={(\side,0)},rotate=-108] \draw(\side,0) ++(108:0.3) node{$C_4$};
+       \begin{scope}[shift={(\side,0)},rotate=36] \draw(\side,0) ++(72:0.3) node{$C_5$};
+        \begin{scope}[shift={(\side,0)},rotate=-108] \draw(\side,0) ++(0:0.3) node{$C_6$};
+        \end{scope}
+       \end{scope}
+      \end{scope}
+     \end{scope}
+    \end{scope}
+    \draw (0.75,-2.5) node{$(b)$};
+   \end{scope}   
+  
+  \end{scope}
+ \end{tikzpicture}
+\end{document}

@@ -2,6 +2,8 @@
 
 \usepackage{../lenses}
 
+
+
 \newcommand{\decagonExt}[6]{ % view,color,length, rot,sep,text
  \ifthenelse{#1>0}{
   \draw[#2] (0,0) -- (#3,0);
@@ -65,14 +67,17 @@
 \begin{document}
  \begin{tikzpicture}
   \begin{scope}[scale=1.2]
+
    \begin{scope}[shift={(0,0)}]
     \decagonI[FF0000]{1.5}{2}{1} % color,side,ext,int
     \draw (1,-1) node{$(a)$};
    \end{scope}
+
    \begin{scope}[shift={(6,0)}]
     \decagonI[008800]{1.5}{0}{1}
     \draw (1,-1) node{$(b)$};
    \end{scope}
+
   \end{scope}
  \end{tikzpicture}
 \end{document}

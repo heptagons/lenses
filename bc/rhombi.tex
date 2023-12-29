@@ -1,0 +1,36 @@
+\documentclass[]{standalone}
+
+\usepackage{../lenses}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[scale=1]
+   \pgfmathsetmacro\side{1}
+   \begin{scope}[shift={(0,0)}]
+    \foreach \x in {0,1,...,10}
+     \begin{scope}[rotate=\x*36] \rhombusB{0044FF}{\side} \end{scope};
+    \draw (0,-2.5) node{$(a)$};
+   \end{scope}
+
+   \begin{scope}[shift={(4,0)}]
+    \foreach \x in {0,1,...,5}
+     \begin{scope}[rotate=\x*72] \rhombusC{880088}{\side} \end{scope};
+    \draw (0,-2.5) node{$(b)$};
+   \end{scope}
+
+   \begin{scope}[shift={(8,0)}]
+    \foreach \x in {0,1,...,5}
+     \begin{scope}[rotate=\x*72]
+      \rhombusC{880088}{\side}
+      \begin{scope}[shift={(\side,0)},rotate=72]
+       \begin{scope}[shift={(\side,0)},rotate=72]
+        \rhombusB{0044FF}{\side}
+       \end{scope}
+      \end{scope}
+     \end{scope};
+    \draw (0,-2.5) node{$(c)$};
+   \end{scope}
+
+  \end{scope}
+ \end{tikzpicture}
+\end{document}
