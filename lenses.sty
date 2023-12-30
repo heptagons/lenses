@@ -5,8 +5,17 @@
 \RequirePackage{tikz}
 \RequirePackage{ifthen}
 
-\newcommand{\rhombus}[3] { % color,side,angle
+\newcommand{\letterId}[3]{
+ \path(#1,#2) node{$\textbf{\em #3}$}; % letter
+}
+
+\newcommand{\rhombus}[4] { % color,side,angle
  \definecolor{main}{HTML}{#1}
+
+ \pgfmathsetmacro\cx{(#2-cos(180-#3))/2}
+ \pgfmathsetmacro\cy{sin(180-#3)/2}
+ \letterId{\cx}{\cy}{#4}
+
  \begin{scope} \draw[main] (0,0) -- (#2,0); %1
   \begin{scope}[shift={(#2,0)},rotate=#3] \draw[main] (0,0) -- (#2,0); %2
    \begin{scope}[shift={(#2,0)},rotate=180-#3] \draw[main] (0,0) -- (#2,0); %3
@@ -36,12 +45,20 @@
 }
 
 
-\newcommand{\rhombusB}[2] { % color,side
- \rhombus{#1}{#2}{36}
+\newcommand{\rhombusB}[3] { % color,side
+ \ifthenelse{#3=0}{
+  \rhombus{#1}{#2}{36}{}
+ }{
+  \rhombus{#1}{#2}{36}{b}
+ }
 }
 
-\newcommand{\rhombusC}[2] { % color,side
- \rhombus{#1}{#2}{72}
+\newcommand{\rhombusC}[3] { % color,side
+ \ifthenelse{#3=0}{
+  \rhombus{#1}{#2}{72}{}
+ }{
+  \rhombus{#1}{#2}{72}{c}
+ }
 }
 
 \newcommand{\pentaconcave}[2]{
@@ -51,6 +68,68 @@
    \begin{scope}[shift={(#2,0)},rotate=180-36] \draw[main] (0,0) -- (#2,0); %3
     \begin{scope}[shift={(#2,0)},rotate=-72] \draw[main] (0,0) -- (#2,0); %4
      \begin{scope}[shift={(#2,0)},rotate=180-36] \draw[main] (0,0) -- (#2,0); %5
+     \end{scope}
+    \end{scope}
+   \end{scope}
+  \end{scope}
+ \end{scope}
+}
+
+\newcommand{\pentagon}[2]{
+ \pentaconcave{FF0000}{#1}
+
+ \begin{scope}[rotate=108,shift={(#1,0)}]
+  \begin{scope}[rotate=-108]
+    \ifthenelse{#2=0}{ }{
+     \pgfmathsetmacro\cx{(#1*cos(36)}
+     \letterId{\cx}{0}{c}
+    }
+  \end{scope}
+
+  \begin{scope}[rotate=-72] \draw (0,0) -- (#1,0);
+   \begin{scope}[shift={(\side,0)},rotate=-72] \draw (0,0) -- (#1,0);
+
+
+   \end{scope}
+  \end{scope}
+ \end{scope}
+}
+
+\newcommand{\pentagram}[2]{
+ \pentaconcave{FF0000}{#1}
+ \begin{scope}[rotate=-36, shift={(#1,0)}, rotate=-144-36]
+  \pentaconcave{FF0000}{#1}
+ \end{scope}
+ \begin{scope}[shift={(#1,0)},rotate=-36] \draw (0,0) -- (#1,0);
+  \begin{scope}[shift={(#1,0)},rotate=-144-18]
+   \ifthenelse{#2=0}{ }{
+    \pgfmathsetmacro\cx{#1*cos(18)}
+    \letterId{\cx}{0}{b}
+   }
+  \end{scope}
+  \begin{scope}[shift={(#1,0)},rotate=-144] \draw (0,0) -- (#1,0);
+  \end{scope}
+ \end{scope}
+}
+
+\newcommand{\pentagonDoubleSide}[2]{
+ \draw(0,0) -- (2*#1,0);
+ \begin{scope}[rotate=-54]
+  \ifthenelse{#2=0}{ }{
+   \pgfmathsetmacro\cx{#1*sin(36)}
+   \letterId{\cx}{0}{c}
+  }
+ \end{scope}
+}
+
+\newcommand{\pentagonDouble}[2]{
+ \begin{scope}[rotate=108,shift={(#1,0)},rotate=-72,shift={(#1,0)}]
+  \begin{scope}[rotate=-72] \pentagonDoubleSide{#1}{#2}
+   \begin{scope}[shift={(2*#1,0)},rotate=-72] \pentagonDoubleSide{#1}{#2}
+    \begin{scope}[shift={(2*#1,0)},rotate=-72] \pentagonDoubleSide{#1}{#2}
+     \begin{scope}[shift={(2*#1,0)},rotate=-72] \pentagonDoubleSide{#1}{#2}
+      \begin{scope}[shift={(2*#1,0)},rotate=-72] \pentagonDoubleSide{#1}{#2}
+      \end{scope}
      \end{scope}
     \end{scope}
    \end{scope}
