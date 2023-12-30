@@ -1,11 +1,14 @@
 \documentclass[11pt]{article}
 \title{Lenses}
 \author{https://github.com/heptagons/lenses}
-\date{2023/12/28}
+\date{2023/12/29}
 
 \usepackage{graphicx}
 
 \usepackage[margin=0.75in]{geometry}
+\usepackage{float} % {figure}{H}
+\usepackage{amsmath} % \dfrac
+
 
 %\usepackage{amssymb}
 %\usepackage{subcaption}
@@ -16,26 +19,45 @@
 
 \maketitle
 \begin{abstract}
-Lenses are equilateral hexagons resembling optical concave and convex lenses.
+Lenses are equilateral hexagons resembling concave and convex optical lenses. The hexagons consecutive six internal angles are $(\theta_1,\theta_2,\theta_3,\theta_1,\theta_2,\theta_3)$ where $\theta_1=X\theta_0$, $\theta_2=Y\theta_0$, and $\theta_3=Z\theta_0$ where $\theta_0 = 2\pi/S$ is the base angle of symmetry $S$.
 \end{abstract}
 
 \section{Lenses}
 
-\subsection{Symmetry 5}
+\section{Symmetry $5$}
 
-\begin{figure}[h]
+Symmetry $5$ uses as base the angle $\beta = \dfrac{2\pi}5$. Includes two rhombi $\mathbi{b}$ and $\mathbi{c}$ and two lenses $\mathbi{B}$ and $\mathbi{C}$.
+
+
+\subsection{Rhombi $\mathbi{b}$ and $\mathbi{c}$}
+
+\begin{figure}[H]
 \centering
 \includegraphics[scale=1.1]{bc/rhombi}
-\caption{Rhombi of the types $\mathbi{b}$ and $\mathbi{c}$. The star at $(a)$ is formed with ten rhombi $\mathbi{b}$. The star at $(b)$ is formed with five rhombi $\mathbi{c}$. The regular decagon at $(c)$ is formed with five rhombi $\mathbi{b}$ and five rhombi $\mathbi{c}$.}
+\caption{Rhombi of the types $\mathbi{b}$ and $\mathbi{c}$.}
 \label{fig:bc-rhombi}
 \end{figure}
 
-\begin{figure}[h]
+Figure \ref{fig:bc-rhombi} show rhombi $\mathbi{b}$ and $\mathbi{c}$. $\mathbi{b}$ is the rhombus with smallest internal angles equal to $\dfrac{\beta}2 = \dfrac{\pi}5$. $\mathbi{c}$ is the rhombus with smallest internal angles equal to $\beta = \dfrac{2\pi}5$.
+Figure $(i)$ show a dissected star whose area equals to $10\mathbi{b}$.
+Figure $(ii)$ show a dissected star whose area equals to $5\mathbi{c}$.
+Figure $(iii)$ show a dissected regular decagon whose area equals to $5\mathbi{b} + 5\mathbi{c}$.
+
+
+\subsection{Lenses $\mathbi{B}$ and $\mathbi{C}$}
+
+\begin{figure}[H]
 \centering
 \includegraphics[scale=1.1]{bc/hexagons}
-\caption{Hexagons of types $\mathbi{B}$ and $\mathbi{C}$. Hexagon $\mathbi{B}$ $(a)$ $\overline{B_1...B_6}$ area equals the area of two rhombi $\mathbi{b}$ plus one rhombus \mathbi{c}.}
+\caption{Lenses of types $\mathbi{B}$ and $\mathbi{C}$.}
 \label{fig:bc-hexagons}
 \end{figure}
+
+Figure \ref{fig:bc-hexagons} show lenses $\mathbi{B}$ and $\mathbi{C}$.
+Figure $(i)$ show the lense $\mathbi{B}$ with perimeter $\overline{B_1...B_6}$ which is formed adding two rhombi $\mathbi{b}$ and adding one rhombus $\mathbi{c}$ so its area equals to $2\mathbi{b} + \mathbi{c}$.
+Figure $(ii)$ show the lense $\mathbi{C}$ with perimeter $\overline{C_1...C_6}$ which is formed adding two rhombi $\mathbi{c}$ and substracting one rhombus $\mathbi{b}$ so its area equals to $2\mathbi{c} - \mathbi{b}$.
+Figure $(iii)$ show a dissected star whose area equals to $2\mathbi{C} + \mathbi{B} = 5\mathbi{c}$.
+Figure $(iv)$ show a dissected regular decagon whose area equals to $3\mathbi{B} + \mathbi{C} = 5\mathbi{b} + 5\mathbi{c}$.
 
 
 

@@ -1,0 +1,57 @@
+\documentclass[]{standalone}
+
+\newcommand{\pentagon}[1]{
+ \pentaconcave{FF0000}{#1}
+ \begin{scope}[rotate=108,shift={(#1,0)}]
+  \begin{scope}[rotate=-72] \draw (0,0) -- (#1,0);
+   \begin{scope}[shift={(\side,0)},rotate=-72] \draw (0,0) -- (#1,0);
+   \end{scope}
+  \end{scope}
+ \end{scope}
+}
+
+\newcommand{\pentagram}[1]{
+ \pentaconcave{FF0000}{#1}
+ \begin{scope}[rotate=-36, shift={(#1,0)}, rotate=-144-36]
+  \pentaconcave{FF0000}{#1}
+ \end{scope}
+ \begin{scope}[shift={(#1,0)},rotate=-36] \draw (0,0) -- (#1,0);
+  \begin{scope}[shift={(#1,0)},rotate=-144] \draw (0,0) -- (#1,0);
+  \end{scope}
+ \end{scope}
+}
+
+\usepackage{../lenses}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[scale=1]
+   \pgfmathsetmacro\side{1}
+   
+   \begin{scope}[shift={(0,0)}] % pentagon 1
+    \pentagon{\side}
+   \end{scope}
+   
+   \begin{scope}[shift={(3,1)}] % pentagram 1
+    \pentagram{\side}
+   \end{scope}
+
+   \begin{scope}[shift={(7,1)}] % pentagon 2
+    \pentagram{\side}
+    \begin{scope}[rotate=108,shift={(\side,0)},rotate=-72,shift={(\side,0)}]
+     \begin{scope}[rotate=-72] \draw(0,0) -- (2*\side,0);
+      \begin{scope}[shift={(2*\side,0)},rotate=-72] \draw(0,0) -- (2*\side,0);
+       \begin{scope}[shift={(2*\side,0)},rotate=-72] \draw(0,0) -- (2*\side,0);
+        \begin{scope}[shift={(2*\side,0)},rotate=-72] \draw(0,0) -- (2*\side,0);
+         \begin{scope}[shift={(2*\side,0)},rotate=-72] \draw(0,0) -- (2*\side,0);
+         \end{scope}
+        \end{scope}
+       \end{scope}
+      \end{scope}
+     \end{scope}
+    \end{scope}
+   \end{scope}
+
+  \end{scope}
+ \end{tikzpicture}
+\end{document}

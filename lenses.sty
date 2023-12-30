@@ -17,6 +17,25 @@
  \end{scope}
 }
 
+\newcommand{\lense}[5] { % color,side,angle1,angle2,angle3
+ \definecolor{main}{HTML}{#1}
+ \begin{scope} \draw[main] (0,0) -- (#2,0); %1
+  \begin{scope}[shift={(#2,0)},rotate=180-#3] \draw[main] (0,0) -- (#2,0); %2
+   \begin{scope}[shift={(#2,0)},rotate=180-#4] \draw[main] (0,0) -- (#2,0); %3
+    \begin{scope}[shift={(#2,0)},rotate=180-#5] \draw[main] (0,0) -- (#2,0); %4
+     \begin{scope}[shift={(#2,0)},rotate=180-#3] \draw[main] (0,0) -- (#2,0); %4
+      \begin{scope}[shift={(#2,0)},rotate=180-#4] \draw[main] (0,0) -- (#2,0); %4
+       \begin{scope}[shift={(#2,0)},rotate=180-#5] \draw[main] (0,0) -- (#2,0); %4
+       \end{scope}
+      \end{scope}
+     \end{scope}
+    \end{scope}
+   \end{scope}
+  \end{scope}
+ \end{scope}
+}
+
+
 \newcommand{\rhombusB}[2] { % color,side
  \rhombus{#1}{#2}{36}
 }
@@ -25,3 +44,24 @@
  \rhombus{#1}{#2}{72}
 }
 
+\newcommand{\pentaconcave}[2]{
+ \definecolor{main}{HTML}{#1}
+ \begin{scope} \draw[main] (0,0) -- (#2,0); %1
+  \begin{scope}[shift={(#2,0)},rotate=72] \draw[main] (0,0) -- (#2,0); %2
+   \begin{scope}[shift={(#2,0)},rotate=180-36] \draw[main] (0,0) -- (#2,0); %3
+    \begin{scope}[shift={(#2,0)},rotate=-72] \draw[main] (0,0) -- (#2,0); %4
+     \begin{scope}[shift={(#2,0)},rotate=180-36] \draw[main] (0,0) -- (#2,0); %5
+     \end{scope}
+    \end{scope}
+   \end{scope}
+  \end{scope}
+ \end{scope}
+}
+
+\newcommand{\lenseB}[2] { % color,side
+ \lense{#1}{#2}{144}{144}{72}
+}
+
+\newcommand{\lenseC}[2] { % color,side
+ \lense{#1}{#2}{72}{216}{72}
+}

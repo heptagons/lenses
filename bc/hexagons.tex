@@ -23,10 +23,10 @@
       \end{scope}
      \end{scope}
     \end{scope}
-    \draw (1.5,-2.5) node{$(a)$};
+    \draw (1.5,-2) node{$(i)$};
    \end{scope}
    
-   \begin{scope}[shift={(5,0)}] % hexagon C
+   \begin{scope}[shift={(4.25,0)}] % hexagon C
     \begin{scope}[] \rhombusC{880088}{\side} \end{scope};
     \begin{scope}[rotate=-72] \rhombusC{880088}{\side} \end{scope};
     \begin{scope}[rotate=-72,shift={(\side,0)}, rotate=144] \rhombusB{0044FF}{\side} \end{scope};
@@ -42,8 +42,33 @@
       \end{scope}
      \end{scope}
     \end{scope}
-    \draw (0.75,-2.5) node{$(b)$};
+    \draw (0.75,-2) node{$(ii)$};
    \end{scope}   
+   
+   \begin{scope}[shift={(7.5,-1)}] % decagonal star
+    \begin{scope}[]
+     \lenseC{0000FF}{\side}
+     \begin{scope}[shift={(\side,0)},rotate=36] \lenseB{0088FF}{\side} \end{scope}    
+     \begin{scope}[shift={(\side,0)},rotate=-36] \lenseC{0000FF}{\side} \end{scope}    
+    \end{scope}
+    \draw (1,-1) node{$(iii)$};
+   \end{scope}
+   
+   \begin{scope}[shift={(11.5,0)}] % regular decagon
+    \begin{scope}[]
+     \lenseB{0088FF}{\side}
+     \begin{scope}[rotate=-72] \lenseB{0088FF}{\side} \end{scope}   
+     \begin{scope}[shift={(\side,0)},rotate=-36] \lenseC{8800FF}{\side} \end{scope}   
+     \begin{scope}[shift={(\side,0)},rotate=-36]
+      \begin{scope}[shift={(\side,0)},rotate=-36]
+       \begin{scope}[shift={(\side,0)},rotate=-36+144]
+        \lenseB{0088FF}{\side}
+       \end{scope}
+      \end{scope}
+     \end{scope}   
+    \end{scope}   
+    \draw (1.5,-2) node{$(iv)$};
+   \end{scope}
   
   \end{scope}
  \end{tikzpicture}
