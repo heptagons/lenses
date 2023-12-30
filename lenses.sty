@@ -45,22 +45,6 @@
 }
 
 
-\newcommand{\rhombusB}[3] { % color,side
- \ifthenelse{#3=0}{
-  \rhombus{#1}{#2}{36}{}
- }{
-  \rhombus{#1}{#2}{36}{b}
- }
-}
-
-\newcommand{\rhombusC}[3] { % color,side
- \ifthenelse{#3=0}{
-  \rhombus{#1}{#2}{72}{}
- }{
-  \rhombus{#1}{#2}{72}{c}
- }
-}
-
 \newcommand{\pentaconcave}[2]{
  \definecolor{main}{HTML}{#1}
  \begin{scope} \draw[main] (0,0) -- (#2,0); %1
@@ -77,7 +61,6 @@
 
 \newcommand{\pentagon}[2]{
  \pentaconcave{FF0000}{#1}
-
  \begin{scope}[rotate=108,shift={(#1,0)}]
   \begin{scope}[rotate=-108]
     \ifthenelse{#2=0}{ }{
@@ -85,11 +68,8 @@
      \letterId{\cx}{0}{c}
     }
   \end{scope}
-
   \begin{scope}[rotate=-72] \draw (0,0) -- (#1,0);
-   \begin{scope}[shift={(\side,0)},rotate=-72] \draw (0,0) -- (#1,0);
-
-
+   \begin{scope}[shift={(#1,0)},rotate=-72] \draw (0,0) -- (#1,0);
    \end{scope}
   \end{scope}
  \end{scope}
@@ -137,10 +117,104 @@
  \end{scope}
 }
 
-\newcommand{\lenseB}[2] { % color,side
- \lense{#1}{#2}{144}{144}{72}
+
+\newcommand{\rhombusB}[3] { % color,side
+ \ifthenelse{#3=0}{
+  \rhombus{#1}{#2}{36}{}
+ }{
+  \rhombus{#1}{#2}{36}{b}
+ }
 }
 
-\newcommand{\lenseC}[2] { % color,side
- \lense{#1}{#2}{72}{216}{72}
+\newcommand{\rhombusC}[3] { % color,side
+ \ifthenelse{#3=0}{
+  \rhombus{#1}{#2}{72}{}
+ }{
+  \rhombus{#1}{#2}{72}{c}
+ }
 }
+
+
+\newcommand{\hexagonB}[1]{
+ \begin{scope}[] \rhombusB{0044FF}{#1}{0} \end{scope};
+ \begin{scope}[shift={(#1,0)},rotate=-36] \rhombusC{880088}{#1}{0} \end{scope};
+ \begin{scope}[rotate=-36] \rhombusB{0044FF}{#1}{0} \end{scope};
+ \draw(0,0) ++(180:0.3) node{$B_1$};
+ \draw(#1,0) ++(0:0.45) node{$O$};
+ \begin{scope}[rotate=36] \draw(#1,0) ++(108:0.3) node{$B_2$};
+  \begin{scope}[shift={(#1,0)},rotate=-36] \draw(#1,0) ++(36:0.3) node{$B_3$};
+   \begin{scope}[shift={(#1,0)},rotate=-36] \draw(#1,0) ++(18:0.3) node{$B_4$};
+    \begin{scope}[shift={(#1,0)},rotate=-108] \draw(#1,0) ++(108:0.3) node{$B_5$};
+     \begin{scope}[shift={(#1,0)},rotate=-36] \draw(#1,0) ++(36:0.3) node{$B_6$};
+     \end{scope}
+    \end{scope}
+   \end{scope}
+  \end{scope}
+ \end{scope}
+}
+
+\newcommand{\hexagonC}[1]{
+ \begin{scope}[] \rhombusC{880088}{#1}{0} \end{scope};
+ \begin{scope}[rotate=-72] \rhombusC{880088}{#1}{0} \end{scope};
+ \begin{scope}[rotate=-72,shift={(#1,0)}, rotate=144] \rhombusB{0044FF}{#1}{0} \end{scope};
+ \draw(0,0) ++(180:0.3) node{$O$};
+ \draw(0.5,0) ++(180:0.15) node{$C_1$};
+ \begin{scope}[rotate=72] \draw(#1,0) ++(72:0.3) node{$C_2$};
+  \begin{scope}[shift={(#1,0)},rotate=-72] \draw(#1,0) ++(18:0.3) node{$C_3$};
+   \begin{scope}[shift={(#1,0)},rotate=-108] \draw(#1,0) ++(108:0.3) node{$C_4$};
+    \begin{scope}[shift={(#1,0)},rotate=36] \draw(#1,0) ++(72:0.3) node{$C_5$};
+     \begin{scope}[shift={(#1,0)},rotate=-108] \draw(#1,0) ++(0:0.3) node{$C_6$};
+     \end{scope}
+    \end{scope}
+   \end{scope}
+  \end{scope}
+ \end{scope}
+}   
+
+
+
+\newcommand{\lenseB}[3] { % color,side
+ \lense{#1}{#2}{144}{144}{72}
+ \begin{scope}[rotate=36]
+  \ifthenelse{#3=0}{ }{
+   \pgfmathsetmacro\cx{#2*cos(36) + #2/2}
+   \letterId{\cx}{0}{B}
+  }
+ \end{scope}
+}
+
+\newcommand{\lenseC}[3] { % color,side
+ \lense{#1}{#2}{72}{216}{72}
+ \begin{scope}[shift={(#2/2,0)},rotate=90]
+  \ifthenelse{#3=0}{ }{
+   \letterId{1}{0}{C}
+  }
+ \end{scope}
+}
+
+
+\newcommand{\rhombusD}[3] { % color,side
+ \ifthenelse{#3=0}{
+  \rhombus{#1}{#2}{180/7}{}
+ }{
+  \rhombus{#1}{#2}{180/7}{d}
+ }
+}
+
+\newcommand{\rhombusE}[3] { % color,side
+ \ifthenelse{#3=0}{
+  \rhombus{#1}{#2}{360/7}{}
+ }{
+  \rhombus{#1}{#2}{360/7}{e}
+ }
+}
+
+\newcommand{\rhombusF}[3] { % color,side
+ \ifthenelse{#3=0}{
+  \rhombus{#1}{#2}{540/7}{}
+ }{
+  \rhombus{#1}{#2}{540/7}{f}
+ }
+}
+
+

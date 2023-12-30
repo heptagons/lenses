@@ -1,0 +1,55 @@
+\documentclass[]{standalone}
+
+\usepackage{../lenses}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[scale=1]
+   \pgfmathsetmacro\side{1}
+   \pgfmathsetmacro\angle{180/7}
+   \begin{scope}[shift={(0,0)}]
+    \foreach \x in {0,1,...,14}
+     \begin{scope}[rotate=\x*\angle] \rhombusD{0044FF}{\side}{1} \end{scope};
+    \draw (0,-2.5) node{$(i)$};
+   \end{scope}
+
+   \begin{scope}[shift={(4,0)}]
+    \foreach \x in {0,1,...,7}
+     \begin{scope}[rotate=2*\x*\angle] \rhombusE{880088}{\side}{1} \end{scope};
+    \draw (0,-2.5) node{$(ii)$};
+   \end{scope}
+
+   \begin{scope}[shift={(7.5,0)}]
+    \foreach \x in {0,1,...,3}
+     \begin{scope}[rotate=3*\x*\angle] \rhombusF{008800}{\side}{1} \end{scope};
+    \draw (0,-2.5) node{$(iii)$};
+   \end{scope}
+
+   \begin{scope}[shift={(11,0)}]
+    \foreach \x in {0,1,...,7}
+     \begin{scope}[rotate=\x*360/7] \rhombusE{880088}{\side}{1}
+      \begin{scope}[shift={(\side,0)},rotate=2*\angle]
+       \begin{scope}[shift={(\side,0)},rotate=2*\angle]
+        \rhombusF{008800}{\side}{1}
+       \end{scope}
+      \end{scope}
+     \end{scope};
+    \draw (0,-2.5) node{$(iv)$};
+   \end{scope}
+
+   \begin{scope}[shift={(16,0)}]
+    \foreach \x in {0,1,...,7}
+     \begin{scope}[rotate=\x*360/7] \rhombusE{880088}{\side}{1}
+      \begin{scope}[shift={(\side,0)},rotate=2*\angle]
+       \begin{scope}[shift={(\side,0)},rotate=2*\angle] \rhombusF{008800}{\side}{1}
+        \begin{scope}[shift={(\side,0)},rotate=2*\angle] \rhombusD{0044FF}{\side}{1}
+        \end{scope}
+       \end{scope}
+      \end{scope}
+     \end{scope};
+    \draw (0,-2.5) node{$(v)$};
+   \end{scope}
+
+  \end{scope}
+ \end{tikzpicture}
+\end{document}
