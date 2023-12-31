@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  31 DEC 2023 12:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  31 DEC 2023 14:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**penta.tex
-(./penta.tex
+**hepta.tex
+(./hepta.tex
 LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 3 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/standalone/standalone.cls
@@ -370,8 +370,8 @@ File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
 )))
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
-)) (./penta.aux)
-\openout1 = `penta.aux'.
+)) (./hepta.aux)
+\openout1 = `hepta.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
@@ -446,20 +446,20 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./penta.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./hepta.aux) ) 
 Here is how much of TeX's memory you used:
- 11916 strings out of 494953
- 241857 string characters out of 6180977
- 276525 words of memory out of 5000000
- 14988 multiletter control sequences out of 15000+600000
+ 11962 strings out of 494953
+ 242828 string characters out of 6180977
+ 301664 words of memory out of 5000000
+ 15034 multiletter control sequences out of 15000+600000
  4307 words of font info for 16 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 62i,7n,56p,410b,1290s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,7n,63p,410b,1655s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on penta.pdf (1 page, 23869 bytes).
+Output written on hepta.pdf (1 page, 26842 bytes).
 PDF statistics:
  23 PDF objects out of 1000 (max. 8388607)
  16 compressed objects within 1 object stream
