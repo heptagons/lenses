@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  31 DEC 2023 19:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  1 JAN 2024 13:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -147,26 +147,23 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
 \mathdisplay@stack=\toks22
 LaTeX Info: Redefining \[ on input line 2735.
 LaTeX Info: Redefining \] on input line 2736.
-) (./lenses.aux
-
-LaTeX Warning: Label `fig:bc-hexagons' multiply defined.
-
-)
+) (./lenses.aux)
 \openout1 = `lenses.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
- (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count104
 \scratchdimen=\dimen122
@@ -260,69 +257,65 @@ e
 <bc/rhombi.pdf, id=1, 325.53119pt x 133.78482pt>
 File: bc/rhombi.pdf Graphic file (type pdf)
  <use bc/rhombi.pdf>
-Package pdftex.def Info: bc/rhombi.pdf used on input line 36.
+Package pdftex.def Info: bc/rhombi.pdf used on input line 47.
 (pdftex.def)             Requested size: 358.0854pt x 147.16374pt.
-
-<bc/penta.pdf, id=2, 268.62459pt x 109.22206pt>
-File: bc/penta.pdf Graphic file (type pdf)
- <use bc/penta.pdf>
-Package pdftex.def Info: bc/penta.pdf used on input line 65.
-(pdftex.def)             Requested size: 295.48795pt x 120.14462pt.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./bc/rhombi.pdf>]
+<bc/penta.pdf, id=32, 268.62459pt x 109.22206pt>
+File: bc/penta.pdf Graphic file (type pdf)
+ <use bc/penta.pdf>
+Package pdftex.def Info: bc/penta.pdf used on input line 63.
+(pdftex.def)             Requested size: 295.48795pt x 120.14462pt.
+
 <bc/hexagons.pdf, id=33, 438.41893pt x 109.22206pt>
 File: bc/hexagons.pdf Graphic file (type pdf)
  <use bc/hexagons.pdf>
-Package pdftex.def Info: bc/hexagons.pdf used on input line 89.
+Package pdftex.def Info: bc/hexagons.pdf used on input line 99.
 (pdftex.def)             Requested size: 482.26231pt x 120.14462pt.
 
-[2 <./bc/penta.pdf> <./bc/hexagons.pdf>]
-<def/rhombi.pdf, id=63, 502.52242pt x 142.42007pt>
+[2 <./bc/penta.pdf>] <def/rhombi.pdf, id=48, 502.52242pt x 142.42007pt>
 File: def/rhombi.pdf Graphic file (type pdf)
- <use def/rhombi.pdf>
-Package pdftex.def Info: def/rhombi.pdf used on input line 126.
-(pdftex.def)             Requested size: 502.5212pt x 142.41972pt.
 
-<def/hepta.pdf, id=64, 444.81683pt x 149.09702pt>
+<use def/rhombi.pdf>
+Package pdftex.def Info: def/rhombi.pdf used on input line 135.
+(pdftex.def)             Requested size: 502.5212pt x 142.41972pt.
+ [3 <./bc/hexagons.pdf> <./def/rhombi.pdf>]
+<def/hepta.pdf, id=78, 444.81683pt x 149.09702pt>
 File: def/hepta.pdf Graphic file (type pdf)
  <use def/hepta.pdf>
-Package pdftex.def Info: def/hepta.pdf used on input line 155.
+Package pdftex.def Info: def/hepta.pdf used on input line 151.
 (pdftex.def)             Requested size: 489.30002pt x 164.00722pt.
- [3 <./def/rhombi.pdf>] <def/def.pdf, id=79, 338.58395pt x 86.57344pt>
+
+<def/def.pdf, id=79, 338.58395pt x 86.57344pt>
 File: def/def.pdf Graphic file (type pdf)
  <use def/def.pdf>
-Package pdftex.def Info: def/def.pdf used on input line 181.
+Package pdftex.def Info: def/def.pdf used on input line 190.
 (pdftex.def)             Requested size: 372.44348pt x 95.23105pt.
-
-[4 <./def/hepta.pdf> <./def/def.pdf>] (./lenses.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+ [4 <./def/hepta.pdf>] [5 <./def/def.pdf>] (./lenses.aux) ) 
 Here is how much of TeX's memory you used:
- 2692 strings out of 494953
- 36705 string characters out of 6180977
- 106354 words of memory out of 5000000
- 5946 multiletter control sequences out of 15000+600000
+ 2694 strings out of 494953
+ 36746 string characters out of 6180977
+ 107329 words of memory out of 5000000
+ 5948 multiletter control sequences out of 15000+600000
  13367 words of font info for 47 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 38i,11n,32p,627b,251s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy10.pfb>
-Output written on lenses.pdf (4 pages, 138942 bytes).
+ 38i,11n,32p,627b,253s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on lenses.pdf (5 pages, 142917 bytes).
 PDF statistics:
- 135 PDF objects out of 1000 (max. 8388607)
- 110 compressed objects within 2 object streams
+ 138 PDF objects out of 1000 (max. 8388607)
+ 112 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

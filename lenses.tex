@@ -1,17 +1,13 @@
 \documentclass[11pt]{article}
 \title{Lenses}
 \author{https://github.com/heptagons/lenses}
-\date{2023/12/31}
+\date{2024/1/1}
 
 \usepackage{graphicx}
 
 \usepackage[margin=0.75in]{geometry}
 \usepackage{float} % {figure}{H}
 \usepackage{amsmath} % \dfrac
-
-
-%\usepackage{amssymb}
-%\usepackage{subcaption}
 
 \def\mathbi#1{\textbf{\em #1}}
 
@@ -24,41 +20,43 @@ Lenses are equilateral hexagons resembling concave and convex optical lenses. Le
 
 \section{Lenses}
 
+\section{Stars}
+
+
 \section{Symmetry $5$}
 
 Symmetry $5$ is based in angle $\beta = \dfrac{2\pi}5$ and produces the two rhombi $(\mathbi{b},\mathbi{c})$ and the two lenses $(\mathbi{B},\mathbi{C})$.
 
-
 \subsection{Rhombi (\mathbi{b},\mathbi{c})}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=1.1]{bc/rhombi}
-\caption{Rhombi $(\mathbi{b},\mathbi{c})$.}
-\label{fig:bc-rhombi}
-\end{figure}
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c c|}
 \hline
-Rhombus & $\theta_1$ & $\theta_2$ \\ %[1ex]
-\hline\
+Rhombus & $\theta_1$ & $\theta_2$ \\ \hline\
 $\mathbi{b}$ & $\beta/2$ & $4\beta/2$ \\[0.5ex] \hline
-%& \\[-1ex]
 $\mathbi{c}$ & $2\beta/2$ & $3\beta/2$ \\[0.5ex] \hline
-%\hline
-%\hline
 \end{tabular}
-\caption{Rhombi $(\mathbi{b},\mathbi{c})$ internal angles $\theta_1 + \theta_2 = \pi$ where $\beta = 2\pi/5$.} 
+\caption{Rhombi $(\mathbi{b},\mathbi{c})$ internal angles. $\theta_1 + \theta_2 = \pi$ and $\beta = 2\pi/5$.} 
 \label{tbl:bc-angles}
 \end{center}
 \end{table}
 
-Figure \ref{fig:bc-rhombi} show rhombi $(\mathbi{b},\mathbi{c})$. 
-From the figures we calculate the areas adding the rhombi:
-Star $(i)$ area is $10\mathbi{b}$, star $(ii)$ area is $5\mathbi{c}$ and 
-regular decagon $(iii)$ area is $5\mathbi{b} + 5\mathbi{c}$. Table \ref {tbl:bc-angles} show the rhombi angles.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1.1]{bc/rhombi}
+\caption{Rhombi $(\mathbi{b},\mathbi{c})$ stars $S_{10}$.}
+\label{fig:bc-rhombi}
+\end{figure}
+
+Table \ref {tbl:bc-angles} show the rhombi $(\mathbi{b},\mathbi{c})$ internal angles in terms of angle $\beta = 2\pi/5$.
+Figure \ref{fig:bc-rhombi} show the rhombi $(\mathbi{b},\mathbi{c})$ dissected from stars $S_{10}$. 
+Inspecting the stars we get the areas simply adding their rhombi.
+At $(i)$ the star $S_{10}(1,8)$ with area $A = 10\mathbi{b}$.
+At $(ii)$ the star $S_{10}(2,6) = S_5(1,3)$ with area $A = 5\mathbi{c}$.
+At $(iii)$ the regular decagon equivalvent to stars $S_{10}(4,4) = S_5(2,2)$ with area $A = 5\mathbi{b} + 5\mathbi{c}$. 
+
+\subsection{Regular pentagon and pentagram}
 
 \begin{figure}[H]
 \centering
@@ -84,36 +82,34 @@ A\{5/2\} &= \mathbi{b} + 2\mathbi{x} \nonumber\\
 
 \subsection{Lenses (\mathbi{B},\mathbi{C})}
 
-\begin{figure}[H]
-\centering
-\includegraphics[scale=1.1]{bc/hexagons}
-\caption{Lenses (\mathbi{B}, \mathbi{C}).}
-\label{fig:bc-hexagons}
-\end{figure}
-
 \begin{table}[H]
 \begin{center}
-\begin{tabular}{|c|c c c|}
-\hline
-Rhombus & $\theta_1$ & $\theta_2$ & $\theta_3$ \\ %[1ex]
-\hline\
+\begin{tabular}{|c|c c c|} \hline
+Lense & $\theta_1$ & $\theta_2$ & $\theta_3$ \\ \hline\
 $\mathbi{B}$ & $\beta$ & $2\beta$ & $2\beta$ \\[0.5ex] \hline
-%& \\[-1ex]
 $\mathbi{C}$ & $\beta$ & $\beta$ & $3\beta$ \\[0.5ex] \hline
-%\hline
-%\hline
 \end{tabular}
 \caption{Lenses $(\mathbi{B},\mathbi{C})$ internal angles $\theta_1+\theta_2+\theta_3 = 2\pi$ where $\beta = 2\pi/5$.} 
 \label{tbl:bc-lenses-angles}
 \end{center}
 \end{table}
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1.1]{bc/hexagons}
+\caption{Lenses (\mathbi{B}, \mathbi{C}) build from rhombi (\mathbi{b}, \mathbi{c}).}
+\label{fig:bc-hexagons}
+\end{figure}
 
-Figure \ref{fig:bc-hexagons} show lenses $(\mathbi{B},\mathbi{C})$.
-Figure $(i)$ show the lense $\mathbi{B}$ with perimeter $\overline{B_1...B_6}$ is formed adding two rhombi $\mathbi{b}$ and adding one rhombus $\mathbi{c}$ so its area is $2\mathbi{b} + \mathbi{c}$.
-Figure $(ii)$ show the lense $\mathbi{C}$ with perimeter $\overline{C_1...C_6}$ is formed adding two rhombi $\mathbi{c}$ and substracting one rhombus $\mathbi{b}$ so its area is $2\mathbi{c} - \mathbi{b}$.
-From the figures we see the area of star $(iii)$ is $\mathbi{B} + 2\mathbi{C} = 5\mathbi{c}$
-and the area of regular decagon $(iv)$ is $3\mathbi{B} + \mathbi{C} = 5(\mathbi{b} + \mathbi{c})$.
+Table \ref{tbl:bc-lenses-angles} show the lenses $(\mathbi{B},\mathbi{C})$ internal angles.
+Figure \ref{fig:bc-hexagons} show lenses $(\mathbi{B},\mathbi{C})$ construction and some uses.
+At $(i)$ the lense $\mathbi{B}$ with perimeter $\overline{B_1...B_6}$ formed adding two rhombi $\mathbi{b}$ and adding one rhombus $\mathbi{c}$ so its area is $2\mathbi{b} + \mathbi{c}$; is equivalent to the hexagon $H_5(1,2,2)$.
+At $(ii)$ the lense $\mathbi{C}$ with perimeter $\overline{C_1...C_6}$ formed adding two rhombi $\mathbi{c}$ and substracting one rhombus $\mathbi{b}$ so its area is $2\mathbi{c} - \mathbi{b}$; is equivalent to the hexagon $H_5(1,1,3)$.
+At $(iii)$ the star $S_5(1,3)$ with area $A = \mathbi{B} + 2\mathbi{C} = 5\mathbi{c}$.
+At $(iv)$ the regular decagon or star $S_5(2,2)$ with area $A = 3\mathbi{B} + \mathbi{C} = 5(\mathbi{b} + \mathbi{c})$.
+
+
+% 7
 
 \section{Symmetry $7$}
 
@@ -121,33 +117,33 @@ Symmetry $7$ is based in angle $\gamma = \dfrac{2\pi}7$ and produces the three r
 
 \subsection{Rhombi $(\mathbi{d},\mathbi{e},\mathbi{f})$}
 
-\begin{figure}[H]
-\centering
-\includegraphics[scale=1]{def/rhombi}
-\caption{Rhombi $(\mathbi{d},\mathbi{e},\mathbi{f})$.}
-\label{fig:def-rhombi}
-\end{figure}
-
 \begin{table}[H]
 \begin{center}
-\begin{tabular}{|c|c c|}
-\hline
-Rhombus & $\theta_1$ & $\theta_2$ \\ %[1ex]
-\hline\
+\begin{tabular}{|c|c c|} \hline
+Rhombus & $\theta_1$ & $\theta_2$ \\ \hline\
 $\mathbi{d}$ & $\gamma/2$ & $6\gamma/2$ \\[0.5ex] \hline
 $\mathbi{e}$ & $2\gamma/2$ & $5\gamma/2$ \\[0.5ex] \hline
 $\mathbi{f}$ & $3\gamma/2$ & $4\gamma/2$ \\[0.5ex] \hline
-%\hline
-%\hline
 \end{tabular}
-\caption{Rhombi $(\mathbi{d},\mathbi{e},\mathbi{f})$ internal angles $\theta_1 + \theta_2 = \pi$ where $\gamma = 2\pi/7$.} 
+\caption{Rhombi $(\mathbi{d},\mathbi{e},\mathbi{f})$ internal angles. $\theta_1 + \theta_2 = \pi$ and $\gamma = 2\pi/7$.} 
 \label{tbl:def-angles}
 \end{center}
 \end{table}
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{def/rhombi}
+\caption{Rhombi $(\mathbi{d},\mathbi{e},\mathbi{f})$ from dissected stars $S_{14}$. }
+\label{fig:def-rhombi}
+\end{figure}
+
+Table \ref{tbl:def-angles} show the symmetry 7 lenses internal angles based in angle $\gamma = 2\pi/7$.
 Figure \ref{fig:def-rhombi} show rhombi $(\mathbi{d},\mathbi{e},\mathbi{f})$. 
-Inspecting the figures we get the areas simply adding the rhombi:
-Star $(i)$ area is $14\mathbi{d}$, star $(ii)$ area is $7\mathbi{e}$. The star at $(iii)$ area is $7(\mathbi{e} + \mathbi{f})$ and the regular 14-gon area at $(iv)$ is $7(\mathbi{d} + \mathbi{e} + \mathbi{f})$. Table \ref {tbl:def-angles} show the symmetry 7 rhombi angles.
+Inspecting the stars we get the areas simply adding their rhombi:
+At $(i)$ the star $S_{14}(1,12)$ with area $A = 14\mathbi{d}$. 
+At $(ii)$ the star $S_{14}(2,10) = S_7(1,5)$ with area $A = 7\mathbi{e}$.
+At $(iii)$ the star $S_{14}(4,8) = S_7(2,4)$ with area $A = 7(\mathbi{e} + \mathbi{f})$.
+At $(iv)$ the regular 14-gon equivalent to stars $S_{14}(6,6) = S_7(3,3)$ with area $A = 7(\mathbi{d} + \mathbi{e} + \mathbi{f})$.
 
 
 \begin{figure}[H]
@@ -176,11 +172,24 @@ A\{7/2\} &= A\{7/3\} + 7\mathbi{f} \nonumber\\
 
 \subsection{Lenses (\mathbi{D},\mathbi{E},\mathbi{F})}
 
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c c c|} \hline
+Lense & $\theta_1$ & $\theta_2$ & $\theta_3$ \\ \hline\
+$\mathbi{D}$ & $\gamma$ & $3\gamma$ & $3\gamma$ \\[0.5ex] \hline
+$\mathbi{E}$ & $\gamma$ & $2\gamma$ & $4\gamma$ \\[0.5ex] \hline
+$\mathbi{F}$ & $2\gamma$ & $2\gamma$ & $3\gamma$ \\[0.5ex] \hline
+\end{tabular}
+\caption{Lenses $(\mathbi{D},\mathbi{E},\mathbi{F})$ internal angles $\theta_1+\theta_2+\theta_3 = 2\pi$ where $\gamma = 2\pi/7$.} 
+\label{tbl:def-lenses-angles}
+\end{center}
+\end{table}
+
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1.1]{def/def}
-\caption{Lenses (\mathbi{D},\mathbi{E},\mathbi{F}).}
-\label{fig:bc-hexagons}
+\caption{Lenses (\mathbi{D},\mathbi{E},\mathbi{F}) build from rhombi (\mathbi{d},\mathbi{e},\mathbi{f}).}
+\label{fig:def-hexagons}
 \end{figure}
 
 

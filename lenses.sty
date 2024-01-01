@@ -139,8 +139,8 @@
  }
 }
 
-\newcommand{\hexagonB}[1]{
- \definecolor{main}{HTML}{CCCCCC}
+\newcommand{\hexagonB}[2]{
+ \definecolor{main}{HTML}{#2}
  \pgfmathsetmacro\ca{(#1*cos(36)}
  \pgfmathsetmacro\sa{(#1*sin(36)}
  \fill[main] (0,0) node[black,left]{$B_1$}
@@ -156,8 +156,8 @@
  \draw(#1,0) ++(0:0.45) node{$O$};
 }
 
-\newcommand{\hexagonC}[1]{
- \definecolor{main}{HTML}{CCCCCC}
+\newcommand{\hexagonC}[2]{
+ \definecolor{main}{HTML}{#2}
  \pgfmathsetmacro\ca{(#1*cos(72)}
  \pgfmathsetmacro\sa{(#1*sin(72)}
  \fill[main] (2*\ca,0) node[black,left]{$C_1$}
@@ -321,8 +321,8 @@
  }
 }
 
-\newcommand{\hexagonD}[1]{ % D = 2d + e
- \definecolor{main}{HTML}{CCCCCC}
+\newcommand{\hexagonD}[2]{ % D = 2d + e
+ \definecolor{main}{HTML}{#2}
  \pgfmathsetmacro\a{180/7}
  \pgfmathsetmacro\ca{#1*cos(\a)}
  \pgfmathsetmacro\sa{#1*sin(\a)}
@@ -339,8 +339,8 @@
  \draw(#1,0) ++(0:0.45) node{$O$};
 }
 
-\newcommand{\hexagonE}[1]{ % E = -d + e + f
- \definecolor{main}{HTML}{CCCCCC}
+\newcommand{\hexagonE}[2]{ % E = -d + e + f
+ \definecolor{main}{HTML}{#2}
  \pgfmathsetmacro\a{180/7}
  \pgfmathsetmacro\ca{#1*cos(\a)}
  \pgfmathsetmacro\sa{#1*sin(\a)}
@@ -364,8 +364,8 @@
 }
 
 
-\newcommand{\hexagonF}[1]{ % F = d + 2f
- \definecolor{main}{HTML}{CCCCCC}
+\newcommand{\hexagonF}[2]{ % F = d + 2f
+ \definecolor{main}{HTML}{#2}
  \pgfmathsetmacro\a{180/7}
  \pgfmathsetmacro\ca{#1*cos(\a)}
  \pgfmathsetmacro\sa{#1*sin(\a)}
