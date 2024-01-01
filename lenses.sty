@@ -139,41 +139,38 @@
  }
 }
 
-
 \newcommand{\hexagonB}[1]{
- \begin{scope}[] \rhombusB{0044FF}{#1}{0} \end{scope};
- \begin{scope}[shift={(#1,0)},rotate=-36] \rhombusC{880088}{#1}{0} \end{scope};
- \begin{scope}[rotate=-36] \rhombusB{0044FF}{#1}{0} \end{scope};
- \draw(0,0) ++(180:0.3) node{$B_1$};
+ \definecolor{main}{HTML}{CCCCCC}
+ \pgfmathsetmacro\ca{(#1*cos(36)}
+ \pgfmathsetmacro\sa{(#1*sin(36)}
+ \fill[main] (0,0) node[black,left]{$B_1$}
+  -- ++(\ca,\sa)   node[black,above]{$B_2$}
+  -- ++(#1,0)      node[black,above]{$B_3$}
+  -- ++(\ca,-\sa)  node[black,right]{$B_4$}
+  -- ++(-\ca,-\sa) node[black,below]{$B_5$}
+  -- ++(-#1,0)     node[black,below]{$B_6$}
+  -- cycle;
+ \begin{scope}[] \rhombusB{888888}{#1}{0} \end{scope};
+ \begin{scope}[shift={(#1,0)},rotate=-36] \rhombusC{888888}{#1}{0} \end{scope};
+ \begin{scope}[rotate=-36] \rhombusB{888888}{#1}{0} \end{scope};
  \draw(#1,0) ++(0:0.45) node{$O$};
- \begin{scope}[rotate=36] \draw(#1,0) ++(108:0.3) node{$B_2$};
-  \begin{scope}[shift={(#1,0)},rotate=-36] \draw(#1,0) ++(36:0.3) node{$B_3$};
-   \begin{scope}[shift={(#1,0)},rotate=-36] \draw(#1,0) ++(18:0.3) node{$B_4$};
-    \begin{scope}[shift={(#1,0)},rotate=-108] \draw(#1,0) ++(108:0.3) node{$B_5$};
-     \begin{scope}[shift={(#1,0)},rotate=-36] \draw(#1,0) ++(36:0.3) node{$B_6$};
-     \end{scope}
-    \end{scope}
-   \end{scope}
-  \end{scope}
- \end{scope}
 }
 
 \newcommand{\hexagonC}[1]{
- \begin{scope}[] \rhombusC{880088}{#1}{0} \end{scope};
- \begin{scope}[rotate=-72] \rhombusC{880088}{#1}{0} \end{scope};
- \begin{scope}[rotate=-72,shift={(#1,0)}, rotate=144] \rhombusB{0044FF}{#1}{0} \end{scope};
+ \definecolor{main}{HTML}{CCCCCC}
+ \pgfmathsetmacro\ca{(#1*cos(72)}
+ \pgfmathsetmacro\sa{(#1*sin(72)}
+ \fill[main] (2*\ca,0) node[black,left]{$C_1$}
+  -- ++(-\ca,\sa)      node[black,above]{$C_2$}
+  -- ++(#1,0)          node[black,above]{$C_3$}
+  -- ++(-\ca,-\sa)     node[black,right]{$C_4$}
+  -- ++(\ca,-\sa)      node[black,below]{$C_5$}
+  -- ++(-#1,0)         node[black,below]{$C_6$}
+  -- cycle;
+ \begin{scope}[] \rhombusC{888888}{#1}{0} \end{scope};
+ \begin{scope}[rotate=-72] \rhombusC{888888}{#1}{0} \end{scope};
+ \begin{scope}[rotate=-72,shift={(#1,0)}, rotate=144] \rhombusB{888888}{#1}{0} \end{scope};
  \draw(0,0) ++(180:0.3) node{$O$};
- \draw(0.5,0) ++(180:0.15) node{$C_1$};
- \begin{scope}[rotate=72] \draw(#1,0) ++(72:0.3) node{$C_2$};
-  \begin{scope}[shift={(#1,0)},rotate=-72] \draw(#1,0) ++(18:0.3) node{$C_3$};
-   \begin{scope}[shift={(#1,0)},rotate=-108] \draw(#1,0) ++(108:0.3) node{$C_4$};
-    \begin{scope}[shift={(#1,0)},rotate=36] \draw(#1,0) ++(72:0.3) node{$C_5$};
-     \begin{scope}[shift={(#1,0)},rotate=-108] \draw(#1,0) ++(0:0.3) node{$C_6$};
-     \end{scope}
-    \end{scope}
-   \end{scope}
-  \end{scope}
- \end{scope}
 }   
 
 
@@ -297,8 +294,8 @@
    \end{scope}
   \end{scope}
  \end{scope}
-
 }
+
 
 \newcommand{\rhombusD}[3] { % color,side
  \ifthenelse{#3=0}{
@@ -323,6 +320,76 @@
   \rhombus{#1}{#2}{540/7}{f}
  }
 }
+
+\newcommand{\hexagonD}[1]{ % D = 2d + e
+ \definecolor{main}{HTML}{CCCCCC}
+ \pgfmathsetmacro\a{180/7}
+ \pgfmathsetmacro\ca{#1*cos(\a)}
+ \pgfmathsetmacro\sa{#1*sin(\a)}
+ \fill[main] (0,0) node[black,left]{$D_1$}
+  -- ++(\ca,\sa)   node[black,above]{$D_2$}
+  -- ++(#1,0)      node[black,above]{$D_3$}
+  -- ++(\ca,-\sa)  node[black,right]{$D_4$}
+  -- ++(-\ca,-\sa) node[black,below]{$D_5$}
+  -- ++(-#1,0)     node[black,below]{$D_6$}
+  -- cycle;
+ \begin{scope}[] \rhombusD{888888}{#1}{0} \end{scope};
+ \begin{scope}[shift={(#1,0)},rotate=-\a] \rhombusE{888888}{#1}{0} \end{scope};
+ \begin{scope}[rotate=-\a] \rhombusD{888888}{#1}{0} \end{scope};
+ \draw(#1,0) ++(0:0.45) node{$O$};
+}
+
+\newcommand{\hexagonE}[1]{ % E = -d + e + f
+ \definecolor{main}{HTML}{CCCCCC}
+ \pgfmathsetmacro\a{180/7}
+ \pgfmathsetmacro\ca{#1*cos(\a)}
+ \pgfmathsetmacro\sa{#1*sin(\a)}
+ \pgfmathsetmacro\cb{#1*cos(2*\a)}
+ \pgfmathsetmacro\sb{#1*sin(2*\a)}
+ \fill[main] (0,0) node[black,below]{$E_1$}
+  -- ++(-\cb,\sb)  node[black,above]{$E_2$}
+  -- ++(#1,0)      node[black,above]{$E_3$}
+  -- ++(\ca,\sa)   node[black,above]{$E_4$}
+  -- ++(\cb,-\sb)  node[black,below]{$E_5$}
+  -- ++(-#1,0)     node[black,below]{$E_6$}
+  -- cycle;
+ \begin{scope}[] \rhombusD{888888}{#1}{0} \end{scope};
+ \begin{scope}[shift={(#1,0)},rotate=5*\a]
+  \rhombusE{888888}{#1}{0}
+  \begin{scope}[shift={(#1,0)},rotate=-7*\a]
+   \rhombusF{888888}{#1}{0}
+  \end{scope}
+ \end{scope}
+ \draw(#1,0) ++(-90:0.3) node{$O$};
+}
+
+
+\newcommand{\hexagonF}[1]{ % F = d + 2f
+ \definecolor{main}{HTML}{CCCCCC}
+ \pgfmathsetmacro\a{180/7}
+ \pgfmathsetmacro\ca{#1*cos(\a)}
+ \pgfmathsetmacro\sa{#1*sin(\a)}
+ \pgfmathsetmacro\cb{#1*cos(2*\a)}
+ \pgfmathsetmacro\sb{#1*sin(2*\a)}
+ \pgfmathsetmacro\cc{#1*cos(3*\a)}
+ \pgfmathsetmacro\sc{#1*sin(3*\a)}
+ \fill[main] (0,0) node[black,below]{$F_1$}
+  -- ++(-\cc,\sc)  node[black,above]{$F_2$}
+  -- ++(\ca,\sa)   node[black,above]{$F_3$}
+  -- ++(#1,0)      node[black,above]{$F_4$}
+  -- ++(\cc,-\sc)  node[black,below]{$F_5$}
+  -- ++(-\ca,-\sa) node[black,below]{$F_6$}
+  -- cycle;
+ \begin{scope}[] \rhombusD{888888}{#1}{0} \end{scope};
+ \begin{scope}[rotate=\a]
+  \draw(#1,0) ++(15:0.3) node{$O$};
+  \rhombusF{888888}{#1}{0}
+ \end{scope}
+ \begin{scope}[shift={(#1,0)},rotate=\a,shift={(#1,0)},rotate=3*\a]
+  \rhombusF{888888}{#1}{0}
+ \end{scope}
+}
+
 
 
 

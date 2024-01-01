@@ -26,7 +26,7 @@ Lenses are equilateral hexagons resembling concave and convex optical lenses. Le
 
 \section{Symmetry $5$}
 
-Symmetry $5$ uses as base the angle $\beta = \dfrac{2\pi}5$ and produces the two rhombi $(\mathbi{b},\mathbi{c})$ and the two lenses $(\mathbi{B},\mathbi{C})$.
+Symmetry $5$ is based in angle $\beta = \dfrac{2\pi}5$ and produces the two rhombi $(\mathbi{b},\mathbi{c})$ and the two lenses $(\mathbi{B},\mathbi{C})$.
 
 
 \subsection{Rhombi (\mathbi{b},\mathbi{c})}
@@ -63,25 +63,23 @@ regular decagon $(iii)$ area is $5\mathbi{b} + 5\mathbi{c}$. Table \ref {tbl:bc-
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1.1]{bc/penta}
-\caption{Pentagon $\{5/1\}$ and pentagram $\{5/2\}$.}
+\caption{Pentagon $\{5/1\}$ at $(i)$ and pentagram $\{5/2\}$ at $(ii)$.}
 \label{fig:bc-penta}
 \end{figure}
 
-Figure \ref{fig:bc-penta} show regular pentagon and pentagram dissected with rhombi $(\mathbi{b},\mathbi{c})$ and a concave pentagon (in gray). We calculate the areas of the regular pentagon $P_1$ at $(i)$ and pentagram $P_2$ at $(ii)$ in function of rhombi $(\mathbi{b},\mathbi{c})$. Let $x$ be the concave pentagon area. From the figures we note pentagon $P_4$ at $(iii)$ is double the side and then four times the area of pentagon $P_1$. From the figures we note the area of $P_1$ is $ \mathbi{c} + x$ and the area of $P_4$ is $\mathbi{b} + 5\mathbi{c} + 2x$, so we compare the pentagons and solve for $x$ to get:
+Figure \ref{fig:bc-penta} show regular pentagon and pentagram dissected with rhombi $(\mathbi{b},\mathbi{c})$ and a concave pentagon (in gray). Let $\mathbi{x}$ be the area of such gray piece. By inspection the area of regular pentagon at $(i)$ is $A_1 = \mathbi{c} + \mathbi{x}$ and the area of regular pentagon at $(iii)$ is $P_2 = \mathbi{b} + 5\mathbi{c} + 2\mathbi{x}$. Since the side of $A_2$ is the double of $A_1$ its area is four times so we can get the value of $\mathbi{x}$ in terms of $(\mathbi{b},\mathbi{c})$
 \begin{align}
 4P_1 &= P_4 \nonumber\\
 4(\mathbi{c} + x) &= \mathbi{b} + 5\mathbi{c} + 2x\nonumber\\
 x &= \frac{\mathbi{b} + \mathbi{c}}2
 \end{align}
 
-We use $x$ to get the areas of pentagon and pentagram:
+We use the value of $\mathbi{x}$ to get the areas of pentagon $(i)$ and pentagram $(ii)$:
 \begin{align}
-P_1 &= \mathbi{c} + x
- =  \mathbi{c} + \frac{\mathbi{b} + \mathbi{c}}2
- = \frac{\mathbi{b} + 3\mathbi{c}}2 \\
-P_2 &= \mathbi{b} + 2x
- =  \mathbi{b} + \frac{2(\mathbi{b} + \mathbi{c})}2
- = 2\mathbi{b} + \mathbi{c}
+A\{5/1\} &= \mathbi{c} + \mathbi{x} \nonumber\\
+ &= \frac{\mathbi{b} + 3\mathbi{c}}2 \\
+A\{5/2\} &= \mathbi{b} + 2\mathbi{x} \nonumber\\
+ &= 2\mathbi{b} + \mathbi{c}
 \end{align}
 
 \subsection{Lenses (\mathbi{B},\mathbi{C})}
@@ -115,17 +113,17 @@ Figure \ref{fig:bc-hexagons} show lenses $(\mathbi{B},\mathbi{C})$.
 Figure $(i)$ show the lense $\mathbi{B}$ with perimeter $\overline{B_1...B_6}$ is formed adding two rhombi $\mathbi{b}$ and adding one rhombus $\mathbi{c}$ so its area is $2\mathbi{b} + \mathbi{c}$.
 Figure $(ii)$ show the lense $\mathbi{C}$ with perimeter $\overline{C_1...C_6}$ is formed adding two rhombi $\mathbi{c}$ and substracting one rhombus $\mathbi{b}$ so its area is $2\mathbi{c} - \mathbi{b}$.
 From the figures we see the area of star $(iii)$ is $\mathbi{B} + 2\mathbi{C} = 5\mathbi{c}$
-and the area of regular decagon $(iv)$ is $3\mathbi{B} + \mathbi{C} = 5\mathbi{b} + 5\mathbi{c}$.
+and the area of regular decagon $(iv)$ is $3\mathbi{B} + \mathbi{C} = 5(\mathbi{b} + \mathbi{c})$.
 
 \section{Symmetry $7$}
 
-Symmetry $7$ uses as base the angle $\gamma = \dfrac{2\pi}7$ and produces the three rhombi $(\mathbi{d},\mathbi{f},\mathbi{e})$ and the three lenses $(\mathbi{D},\mathbi{E},\mathbi{F})$.
+Symmetry $7$ is based in angle $\gamma = \dfrac{2\pi}7$ and produces the three rhombi $(\mathbi{d},\mathbi{f},\mathbi{e})$ and the three lenses $(\mathbi{D},\mathbi{E},\mathbi{F})$.
 
 \subsection{Rhombi $(\mathbi{d},\mathbi{e},\mathbi{f})$}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.9]{def/rhombi}
+\includegraphics[scale=1]{def/rhombi}
 \caption{Rhombi $(\mathbi{d},\mathbi{e},\mathbi{f})$.}
 \label{fig:def-rhombi}
 \end{figure}
@@ -149,33 +147,41 @@ $\mathbi{f}$ & $3\gamma/2$ & $4\gamma/2$ \\[0.5ex] \hline
 
 Figure \ref{fig:def-rhombi} show rhombi $(\mathbi{d},\mathbi{e},\mathbi{f})$. 
 Inspecting the figures we get the areas simply adding the rhombi:
-Star $(i)$ area is $14\mathbi{d}$, star $(ii)$ area is $7\mathbi{e}$. The star $(iv)$ area is $7(\mathbi{e} + \mathbi{f})$ and the regular 14-gon area is $7(\mathbi{d} + \mathbi{e} + \mathbi{f})$. Table \ref {tbl:def-angles} show the symmetry 7 rhombi angles.
+Star $(i)$ area is $14\mathbi{d}$, star $(ii)$ area is $7\mathbi{e}$. The star at $(iii)$ area is $7(\mathbi{e} + \mathbi{f})$ and the regular 14-gon area at $(iv)$ is $7(\mathbi{d} + \mathbi{e} + \mathbi{f})$. Table \ref {tbl:def-angles} show the symmetry 7 rhombi angles.
 
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1.1]{def/hepta}
-\caption{Heptagon $\{7/1\}$ at $(i)$ and heptagrams $\{7/2\}$ at $(ii)$ and $\{7/3\}$ at $(iii)$.}
+\caption{Heptagon $\{7/1\}$ at $(i)$ and heptagrams $\{7/3\}$ at $(ii)$ and $\{7/2\}$ at $(iii)$.}
 \label{fig:def-hepta}
 \end{figure}
 
-Figure \ref{fig:def-hepta} show regular heptagon and heptagrams dissected with rhombi $(\mathbi{c},\mathbi{d},\mathbi{e})$ and with one equilateral concave heptagon (in gray). Let $\mathbi{x}$ the area of such gray piece. By inspection the area of regular heptagon at $(i)$ is $H_1 = \mathbi{e} + 2\mathbi{f} + \mathbi{x}$ while the area of regular heptagon at $(iv)$ is $H_2 = \mathbi{d} + 7(\mathbi{e}+\mathbi{f}) + 2\mathbi{x}$. Since the side of $H_2$ is the double of $H_1$ its area is four times so we can get the value of $\mathbi{x}$:
+Figure \ref{fig:def-hepta} show regular heptagon and heptagrams dissected with rhombi $(\mathbi{c},\mathbi{d},\mathbi{e})$ and with one equilateral concave heptagon (in gray). Let $\mathbi{x}$ be the area of such gray piece. By inspection the area of regular heptagon at $(i)$ is $A_1 = \mathbi{e} + 2\mathbi{f} + \mathbi{x}$ while the area of regular heptagon at $(iv)$ is $A_2 = \mathbi{d} + 7(\mathbi{e}+\mathbi{f}) + 2\mathbi{x}$. Since the side of $A_2$ is the double of $A_1$ its area is four times so we can get the value of $\mathbi{x}$ in terms of $(\mathbi{d},\mathbi{e},\mathbi{f})$:
 \begin{align}
-4H_1 &= H_2 \nonumber\\
+4A_1 &= A_2 \nonumber\\
 4(\mathbi{e} + 2\mathbi{f} + \mathbi{x}) &= \mathbi{d} + 7(\mathbi{e}+\mathbi{f}) + 2\mathbi{x} \nonumber\\
 \mathbi{x} &= \frac{\mathbi{d} + 3\mathbi{e} - \mathbi{f}}2
 \end{align}
 
-We use the value of $\mathbi{x}$ to calculate the areas of heptagon $(i)$ and heptagrams $(ii)$ and $(iii)$ in function of $(\mathbi{d},\mathbi{e},\mathbi{f})$:
+We use the value of $\mathbi{x}$ to calculate the areas of heptagon $(i)$ and heptagrams $(ii)$ and $(iii)$ in terms of $(\mathbi{d},\mathbi{e},\mathbi{f})$:
 \begin{align}
 A\{7/1\} &= \mathbi{e} + 2\mathbi{f} + \mathbi{x} \nonumber\\
     &= \frac{\mathbi{d} + 5\mathbi{e} + 3\mathbi{f}}2 \\
-A\{7/2\} &= \mathbi{d} + 2\mathbi{x} \nonumber\\
+A\{7/3\} &= \mathbi{d} + 2\mathbi{x} \nonumber\\
  &= 2\mathbi{d} + 3\mathbi{e} - \mathbi{f} \\
-A\{7/3\} &= A\{7/2\} + 7\mathbi{f} \nonumber\\
+A\{7/2\} &= A\{7/3\} + 7\mathbi{f} \nonumber\\
  &= 2\mathbi{d} + 3\mathbi{e} + 6\mathbi{f}
 \end{align}
 
+\subsection{Lenses (\mathbi{D},\mathbi{E},\mathbi{F})}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1.1]{def/def}
+\caption{Lenses (\mathbi{D},\mathbi{E},\mathbi{F}).}
+\label{fig:bc-hexagons}
+\end{figure}
 
 
 \end{document}

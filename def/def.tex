@@ -1,0 +1,52 @@
+\documentclass[]{standalone}
+
+\usepackage{../lenses}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[scale=1]
+   \pgfmathsetmacro\side{1}
+   \begin{scope}[shift={(0,0.25)}]
+    \hexagonD{1}
+    \draw (1.5,-1.5) node{$(i)$};
+   \end{scope}
+   
+   \begin{scope}[shift={(5,-0.25)}]
+    \hexagonE{1}
+    \draw (0.75,-1.0) node{$(ii)$};
+   \end{scope}   
+
+   \begin{scope}[shift={(9,-0.5)}]
+    \hexagonF{1}
+    \draw (0.75,-0.75) node{$(iii)$};
+   \end{scope}   
+
+   
+%   \begin{scope}[shift={(7.5,-1)}] % decagonal star
+%    \begin{scope}[]
+%     \lenseC{0000FF}{\side}{1}
+%     \begin{scope}[shift={(\side,0)},rotate=36] \lenseB{0088FF}{\side}{1} \end{scope}    
+%     \begin{scope}[shift={(\side,0)},rotate=-36] \lenseC{0000FF}{\side}{1} \end{scope}    
+%    \end{scope}
+%    \draw (1,-1) node{$(iii)$};
+%   \end{scope}
+%   
+%   \begin{scope}[shift={(11.5,0)}] % regular decagon
+%    \begin{scope}[]
+%     \lenseB{0088FF}{\side}{1}
+%     \begin{scope}[rotate=-72] \lenseB{0088FF}{\side}{1} \end{scope}   
+%     \begin{scope}[shift={(\side,0)},rotate=-36] \lenseC{8800FF}{\side}{1} \end{scope}   
+%     \begin{scope}[shift={(\side,0)},rotate=-36]
+%      \begin{scope}[shift={(\side,0)},rotate=-36]
+%       \begin{scope}[shift={(\side,0)},rotate=-36+144]
+%        \lenseB{0088FF}{\side}{1}
+%       \end{scope}
+%      \end{scope}
+%     \end{scope}   
+%    \end{scope}   
+%    \draw (1.5,-2) node{$(iv)$};
+%   \end{scope}
+  
+  \end{scope}
+ \end{tikzpicture}
+\end{document}
