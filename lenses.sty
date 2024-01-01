@@ -160,12 +160,12 @@
  \definecolor{main}{HTML}{#2}
  \pgfmathsetmacro\ca{(#1*cos(72)}
  \pgfmathsetmacro\sa{(#1*sin(72)}
- \fill[main] (2*\ca,0) node[black,left]{$C_1$}
-  -- ++(-\ca,\sa)      node[black,above]{$C_2$}
-  -- ++(#1,0)          node[black,above]{$C_3$}
-  -- ++(-\ca,-\sa)     node[black,right]{$C_4$}
-  -- ++(\ca,-\sa)      node[black,below]{$C_5$}
-  -- ++(-#1,0)         node[black,below]{$C_6$}
+ \fill[main] (2*\ca,0) node[black,left]{$C_6$}
+  -- ++(-\ca,\sa)      node[black,above]{$C_1$}
+  -- ++(#1,0)          node[black,above]{$C_2$}
+  -- ++(-\ca,-\sa)     node[black,right]{$C_3$}
+  -- ++(\ca,-\sa)      node[black,below]{$C_4$}
+  -- ++(-#1,0)         node[black,below]{$C_5$}
   -- cycle;
  \begin{scope}[] \rhombusC{888888}{#1}{0} \end{scope};
  \begin{scope}[rotate=-72] \rhombusC{888888}{#1}{0} \end{scope};
@@ -340,27 +340,29 @@
 }
 
 \newcommand{\hexagonE}[2]{ % E = -d + e + f
- \definecolor{main}{HTML}{#2}
- \pgfmathsetmacro\a{180/7}
- \pgfmathsetmacro\ca{#1*cos(\a)}
- \pgfmathsetmacro\sa{#1*sin(\a)}
- \pgfmathsetmacro\cb{#1*cos(2*\a)}
- \pgfmathsetmacro\sb{#1*sin(2*\a)}
- \fill[main] (0,0) node[black,below]{$E_1$}
-  -- ++(-\cb,\sb)  node[black,above]{$E_2$}
-  -- ++(#1,0)      node[black,above]{$E_3$}
-  -- ++(\ca,\sa)   node[black,above]{$E_4$}
-  -- ++(\cb,-\sb)  node[black,below]{$E_5$}
-  -- ++(-#1,0)     node[black,below]{$E_6$}
-  -- cycle;
- \begin{scope}[] \rhombusD{888888}{#1}{0} \end{scope};
- \begin{scope}[shift={(#1,0)},rotate=5*\a]
-  \rhombusE{888888}{#1}{0}
-  \begin{scope}[shift={(#1,0)},rotate=-7*\a]
-   \rhombusF{888888}{#1}{0}
+ \begin{scope}[yscale=-1,shift={(0,-1)}]
+  \definecolor{main}{HTML}{#2}
+  \pgfmathsetmacro\a{180/7}
+  \pgfmathsetmacro\ca{#1*cos(\a)}
+  \pgfmathsetmacro\sa{#1*sin(\a)}
+  \pgfmathsetmacro\cb{#1*cos(2*\a)}
+  \pgfmathsetmacro\sb{#1*sin(2*\a)}
+  \fill[main] (0,0) node[black,above]{$E_2$}
+   -- ++(-\cb,\sb)  node[black,below]{$E_1$}
+   -- ++(#1,0)      node[black,below]{$E_6$}
+   -- ++(\ca,\sa)   node[black,below]{$E_5$}
+   -- ++(\cb,-\sb)  node[black,above]{$E_4$}
+   -- ++(-#1,0)     node[black,above]{$E_3$}
+   -- cycle;
+  \begin{scope}[] \rhombusD{888888}{#1}{0} \end{scope};
+  \begin{scope}[shift={(#1,0)},rotate=5*\a]
+   \rhombusE{888888}{#1}{0}
+   \begin{scope}[shift={(#1,0)},rotate=-7*\a]
+    \rhombusF{888888}{#1}{0}
+   \end{scope}
   \end{scope}
+  \draw(#1,0) ++(-90:0.3) node{$O$};
  \end{scope}
- \draw(#1,0) ++(-90:0.3) node{$O$};
 }
 
 

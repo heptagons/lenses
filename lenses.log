@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  1 JAN 2024 13:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  1 JAN 2024 14:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -278,21 +278,21 @@ Package pdftex.def Info: bc/hexagons.pdf used on input line 99.
 File: def/rhombi.pdf Graphic file (type pdf)
 
 <use def/rhombi.pdf>
-Package pdftex.def Info: def/rhombi.pdf used on input line 135.
+Package pdftex.def Info: def/rhombi.pdf used on input line 137.
 (pdftex.def)             Requested size: 502.5212pt x 142.41972pt.
  [3 <./bc/hexagons.pdf> <./def/rhombi.pdf>]
 <def/hepta.pdf, id=78, 444.81683pt x 149.09702pt>
 File: def/hepta.pdf Graphic file (type pdf)
  <use def/hepta.pdf>
-Package pdftex.def Info: def/hepta.pdf used on input line 151.
+Package pdftex.def Info: def/hepta.pdf used on input line 154.
 (pdftex.def)             Requested size: 489.30002pt x 164.00722pt.
-
-<def/def.pdf, id=79, 338.58395pt x 86.57344pt>
+ [4 <./def/hepta.pdf>] <def/def.pdf, id=92, 338.58395pt x 84.95439pt>
 File: def/def.pdf Graphic file (type pdf)
  <use def/def.pdf>
-Package pdftex.def Info: def/def.pdf used on input line 190.
-(pdftex.def)             Requested size: 372.44348pt x 95.23105pt.
- [4 <./def/hepta.pdf>] [5 <./def/def.pdf>] (./lenses.aux) ) 
+Package pdftex.def Info: def/def.pdf used on input line 193.
+(pdftex.def)             Requested size: 372.44348pt x 93.4501pt.
+
+[5 <./def/def.pdf>] (./lenses.aux) ) 
 Here is how much of TeX's memory you used:
  2694 strings out of 494953
  36746 string characters out of 6180977
@@ -301,18 +301,18 @@ Here is how much of TeX's memory you used:
  13367 words of font info for 47 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  38i,11n,32p,627b,253s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on lenses.pdf (5 pages, 142917 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on lenses.pdf (5 pages, 147554 bytes).
 PDF statistics:
  138 PDF objects out of 1000 (max. 8388607)
  112 compressed objects within 2 object streams
