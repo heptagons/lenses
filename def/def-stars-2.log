@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  2 JAN 2024 13:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  2 JAN 2024 17:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -449,10 +449,10 @@ Missing character: There is no 1 in font nullfont!
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./def-stars-2.aux) ) 
 Here is how much of TeX's memory you used:
- 12014 strings out of 494953
- 243795 string characters out of 6180977
- 289787 words of memory out of 5000000
- 15086 multiletter control sequences out of 15000+600000
+ 12019 strings out of 494953
+ 243816 string characters out of 6180977
+ 290349 words of memory out of 5000000
+ 15091 multiletter control sequences out of 15000+600000
  4307 words of font info for 16 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  62i,7n,59p,416b,1482s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -460,7 +460,7 @@ Here is how much of TeX's memory you used:
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on def-stars-2.pdf (1 page, 25294 bytes).
+Output written on def-stars-2.pdf (1 page, 25290 bytes).
 PDF statistics:
  23 PDF objects out of 1000 (max. 8388607)
  16 compressed objects within 1 object stream

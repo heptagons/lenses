@@ -26,7 +26,7 @@
  \end{scope}
 }
 
-\newcommand{\lensesHeptaHorns}[2]{ %side,color,rot
+\newcommand{\lensesHeptaMoon}[2]{ %side,color,rot
  \lenseDD{#1}{0}{#2}{1} %size,rot,color,letter
  \begin{scope}[rotate=2*180/7,shift={(#1,0)}] %\draw(0,0) node{$1$};
   \begin{scope}[rotate=-1*180/7] \lenseEE{#1}{0}{#2}{1} \end{scope}
@@ -51,10 +51,10 @@
    
    \begin{scope}[shift={(0,0)}]
     \begin{scope}[rotate=3*180/14]
-     \lensesHeptaLeaf{\side}{FFFFCC}{1} 
-     \lensesHeptaCrown{\side}{CCFFCC} %left crown 
+     \lensesHeptaLeaf{\side}{CCFFCC}{1} 
+     \lensesHeptaCrown{\side}{FFFFCC} %left crown 
      \begin{scope}[xscale=-1,rotate=3*180/7]
-      \lensesHeptaCrown{\side}{CCFFCC} %right crown 
+      \lensesHeptaCrown{\side}{FFFFCC} %right crown 
      \end{scope}
     \end{scope}  
     \draw (0,-0.75) node{$(i)$};
@@ -62,9 +62,9 @@
 
    \begin{scope}[shift={(5,0)}]
     \begin{scope}[rotate=3*180/14]
-     \lensesHeptaLeaf{\side}{FFFFCC}{1} 
+     \lensesHeptaLeaf{\side}{CCFFCC}{1} 
      \begin{scope}[rotate=-4*180/14]
-      \lensesHeptaHorns{\side}{FFCCCC}{1}%side,color
+      \lensesHeptaMoon{\side}{CCFFFF}{1}%side,color
      \end{scope}
     \end{scope}  
     \draw (1,-0.75) node{$(ii)$};
