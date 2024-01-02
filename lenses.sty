@@ -173,8 +173,6 @@
  \draw(0,0) ++(180:0.3) node{$O$};
 }   
 
-
-
 \newcommand{\lenseB}[3] { % color,side
  \lense{#1}{#2}{144}{144}{72}
  \begin{scope}[rotate=36]
@@ -194,8 +192,8 @@
  \end{scope}
 }
 
-
 % 7
+
 \newcommand{\heptaconcave}[2]{
  \definecolor{main}{HTML}{#1}
  \pgfmathsetmacro\angle{180/7}
@@ -392,6 +390,36 @@
  \end{scope}
 }
 
+\newcommand{\lenseD}[3] { % color,side
+ \pgfmathsetmacro\a{2*180/7}
+ \lense{#1}{#2}{3*\a}{3*\a}{\a}
+ \begin{scope}[rotate=\a/2]
+  \ifthenelse{#3=0}{ }{
+   \pgfmathsetmacro\cx{#2*cos(\a/2) + #2/2}
+   \letterId{\cx}{0}{D}
+  }
+ \end{scope}
+}
+
+\newcommand{\lenseE}[3] { % color,side
+ \pgfmathsetmacro\a{2*180/7}
+ \lense{#1}{#2}{4*\a}{2*\a}{1*\a}
+ \begin{scope}[shift={(#1,0)},rotate=15]
+  \ifthenelse{#3=0}{ }{
+   \letterId{1}{0}{E}
+  }
+ \end{scope}
+}
+
+\newcommand{\lenseF}[3] { % color,side
+ \pgfmathsetmacro\a{2*180/7}
+ \lense{#1}{#2}{3*\a}{2*\a}{2*\a}
+ \begin{scope}[shift={(#2/2,0)},rotate=90]
+  \ifthenelse{#3=0}{ }{
+   \letterId{1}{0}{F}
+  }
+ \end{scope}
+}
 
 
 
