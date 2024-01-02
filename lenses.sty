@@ -483,3 +483,48 @@
  }
 }
 
+\newcommand{\octagonGeneric}[9]{ % symm,a1,a2,a3,a4,a5,size,rot,color
+ \pgfmathsetmacro\symm{360/#1}
+ \pgfmathsetmacro\aa{180-(#2*\symm)}
+ \pgfmathsetmacro\ab{180-(#3*\symm)}
+ \pgfmathsetmacro\ac{180-(#4*\symm)}
+ \pgfmathsetmacro\ad{180-(#5*\symm)}
+ \pgfmathsetmacro\ae{180-(#6*\symm)}
+ 
+ \pgfmathsetmacro\ca{#7*cos(\aa)}
+ \pgfmathsetmacro\sa{#7*sin(\aa)}
+ \pgfmathsetmacro\cb{#7*cos(\aa+\ab))}
+ \pgfmathsetmacro\sb{#7*sin(\aa+\ab)}
+ \pgfmathsetmacro\cc{#7*cos(\aa+\ab+\ac)}
+ \pgfmathsetmacro\sc{#7*sin(\aa+\ab+\ac)}
+ \pgfmathsetmacro\cd{#7*cos(\aa+\ab+\ac+\ad)}
+ \pgfmathsetmacro\sd{#7*sin(\aa+\ab+\ac+\ad)}
+ \pgfmathsetmacro\ce{#7*cos(\aa+\ab+\ac+\ad+\ae)}
+ \pgfmathsetmacro\se{#7*sin(\aa+\ab+\ac+\ad+\ae)}
+ \pgfmathsetmacro\cf{#7*cos(\aa+\ab+\ac+\ad+\ae+\ad)}
+ \pgfmathsetmacro\sf{#7*sin(\aa+\ab+\ac+\ad+\ae+\ad)}
+ \begin{scope}[rotate=#8*\symm/2]
+  \definecolor{main}{HTML}{#9}
+  \fill[main] (0,0)
+  -- ++(#7,0)
+  -- ++(\ca,\sa)
+  -- ++(\cb,\sb)
+  -- ++(\cc,\sc)
+  -- ++(\cd,\sd)
+  -- ++(\ce,\se)
+  -- ++(\cf,\sf)
+  -- cycle;
+  \draw[black] (0,0)
+  -- ++(#7,0)
+  -- ++(\ca,\sa)
+  -- ++(\cb,\sb)
+  -- ++(\cc,\sc)
+  -- ++(\cd,\sd)
+  -- ++(\ce,\se)
+  -- ++(\cf,\sf)
+  -- cycle;
+ \end{scope}
+}
+
+
+

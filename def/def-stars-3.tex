@@ -1,0 +1,84 @@
+\documentclass[]{standalone}
+
+\usepackage{../lenses}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[scale=1]
+   \pgfmathsetmacro\s{1} %side
+   \pgfmathsetmacro\r{180/7}
+
+   \begin{scope}[shift={(5,0)}]
+    \begin{scope}[rotate=5*180/14]
+     \lenseDD{\s}{0}{FFFFFF}{1} %size,rot,color,letter
+     \begin{scope}[rotate=2*\r]
+      \octagonGeneric{7}{4}{2}{1}{5}{1}{\s}{0}{66CCFF}
+     \end{scope}
+     \begin{scope}[xscale=-1, rotate=7*\r]
+      \octagonGeneric{7}{4}{2}{1}{5}{1}{\s}{0}{66CCFF}
+     \end{scope}
+    \end{scope}
+    \path(0,-1.5) node{$(i)$};
+   \end{scope}
+
+   \begin{scope}[shift={(9,-1)}]
+    \begin{scope}[rotate=1*180/14]
+     \octagonGeneric{7}{4}{2}{1}{5}{1}{\s}{0}{66CCFF}
+     \begin{scope}[rotate=4*\r,shift={(\s,0)}] %\path(0,0) node{$1$};
+      \begin{scope}[xscale=-1,rotate=-4*\r] \lenseEE{\s}{0}{FFFFFF}{1} \end{scope}
+      \begin{scope}[rotate=-3*\r] \lenseFF{\s}{0}{FFFFFF}{1} \end{scope}
+      \begin{scope}[rotate=1*\r,shift={(\s,0)}] %\path(0,0) node{$2$};
+       \begin{scope}[rotate=-3*\r,shift={(\s,0)}] %\path(0,0) node{$3$};
+        \begin{scope}[rotate=1*\r,shift={(\s,0)}] %\path(0,0) node{$4$};
+         \begin{scope}[xscale=-1,rotate=-4*\r] \octagonGeneric{7}{4}{2}{1}{5}{1}{\s}{0}{66CCFF} \end{scope}
+        \end{scope}
+        \begin{scope}[rotate=-1*\r,shift={(\s,0)}] %\path(0,0) node{$5$};
+         \begin{scope}[rotate=-3*\r,shift={(\s,0)}] %\path(0,0) node{$6$};
+          \begin{scope}[rotate=1*\r] \lenseFF{\s}{0}{FFFFFF}{1} \end{scope}
+          \begin{scope}[rotate=1*\r,shift={(\s,0)}] %\path(0,0) node{$7$};
+           \begin{scope}[rotate=1*\r,shift={(\s,0)}] %\path(0,0) node{$8$};
+            \begin{scope}[rotate=-7*\r] \lenseFF{\s}{0}{FFFFFF}{1} \end{scope}
+           \end{scope}
+          \end{scope}
+         \end{scope}
+        \end{scope}
+       \end{scope}
+      \end{scope}
+     \end{scope}
+    \end{scope}
+    \path(1,-0.5) node{$(ii)$};
+   \end{scope}
+
+   \begin{scope}[shift={(15,-1)}]
+   
+    \begin{scope}[rotate=0*\r] \lenseDD{\s}{0}{FFFFFF}{1} \end{scope}
+    \begin{scope}[xscale=-1,rotate=3*\r] \lenseEE{\s}{0}{FFFFFF}{1} \end{scope}
+    \begin{scope}[rotate=4*\r] \lenseDD{\s}{0}{FFFFFF}{1} \end{scope}
+    \begin{scope}[rotate=2*\r,shift={(\s,0)}] %\path(0,0) node{$1$};
+     \begin{scope}[rotate=-1*\r,shift={(\s,0)}] %\path(0,0) node{$2$};
+      \begin{scope}[rotate=3*\r] \lenseFF{\s}{0}{FFFFFF}{1} \end{scope}
+      \begin{scope}[xscale=-1,rotate=4*\r] \lenseFF{\s}{0}{FFFFFF}{1} \end{scope}
+     \end{scope}      
+    \end{scope}      
+    \begin{scope}[rotate=6*\r,shift={(\s,0)}] %\path(0,0) node{$3$};
+     \begin{scope}[rotate=-1*\r,shift={(\s,0)}] %\path(0,0) node{$4$};
+      \begin{scope}[rotate=-1*\r,shift={(\s,0)}] %\path(0,0) node{$5$};
+       \begin{scope}[xscale=-1,rotate=8*\r] \lenseFF{\s}{0}{FFFFFF}{1} \end{scope}
+       \begin{scope}[rotate=-1*\r,shift={(\s,0)}] %\path(0,0) node{$6$};
+        \begin{scope}[rotate=-1*\r,shift={(\s,0)}] %\path(0,0) node{$7$};
+         \begin{scope}[rotate=-1*\r,shift={(\s,0)}] %\path(0,0) node{$8$};
+          \begin{scope}[xscale=-1,rotate=-4*\r] \octagonGeneric{7}{4}{2}{1}{5}{1}{\s}{0}{66CCFF} \end{scope}
+          \begin{scope}[rotate=-3*\r] \lenseDD{\s}{0}{FFFFFF}{1} \end{scope}
+         \end{scope}
+        \end{scope}
+       \end{scope}
+      \end{scope}
+     \end{scope}
+    \end{scope}
+
+    \path(0.5,-0.5) node{$(iii)$};
+   \end{scope}
+  
+  \end{scope}
+ \end{tikzpicture}
+\end{document}
