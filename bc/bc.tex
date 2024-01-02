@@ -1,0 +1,22 @@
+\documentclass[]{standalone}
+
+\usepackage{../lenses}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[scale=1]
+   \pgfmathsetmacro\side{1}
+
+   \begin{scope}[shift={(0,0)}]
+    \hexagonB{\side}{CCCCCC}
+    \draw (1.5,-2) node{$(i)$};
+   \end{scope}
+   
+   \begin{scope}[shift={(4.25,0)}]
+    \hexagonC{\side}{CCCCCC}
+    \draw (0.75,-2) node{$(ii)$};
+   \end{scope}   
+  
+  \end{scope}
+ \end{tikzpicture}
+\end{document}
