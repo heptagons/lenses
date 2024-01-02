@@ -1,9 +1,8 @@
 \documentclass[]{standalone}
 
 \usepackage{../lenses}
-%\usepackage{ifthen}
 
-\newcommand{\lensesHeptaLeaf}[3]{ %size,color,letter
+\newcommand{\lensesHeptaLeaf}[3]{ %side,color,letter
  \lenseDD{#1}{0}{#2}{#3} %size,rot,color,letter
  \lenseDD{#1}{2}{#2}{#3}
  \begin{scope}[rotate=360/7,shift={(#1,0)}]
@@ -14,134 +13,63 @@
  \end{scope}
 }
 
-\begin{document}
- \begin{tikzpicture}
-  \begin{scope}[scale=1]
-   \pgfmathsetmacro\scale{1}
-   
-   \begin{scope}[rotate=3*180/14]
-
-   \begin{scope}
-    \lensesHeptaLeaf{\scale}{FFFFCC}{1} 
+\newcommand{\lensesHeptaCrown}[2]{ %side,color
+ \lenseEE{#1}{4}{#2}{1} %bottom
+ \begin{scope}[rotate=4*180/7,shift={(#1,0)}]
+  \begin{scope}[rotate=-1*180/7,shift={(#1,0)}]
+   \begin{scope}[rotate=3*180/7,shift={(#1,0)}] %\draw(0,0) node{$3$};
+    \begin{scope}[xscale=-1,rotate=8*180/7]
+     \lenseEE{#1}{4}{#2}{1} %top
+    \end{scope}
    \end{scope}
-   %left crown 
-   \lenseEE{\scale}{4}{CCFFCC}{1} %bottom
-   \begin{scope}[rotate=4*180/7,shift={(\scale,0)}]
-    \begin{scope}[rotate=-1*180/7,shift={(\scale,0)}]
-     \begin{scope}[rotate=3*180/7,shift={(\scale,0)}] %\draw(0,0) node{$3$};
-      \begin{scope}[xscale=-1,rotate=8*180/7]
-       \lenseEE{1}{4}{CCFFCC}{1} %top
-      \end{scope}
+  \end{scope}
+ \end{scope}
+}
+
+\newcommand{\lensesHeptaHorns}[2]{ %side,color,rot
+ \lenseDD{#1}{0}{#2}{1} %size,rot,color,letter
+ \begin{scope}[rotate=2*180/7,shift={(#1,0)}] %\draw(0,0) node{$1$};
+  \begin{scope}[rotate=-1*180/7] \lenseEE{#1}{0}{#2}{1} \end{scope}
+  \begin{scope}[rotate=1*180/7,shift={(#1,0)}] %\draw(0,0) node{$2$};
+   \begin{scope}[rotate=-3*180/7] \lenseFF{#1}{0}{#2}{1} \end{scope}
+   \begin{scope}[rotate=1*180/7,shift={(#1,0)}] %\draw(0,0) node{$3$};
+    \begin{scope}[rotate=1*180/7,shift={(#1,0)}] %\draw(0,0) node{$4$};
+     \begin{scope}[xscale=-1,rotate=-2*180/7] \lenseEE{#1}{0}{#2}{1} \end{scope}
+     \begin{scope}[rotate=1*180/7,shift={(#1,0)}] %\draw(0,0) node{$5$};
+      \begin{scope}[rotate=-7*180/7] \lenseDD{#1}{0}{#2}{1} \end{scope}
      \end{scope}
     \end{scope}
    \end{scope}
-   %right crown 
-   \begin{scope}[xscale=-1,rotate=3*180/7]
-    \lenseEE{1}{4}{CCFFCC}{1} %bottom
-   \end{scope}
-   \begin{scope}[rotate=0*180/7,shift={(\scale,0)}] %\draw(0,0) node{$1$};
-    \begin{scope}[rotate=1*180/7,shift={(\scale,0)}] %\draw(0,0) node{$2$};
-     \begin{scope}[rotate=-3*180/7,shift={(\scale,0)}] %\draw(0,0) node{$3$};
-      \begin{scope}[rotate=1*180/7]
-       \lenseEE{1}{4}{CCFFCC}{1} %top
-      \end{scope}
-     \end{scope}  
+  \end{scope}
+ \end{scope}
+}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[scale=1]
+   \pgfmathsetmacro\side{1}
+   
+   \begin{scope}[shift={(0,0)}]
+    \begin{scope}[rotate=3*180/14]
+     \lensesHeptaLeaf{\side}{FFFFCC}{1} 
+     \lensesHeptaCrown{\side}{CCFFCC} %left crown 
+     \begin{scope}[xscale=-1,rotate=3*180/7]
+      \lensesHeptaCrown{\side}{CCFFCC} %right crown 
+     \end{scope}
     \end{scope}  
-   \end{scope}  
- 
-   \end{scope}  
+    \draw (0,-0.75) node{$(i)$};
+   \end{scope}
 
-   \draw (0,-0.75) node{$(i)$};
+   \begin{scope}[shift={(5,0)}]
+    \begin{scope}[rotate=3*180/14]
+     \lensesHeptaLeaf{\side}{FFFFCC}{1} 
+     \begin{scope}[rotate=-4*180/14]
+      \lensesHeptaHorns{\side}{FFCCCC}{1}%side,color
+     \end{scope}
+    \end{scope}  
+    \draw (1,-0.75) node{$(ii)$};
+   \end{scope}
 
-%   \definecolor{leaf}{HTML}{FFCCCC} % pink
-%   \definecolor{moon}{HTML}{CCFFCC} % green
-%   \definecolor{crown}{HTML}{CCCCFF} % blue
-%   \pgfmathsetmacro\side{1}
-%   \pgfmathsetmacro\a{180/7}
-%   \pgfmathsetmacro\ca{\side*cos(\a)}
-%   \pgfmathsetmacro\sa{\side*sin(\a)}
-%   \pgfmathsetmacro\cb{\side*cos(2*\a)}
-%   \pgfmathsetmacro\sb{\side*sin(2*\a)}
-%   \pgfmathsetmacro\cc{\side*cos(3*\a)}
-%   \pgfmathsetmacro\sc{\side*sin(3*\a)}
-%   \begin{scope}[shift={(0,-1)}]
-%    \begin{scope}[]
-%     \draw[crown] (0,0) % C+C
-%      -- ++(-\cc,\sc)
-%      -- ++(\cc,\sc)
-%      -- ++(\side,0)
-%      -- ++(\cc,-\sc)
-%      -- ++(\cb,-\sb)
-%      -- ++(\ca,\sa)
-%      -- ++(-\cc,\sc)
-%      -- ++(\ca,-\sa)
-%      -- ++(-\ca,-\sa)
-%      -- ++(\cc,-\sc)
-%      -- ++(-\ca,\sa)
-%      -- cycle;
-%      \fill[leaf] (\side,0)
-%       -- ++(\cc,\sc)
-%       -- ++(-\cc,\sc)
-%       -- ++(\ca,\sa)
-%       -- ++(-\cc,-\sc)
-%       -- ++(\cc,-\sc)
-%       -- cycle;
-%
-%     \lenseD{000000}{\side}{1} % DEF-leaf
-%     \begin{scope}[rotate=\a]
-%      \lenseD{000000}{\side}{1} 
-%      \begin{scope}[shift={(\side,0)}]
-%       \begin{scope}[rotate=-0.5*\a] 
-%        \lenseE{000000}{\side}{1}
-%        \begin{scope}[rotate=\a,shift={(\side,0)},rotate=-1.5*\a]
-%         \lenseF{000000}{\side}{1}
-%         %\draw(0,0) node{$o$};
-%        \end{scope}
-%       \end{scope}
-%      \end{scope}    
-%     \end{scope}    
-%
-%     %\begin{scope}[shift={(\side,0)},rotate=36] \lenseB{000000}{\side}{1} \end{scope}    
-%     %\begin{scope}[shift={(\side,0)},rotate=-36] \lenseC{000000}{\side}{1} \end{scope}    
-%    \end{scope}
-%    \draw (1,-1) node{$(i)$};
-%   \end{scope}
-%   
-%   \begin{scope}[shift={(4,0)}] % regular decagon
-%    \begin{scope}[]
-%    \fill[leaf] (0,0)
-%     -- ++(\cb,\sb)
-%     -- ++(\ca,\sa)
-%     -- ++(\side,0)
-%     -- ++(-\cb,-\sb)
-%     -- ++(-\ca,-\sa)
-%     -- cycle;
-%     \lenseB{000000}{\side}{1}
-%     
-%     \fill[moon] (\side,0)
-%     -- ++(\ca,\sa)
-%     -- ++(\cb,\sb)
-%     -- ++(\ca,-\sa)
-%     -- ++(-\cc,-\sc)
-%     -- ++(\cc,-\sc)
-%     -- ++(-\ca,-\sa)
-%     -- ++(-\side,0)
-%     -- ++(-\ca,\sa)
-%     -- ++(-\cb,\sb)
-%     -- cycle;
-%     
-%     \begin{scope}[rotate=-72] \lenseB{000000}{\side}{1} \end{scope}   
-%     \begin{scope}[shift={(\side,0)},rotate=-36] \lenseC{000000}{\side}{1} \end{scope}   
-%     \begin{scope}[shift={(\side,0)},rotate=-36]
-%      \begin{scope}[shift={(\side,0)},rotate=-36]
-%       \begin{scope}[shift={(\side,0)},rotate=-36+144]
-%        \lenseB{000000}{\side}{1}
-%       \end{scope}
-%      \end{scope}
-%     \end{scope}   
-%    \end{scope}   
-%   \end{scope}
-%  
   \end{scope}
  \end{tikzpicture}
 \end{document}
