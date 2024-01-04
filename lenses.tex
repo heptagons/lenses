@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \title{Lenses}
 \author{https://github.com/heptagons/lenses}
-\date{2024/1/3}
+\date{2024/1/4}
 
 \usepackage{graphicx}
 
@@ -15,12 +15,21 @@
 
 \maketitle
 \begin{abstract}
-Lenses are equilateral hexagons resembling concave and convex optical lenses. Lenses consecutive six internal angles are $(\theta_1,\theta_2,\theta_3,\theta_1,\theta_2,\theta_3)$ where $\theta_1=X\theta_0$, $\theta_2=Y\theta_0$, and $\theta_3=Z\theta_0$ where $\theta_0 = 2\pi/S$ is the base angle of symmetry $S = X + Y + Z$.
+Lenses are equilateral hexagons resembling concave and convex optical lenses. Lenses consecutive six internal angles are $(\theta_1,\theta_2,\theta_3,\theta_1,\theta_2,\theta_3)$ where $\theta_1 = x\theta_0$, $\theta_2 = y\theta_0$, and $\theta_3 = z\theta_0$ where $\theta_0 = 2\pi/s$ is the base angle of symmetry $s = x + y + z$. Lenses can be formed adding and substracting rhombi or by intersecting equi-stars with others.
 \end{abstract}
 
-\section{Stars}
+\section{Equi-stars}
 
-Stars are polygons with a pair number of sides and defined by three numbers: A symmetry number and a pair of angles multiples of the symmetry. The symmetry angle is defined as $\omega = \dfrac{2\pi}s$ where $s$ is the symmetry number.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{stars/stars}
+\caption{Equi-stars of symmetries $3$,$5$,$7$ and $9$.}
+\label{fig:stars}
+\end{figure}
+
+Equi-stars are equilateral polygons with an even number of sides and vertices of at most two different angles. These stars can be defined with only two numbers: A symmetry integer $s$ and a minimum angle integer $a$ so the star is defined as $S(s,a)$. Here we are interested only in symmetries of the form $s=2n+1$ for $n=1,2,3...$. Every symmetry $s=2n+1$ has exactly $n$ different stars: $S(s,1),S(s,2),...,S(s,n)$. Stars of the form $S(s,n)$ correspond to the regular polygons of $2s$ sides.
+
+Figure \ref{fig:stars} show the stars for the smaller symmetries in translucent colors and intersecting with others of the same symmetry. At $(i)$ we have for the symmetry $3$ the only star in red $S(3,1)$ which is the regular hexagon. At $(ii)$ we have for the symmetry $5$ the regular decagon in red $S(5,2)$ and the star $S(5,1)$ in yellow; the region in orange is the intersection of the two stars. At $(iii)$ for symmetry $7$ we have three stars: The equilateral 14-gon $S(7,3)$ in red, the $S(7,2)$ in yellow and the $S(7,1)$ in green. At $(iv)$ we have for the symmetry $9$ four stars: The regular 18-gon $S(9,4)$ in red, the $S(9,3)$ in yellow, the $S(9,2)$ in green and the $S(9,1)$ in blue.
 
 \section{Symmetry $5$}
 
