@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \title{Lenses}
 \author{https://github.com/heptagons/lenses}
-\date{2024/1/2}
+\date{2024/1/3}
 
 \usepackage{graphicx}
 
@@ -18,29 +18,15 @@
 Lenses are equilateral hexagons resembling concave and convex optical lenses. Lenses consecutive six internal angles are $(\theta_1,\theta_2,\theta_3,\theta_1,\theta_2,\theta_3)$ where $\theta_1=X\theta_0$, $\theta_2=Y\theta_0$, and $\theta_3=Z\theta_0$ where $\theta_0 = 2\pi/S$ is the base angle of symmetry $S = X + Y + Z$.
 \end{abstract}
 
-\section{Lenses}
-
 \section{Stars}
 
+Stars are polygons with a pair number of sides and defined by three numbers: A symmetry number and a pair of angles multiples of the symmetry. The symmetry angle is defined as $\omega = \dfrac{2\pi}s$ where $s$ is the symmetry number.
 
 \section{Symmetry $5$}
 
 Symmetry $5$ is based in angle $\beta = \dfrac{2\pi}5$ and produces the two rhombi $(\mathbi{b},\mathbi{c})$ and the two lenses $(\mathbi{B},\mathbi{C})$.
 
 \subsection{Rhombi (\mathbi{b},\mathbi{c})}
-
-\begin{table}[H]
-\begin{center}
-\begin{tabular}{|c|c c|}
-\hline
-Rhombus & $\theta_1$ & $\theta_2$ \\ \hline\
-$\mathbi{b}$ & $\beta/2$ & $4\beta/2$ \\[0.5ex] \hline
-$\mathbi{c}$ & $2\beta/2$ & $3\beta/2$ \\[0.5ex] \hline
-\end{tabular}
-\caption{Rhombi $(\mathbi{b},\mathbi{c})$ internal angles. $\theta_1 + \theta_2 = \pi$ and $\beta = 2\pi/5$.} 
-\label{tbl:bc-angles}
-\end{center}
-\end{table}
 
 \begin{figure}[H]
 \centering
@@ -49,12 +35,31 @@ $\mathbi{c}$ & $2\beta/2$ & $3\beta/2$ \\[0.5ex] \hline
 \label{fig:bc-rhombi}
 \end{figure}
 
-Table \ref {tbl:bc-angles} show the rhombi $(\mathbi{b},\mathbi{c})$ internal angles in terms of angle $\beta = 2\pi/5$.
 Figure \ref{fig:bc-rhombi} show the rhombi $(\mathbi{b},\mathbi{c})$. 
 Inspecting the stars we get the areas simply adding their rhombi.
 At $(i)$ the star $S_{10}(1,8)$ with area $A = 10\mathbi{b}$.
 At $(ii)$ the star $S_{10}(2,6) = S_5(1,3)$ with area $A = 5\mathbi{c}$.
 At $(iii)$ the regular decagon equivalvent to stars $S_{10}(4,4) = S_5(2,2)$ with area $A = 5\mathbi{b} + 5\mathbi{c}$. 
+Table \ref {tbl:bc-angles} show the rhombi $(\mathbi{b},\mathbi{c})$ internal angles in terms of angle $\beta = 2\pi/5$ and areas for side equals to $1$. Dividing areas we find $\dfrac{\mathbi{c}}{\mathbi{b}} = 2\cos\left(\dfrac{\pi}5\right) = \dfrac{\sqrt5 + 1}2$.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c c| l |}
+\hline
+Rhombus & $\theta_1$ & $\theta_2$ & Area \\ \hline\
+$\mathbi{b}$ & $\beta/2$ & $4\beta/2$ & $\sin(2\beta) = \dfrac{\sqrt{10-2\sqrt5}}4 $
+\\[1.2ex] \hline
+$\mathbi{c}$ & $2\beta/2$ & $3\beta/2$ & 
+$\sin(\beta) = \dfrac{\sqrt{10+2\sqrt5}}4 
+= \mathbi{b}\cos\left(\dfrac{\pi}5\right) = \mathbi{b}\left(\dfrac{\sqrt5+1}2\right)$
+\\[1.2ex] \hline
+\end{tabular}
+\caption{Rhombi $(\mathbi{b},\mathbi{c})$ internal angles and areas. $\theta_1 + \theta_2 = \pi$ and $\beta = 2\pi/5$.} 
+\label{tbl:bc-angles}
+\end{center}
+\end{table}
+
+
 
 \subsection{Regular pentagon and star $|5/2|$}
 
@@ -130,19 +135,6 @@ Symmetry $7$ is based in angle $\gamma = \dfrac{2\pi}7$ and produces the three r
 
 \subsection{Rhombi $(\mathbi{d},\mathbi{e},\mathbi{f})$}
 
-\begin{table}[H]
-\begin{center}
-\begin{tabular}{|c|c c|} \hline
-Rhombus & $\theta_1$ & $\theta_2$ \\ \hline\
-$\mathbi{d}$ & $\gamma/2$ & $6\gamma/2$ \\[0.5ex] \hline
-$\mathbi{e}$ & $2\gamma/2$ & $5\gamma/2$ \\[0.5ex] \hline
-$\mathbi{f}$ & $3\gamma/2$ & $4\gamma/2$ \\[0.5ex] \hline
-\end{tabular}
-\caption{Rhombi $(\mathbi{d},\mathbi{e},\mathbi{f})$ internal angles. $\theta_1 + \theta_2 = \pi$ and $\gamma = 2\pi/7$.} 
-\label{tbl:def-angles}
-\end{center}
-\end{table}
-
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{def/rhombi}
@@ -150,13 +142,31 @@ $\mathbi{f}$ & $3\gamma/2$ & $4\gamma/2$ \\[0.5ex] \hline
 \label{fig:def-rhombi}
 \end{figure}
 
-Table \ref{tbl:def-angles} show the symmetry 7 lenses internal angles based in angle $\gamma = 2\pi/7$.
 Figure \ref{fig:def-rhombi} show rhombi $(\mathbi{d},\mathbi{e},\mathbi{f})$. 
 Inspecting the stars we get the areas simply adding their rhombi.
 At $(i)$ the star $S_{14}(1,12)$ with area $A = 14\mathbi{d}$. 
 At $(ii)$ the star $S_{14}(2,10) = S_7(1,5)$ with area $A = 7\mathbi{e}$.
 At $(iii)$ the star $S_{14}(4,8) = S_7(2,4)$ with area $A = 7(\mathbi{e} + \mathbi{f})$.
 At $(iv)$ the regular 14-gon equivalent to stars $S_{14}(6,6) = S_7(3,3)$ with area $A = 7(\mathbi{d} + \mathbi{e} + \mathbi{f})$.
+Table \ref{tbl:def-angles} show the symmetry 7 lenses internal angles based in angle $\gamma = 2\pi/7$ and the areas.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c c| c |} \hline
+Rhombus & $\theta_1$ & $\theta_2$ & Area \\ \hline\
+$\mathbi{d}$ & $\gamma/2$ & $6\gamma/2$ & $\sin(3\gamma)$
+\\[0.5ex] \hline
+$\mathbi{e}$ & $2\gamma/2$ & $5\gamma/2$ & $\sin(\gamma)$
+\\[0.5ex] \hline
+$\mathbi{f}$ & $3\gamma/2$ & $4\gamma/2$ & $\sin(2\gamma)$
+\\[0.5ex] \hline
+\end{tabular}
+\caption{Rhombi $(\mathbi{d},\mathbi{e},\mathbi{f})$ internal angles. $\theta_1 + \theta_2 = \pi$ and $\gamma = 2\pi/7$.} 
+\label{tbl:def-angles}
+\end{center}
+\end{table}
+
+
 
 \subsection{Regular heptagon and stars $|7/3|$ and $|7/2|$}
 
