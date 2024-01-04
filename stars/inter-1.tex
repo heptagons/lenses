@@ -1,0 +1,52 @@
+\documentclass[]{standalone}
+
+\usepackage{../lenses}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[scale=0.9]
+   \def\s{1}
+   \def\c{FF0000}
+
+   \begin{scope}[shift={(4,0)}]
+    \starGeneric{3}{1}{\s}{0}{FF0000}{0.3}{}
+    \path(-2,-4.5) node{$(i)$};
+   \end{scope}
+
+   \begin{scope}[shift={(8,0)}]
+    \starGeneric{5}{2}{\s}{0}{FF0000}{0.3}{}
+    \starGeneric{5}{1}{\s}{1}{FFFF00}{0.3}{}
+    \begin{scope}[thick]
+     \lenseBB{\s}{3}{FFCCCC}{1}
+    \end{scope}
+    \path(-2,-4.5) node{$(ii)$};
+   \end{scope}
+   
+   \begin{scope}[shift={(14,0)}]
+    \starGeneric{7}{3}{1}{0}{FF0000}{0.3}{}
+    \starGeneric{7}{2}{1}{1}{FFFF00}{0.3}{}
+    \begin{scope}[thick]
+     \lenseDD{\s}{4}{FFCCCC}{1}
+     \begin{scope}[rotate=-4*180/7,shift={(\s,0)}] %\path(0,0) node{$1$};
+      \lenseEE{\s}{-1}{FFFFCC}{1}
+     \end{scope}
+     \begin{scope}[rotate=4*180/7,shift={(\s,0)}] %\path(0,0) node{$2$};
+      \begin{scope}[rotate=1*180/7,shift={(\s,0)}] %\path(0,0) node{$3$};
+       \begin{scope}[rotate=1*180/7,shift={(\s,0)}] %\path(0,0) node{$4$};
+        \lenseFF{\s}{1}{FFCCCC}{1}
+       \end{scope}
+      \end{scope}
+     \end{scope}
+    \end{scope}
+    \path(-2,-4.5) node{$(iii)$};
+   \end{scope}
+
+   \begin{scope}[shift={(21,0)}]
+    \starGeneric{9}{4}{1}{0}{FF0000}{0.3}{}
+    \starGeneric{9}{3}{1}{1}{FFFF00}{0.3}{}
+    \path(-2.5,-4.5) node{$(iv)$};
+   \end{scope}
+
+  \end{scope}
+ \end{tikzpicture}
+\end{document}

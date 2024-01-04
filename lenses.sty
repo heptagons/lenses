@@ -458,6 +458,16 @@
  \end{scope}
 }
 
+\newcommand{\lenseBB}[4]{ %size,rot,color,letter
+ \lenseGeneric{5}{1}{2}{2}{#1}{#2}{#3}
+ \ifthenelse{#4=0}{}{
+  \begin{scope}[rotate=#2*360/10 + 36]
+   \draw(#1*1.25,0) node{\textbf{\em B}};
+  \end{scope}
+ }
+}
+
+
 \newcommand{\lenseDD}[4]{ %size,rot,color,letter
  \lenseGeneric{7}{1}{3}{3}{#1}{#2}{#3}
  \ifthenelse{#4=0}{}{
@@ -528,7 +538,7 @@
  \end{scope}
 }
 
-\newcommand{\starGeneric}[5]{ % symm,angle1,side,color,rot
+\newcommand{\starGeneric}[7]{ % symm,angle1,side,color,rot
  \tikzmath{
   \n      = int(#1)-1;
   \angle  = 180/#1;
@@ -542,12 +552,13 @@
 % \path(0,-1.5) node[right]{$s=#3, r=\r,R=\R$};
  \definecolor{main}{HTML}{#5}
  \begin{scope}[rotate=#4*180/#1,shift={(-\R,0)}]
-  \fill[main, opacity=0.5, draw=black, thick]
+  \fill[main, opacity=#6, draw=black, thick]
    (0:\R)
    \foreach \i in {0,...,\n} { 
     -- (2*\i*\angle:\R) -- ({(2*\i+1)*\angle}:\r)
    }
    --cycle;
+   \path(0,0) node{#7};
   \end{scope}
 }
 
