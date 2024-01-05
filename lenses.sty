@@ -592,7 +592,7 @@
  \end{scope}
 }
 
-\newcommand{\starGeneric}[7]{ % symm,angle1,side,color,rot
+\newcommand{\starGeneric}[8]{ % symm,angle,side,rot,color,opacity,text,draw
  \tikzmath{
   \n      = int(#1)-1;
   \angle  = 180/#1;
@@ -606,7 +606,7 @@
 % \path(0,-1.5) node[right]{$s=#3, r=\r,R=\R$};
  \definecolor{main}{HTML}{#5}
  \begin{scope}[rotate=#4*180/#1,shift={(-\R,0)}]
-  \fill[main, opacity=#6, draw=black, thick]
+  \fill[main, fill opacity=#6, draw={#8}]
    (0:\R)
    \foreach \i in {0,...,\n} { 
     -- (2*\i*\angle:\R) -- ({(2*\i+1)*\angle}:\r)
