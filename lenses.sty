@@ -458,6 +458,16 @@
  \end{scope}
 }
 
+\newcommand{\lenseAA}[4]{ %size,rot,color,letter
+ \lenseGeneric{3}{1}{1}{1}{#1}{#2}{#3}
+ \ifthenelse{#4=0}{}{
+  \begin{scope}[rotate=#2*360/6 + 60]
+   \draw(#1*1,0) node{\textbf{\em A}};
+  \end{scope}
+ }
+}
+
+
 \newcommand{\lenseBB}[4]{ %size,rot,color,letter
  \lenseGeneric{5}{1}{2}{2}{#1}{#2}{#3}
  \ifthenelse{#4=0}{}{
@@ -467,6 +477,14 @@
  }
 }
 
+\newcommand{\lenseCC}[4]{ %size,rot,color,letter
+ \lenseGeneric{5}{1}{1}{3}{#1}{#2}{#3}
+ \ifthenelse{#4=0}{}{
+  \begin{scope}[rotate=#2*360/10 + 6]
+   \draw(#1*1.25,0) node{\textbf{\em C}};
+  \end{scope}
+ }
+}
 
 \newcommand{\lenseDD}[4]{ %size,rot,color,letter
  \lenseGeneric{7}{1}{3}{3}{#1}{#2}{#3}
@@ -491,6 +509,42 @@
  \ifthenelse{#4=0}{}{
   \begin{scope}[rotate=#2*360/14 + 40]
    \draw(#1*1.1,0) node{\textbf{\em F}};
+  \end{scope}
+ }
+}
+
+\newcommand{\lenseGG}[4]{ %size,rot,color,letter
+ \lenseGeneric{9}{1}{4}{4}{#1}{#2}{#3}
+ \ifthenelse{#4=0}{}{
+  \begin{scope}[rotate=#2*360/18 + 180/9]
+   \draw(#1*1.5,0) node{\textbf{\em G}};
+  \end{scope}
+ }
+}
+
+\newcommand{\lenseHH}[4]{ %size,rot,color,letter
+ \lenseGeneric{9}{1}{3}{5}{#1}{#2}{#3}
+ \ifthenelse{#4=0}{}{
+  \begin{scope}[rotate=#2*360/18 + 8]
+   \draw(#1*1.3,0) node{\textbf{\em H}};
+  \end{scope}
+ }
+}
+
+\newcommand{\lenseII}[4]{ %size,rot,color,letter
+ \lenseGeneric{9}{3}{2}{4}{#1}{#2}{#3}
+ \ifthenelse{#4=0}{}{
+  \begin{scope}[rotate=#2*360/18 + 40]
+   \draw(#1*0.9,0) node{\textbf{\em I}};
+  \end{scope}
+ }
+}
+
+\newcommand{\lenseJJ}[4]{ %size,rot,color,letter
+ \lenseGeneric{9}{2}{2}{5}{#1}{#2}{#3}
+ \ifthenelse{#4=0}{}{
+  \begin{scope}[rotate=#2*360/18 + 18]
+   \draw(#1*1.1,0) node{\textbf{\em J}};
   \end{scope}
  }
 }

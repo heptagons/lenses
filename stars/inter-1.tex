@@ -6,25 +6,32 @@
  \begin{tikzpicture}
   \begin{scope}[scale=0.9]
    \def\s{1}
-   \def\c{FF0000}
+   \def\ca{FF0000} %red
+   \def\cb{FFFF00} %yellow
 
    \begin{scope}[shift={(4,0)}]
-    \starGeneric{3}{1}{\s}{0}{FF0000}{0.3}{}
-    \path(-2,-4.5) node{$(i)$};
+    \starGeneric{3}{1}{\s}{0}{\ca}{0.5}{}
+    \begin{scope}[thick]
+     \lenseAA{\s}{2}{FFCCCC}{1}
+    \end{scope}
+    \path(-1,-4.5) node{$(i)$};
    \end{scope}
 
    \begin{scope}[shift={(8,0)}]
-    \starGeneric{5}{2}{\s}{0}{FF0000}{0.3}{}
-    \starGeneric{5}{1}{\s}{1}{FFFF00}{0.3}{}
+    \starGeneric{5}{2}{\s}{0}{\ca}{0.5}{}
+    \starGeneric{5}{1}{\s}{1}{\cb}{0.5}{}
     \begin{scope}[thick]
      \lenseBB{\s}{3}{FFCCCC}{1}
+     \begin{scope}[rotate=-108,shift={(\s,0)}] %\path(0,0) node{$1$};
+      \lenseCC{\s}{-1}{FFFFCC}{1}
+     \end{scope}
     \end{scope}
-    \path(-2,-4.5) node{$(ii)$};
+    \path(-1.5,-4.5) node{$(ii)$};
    \end{scope}
    
-   \begin{scope}[shift={(14,0)}]
-    \starGeneric{7}{3}{1}{0}{FF0000}{0.3}{}
-    \starGeneric{7}{2}{1}{1}{FFFF00}{0.3}{}
+   \begin{scope}[shift={(13.5,0)}]
+    \starGeneric{7}{3}{1}{0}{\ca}{0.5}{}
+    \starGeneric{7}{2}{1}{1}{\cb}{0.5}{}
     \begin{scope}[thick]
      \lenseDD{\s}{4}{FFCCCC}{1}
      \begin{scope}[rotate=-4*180/7,shift={(\s,0)}] %\path(0,0) node{$1$};
@@ -41,9 +48,27 @@
     \path(-2,-4.5) node{$(iii)$};
    \end{scope}
 
-   \begin{scope}[shift={(21,0)}]
-    \starGeneric{9}{4}{1}{0}{FF0000}{0.3}{}
-    \starGeneric{9}{3}{1}{1}{FFFF00}{0.3}{}
+   \begin{scope}[shift={(20.5,0)}]
+    \starGeneric{9}{4}{1}{0}{\ca}{0.5}{}
+    \starGeneric{9}{3}{1}{1}{\cb}{0.5}{}
+    \begin{scope}[thick]
+     \lenseGG{\s}{5}{FFCCCC}{1}
+     \begin{scope}[rotate=-5*180/9,shift={(\s,0)}] %\path(0,0) node{$1$};
+      \lenseHH{\s}{-1}{FFFFCC}{1}
+      \begin{scope}[rotate=-1*180/9,shift={(\s,0)}] %\path(0,0) node{$5$};
+       \begin{scope}[rotate=-1*180/9,shift={(\s,0)}] %\path(0,0) node{$6$};
+        \lenseJJ{\s}{-1}{FFFFCC}{1}
+       \end{scope}
+      \end{scope}
+     \end{scope}
+     \begin{scope}[rotate=5*180/9,shift={(\s,0)}] %\path(0,0) node{$2$};
+      \begin{scope}[rotate=1*180/9,shift={(\s,0)}] %\path(0,0) node{$3$};
+       \begin{scope}[rotate=1*180/9,shift={(\s,0)}] %\path(0,0) node{$4$};
+        \lenseII{\s}{1}{FFCCCC}{1}
+       \end{scope}
+      \end{scope}
+     \end{scope}
+    \end{scope}
     \path(-2.5,-4.5) node{$(iv)$};
    \end{scope}
 

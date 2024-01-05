@@ -1,0 +1,90 @@
+\documentclass[]{standalone}
+
+\usepackage{../lenses}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[scale=0.9]
+   \def\s{1}
+   \def\ca{FF0000} %red
+   \def\cb{00FF00} %green
+   \def\cc{0000FF} %blue
+
+   \begin{scope}[shift={(0,0)}]
+    \begin{scope}[rotate=-180/3]
+     \starGeneric{3}{1}{\s}{0}{\ca}{0.3}{}
+     \starGeneric{3}{1}{\s}{2}{\cc}{0.3}{}
+     \begin{scope}[thick,dashed]
+      \lenseAA{\s}{2}{FF8888}{1}
+     \end{scope}
+    \end{scope}
+    \path(-0.5,-4.5) node{$(i)$};
+   \end{scope}
+
+   \begin{scope}[shift={(4.5,0)}]
+    \begin{scope}[rotate=-180/5]
+     \starGeneric{5}{2}{\s}{0}{\ca}{0.3}{}
+     \starGeneric{5}{1}{\s}{1}{\cb}{0.3}{$L_5$}
+     \starGeneric{5}{2}{\s}{2}{\cc}{0.3}{}
+     \begin{scope}[thick,dashed]
+      \lenseBB{\s}{3}{FF8888}{1}
+      \begin{scope}[rotate=5*180/5,shift={(\s,0)}] %\path(0,0) node{$1$};
+       \begin{scope}[xscale=-1] \lenseCC{\s}{4}{88CC00}{1} \end{scope}
+      \end{scope}
+     \end{scope}
+    \end{scope}
+    \path(-1.5,-4.5) node{$(i)$};
+   \end{scope}
+   
+   \begin{scope}[shift={(10.25,0)}]
+    \begin{scope}[rotate=-180/7]
+     \starGeneric{7}{3}{\s}{0}{\ca}{0.3}{}
+     \starGeneric{7}{2}{\s}{1}{\cb}{0.3}{$L_7$}
+     \starGeneric{7}{3}{\s}{2}{\cc}{0.3}{}
+     \begin{scope}[thick,dashed]
+      \lenseDD{\s}{4}{FF8888}{1}
+      \begin{scope}[rotate=6*180/7,shift={(\s,0)}] %\path(0,0) node{$1$};
+       \begin{scope}[xscale=-1] \lenseEE{\s}{6}{88CC00}{1} \end{scope}
+      \end{scope}
+      \begin{scope}[rotate=4*180/7,shift={(\s,0)}] %\path(0,0) node{$2$};
+       \begin{scope}[rotate=1*180/7,shift={(\s,0)}] %\path(0,0) node{$3$};
+        \begin{scope}[rotate=1*180/7,shift={(\s,0)}] %\path(0,0) node{$4$};
+         \lenseFF{\s}{1}{FF8888}{1}
+        \end{scope}
+       \end{scope}
+      \end{scope}
+     \end{scope}
+    \end{scope}
+    \path(-2,-4.5) node{$(ii)$};
+   \end{scope}
+
+   \begin{scope}[shift={(17,0)}]
+    \begin{scope}[rotate=-180/9]
+     \starGeneric{9}{4}{\s}{0}{\ca}{0.3}{}
+     \starGeneric{9}{3}{\s}{1}{\cb}{0.3}{$L_9$}
+     \starGeneric{9}{4}{\s}{2}{\cc}{0.3}{}
+     \begin{scope}[thick,dashed]
+      \lenseGG{\s}{5}{FF8888}{1}
+      \begin{scope}[rotate=7*180/9,shift={(\s,0)}] %\path(0,0) node{$1$};
+       \begin{scope}[xscale=-1] \lenseHH{\s}{8}{88CC00}{1} \end{scope}
+       \begin{scope}[rotate=1*180/9,shift={(\s,0)}] %\path(0,0) node{$5$};
+        \begin{scope}[rotate=1*180/9,shift={(\s,0)}] %\path(0,0) node{$6$};
+         \begin{scope}[xscale=-1] \lenseJJ{\s}{8}{88CC00}{1} \end{scope}
+        \end{scope}
+       \end{scope}
+      \end{scope}
+      \begin{scope}[rotate=5*180/9,shift={(\s,0)}] %\path(0,0) node{$2$};
+       \begin{scope}[rotate=1*180/9,shift={(\s,0)}] %\path(0,0) node{$3$};
+        \begin{scope}[rotate=1*180/9,shift={(\s,0)}] %\path(0,0) node{$4$};
+         \lenseII{\s}{1}{FF8888}{1}
+        \end{scope}
+       \end{scope}
+      \end{scope}
+     \end{scope}
+    \end{scope}
+    \path(-2.5,-4.5) node{$(iv)$};
+   \end{scope}
+
+  \end{scope}
+ \end{tikzpicture}
+\end{document}
