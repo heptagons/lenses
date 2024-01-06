@@ -37,42 +37,44 @@
 
 \begin{document}
  \begin{tikzpicture}
-  \begin{scope}[scale=0.9]
+  \begin{scope}[scale=0.75]
    \def\s{1}
    \def\ca{FF0000} %red
    \def\cb{FFFF00} %yellow
 
    \begin{scope}[shift={(0,0)}]
-    \begin{scope}[rotate=-180/7]
+    \begin{scope}[rotate=-1*180/7]
      \starGeneric{7}{3}{\s}{0}{\ca}{0.25}{}{black}
      \starGeneric{7}{1}{\s}{2}{\cb}{0.25}{}{black}
      \starGeneric{7}{3}{\s}{4}{\ca}{0.25}{}{black}
      \begin{scope}[rotate=8*180/7, shift={(\s,0)}] %\path(0,0) node{$1$};     
-      \lineGeneric{7}{11,2,13,4,1,6,9,8}{\s}{red}{2pt}
+      \lineGeneric{7}{11,2,13,4,1,6,9,8}{\s}{red}{1.5pt}
      \end{scope}
-     \moveGeneric{7}{11,2,13}{\s}
     \end{scope}
-    \path(-2,-4.5) node{$(i)$};
+    \path(-1.5,-7) node{$(i)$};
    \end{scope}
 
-   \begin{scope}[shift={(8,0)}]
-    \begin{scope}[rotate=-180/9]
+   \begin{scope}[shift={(7.5,0)}]
+    \begin{scope}[rotate=-2*180/9]
      \starGeneric{9}{4}{\s}{0}{\ca}{0.25}{}{black}
      \starGeneric{9}{1}{\s}{3}{\cb}{0.25}{}{black}
      \starGeneric{9}{4}{\s}{6}{\ca}{0.25}{}{black}
+     \begin{scope}[rotate=11*180/9, shift={(\s,0)}] %\path(0,0) node{$1$};     
+      \lineGeneric{9}{13,2,15,4,17,6,11,8}{\s}{red}{1.5pt}
+     \end{scope}
     \end{scope}
     
-    \path(-2.5,-4.5) node{$(ii)$};
+    \path(-2,-7) node{$(ii)$};
    \end{scope}
 
-   \begin{scope}[shift={(17,0)}]
-    \begin{scope}[rotate=-180/9]
+   \begin{scope}[shift={(16.5,0)}]
+    \begin{scope}[rotate=-2*180/9]
      \starGeneric{11}{5}{\s}{0}{\ca}{0.25}{}{black}
      \starGeneric{11}{1}{\s}{4}{\cb}{0.25}{}{black}
      \starGeneric{11}{5}{\s}{8}{\ca}{0.25}{}{black}
     \end{scope}
     
-    \path(-2.5,-4.5) node{$(ii)$};
+    \path(-2.5,-7) node{$(iii)$};
    \end{scope}
 
 
