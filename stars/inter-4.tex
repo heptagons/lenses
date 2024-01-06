@@ -1,0 +1,91 @@
+\documentclass[]{standalone}
+
+%\newcommand{\moveGeneric}[3]{ %symm,angles,side
+% \pgfmathsetmacro\mx{0}
+% \pgfmathsetmacro\my{0}
+% \pgfpathmoveto{\pgfpointxy{\mx}{\my}}
+% \foreach \i in {#2} {
+%  \pgfmathsetmacro\tx{\mx + cos(\i*180/#1)}
+%  \pgfmathsetmacro\ty{\my + sin(\i*180/#1)}
+%  \global\let\mx\tx
+%  \global\let\my\ty
+%  \pgfpathlineto{\pgfpointxy{#3*\mx}{#3*\my}}
+% }
+% \pgfsetstrokecolor{blue}
+% \pgfsetlinewidth{2pt}
+% \pgfusepath{stroke}
+% \path(\mx,\my) node{$o$};
+%}
+%
+%\newcommand{\lineGeneric}[5]{ %symm,angles,side,color,linewidth
+% \pgfmathsetmacro\mx{0}
+% \pgfmathsetmacro\my{0}
+% \pgfpathmoveto{\pgfpointxy{\mx}{\my}}
+% \foreach \i in {#2} {
+%  \pgfmathsetmacro\tx{\mx + cos(\i*180/#1)}
+%  \pgfmathsetmacro\ty{\my + sin(\i*180/#1)}
+%  \global\let\mx\tx
+%  \global\let\my\ty
+%  \pgfpathlineto{\pgfpointxy{#3*\mx}{#3*\my}}
+% }
+% \pgfsetstrokecolor{#4}
+% \pgfsetlinewidth{#5}
+% \pgfusepath{stroke}
+%}
+
+
+\usepackage{../lenses}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[scale=0.75]
+   \def\s{1}
+   \def\ca{FFFF00} %red
+   \def\cb{00FF00} %blue
+
+   \begin{scope}[shift={(0,0)}]
+    \begin{scope}[rotate=0*180/14]
+     \starGeneric{7}{2}{\s}{0}{\ca}{0.25}{}{black}
+     
+     \begin{scope}[rotate=-5*180/7, shift={(\s,0)}] \path(0,0) node{$1$};     
+      \starGeneric{7}{1}{\s}{-7}{\cb}{0.25}{}{black}
+     \end{scope}
+    \end{scope}
+    \path(-1.5,-7.5) node{$(i)$};
+   \end{scope}
+
+   \begin{scope}[shift={(7,0)}]
+    \begin{scope}[rotate=0*180/18]
+     \starGeneric{9}{3}{\s}{0}{\ca}{0.25}{}{black}
+     \begin{scope}[rotate=-6*180/9, shift={(\s,0)}] \path(0,0) node{$1$};     
+      \starGeneric{9}{2}{\s}{-10}{\cb}{0.25}{}{black}
+      \begin{scope}[rotate=-1*180/9, shift={(\s,0)}] \path(0,0) node{$2$};     
+       \starGeneric{9}{3}{\s}{3}{\ca}{0}{}{red}
+      \end{scope}
+      \starGeneric{9}{2}{\s}{-8}{\cb}{0}{}{blue}
+     \end{scope}
+    \end{scope}
+    \path(-1.5,-7.5) node{$(ii)$};
+   \end{scope}
+
+   \begin{scope}[shift={(16,0)}]
+    \begin{scope}[rotate=0*180/22]
+     \starGeneric{11}{4}{\s}{0}{\ca}{0.25}{}{black}
+     \begin{scope}[rotate=-7*180/11, shift={(\s,0)}] \path(0,0) node{$1$};     
+      \starGeneric{11}{3}{\s}{-13}{\cb}{0.25}{}{black}
+      \begin{scope}[rotate=-3*180/11, shift={(\s,0)}] \path(0,0) node{$2$};     
+       \starGeneric{11}{4}{\s}{4}{\ca}{0}{}{red}
+      \end{scope}
+      \starGeneric{11}{3}{\s}{-11}{\ca}{0}{}{blue}
+      \starGeneric{11}{3}{\s}{-9}{\ca}{0}{}{black}
+      
+      \begin{scope}[rotate=-1*180/11, shift={(\s,0)}] \path(0,0) node{$3$};     
+      \end{scope}
+     \end{scope}
+    \end{scope}
+    \path(-1.5,-7.5) node{$(iii)$};
+   \end{scope}
+
+  \end{scope}
+ \end{tikzpicture}
+\end{document}
