@@ -1,0 +1,81 @@
+\documentclass[]{standalone}
+\newcommand{\moveGeneric}[3]{ %symm,angles,side
+ \pgfmathsetmacro\mx{0}
+ \pgfmathsetmacro\my{0}
+ \pgfpathmoveto{\pgfpointxy{\mx}{\my}}
+ \foreach \i in {#2} {
+  \pgfmathsetmacro\tx{\mx + cos(\i*180/#1)}
+  \pgfmathsetmacro\ty{\my + sin(\i*180/#1)}
+  \global\let\mx\tx
+  \global\let\my\ty
+  \pgfpathlineto{\pgfpointxy{#3*\mx}{#3*\my}}
+ }
+ \pgfsetstrokecolor{blue}
+ \pgfsetlinewidth{2pt}
+ \pgfusepath{stroke}
+ \path(\mx,\my) node{$o$};
+}
+
+\newcommand{\lineGeneric}[5]{ %symm,angles,side,color,linewidth
+ \pgfmathsetmacro\mx{0}
+ \pgfmathsetmacro\my{0}
+ \pgfpathmoveto{\pgfpointxy{\mx}{\my}}
+ \foreach \i in {#2} {
+  \pgfmathsetmacro\tx{\mx + cos(\i*180/#1)}
+  \pgfmathsetmacro\ty{\my + sin(\i*180/#1)}
+  \global\let\mx\tx
+  \global\let\my\ty
+  \pgfpathlineto{\pgfpointxy{#3*\mx}{#3*\my}}
+ }
+ \pgfsetstrokecolor{#4}
+ \pgfsetlinewidth{#5}
+ \pgfusepath{stroke}
+}
+
+
+\usepackage{../lenses}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[scale=0.9]
+   \def\s{1}
+   \def\ca{FF0000} %red
+   \def\cb{FFFF00} %yellow
+
+   \begin{scope}[shift={(0,0)}]
+    \begin{scope}[rotate=-180/7]
+     \starGeneric{7}{3}{\s}{0}{\ca}{0.25}{}{black}
+     \starGeneric{7}{1}{\s}{2}{\cb}{0.25}{}{black}
+     \starGeneric{7}{3}{\s}{4}{\ca}{0.25}{}{black}
+     \begin{scope}[rotate=8*180/7, shift={(\s,0)}] %\path(0,0) node{$1$};     
+      \lineGeneric{7}{11,2,13,4,1,6,9,8}{\s}{red}{2pt}
+     \end{scope}
+     \moveGeneric{7}{11,2,13}{\s}
+    \end{scope}
+    \path(-2,-4.5) node{$(i)$};
+   \end{scope}
+
+   \begin{scope}[shift={(8,0)}]
+    \begin{scope}[rotate=-180/9]
+     \starGeneric{9}{4}{\s}{0}{\ca}{0.25}{}{black}
+     \starGeneric{9}{1}{\s}{3}{\cb}{0.25}{}{black}
+     \starGeneric{9}{4}{\s}{6}{\ca}{0.25}{}{black}
+    \end{scope}
+    
+    \path(-2.5,-4.5) node{$(ii)$};
+   \end{scope}
+
+   \begin{scope}[shift={(17,0)}]
+    \begin{scope}[rotate=-180/9]
+     \starGeneric{11}{5}{\s}{0}{\ca}{0.25}{}{black}
+     \starGeneric{11}{1}{\s}{4}{\cb}{0.25}{}{black}
+     \starGeneric{11}{5}{\s}{8}{\ca}{0.25}{}{black}
+    \end{scope}
+    
+    \path(-2.5,-4.5) node{$(ii)$};
+   \end{scope}
+
+
+  \end{scope}
+ \end{tikzpicture}
+\end{document}
