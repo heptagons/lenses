@@ -12,12 +12,15 @@
    \begin{scope}[shift={(0,0)}]
     \begin{scope}[rotate=-180/3]
      \starGeneric{3}{1}{\s}{0}{\ca}{0.25}{}{black}
-     \starGeneric{3}{1}{\s}{2}{\ca}{0.25}{}{black}
+     \starGeneric{3}{1}{\s}{2}{\ca}{0.25}{}{blue}
      \begin{scope}[very thick]
       \lenseAA{\s}{2}{FF4444}{1}
      \end{scope}
     \end{scope}
     \path(-120:\s) node{$\epsilon$};
+    
+    \path(-1*\s,+2*\s) node[black]{$S_A$};
+    \path(-1*\s,-2*\s) node[blue]{$S_A'$};
 
     \path(-0.5,-4.5) node{$(i)$};
    \end{scope}
@@ -25,8 +28,8 @@
    \begin{scope}[shift={(4.5,0)}]
     \begin{scope}[rotate=-180/5]
      \starGeneric{5}{2}{\s}{0}{\ca}{0.25}{}{black}
-     \starGeneric{5}{1}{\s}{1}{\cb}{0.25}{}{black}
-     \starGeneric{5}{2}{\s}{2}{\ca}{0.25}{}{black}
+     \starGeneric{5}{1}{\s}{1}{\cb}{0.25}{}{red}
+     \starGeneric{5}{2}{\s}{2}{\ca}{0.25}{}{blue}
      \begin{scope}[very thick]
       \lenseBB{\s}{3}{FF4444}{1}
       \begin{scope}[rotate=5*180/5,shift={(\s,0)}] %\path(0,0) node{$1$};
@@ -34,12 +37,16 @@
       \end{scope}
      \end{scope}
     \end{scope}
-    \path(-\s*2.1, +\s*1.4) node{$\alpha'$};
+    \path(-\s*2.1, +\s*1.4) node{$\alpha^-$};
     %\path(-\s*2.1, +\s*0.7) node{$\beta'$};
     \path(-\s*2.1, +\s*0.0) node{$\gamma$};
     \path(-\s*2.1, -\s*0.7) node{$\delta$};
     \path(-\s*2.1, -\s*1.4) node{$\epsilon$};
-    
+
+    \path(-3*\s,+2*\s) node[black]{$S_B$};
+    \path(-3*\s,+0*\s) node[red]{$S_C$};
+    \path(-3*\s,-2*\s) node[blue]{$S_B'$};
+
     \path(-1.5,-4.5) node{$(ii)$};
    \end{scope}
    
@@ -47,8 +54,8 @@
     \begin{scope}[rotate=-180/7]
      \begin{scope}[]
       \starGeneric{7}{3}{\s}{0}{\ca}{0.25}{}{black}
-      \starGeneric{7}{2}{\s}{1}{\cb}{0.25}{}{black}
-      \starGeneric{7}{3}{\s}{2}{\ca}{0.25}{}{black}
+      \starGeneric{7}{2}{\s}{1}{\cb}{0.25}{}{red}
+      \starGeneric{7}{3}{\s}{2}{\ca}{0.25}{}{blue}
      \end{scope}
      \begin{scope}[very thick]
       \lenseDD{\s}{4}{FF4444}{1}
@@ -64,20 +71,24 @@
       \end{scope}
      \end{scope}
     \end{scope}
-    \path(-\s*3.5, +\s*1.9)  node{$\alpha'$};
-    \path(-\s*3.5, +\s*1.05) node{$\beta'$};
+    \path(-\s*3.5, +\s*1.9)  node{$\alpha^-$};
+    \path(-\s*3.5, +\s*1.05) node{$\beta^-$};
     \path(-\s*3.5, +\s*0.0)  node{$\gamma$};
     \path(-\s*3.5, -\s*1.05) node{$\delta$};
     \path(-\s*3.5, -\s*1.9)  node{$\epsilon$};
 
+    \path(-4.5*\s,+2*\s) node[black]{$S_D$};
+    \path(-4.5*\s,+0*\s) node[red]{$S_E$};
+    \path(-4.5*\s,-2*\s) node[blue]{$S_D'$};
+
     \path(-2,-4.5) node{$(ii)$};
    \end{scope}
 
-   \begin{scope}[shift={(17,0)}]
+   \begin{scope}[shift={(17.25,0)}]
     \begin{scope}[rotate=-180/9]
      \starGeneric{9}{4}{\s}{0}{\ca}{0.25}{}{black}
-     \starGeneric{9}{3}{\s}{1}{\cb}{0.25}{}{black}
-     \starGeneric{9}{4}{\s}{2}{\ca}{0.25}{}{black}
+     \starGeneric{9}{3}{\s}{1}{\cb}{0.25}{}{red}
+     \starGeneric{9}{4}{\s}{2}{\ca}{0.25}{}{blue}
      \begin{scope}[very thick]
       \lenseGG{\s}{5}{FF4444}{1}
       \begin{scope}[rotate=7*180/9,shift={(\s,0)}] %\path(0,0) node{$1$};
@@ -97,11 +108,15 @@
       \end{scope}
      \end{scope}
     \end{scope}
-    \path(-\s*4.9, +\s*2.2) node{$\alpha'$};
-    \path(-\s*4.9, +\s*1.2) node{$\beta'$};
+    \path(-\s*4.9, +\s*2.2) node{$\alpha^-$};
+    \path(-\s*4.9, +\s*1.2) node{$\beta^-$};
     \path(-\s*4.9, +\s*0.0) node{$\gamma$};
     \path(-\s*4.9, -\s*1.2) node{$\delta$};
     \path(-\s*4.9, -\s*2.2) node{$\epsilon$};
+    
+    \path(-5.8*\s,+2*\s) node[black]{$S_G$};
+    \path(-5.8*\s,+0*\s) node[red]{$S_H$};
+    \path(-5.8*\s,-2*\s) node[blue]{$S_G'$};
     
     \path(-2.5,-4.5) node{$(iv)$};
    \end{scope}
