@@ -11,6 +11,29 @@
  \path(#1,#2) node{$\textbf{\em #3}$}; % letter
 }
 
+\newcommand{\lineGeneric}[6]{ %symm,side,moveto,lineto,color,linewidth
+ \pgfmathsetmacro\mx{0}
+ \pgfmathsetmacro\my{0}
+ \pgfpathmoveto{\pgfpointxy{\mx}{\my}}
+ \foreach \i in {#3} {
+  \pgfmathsetmacro\tx{\mx + cos(\i*180/#1)}
+  \pgfmathsetmacro\ty{\my + sin(\i*180/#1)}
+  \global\let\mx\tx
+  \global\let\my\ty
+  \pgfpathmoveto{\pgfpointxy{#2*\mx}{#2*\my}}
+ }
+ \foreach \i in {#4} {
+  \pgfmathsetmacro\tx{\mx + cos(\i*180/#1)}
+  \pgfmathsetmacro\ty{\my + sin(\i*180/#1)}
+  \global\let\mx\tx
+  \global\let\my\ty
+  \pgfpathlineto{\pgfpointxy{#2*\mx}{#2*\my}}
+ }
+ \pgfsetstrokecolor{#5}
+ \pgfsetlinewidth{#6}
+ \pgfusepath{stroke}
+}
+
 \newcommand{\rhombus}[4] { % color,side,angle,letter
  \definecolor{main}{HTML}{#1}
 
@@ -616,6 +639,36 @@
   \end{scope}
 }
 
+\newcommand{\hexagonGeneric}[7]{ % symm,a1,a2,a3,size,rot,color
+ \pgfmathsetmacro\symm{360/#1}
+ \pgfmathsetmacro\aa{180-(#2*\symm)}
+ \pgfmathsetmacro\ab{180-(#3*\symm)}
+ \pgfmathsetmacro\ac{180-(#4*\symm)}
+ \pgfmathsetmacro\ca{#5*cos(\ac)}
+ \pgfmathsetmacro\sa{#5*sin(\ac)}
+ \pgfmathsetmacro\cb{#5*cos(\ac+\ab))}
+ \pgfmathsetmacro\sb{#5*sin(\ac+\ab)}
+ \pgfmathsetmacro\cc{#5*cos(\ac+\ab+\aa)}
+ \pgfmathsetmacro\sc{#5*sin(\ac+\ab+\aa)}
+ \pgfmathsetmacro\cd{#5*cos(\ac+\ab+\aa+\ac)}
+ \pgfmathsetmacro\sd{#5*sin(\ac+\ab+\aa+\ac)}
+ \begin{scope}[rotate=#6*\symm/2]
+  \fill[#7] (0,0)
+  -- ++(#5,0)
+  -- ++(\ca,\sa)
+  -- ++(\cb,\sb)
+  -- ++(\cc,\sc)
+  -- ++(\cd,\sd)
+  -- cycle;
+  \draw[] (0,0)
+  -- ++(#5,0)
+  -- ++(\ca,\sa)
+  -- ++(\cb,\sb)
+  -- ++(\cc,\sc)
+  -- ++(\cd,\sd)
+  -- cycle;
+ \end{scope}
+}
 
 
 

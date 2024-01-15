@@ -1,0 +1,59 @@
+\documentclass[]{standalone}
+
+\usepackage{../lenses}
+
+\pgfmathsetmacro\symm{9}
+\pgfmathsetmacro\side{1}
+
+\newcommand{\rhombusRotG}[2]{ % size,rot
+ \begin{scope}[rotate=#1*180/9] \rhombus{000000}{#2}{1*180/9}{g} \end{scope}
+}
+
+\newcommand{\rhombusRotH}[2]{ % size,rot
+ \begin{scope}[rotate=#1*180/9] \rhombus{000000}{#2}{2*180/9}{h} \end{scope}
+}
+
+\newcommand{\rhombusRotA}[2]{ % size,rot
+ \begin{scope}[rotate=#1*180/9] \rhombus{000000}{#2}{3*180/9}{a} \end{scope}
+}
+
+\newcommand{\rhombusRotI}[2]{ % size,rot
+ \begin{scope}[rotate=#1*180/9] \rhombus{000000}{#2}{4*180/9}{i} \end{scope}
+}
+
+\begin{document}
+ \begin{tikzpicture}
+
+  \begin{scope}[shift={(0,0)}]
+   \begin{scope} %\path(0,0) node{$o$};
+    \rhombusRotA{+0}{\side}
+    \hexagonGeneric{\symm}{1}{6}{2}{\side}{-2}{green!50!white}
+    \letterId{0.70}{-0.25}{G}
+   \end{scope}
+   \begin{scope}[shift={(0,-2)}] %\path(0,0) node{$A$};
+    \begin{scope}[rotate=3*180/9,shift={(\side,0)}] %\path(0,0) node{$B$};
+     \rhombusRotI{+9}{\side}
+     \rhombusRotH{-5}{\side}
+    \end{scope}
+   \end{scope}
+   \path(1,-3.5) node{$(i)$};
+  \end{scope}
+
+  \begin{scope}[shift={(3,0)}]  
+   \begin{scope} \path(0,0) node{$o$};
+    \rhombusRotG{+0}{\side}
+    \hexagonGeneric{\symm}{1}{5}{3}{\side}{-2}{green!50!white}
+    \letterId{1.35}{-0.15}{H}
+   \end{scope}
+   \begin{scope}[shift={(0,-2)}] \path(0,0) node{$A$};
+    \rhombusRotA{-2}{\side}
+    \begin{scope}[rotate=1*180/9,shift={(\side,0)}] \path(0,0) node{$B$};
+     \rhombusRotH{-3}{\side}
+    \end{scope}
+   \end{scope}
+   \path(1,-3.5) node{$(ii)$};
+  \end{scope}
+  
+  
+ \end{tikzpicture}
+\end{document}

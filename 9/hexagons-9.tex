@@ -2,29 +2,6 @@
 
 \usepackage{../lenses}
 
-\newcommand{\lineGeneric}[6]{ %symm,side,moveto,lineto,color,linewidth
- \pgfmathsetmacro\mx{0}
- \pgfmathsetmacro\my{0}
- \pgfpathmoveto{\pgfpointxy{\mx}{\my}}
- \foreach \i in {#3} {
-  \pgfmathsetmacro\tx{\mx + cos(\i*180/#1)}
-  \pgfmathsetmacro\ty{\my + sin(\i*180/#1)}
-  \global\let\mx\tx
-  \global\let\my\ty
-  \pgfpathmoveto{\pgfpointxy{#2*\mx}{#2*\my}}
- }
- \foreach \i in {#4} {
-  \pgfmathsetmacro\tx{\mx + cos(\i*180/#1)}
-  \pgfmathsetmacro\ty{\my + sin(\i*180/#1)}
-  \global\let\mx\tx
-  \global\let\my\ty
-  \pgfpathlineto{\pgfpointxy{#2*\mx}{#2*\my}}
- }
- \pgfsetstrokecolor{#5}
- \pgfsetlinewidth{#6}
- \pgfusepath{stroke}
-}
-
 \begin{document}
  \begin{tikzpicture}
   \begin{scope}[xscale=-1.5,yscale=1.5]
@@ -81,9 +58,6 @@
    \path(-0.21*\side,-0.38*\side) node[blue!50!white]{\textbf{1}};
    \path(-0.75*\side,-0.80*\side) node[blue!50!white]{\textbf{7}};
    \path(-1.20*\side,-0.20*\side) node[blue!50!white]{\textbf{1}};
-
-
-
 
    \path(+0.25*\side,0*\side) node{$O$};
    
