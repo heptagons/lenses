@@ -36,24 +36,73 @@
      \rhombusRotH{-5}{\side}
     \end{scope}
    \end{scope}
-   \path(1,-3.5) node{$(i)$};
+   \path(1.25,-3.25) node{$(i)$};
   \end{scope}
 
-  \begin{scope}[shift={(3,0)}]  
-   \begin{scope} \path(0,0) node{$o$};
+  \begin{scope}[shift={(2.75,0.5)}]  
+   \begin{scope} %\path(0,0) node{$o$};
     \rhombusRotG{+0}{\side}
     \hexagonGeneric{\symm}{1}{5}{3}{\side}{-2}{green!50!white}
     \letterId{1.35}{-0.15}{H}
    \end{scope}
-   \begin{scope}[shift={(0,-2)}] \path(0,0) node{$A$};
+   \begin{scope}[shift={(0,-2)}] %\path(0,0) node{$A$};
     \rhombusRotA{-2}{\side}
-    \begin{scope}[rotate=1*180/9,shift={(\side,0)}] \path(0,0) node{$B$};
+    \begin{scope}[rotate=1*180/9,shift={(\side,0)}] %\path(0,0) node{$B$};
      \rhombusRotH{-3}{\side}
     \end{scope}
    \end{scope}
-   \path(1,-3.5) node{$(ii)$};
+   \path(1.5,-3.75) node{$(ii)$};
   \end{scope}
   
+  \begin{scope}[shift={(6.0,0.75)}]
+   \begin{scope} %\path(0,0) node{$o$};
+    \hexagonGeneric{\symm}{1}{4}{4}{\side}{-2}{green!50!white}
+    \letterId{1.35}{-0.50}{I}
+   \end{scope}
+   \begin{scope}[shift={(0,-2)}] %\path(0,0) node{$A$};
+    \rhombusRotG{-1}{\side}
+    \rhombusRotG{-2}{\side}
+    \begin{scope}[rotate=-1*180/9,shift={(\side,0)}] %\path(0,0) node{$B$};
+     \rhombusRotH{-1}{\side}
+    \end{scope}
+   \end{scope}
+   \path(1.5,-4) node{$(iii)$};
+  \end{scope}
+  
+  \begin{scope}[shift={(9.5,0.5)}]
+   \begin{scope} %\path(0,0) node{$o$};
+    \begin{scope}[rotate=-2*180/9]
+     \rhombusRotG{+2}{\side}
+     \hexagonGeneric{\symm}{2}{5}{2}{\side}{-2}{green!50!white} % lense
+    \end{scope}
+    \letterId{1.05}{-0.30}{J}
+   \end{scope}
+   \begin{scope}[shift={(0,-2)}] %\path(0,0) node{$A$};
+    \begin{scope}[rotate=1*180/9,shift={(\side,0)}] %\path(0,0) node{$B$};
+     \rhombusRotI{-9}{\side}
+     \rhombusRotI{-5}{\side}
+    \end{scope}
+   \end{scope}
+   \path(1.0,-3.75) node{$(iv)$};
+  \end{scope}
+  
+  \begin{scope}[shift={(12.5,0.5)}]
+   \begin{scope} %\path(0,0) node{$o$};
+    \begin{scope}[rotate=-1*180/9]
+     \hexagonGeneric{\symm}{2}{4}{3}{\side}{-2}{green!50!white}
+    \end{scope}
+    \letterId{1.25}{-0.25}{K}
+   \end{scope} 
+
+   \begin{scope}[shift={(0,-2)}] %\path(0,0) node{$A$};
+    \rhombusRotG{0}{\side}
+    \rhombusRotA{-3}{\side}
+    \begin{scope}[shift={(\side,0)}]
+     \rhombusRotI{-3}{\side}
+    \end{scope}   
+   \end{scope}
+   \path(1.25,-3.75) node{$(v)$};
+  \end{scope}
   
  \end{tikzpicture}
 \end{document}
