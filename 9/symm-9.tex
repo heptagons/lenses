@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \title{Symmetry 9}
 \author{https://github.com/heptagons/lenses}
-\date{2024/1/15}
+\date{2024/1/16}
 
 \usepackage{graphicx}
 
@@ -15,67 +15,97 @@
 
 \maketitle
 \begin{abstract}
-Symmetry 9
+We build equilateral polygons that can tesselate the plane using the symmetry $9$. We analyze lower odd symmetries $3,5,7$ also to find patterns. The polygons are rhombus, hexagons, octagons and stars.
 \end{abstract}
 
-\section{Rhombi}
+\section{Symmetries}
+
+We are interested in odd symmetries starting with $3$. Table \ref{tbl:symm} show the symmetries up to $9$. The value of the angle of the symmetry $m$ is $\theta = \dfrac{2\pi}m$. 
 
 \begin{table}[H]
 \begin{center}
-\begin{tabular}{|c|c|c c| r |}
+\begin{tabular}{|c|c c|}
 \hline
-Rhombus & Name & $\theta_1$ & $\theta_2$ & Area \\ \hline\
-$R_3(\frac{1}2,1)$ & $\mathbi{a}$ & $\alpha/2$ & $2\alpha/2$  & $\sin(\alpha) \approx 0.866$ \\[0.5ex]
+$m$ & Angle & $\theta$ \\ \hline\
+$3$ & $\alpha$ & $2\pi/3$ \\ \hline
+$5$ & $\beta$  & $2\pi/5$ \\ \hline
+$7$ & $\gamma$ & $2\pi/7$ \\ \hline
+$9$ & $\delta$ & $2\pi/9$ \\ \hline
+\end{tabular}
+\caption{Symmetries $m=\{3,5,7,9\}$.} 
+\label{tbl:symm}
+\end{center}
+\end{table}
+
+\section{Rhombi}
+
+Rhombi are equilateral tetragons. For every odd symmetry $m$ we find $n = \dfrac{m-1}2$ different rhombi. The rhombi smallest angles are defined as $\omega_1 \equiv \dfrac{i}2$ while the other as $\omega_2 \equiv n + \dfrac{i-1}2$ where $i = 1,...,n$. We identify the rhombi with the symmetry $m$ and angle $\omega_1$ only. So for symmetry $9$ we have the four rhombi: $R_9\left(\frac{1}2\right)$, $R_9(1)$, $R_9\left(\frac{3}2\right)$ and $R_9(2)$.
+
+Figure \ref{tbl:rhombi} show the rhombi for symmetries up to $9$. Every rhombus is labeled with a consecutive lowercase letter $\mathbi{a}$, $\mathbi{b}$, $\mathbi{c}$,... The first rhombi $\mathbi{a}$ is found again in symmetry $9$ so we prevent renaming identical rhombi.
+
+The rhombi angles $\theta_1$ and $\theta_2$ are expressed in function of the angles $\{\alpha,\beta,\gamma,\delta\}$ of symmetries $m=\{3,5,7,9\}$ where $\theta_1 < \theta_2$ and $\theta_1 + \theta_2 = \pi$. We cannot use the rhombi isolated in our tessellations since not both $\omega_1$ and $\omega_2$ are integers. But we'll add and substract rhombi together to build hexagons, octagons and beyond where all polygon's angles $\omega_n$ are integers.
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|c|c|c|c c| r |}
 \hline
-$R_5(\frac{1}2,2)$ & $\mathbi{b}$ & $\beta/2$  & $4\beta/2$   & $\sin(2\beta) \approx 0.587$\\[0.5ex]
-$R_5(1,\frac{3}2)$ & $\mathbi{c}$ & $2\beta/2$ & $3\beta/2$   & $\sin(\beta) \approx 0.951$\\[0.5ex]
+$R_m(\omega_1)$ & $\omega_2$ & Name & $\theta_1$ & $\theta_2$ & Area \\ \hline\
+$R_3(\frac{1}2)$ & $1$  & $\mathbi{a}$ & $\alpha/2$ & $2\alpha/2$  & $\sin(\alpha) \approx 0.866$ \\[0.5ex]
 \hline
-$R_7(\frac{1}2,3)$ & $\mathbi{d}$ & $\gamma/2$ & $6\gamma/2$  & $\sin(3\gamma) \approx 0.433$\\[0.5ex]
-$R_7(1,\frac{5}2)$ & $\mathbi{e}$ & $2\gamma/2$ & $5\gamma/2$ & $\sin(\gamma) \approx 0.781$\\[0.5ex]
-$R_7(\frac{3}2,2)$ & $\mathbi{f}$ & $3\gamma/2$ & $4\gamma/2$ & $\sin(2\gamma) \approx 0.974$\\[0.5ex]
+$R_5(\frac{1}2)$ & $2$  & $\mathbi{b}$ & $\beta/2$  & $4\beta/2$   & $\sin(2\beta) \approx 0.587$\\[0.5ex]
+$R_5(1)$ & $\frac{3}2$  & $\mathbi{c}$ & $2\beta/2$ & $3\beta/2$   & $\sin(\beta) \approx 0.951$\\[0.5ex]
 \hline
-$R_9(\frac{1}2,4)$ & $\mathbi{g}$ & $\delta/2$ & $8\delta/2$  & $\sin(4\delta) \approx 0.342$\\[0.5ex]
-$R_9(1,\frac{7}2)$ & $\mathbi{h}$ & $2\delta/2$ & $7\delta/2$ & $\sin(\delta) \approx 0.642$\\[0.5ex]
-$R_9(\frac{3}2,3)$ & $\mathbi{a}$ & $3\delta/2$ & $6\delta/2$ & $\sin(3\delta) \approx 0.866$\\[0.5ex]
-$R_9(2,\frac{5}2)$ & $\mathbi{i}$ & $4\delta/2$ & $5\delta/2$ & $\sin(2\delta) \approx 0.984$\\[0.5ex]
+$R_7(\frac{1}2)$ & $3$  & $\mathbi{d}$ & $\gamma/2$ & $6\gamma/2$  & $\sin(3\gamma) \approx 0.433$\\[0.5ex]
+$R_7(1)$ & $\frac{5}2$ & $\mathbi{e}$ & $2\gamma/2$ & $5\gamma/2$ & $\sin(\gamma) \approx 0.781$\\[0.5ex]
+$R_7(\frac{3}2)$ & $2$  & $\mathbi{f}$ & $3\gamma/2$ & $4\gamma/2$ & $\sin(2\gamma) \approx 0.974$\\[0.5ex]
+\hline
+$R_9(\frac{1}2)$ & $4$ & $\mathbi{g}$ & $\delta/2$ & $8\delta/2$  & $\sin(4\delta) \approx 0.342$\\[0.5ex]
+$R_9(1)$ & $\frac{7}2$ & $\mathbi{h}$ & $2\delta/2$ & $7\delta/2$ & $\sin(\delta) \approx 0.642$\\[0.5ex]
+$R_9(\frac{3}2)$ & $3$ & $\mathbi{a}$ & $3\delta/2$ & $6\delta/2$ & $\sin(3\delta) \approx 0.866$\\[0.5ex]
+$R_9(2)$ & $\frac{5}2$ & $\mathbi{i}$ & $4\delta/2$ & $5\delta/2$ & $\sin(2\delta) \approx 0.984$\\[0.5ex]
 \hline
 \end{tabular}
-\caption{Rhombi $R_m(\omega_1,\omega_2)$ for symmetries $m=\{3,5,7,9\}$ internal angles $\theta_1 < \theta_2$ ($\theta_1 + \theta_2 = \pi$) and areas. $\alpha = 2\pi/3$, $\beta = 2\pi/5$, $\gamma = 2\pi/7$ and $\delta = 2\pi/9$ $(3\delta = \alpha)$.} 
+\caption{Rhombi $R_m(\omega_1,\omega_2)$ for symmetries $m=\{3,5,7,9\}$.} 
 \label{tbl:rhombi}
 \end{center}
 \end{table}
 
+\section{Stars}
+
+For every odd symmetry $m$ we have several stars that are equilateral 2$m$-gons with at most two different angles $\omega_1$ and $\omega_2$ at the vertices. We find exactly $n = \dfrac{m-1}2$ different stars with angles $\omega_1 \leq \omega_2$ as integers.
+
+Figure \ref{tbl:stars} show the stars for symmetries up to $9$. Every star with both $\omega_1$ and $\omega_2$ integers are labeled with a consecutive uppercase letter $\mathcal{A}, \mathcal{B}, \mathcal{C}...$. The stars are easily build with rhombi so the table show the stars area in function of them.
+
 \begin{table}[H]
 \begin{center}
-\begin{tabular}{|c|c|l|l|}
+\begin{tabular}{|c|c|c|l|l|}
 \hline
-Star & Name & Area & Polygon \\ \hline\
-$S_3(\frac{1}2,1)$ & -     & $6\mathbi{a}$ & $|6/2|$ hexagram \\[0.5ex]
-$S_3(1,1)$ & $\mathcal{A}$ & $3\mathbi{a}$ & Regular hexagon \\[0.5ex]
+$S_m(\omega_1)$ & $\omega_2$ & Name & Area & Polygon \\ \hline\
+$S_3(\frac{1}2)$ & $2$ & -     & $6\mathbi{a}$ & $|6/2|$ (12-gon) \\[0.5ex]
+$S_3(1)$         & $1$ & $\mathcal{A}$ & $3\mathbi{a}$ & Regular hexagon \\[0.5ex]
 \hline
-$S_5(\frac{1}2,4)$ & -      & $5\mathbi{b}$ & $|10/4|$ decagram\\[0.5ex]
-$S_5(1,3)$ & $\mathcal{B}$ & $5\mathbi{c}$ & $|(5/2)_\alpha|$ decagram\\[0.5ex]
-$S_5(2,2)$ & $\mathcal{C}$ & $5(\mathbi{c}+\mathbi{b})$ & Regular decagon\\[0.5ex]
+$S_5(\frac{1}2)$ & $4$ & -      & $5\mathbi{b}$ & $|10/4|$ (20-gon)\\[0.5ex]
+$S_5(1)$ & $3$ & $\mathcal{B}$ & $5\mathbi{c}$ & $|(5/2)_\alpha|$ decagram\\[0.5ex]
+$S_5(2)$ & $2$ & $\mathcal{C}$ & $5(\mathbi{c}+\mathbi{b})$ & Regular decagon\\[0.5ex]
 \hline
-$S_7(\frac{1}2,6)$ & -     & $7\mathbi{d}$ & $|14/6|$ 14-gram\\[0.5ex]
-$S_7(1,5)$ & $\mathcal{D}$ & $7\mathbi{e}$ & $|(7/4)_\alpha|$ 14-gram\\[0.5ex]
-$S_7(2,4)$ & $\mathcal{E}$ & $7(\mathbi{e}+\mathbi{f})$ & $|(7/2)_\alpha|$ 14-gram\\[0.5ex]
-$S_7(3,3)$ & $\mathcal{F}$ & $7(\mathbi{e}+\mathbi{f}+\mathbi{d})$ & Regular 14-gon\\[0.5ex]
+$S_7(\frac{1}2)$ & $6$ & -     & $7\mathbi{d}$ & $|14/6|$ (28-gon)\\[0.5ex]
+$S_7(1)$ & $5$ & $\mathcal{D}$ & $7\mathbi{e}$ & $|(7/4)_\alpha|$ 14-gram\\[0.5ex]
+$S_7(2)$ & $4$ & $\mathcal{E}$ & $7(\mathbi{e}+\mathbi{f})$ & $|(7/2)_\alpha|$ 14-gram\\[0.5ex]
+$S_7(3)$ & $3$ & $\mathcal{F}$ & $7(\mathbi{e}+\mathbi{f}+\mathbi{d})$ & Regular 14-gon\\[0.5ex]
 \hline
-$S_9(\frac{1}2,7)$ & -     & $9\mathbi{g}$ & $|18/8|$ 18-gram\\[0.5ex]
-$S_9(1,6)$ & $\mathcal{G}$ & $9\mathbi{h}$ & $|(9/6)_\alpha|$ 18-gram\\[0.5ex]
-$S_9(2,5)$ & $\mathcal{H}$ & $9(\mathbi{h}+\mathbi{i})$ & $|(9/4)_\alpha|$ 18-gram\\[0.5ex]
-$S_9(3,4)$ & $\mathcal{I}$ & $9(\mathbi{h}+\mathbi{i}+\mathbi{a})$ & $|(9/2)_\alpha|$ 18-gram\\[0.5ex]
-$S_9(4,4)$ & $\mathcal{J}$ & $9(\mathbi{h}+\mathbi{i}+\mathbi{a}+\mathbi{g})$ & Regular 18-gon\\[0.5ex]
+$S_9(\frac{1}2)$ & $8$ & -     & $9\mathbi{g}$ & $|18/8|$ (36-gon)\\[0.5ex]
+$S_9(1)$ & $7$ & $\mathcal{G}$ & $9\mathbi{h}$ & $|(9/6)_\alpha|$ 18-gram\\[0.5ex]
+$S_9(2)$ & $6$ & $\mathcal{H}$ & $9(\mathbi{h}+\mathbi{i})$ & $|(9/4)_\alpha|$ 18-gram\\[0.5ex]
+$S_9(3)$ & $5$ & $\mathcal{I}$ & $9(\mathbi{h}+\mathbi{i}+\mathbi{a})$ & $|(9/2)_\alpha|$ 18-gram\\[0.5ex]
+$S_9(4)$ & $4$ & $\mathcal{J}$ & $9(\mathbi{h}+\mathbi{i}+\mathbi{a}+\mathbi{g})$ & Regular 18-gon\\[0.5ex]
 \hline
 \end{tabular}
-\caption{Stars $S_m(\omega_1,\omega_2)$ for symmetries $m=\{3,5,7,9\}$. We use the names $\{\mathcal{A},\mathcal{B},...\mathcal{J}\}$ when both $\omega_1$ and $\omega_2$ are integers.}
+\caption{Stars $S_m(\omega_1,\omega_2)$ for symmetries $m=\{3,5,7,9\}$.}
 \label{tbl:stars}
 \end{center}
 \end{table}
 
-
-\subsection{Stars from rhombi}
+Figure \ref{fig:rhombi-9} show nine copies of symmetry-9 rhombi $\{\mathbi{h},\mathbi{i},\mathbi{a},\mathbi{g}\}$ forming the four stars $S_9(1)$, $S_9(2)$, $S_9(3)$ and $S_9(4)$ named respectivelly $\mathcal{G}$, $\mathcal{H}$, $\mathcal{I}$ and $\mathcal{J}$.
 
 \begin{figure}[H]
 \centering
@@ -88,20 +118,24 @@ $9\mathbi{h}$,
 \label{fig:rhombi-9}
 \end{figure}
 
-Figure \ref{fig:rhombi-9} show nine copies of symmetry-9 rhombi $\{\mathbi{h},\mathbi{i},\mathbi{a},\mathbi{g}\}$ to form four stars.
 
 
 
 
 \section{Hexagons}
 
+For the odd symmetries mentioned, we can obtain equilateral hexagons by connecting six equal edges at integral values of $\omega$ or by adding and substracting rhombi or by dissecting the areas left after stars intersections. In any case we find the hexagons has at most three different internal angles.
+
 \subsection{Hexagons angles}
+
+
+Figure \ref{tbl:hexagons-angles} show the hexagons defined as $H_m(\omega_1,\omega_2)$ for symmetries $m = \{3,5,7,9\}$ where $\omega_1 \leq \omega_2 \leq \omega_3$ and $\omega_1 + \omega_2 + \omega_3 = m$. The six consecutive angles of the hexagons are $(\omega_1,\omega_2,\omega_3,\omega_1,\omega_2,\omega_3)$. We labeled the non self-intersecting hexagons with uppercase letters $\mathbi{A}$, $\mathbi{B}$, $\mathbi{C}$, ... We prevent to name differently any hexagon which is equivalent to a previous one having the same angles as what happens with hexagon $\mathcal{A}$ in symmetry $9$ group.
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{| c | c | c | l | }
 \hline
-Hexagon & Name & $(\omega_1, \omega_2, \omega_3)$ & Polygon \\ \hline\
+$H_m(\omega_1,\omega_2)$ & Name & $(\omega_1, \omega_2, \omega_3)$ & Polygon \\ \hline\
 $H_3(1,1)$ & \mathbi{A} & (\textbf{1, 1, 1}) & Regular hexagon \\[0.5ex]
 \hline
 $H_5(1,1)$ & \mathbi{B} & (\textbf{1, 1, 3}) & Sormeh Dan Girih tile\\[0.5ex]
@@ -126,7 +160,6 @@ $H_9(3,3)$ & \mathbi{A} & (\textbf{3, 3, 3}) & equivalent to $H_3(1,1)$\\[1.1ex]
 \end{center}
 \end{table}
 
-Figure \ref{tbl:hexagons-angles} show the hexagons defined as $H_m(\omega_1,\omega_2)$ for symmetries $\{3,5,7,9\}$. Always $\omega_1 \leq \omega_2 \leq \omega_3$ and $\omega_1 + \omega_2 + \omega_3 = m$. The six consecutive angles of the hexagons are $(\omega_1,\omega_2,\omega_3,\omega_1,\omega_2,\omega_3)$.
 
 \subsection{Hexagons areas}
 
@@ -160,7 +193,7 @@ Figure \ref{fig:hexagons-from-hexagons-9} show how to express the area of the si
 \mathbi{A} + \mathbi{I} + \mathbi{J} &= \mathbi{H} + 2\mathbi{K}
 \end{align}
 
-Using the last equations we form the table \ref{tbl:hexagons-areas}.
+Using the last equations we form the table \ref{tbl:hexagons-areas} which show the areas of the six hexagons in function of four rhombi $\mathbi{g,h,a,i}$ and in function of only four hexagons $\mathbi{H,I,J,K}$.
 
 \begin{table}[H]
 \begin{center}
@@ -176,23 +209,13 @@ $\mathbi{A}$ & $3\mathbi{a}$ & $2\mathbi{K} + \mathbi{H} - \mathbi{I} - \mathbi{
 $\mathbi{G}$ & $\mathbi{i} + \mathbi{h} - \mathbi{a}$ & $\mathbi{I} + \mathbi{J} - \mathbi{K}$ \\[0.5ex]
 \hline
 \end{tabular}
-\caption{Areas of the six hexagons in function of four rhombi $\mathbi{g,h,a,i}$ and four hexagons $\mathbi{H,I,J,K}$.} 
+\caption{Symmetry $9$ hexagon areas.} 
 \label{tbl:hexagons-areas}
 \end{center}
 \end{table}
 
 
 \subsection{Hexagons from stars}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=1]{hexagons-9}
-\caption{Symmetry $9$ stars $\{\mathcal{G},\mathcal{H},\mathcal{I},\mathcal{J}\}$
- dissected to get the six hexagons
-$\{\mathbi{G},\mathbi{H},\mathbi{I},\mathbi{J},\mathbi{K},\mathbi{A}\}$.
-}
-\label{fig:hexagons-9}
-\end{figure}
 
 Figure \ref{fig:hexagons-9} show the disposition of the symmetry $9$ four stars. We denote the $18$ vertices of stars $\{\mathcal{G},\mathcal{H},\mathcal{I},\mathcal{J}\}$ as
  $\{G_0,G_1,...,G_{17}\}$,
@@ -208,6 +231,18 @@ Then we add three new edges (in orange) joining the stars $\mathcal{I}$ and $\ma
 
 Finally we add three more edges (in green) joining the stars $\mathcal{H}$ and $\mathcal{G}$ vertices:
 $\overline{H_3G_2}$, $\overline{H_5G_4}$ and $\overline{H_7G_6}$ dissecting the green region into four hexagons, two of them new. The three consective angles of the the two hexagons are show: $\textbf{G (1,6,2)}$ and $\textbf{J (2,5,2)}$.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{hexagons-9}
+\caption{Symmetry $9$ stars $\{\mathcal{G},\mathcal{H},\mathcal{I},\mathcal{J}\}$
+ dissected to get the six hexagons
+$\{\mathbi{G},\mathbi{H},\mathbi{I},\mathbi{J},\mathbi{K},\mathbi{A}\}$.
+}
+\label{fig:hexagons-9}
+\end{figure}
+
 
 
 
