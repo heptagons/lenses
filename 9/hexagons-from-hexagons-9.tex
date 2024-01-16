@@ -29,6 +29,41 @@
    \path(3.7,-0.6) node{$\Longleftrightarrow$};
    \path(3.7,-2.2) node{$(i)$};
   \end{scope}
+
+
+  \begin{scope}[shift={(8.5,0)}]
+   \begin{scope} %\path(0,0) node{$a$};
+    \hexagonGeneric{9}{3}{3}{3}{\side}{-3}{red!50!white}
+    \begin{scope}[rotate=-3*180/9,shift={(\side,0)}] %\path(0,0) node{$b$};
+     \begin{scope}[rotate=+3*180/9,shift={(\side,0)}] %\path(0,0) node{$c$};
+      \hexagonGeneric{9}{2}{2}{5}{\side}{-1}{black!15!white}
+      \begin{scope}[rotate=+3*180/9,shift={(\side,0)}] %\path(0,0) node{$d$};
+       \hexagonGeneric{9}{4}{1}{4}{\side}{-5}{black!15!white}
+      \end{scope}
+     \end{scope}   
+    \end{scope}   
+    \letterId{1.00}{-0.00}{A}
+    \letterId{2.60}{-0.10}{I}
+    \letterId{2.55}{-0.90}{J}
+   \end{scope}
+   
+   \begin{scope}[shift={(4.75,0)}] %\path(0,0) node{$c$};
+    \hexagonGeneric{9}{2}{3}{4}{\side}{-1}{black!15!white}
+    \hexagonGeneric{9}{1}{5}{3}{\side}{-3}{black!15!white}
+    \begin{scope}[rotate=-1*180/9,shift={(\side,0)}] %\path(0,0) node{$b$};
+     \begin{scope}[rotate=+1*180/9,shift={(\side,0)}] %\path(0,0) node{$c$};
+      \hexagonGeneric{9}{3}{2}{4}{\side}{-3}{black!15!white}
+     \end{scope}   
+    \end{scope}
+    \letterId{1.20}{+0.20}{K}
+    \letterId{1.20}{-0.60}{H}
+    \letterId{2.80}{-0.70}{K}
+   \end{scope}
+
+   \path(4.2,-0.6) node{$\Longleftrightarrow$};
+   \path(4.2,-2.2) node{$(ii)$};
+  \end{scope}
+
  
  \end{tikzpicture}
 \end{document}

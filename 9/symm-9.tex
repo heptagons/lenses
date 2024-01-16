@@ -147,26 +147,39 @@ Figure \ref{fig:hexagons-from-rhombi-9} show how to calculate the area of the sy
 \mathbi{A} &= 3\mathbi{a}
 \end{align}
 
-Using the last equations we form the table \ref{tbl:hexagons-areas}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{hexagons-from-hexagons-9}
+\caption{Hexagons $\{\mathbi{G},\mathbi{A}\}$ formed adding and substracting hexagons $\{\mathbi{H},\mathbi{I},\mathbi{J},\mathbi{K}\}$.}
+\label{fig:hexagons-from-hexagons-9}
+\end{figure}
+
+Figure \ref{fig:hexagons-from-hexagons-9} show how to express the area of the six hexagons in function of only four. For $(i)$ and $(ii)$ we equate the area of the sum of hexagons of the left with the area of the hexagons of the right:
+\begin{align}
+\mathbi{G} + \mathbi{K} &= \mathbi{I} + \mathbi{J} \\
+\mathbi{A} + \mathbi{I} + \mathbi{J} &= \mathbi{H} + 2\mathbi{K}
+\end{align}
+
+Using the last equations we form the table \ref{tbl:hexagons-areas}.
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{| c | l | l |}
 \hline
 Hexagon & $\mathbi{g,h,a,i}$ area & $\mathbi{H,I,J,K}$ area \\ \hline\
-$\mathbi{G}$ & $\mathbi{i} + \mathbi{h} - \mathbi{a}$ & $\mathbi{I} + \mathbi{J} - \mathbi{K}$ \\[0.5ex]
 $\mathbi{H}$ & $\mathbi{a} + \mathbi{h} - \mathbi{g}$ & $\mathbi{H}$ \\[0.5ex]
 $\mathbi{I}$ & $2\mathbi{g} + \mathbi{h}$ & $\mathbi{I}$ \\[0.5ex]
 $\mathbi{J}$ & $2\mathbi{i} - \mathbi{g}$ & $\mathbi{J}$ \\[0.5ex]
 $\mathbi{K}$ & $\mathbi{g} + \mathbi{a} + \mathbi{i}$ & $\mathbi{K}$ \\[0.5ex]
+\hline
 $\mathbi{A}$ & $3\mathbi{a}$ & $2\mathbi{K} + \mathbi{H} - \mathbi{I} - \mathbi{J}$ \\[0.5ex]
+$\mathbi{G}$ & $\mathbi{i} + \mathbi{h} - \mathbi{a}$ & $\mathbi{I} + \mathbi{J} - \mathbi{K}$ \\[0.5ex]
 \hline
 \end{tabular}
-\caption{Symmetry $9$ hexagons areas in function of rhombi $\mathbi{g,h,a,i}$ and hexagons $\mathbi{H,I,J,K}$.} 
+\caption{Areas of the six hexagons in function of four rhombi $\mathbi{g,h,a,i}$ and four hexagons $\mathbi{H,I,J,K}$.} 
 \label{tbl:hexagons-areas}
 \end{center}
 \end{table}
-
 
 
 \subsection{Hexagons from stars}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  15 JAN 2024 18:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  15 JAN 2024 19:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -459,19 +459,19 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 (./hexagons-from-hexagons-9.aux) ) 
 Here is how much of TeX's memory you used:
- 12234 strings out of 494953
- 248710 string characters out of 6180977
- 285665 words of memory out of 5000000
- 15300 multiletter control sequences out of 15000+600000
+ 12243 strings out of 494953
+ 248875 string characters out of 6180977
+ 289665 words of memory out of 5000000
+ 15309 multiletter control sequences out of 15000+600000
  4307 words of font info for 16 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 62i,7n,56p,429b,711s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,7n,56p,429b,905s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmsy10.pfb>
-Output written on hexagons-from-hexagons-9.pdf (1 page, 31690 bytes).
+Output written on hexagons-from-hexagons-9.pdf (1 page, 33024 bytes).
 PDF statistics:
  27 PDF objects out of 1000 (max. 8388607)
  19 compressed objects within 1 object stream
