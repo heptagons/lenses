@@ -36,8 +36,10 @@
      \rhombusRotH{-5}{\side}
     \end{scope}
    \end{scope}
-   \path(1.25,-3.25) node{$(i)$};
+   \path(1.5,-0.6) node{$\Updownarrow$};
+   \path(1.25,-3.2) node{$(i)$};
   \end{scope}
+  
 
   \begin{scope}[shift={(2.75,0.5)}]  
    \begin{scope} %\path(0,0) node{$o$};
@@ -51,7 +53,8 @@
      \rhombusRotH{-3}{\side}
     \end{scope}
    \end{scope}
-   \path(1.5,-3.75) node{$(ii)$};
+   \path(1.4,-1.1) node{$\Updownarrow$};
+   \path(1.4,-3.7) node{$(ii)$};
   \end{scope}
   
   \begin{scope}[shift={(6.0,0.75)}]
@@ -66,10 +69,11 @@
      \rhombusRotH{-1}{\side}
     \end{scope}
    \end{scope}
-   \path(1.5,-4) node{$(iii)$};
+   \path(1.4,-1.4) node{$\Updownarrow$};
+   \path(1.4,-4) node{$(iii)$};
   \end{scope}
   
-  \begin{scope}[shift={(9.5,0.5)}]
+  \begin{scope}[shift={(9.25,0.5)}]
    \begin{scope} %\path(0,0) node{$o$};
     \begin{scope}[rotate=-2*180/9]
      \rhombusRotG{+2}{\side}
@@ -83,17 +87,17 @@
      \rhombusRotI{-5}{\side}
     \end{scope}
    \end{scope}
+   \path(1.2,-1.2) node{$\Updownarrow$};
    \path(1.0,-3.75) node{$(iv)$};
   \end{scope}
   
-  \begin{scope}[shift={(12.5,0.5)}]
+  \begin{scope}[shift={(12.0,0.5)}]
    \begin{scope} %\path(0,0) node{$o$};
     \begin{scope}[rotate=-1*180/9]
      \hexagonGeneric{\symm}{2}{4}{3}{\side}{-2}{green!50!white}
     \end{scope}
     \letterId{1.25}{-0.25}{K}
    \end{scope} 
-
    \begin{scope}[shift={(0,-2)}] %\path(0,0) node{$A$};
     \rhombusRotG{0}{\side}
     \rhombusRotA{-3}{\side}
@@ -101,7 +105,28 @@
      \rhombusRotI{-3}{\side}
     \end{scope}   
    \end{scope}
+   \path(1.2,-1.25) node{$\Updownarrow$};
    \path(1.25,-3.75) node{$(v)$};
+  \end{scope}
+  
+  \begin{scope}[shift={(15,0.25)}]
+   \begin{scope} %\path(0,0) node{$o$};
+    \begin{scope}[rotate=-1*180/9]
+     \hexagonGeneric{\symm}{3}{3}{3}{\side}{-2}{red!50!white}
+    \end{scope}
+    \letterId{1.0}{-0.0}{A}
+   \end{scope} 
+   \begin{scope}[shift={(0,-2)}] %\path(0,0) node{$A$};
+    \rhombusRotA{0}{\side}
+    \rhombusRotA{-3}{\side}
+    \begin{scope}[rotate=60,shift={(\side,0)}]
+     \begin{scope}[rotate=-60,shift={(\side,0)}]
+      \rhombusRotA{-6}{\side}
+     \end{scope}
+    \end{scope}   
+   \end{scope}
+   \path(0.15,-1.00) node{$\Updownarrow$};
+   \path(1.25,-3.5) node{$(vi)$};
   \end{scope}
   
  \end{tikzpicture}

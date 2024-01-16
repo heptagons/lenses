@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \title{Symmetry 9}
 \author{https://github.com/heptagons/lenses}
-\date{2024/1/14}
+\date{2024/1/15}
 
 \usepackage{graphicx}
 
@@ -40,7 +40,7 @@ $R_9(\frac{3}2,3)$ & $\mathbi{a}$ & $3\delta/2$ & $6\delta/2$ & $\sin(3\delta) \
 $R_9(2,\frac{5}2)$ & $\mathbi{i}$ & $4\delta/2$ & $5\delta/2$ & $\sin(2\delta) \approx 0.984$\\[0.5ex]
 \hline
 \end{tabular}
-\caption{Rhombi for symmetries $\{3,5,7,9\}$ internal angles $\theta_1 < \theta_2$ ($\theta_1 + \theta_2 = \pi$) and areas. $\alpha = 2\pi/3$, $\beta = 2\pi/5$, $\gamma = 2\pi/7$ and $\delta = 2\pi/9$ $(3\delta = \alpha)$.} 
+\caption{Rhombi $R_m(\omega_1,\omega_2)$ for symmetries $m=\{3,5,7,9\}$ internal angles $\theta_1 < \theta_2$ ($\theta_1 + \theta_2 = \pi$) and areas. $\alpha = 2\pi/3$, $\beta = 2\pi/5$, $\gamma = 2\pi/7$ and $\delta = 2\pi/9$ $(3\delta = \alpha)$.} 
 \label{tbl:rhombi}
 \end{center}
 \end{table}
@@ -69,7 +69,7 @@ $S_9(3,4)$ & $\mathcal{I}$ & $9(\mathbi{h}+\mathbi{i}+\mathbi{a})$ & $|(9/2)_\al
 $S_9(4,4)$ & $\mathcal{J}$ & $9(\mathbi{h}+\mathbi{i}+\mathbi{a}+\mathbi{g})$ & Regular 18-gon\\[0.5ex]
 \hline
 \end{tabular}
-\caption{Stars $\{\mathcal{A},\mathcal{B},...\mathcal{J}\}$ for symmetries $\{3,5,7,9\}$.}
+\caption{Stars $S_m(\omega_1,\omega_2)$ for symmetries $m=\{3,5,7,9\}$. We use the names $\{\mathcal{A},\mathcal{B},...\mathcal{J}\}$ when both $\omega_1$ and $\omega_2$ are integers.}
 \label{tbl:stars}
 \end{center}
 \end{table}
@@ -94,6 +94,80 @@ Figure \ref{fig:rhombi-9} show nine copies of symmetry-9 rhombi $\{\mathbi{h},\m
 
 
 \section{Hexagons}
+
+\subsection{Hexagons angles}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| c | c | c | l | }
+\hline
+Hexagon & Name & $(\omega_1, \omega_2, \omega_3)$ & Polygon \\ \hline\
+$H_3(1,1)$ & \mathbi{A} & (\textbf{1, 1, 1}) & Regular hexagon \\[0.5ex]
+\hline
+$H_5(1,1)$ & \mathbi{B} & (\textbf{1, 1, 3}) & Sormeh Dan Girih tile\\[0.5ex]
+$H_5(1,2)$ & \mathbi{C} & (\textbf{1, 2, 2}) & Shesh Band Girih tite\\[0.5ex]
+\hline
+$H_7(1,1)$ & -          & (\textbf{1, 1, 5}) & self-intersecting \\[0.5ex]
+$H_7(1,2)$ & \mathbi{D} & (\textbf{1, 2, 4}) & \\[0.5ex]
+$H_7(1,3)$ & \mathbi{E} & (\textbf{1, 3, 3}) & \\[0.5ex]
+$H_7(2,2)$ & \mathbi{F} & (\textbf{2, 2, 3}) & \\[0.5ex]
+\hline
+$H_9(1,1)$ & -          & (\textbf{1, 1, 7}) & self-intersecting \\[0.5ex]
+$H_9(1,2)$ & \mathbi{G} & (\textbf{1, 2, 6}) & \\[0.5ex]
+$H_9(1,3)$ & \mathbi{H} & (\textbf{1, 3, 5}) & \\[0.5ex]
+$H_9(1,4)$ & \mathbi{I} & (\textbf{1, 4, 4}) & \\[0.5ex]
+$H_9(2,2)$ & \mathbi{J} & (\textbf{2, 2, 5}) & \\[0.5ex]
+$H_9(2,3)$ & \mathbi{K} & (\textbf{2, 3, 4}) & \\[0.5ex]
+$H_9(3,3)$ & \mathbi{A} & (\textbf{3, 3, 3}) & equivalent to $H_3(1,1)$\\[1.1ex]
+\hline
+\end{tabular}
+\caption{Hexagons $H_m(\omega_1,\omega_2)$ for symmetries $m = \{3,5,7,9\}$.} 
+\label{tbl:hexagons-angles}
+\end{center}
+\end{table}
+
+Figure \ref{tbl:hexagons-angles} show the hexagons defined as $H_m(\omega_1,\omega_2)$ for symmetries $\{3,5,7,9\}$. Always $\omega_1 \leq \omega_2 \leq \omega_3$ and $\omega_1 + \omega_2 + \omega_3 = m$. The six consecutive angles of the hexagons are $(\omega_1,\omega_2,\omega_3,\omega_1,\omega_2,\omega_3)$.
+
+\subsection{Hexagons areas}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{hexagons-from-rhombi-9}
+\caption{Hexagons formed adding and substracting rhombi.}
+\label{fig:hexagons-from-rhombi-9}
+\end{figure}
+
+Figure \ref{fig:hexagons-from-rhombi-9} show how to calculate the area of the symmetry $9$ hexagons in function of the symmetry $9$ rhombi. From $(i)$ to $(vi)$ we equate the area of sum of the polygons in the top with the area of the sum of the polygons of the bottom:
+\begin{align}
+\mathbi{a} + \mathbi{G} &= \mathbi{i} + \mathbi{h} \\
+\mathbi{g} + \mathbi{H} &= \mathbi{a} + \mathbi{h} \\
+\mathbi{I} &= 2\mathbi{g} + \mathbi{h} \\
+\mathbi{g} + \mathbi{J} &= 2\mathbi{i} \\
+\mathbi{K} &= \mathbi{g} + \mathbi{a} + \mathbi{i} \\
+\mathbi{A} &= 3\mathbi{a}
+\end{align}
+
+Using the last equations we form the table \ref{tbl:hexagons-areas}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| c | l | l |}
+\hline
+Hexagon & $\mathbi{g,h,a,i}$ area & $\mathbi{H,I,J,K}$ area \\ \hline\
+$\mathbi{G}$ & $\mathbi{i} + \mathbi{h} - \mathbi{a}$ & $\mathbi{I} + \mathbi{J} - \mathbi{K}$ \\[0.5ex]
+$\mathbi{H}$ & $\mathbi{a} + \mathbi{h} - \mathbi{g}$ & $\mathbi{H}$ \\[0.5ex]
+$\mathbi{I}$ & $2\mathbi{g} + \mathbi{h}$ & $\mathbi{I}$ \\[0.5ex]
+$\mathbi{J}$ & $2\mathbi{i} - \mathbi{g}$ & $\mathbi{J}$ \\[0.5ex]
+$\mathbi{K}$ & $\mathbi{g} + \mathbi{a} + \mathbi{i}$ & $\mathbi{K}$ \\[0.5ex]
+$\mathbi{A}$ & $3\mathbi{a}$ & $2\mathbi{K} + \mathbi{H} - \mathbi{I} - \mathbi{J}$ \\[0.5ex]
+\hline
+\end{tabular}
+\caption{Symmetry $9$ hexagons areas in function of rhombi $\mathbi{g,h,a,i}$ and hexagons $\mathbi{H,I,J,K}$.} 
+\label{tbl:hexagons-areas}
+\end{center}
+\end{table}
+
+
 
 \subsection{Hexagons from stars}
 
@@ -122,47 +196,7 @@ Then we add three new edges (in orange) joining the stars $\mathcal{I}$ and $\ma
 Finally we add three more edges (in green) joining the stars $\mathcal{H}$ and $\mathcal{G}$ vertices:
 $\overline{H_3G_2}$, $\overline{H_5G_4}$ and $\overline{H_7G_6}$ dissecting the green region into four hexagons, two of them new. The three consective angles of the the two hexagons are show: $\textbf{G (1,6,2)}$ and $\textbf{J (2,5,2)}$.
 
-\subsection{Hexagons from rhombi}
 
-\begin{figure}[H]
-\centering
-\includegraphics[scale=1]{hexagons-from-rhombi-9}
-\caption{.}
-\label{fig:hexagons-from-rhombi-9}
-\end{figure}
-
-\subsection{Hexagons angles}
-
-The three consecutive angles of the hexagons are of the form $(a,b,c)$ where $a+b+c = 9$. Table \ref{tbl:hexagons-angles}
-
-\begin{table}[H]
-\begin{center}
-\begin{tabular}{| c | c | c | l | }
-\hline
-Hexagon & Name & $(\textbf{a, b, c})$ & Polygon \\ \hline\
-$H_3(1,1)$ & \mathbi{A} & (\textbf{1, 1, 1}) & Regular hexagon \\[0.5ex]
-\hline
-$H_5(1,1)$ & \mathbi{B} & (\textbf{1, 1, 3}) & Sormeh Dan Girih tile\\[0.5ex]
-$H_5(1,2)$ & \mathbi{C} & (\textbf{1, 2, 2}) & Shesh Band Girih tite\\[0.5ex]
-\hline
-$H_7(1,1)$ & -          & (\textbf{1, 1, 5}) & self-intersecting \\[0.5ex]
-$H_7(1,2)$ & \mathbi{D} & (\textbf{1, 2, 4}) & \\[0.5ex]
-$H_7(1,3)$ & \mathbi{E} & (\textbf{1, 3, 3}) & \\[0.5ex]
-$H_7(2,2)$ & \mathbi{F} & (\textbf{2, 2, 3}) & \\[0.5ex]
-\hline
-$H_9(1,1)$ & -          & (\textbf{1, 1, 7}) & self-intersecting \\[0.5ex]
-$H_9(1,2)$ & \mathbi{G} & (\textbf{1, 2, 6}) & \\[0.5ex]
-$H_9(1,3)$ & \mathbi{H} & (\textbf{1, 3, 5}) & \\[0.5ex]
-$H_9(1,4)$ & \mathbi{I} & (\textbf{1, 4, 4}) & \\[0.5ex]
-$H_9(2,2)$ & \mathbi{J} & (\textbf{2, 2, 5}) & \\[0.5ex]
-$H_9(2,3)$ & \mathbi{K} & (\textbf{2, 3, 4}) & \\[0.5ex]
-$H_9(3,3)$ & \mathbi{A} & (\textbf{3, 3, 3}) & symmetry 3 hexagon\\[1.1ex]
-\hline
-\end{tabular}
-\caption{Hexagons of symmetries $\{3,5,7,9\}$ with angles factors $\mathbf{a} \leq \mathbf{b} \leq \mathbf{c}$.} 
-\label{tbl:hexagons-angles}
-\end{center}
-\end{table}
 
 
 
