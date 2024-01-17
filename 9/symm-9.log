@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  16 JAN 2024 16:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  16 JAN 2024 18:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -286,31 +286,41 @@ File: hexagons-9.pdf Graphic file (type pdf)
  <use hexagons-9.pdf>
 Package pdftex.def Info: hexagons-9.pdf used on input line 238.
 (pdftex.def)             Requested size: 311.57124pt x 319.40451pt.
- [5 <./hexagons-from-hexagons-9.pdf>] [6 <./hexagons-9.pdf>] (./symm-9.aux) ) 
+ [5 <./hexagons-from-hexagons-9.pdf>] <octagons-9.pdf, id=84, 338.61105pt x 456
+.7725pt>
+File: octagons-9.pdf Graphic file (type pdf)
+
+<use octagons-9.pdf>
+Package pdftex.def Info: octagons-9.pdf used on input line 252.
+(pdftex.def)             Requested size: 338.61021pt x 456.77138pt.
+ [6 <./hexagons-9.pdf>] [7 <./octagons-9.pdf>]
+(./symm-9.aux) ) 
 Here is how much of TeX's memory you used:
- 2679 strings out of 494953
- 36665 string characters out of 6180977
- 120326 words of memory out of 5000000
- 5935 multiletter control sequences out of 15000+600000
+ 2685 strings out of 494953
+ 36770 string characters out of 6180977
+ 120334 words of memory out of 5000000
+ 5940 multiletter control sequences out of 15000+600000
  12169 words of font info for 43 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 38i,11n,32p,632b,253s stack positions out of 5000i,500n,10000p,200000b,80000s
-</
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on symm-9.pdf (6 pages, 164398 bytes).
+ 38i,11n,32p,532b,253s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7
+.pfb>
+Output written on symm-9.pdf (7 pages, 182841 bytes).
 PDF statistics:
- 135 PDF objects out of 1000 (max. 8388607)
- 109 compressed objects within 2 object streams
+ 163 PDF objects out of 1000 (max. 8388607)
+ 133 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

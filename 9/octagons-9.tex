@@ -1,0 +1,68 @@
+\documentclass[]{standalone}
+
+\usepackage{../lenses}
+
+\newcommand{\octagonName}[3]{ %x,y,letter
+ \path(#1,#2) node{$\textsf{\em #3}$};
+}
+
+\begin{document}
+ \begin{tikzpicture}
+  \begin{scope}[xscale=-1.6,yscale=1.6,rotate=0]
+   \def\s{1}
+   \def\ca{FFFF00} %yellow
+   \def\cb{00FF00} %green
+
+   \begin{scope}[shift={(7,0)}]
+    \begin{scope}[rotate=0*180/18]
+     \starGeneric{9}{3}{\s}{0}{\ca}{0.25}{}{black}
+     \begin{scope}[rotate=-6*180/9, shift={(\s,0)}] %\path(0,0) node{$1$};     
+      \starGeneric{9}{2}{\s}{-10}{\cb}{0.25}{}{black}
+      \begin{scope}[rotate=-1*180/9, shift={(\s,0)}] %\path(0,0) node{$2$};     
+       \starGeneric{9}{3}{\s}{3}{\ca}{0}{}{red}
+      \end{scope}
+      \starGeneric{9}{2}{\s}{-8}{\cb}{0}{}{blue}
+     \end{scope}
+    \end{scope}
+
+    \path(-5.7,+0.0) node{$\mathcal{I}$};
+    \path(-3.7,+3.3) node[red]{$\mathcal{I}'$};
+    \path(-4.8,-3.7) node{$\mathcal{J}$};
+    \path(-2.4,-5.7) node[blue]{$\mathcal{J}'$};
+
+	\lineGeneric{9}{\s}{6}{-9,-6,-13,-10,-7,-4,-11,-8}{orange}{1.5pt}
+	\lineGeneric{9}{\s}{6,5,8}{-9,-6,7,-8}{red}{1.5pt}
+
+    \octagonName{-1.57}{-3.97}{B}
+    \octagonName{-2.10}{-0.8}{C}
+    \octagonName{-1.80}{-1.8}{C}
+    \octagonName{-3.50}{-1.8}{D}
+
+    \lineGeneric{9}{\s}{-6,-5}{-6,-7,-8,-9}{green!66!black}{1.5pt}
+    \lineGeneric{9}{\s}{-6,-5,-2,-7}{-6,-11,-4,-9}{blue}{1pt}
+    
+    \path(0.15,0.00) node{$O$};
+    
+    \begin{scope}[green!50!black]
+     \path(-2.05,-0.25) node{$\textbf{2}$};
+     \path(-1.65,-0.95) node{$\textbf{6}$};
+     \path(-0.90,-1.02) node{$\textbf{1}$};
+     \path(-1.30,-1.32) node{$\textbf{3}$};
+    \end{scope}
+    \begin{scope}[blue]
+     \path(-3.62,-0.80) node{$\textbf{1}$};
+     \path(-3.25,-1.33) node{$\textbf{6}$};
+     \path(-2.40,-1.35) node{$\textbf{2}$};
+     \path(-2.55,-2.05) node{$\textbf{3}$};
+    \end{scope}    
+    \begin{scope}[red]
+     \path(-1.75,-3.70) node{$\textbf{1}$};
+     \path(-0.99,-3.99) node{$\textbf{7}$};
+     \path(-0.75,-3.55) node{$\textbf{1}$};
+     \path(-0.67,-3.99) node{$\textbf{2}$};
+    \end{scope}
+   \end{scope}
+
+  \end{scope}
+ \end{tikzpicture}
+\end{document}

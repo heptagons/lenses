@@ -124,12 +124,12 @@ $9\mathbi{h}$,
 
 \section{Hexagons}
 
-For the odd symmetries mentioned, we can obtain equilateral hexagons by connecting six equal edges at integral values of $\omega$ or by adding and substracting rhombi or by dissecting the areas left after stars intersections. In any case we find the hexagons has at most three different internal angles.
+For any odd symmetry $m$, we can obtain equilateral hexagons by connecting six equal edges at integral values of $\omega$ or by adding and substracting rhombi or by dissecting the areas left after stars intersections. In any case we find the hexagons has at most three different internal angles in this order $(\omega_1, \omega_2, \omega_3, \omega_1, \omega_2, \omega_3)$ where $\omega_1 + \omega_2 + \omega_3 = m$.
 
 \subsection{Hexagons angles}
 
 
-Figure \ref{tbl:hexagons-angles} show the hexagons defined as $H_m(\omega_1,\omega_2)$ for symmetries $m = \{3,5,7,9\}$ where $\omega_1 \leq \omega_2 \leq \omega_3$ and $\omega_1 + \omega_2 + \omega_3 = m$. The six consecutive angles of the hexagons are $(\omega_1,\omega_2,\omega_3,\omega_1,\omega_2,\omega_3)$. We labeled the non self-intersecting hexagons with uppercase letters $\mathbi{A}$, $\mathbi{B}$, $\mathbi{C}$, ... We prevent to name differently any hexagon which is equivalent to a previous one having the same angles as what happens with hexagon $\mathcal{A}$ in symmetry $9$ group.
+Figure \ref{tbl:hexagons-angles} show the hexagons defined as $H_m(\omega_1,\omega_2)$ for symmetries $m = \{3,5,7,9\}$ where $\omega_1 \leq \omega_2 \leq \omega_3$. We labeled the non self-intersecting hexagons with uppercase letters $\mathbi{A}$, $\mathbi{B}$, $\mathbi{C}$, ... We prevent to name differently any hexagon which is equivalent to a previous one having the same angles as what happens with hexagon $\mathbi{A}$ of symmetries $3$ and $9$.
 
 \begin{table}[H]
 \begin{center}
@@ -166,11 +166,11 @@ $H_9(3,3)$ & \mathbi{A} & (\textbf{3, 3, 3}) & equivalent to $H_3(1,1)$\\[1.1ex]
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{hexagons-from-rhombi-9}
-\caption{Hexagons formed adding and substracting rhombi.}
+\caption{Symmetry $9$ hexagons formed adding and substracting rhombi.}
 \label{fig:hexagons-from-rhombi-9}
 \end{figure}
 
-Figure \ref{fig:hexagons-from-rhombi-9} show how to calculate the area of the symmetry $9$ hexagons in function of the symmetry $9$ rhombi. From $(i)$ to $(vi)$ we equate the area of sum of the polygons in the top with the area of the sum of the polygons of the bottom:
+Figure \ref{fig:hexagons-from-rhombi-9} show how to calculate the area of the symmetry $9$ hexagons in function of the symmetry $9$ rhombi. From $(i)$ to $(vi)$ we equate the area of sum of the polygons in the top with the area of the sum of the polygons of the bottom. We have for the six cases these six equations:
 \begin{align}
 \mathbi{a} + \mathbi{G} &= \mathbi{i} + \mathbi{h} \\
 \mathbi{g} + \mathbi{H} &= \mathbi{a} + \mathbi{h} \\
@@ -187,13 +187,13 @@ Figure \ref{fig:hexagons-from-rhombi-9} show how to calculate the area of the sy
 \label{fig:hexagons-from-hexagons-9}
 \end{figure}
 
-Figure \ref{fig:hexagons-from-hexagons-9} show how to express the area of the six hexagons in function of only four. For $(i)$ and $(ii)$ we equate the area of the sum of hexagons of the left with the area of the hexagons of the right:
+Figure \ref{fig:hexagons-from-hexagons-9} show how to express the area of the six hexagons in function of only four. For $(i)$ and $(ii)$ we equate the area of the sum of hexagons of the left with the area of the hexagons of the right. We have for the two cases these two equations:
 \begin{align}
 \mathbi{G} + \mathbi{K} &= \mathbi{I} + \mathbi{J} \\
 \mathbi{A} + \mathbi{I} + \mathbi{J} &= \mathbi{H} + 2\mathbi{K}
 \end{align}
 
-Using the last equations we form the table \ref{tbl:hexagons-areas} which show the areas of the six hexagons in function of four rhombi $\mathbi{g,h,a,i}$ and in function of only four hexagons $\mathbi{H,I,J,K}$.
+Using the last eight equations we form the table \ref{tbl:hexagons-areas} which show the areas of the six hexagons in function of four rhombi $\mathbi{g,h,a,i}$ and in function of only four hexagons $\mathbi{H,I,J,K}$.
 
 \begin{table}[H]
 \begin{center}
@@ -217,12 +217,12 @@ $\mathbi{G}$ & $\mathbi{i} + \mathbi{h} - \mathbi{a}$ & $\mathbi{I} + \mathbi{J}
 
 \subsection{Hexagons from stars}
 
-Figure \ref{fig:hexagons-9} show the disposition of the symmetry $9$ four stars. We denote the $18$ vertices of stars $\{\mathcal{G},\mathcal{H},\mathcal{I},\mathcal{J}\}$ as
+Figure \ref{fig:hexagons-9} show the disposition of the symmetry $9$ four stars. We label the $18$ vertices of stars $\{\mathcal{G},\mathcal{H},\mathcal{I},\mathcal{J}\}$ as
  $\{G_0,G_1,...,G_{17}\}$,
  $\{H_0,H_1,...,H_{17}\}$,
  $\{I_0,I_1,...,I_{17}\}$ and
  $\{I_0,G_1,...,I_{17}\}$ respectivelly. 
-For simplification only some vertices are labeled in the figure. First we make coincident at vertice $O$ all the vertices $G_0,H_0,I_0,J_0$. With the center at $O$ we rotate all stars to make coincidents
+For simplicity, only some vertices are show. First we make coincident at vertice $O$ all the vertices $G_0,H_0,I_0,J_0$. With the center at $O$ we rotate all stars to make coincidents
 $G_{17}$, $H_{17}$, $I_{17}$ and $J_{17}$. The rotations also joined another different vertices.
 
 First we add three new edges (in red) joining the stars $\mathcal{J}$ and $\mathcal{I}$ vertices: $\overline{J_3I_2}$, $\overline{J_5I_4}$ and $\overline{J_7I_6}$ dissecting the red region into four hexagons, two of them essentially different. The three consective angles of the two hexagons are shown: $\textbf{I (1,4,4)}$ and $\textbf{K (3,4,2)}$.
@@ -243,9 +243,16 @@ $\{\mathbi{G},\mathbi{H},\mathbi{I},\mathbi{J},\mathbi{K},\mathbi{A}\}$.
 \label{fig:hexagons-9}
 \end{figure}
 
+\section{Octagons}
 
+\subsection{Octagons by stars}
 
-
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{octagons-9}
+\caption{Octagons after intersection of stars $\mathcal{I}$ and $\mathcal{J}$.}
+\label{fig:octagons-9}
+\end{figure}
 
 
 
