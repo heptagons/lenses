@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \title{Symmetry 9}
 \author{https://github.com/heptagons/lenses}
-\date{2024/1/17}
+\date{2024/1/18}
 
 \usepackage{graphicx}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
@@ -38,14 +38,13 @@ $9$ & $\delta$ & $2\pi/9$ \\ \hline
 \end{center}
 \end{table}
 
-\subsection{Symmetry 9}
+\subsection{Symmetry $m=9$}
 
-Figure \ref{fig:vectors-a} show the nine different vectors in symmetry $9$. We identify five independent abscissas $x_i$ and five independent ordinates $y_i$ where $i = 1,2,...,5$ and $\delta = 2\pi/9$ as mentioned already in table \ref{tbl:symm}:
+Figure \ref{fig:vectors-a} show the nine different vectors in symmetry $9$. We identify $n = \dfrac{m-1}2 = 5$ independent abscissas and ordinates $\{ x_i, y_i \}$ where $\delta = 2\pi/9$ as mentioned already in table \ref{tbl:symm}:
 \begin{align}
-x_i &= \cos((i-1)\delta)\\
-y_i &= \sin((i-1)\delta)
+\{ x_i, y_i \} &= \{ \cos((i-1)\delta), \sin((i-1)\delta) \} \quad i = 1,2,...,n=5
 \end{align}
-We use the different abscissas and ordinates identify the positions of the nine points $P_1,P_2,P_3,P_4,P_5,P_6,P_7,P_8,P_9$ of the figure respect to origin point $O$ located at $(0,0)$:
+We use the different $x_i,y_i$ to identify the positions of the $m=9$ points $P_1,P_2,...,P_9$ of the figure respect to origin point $O$ located at $(0,0)$:
 \begin{align}
 P_1 &= (x_1,+y_1) \quad\mapsto V([1,0,0,0,0],[1,0,0,0,0])\\
 P_2 &= (x_2,+y_2) \quad\mapsto V([0,1,0,0,0],[0,1,0,0,0])\\
@@ -67,8 +66,8 @@ P_9 &= (x_2,-y_2) \quad\mapsto V([0,1,0,0,0],[0,-1,0,0,0])
 
 $V([X_1,X_2,X_3,X_4,X_5],[Y_1,Y_2,Y_3,Y_4,Y_5])$ where $X_i,Y_i \in \mathbb{Z}$ is the the \textbf{vertice} absolute position respect to origin vertice $V([0,0,0,0,0],[0,0,0,0,0])$ in our symmetry $9$ tesselations. The absolute abscissa and ordinate of such vertice $V(x,y)$ are calculated as:
 \begin{align}
-x &= \sum_{i=1}^{5}X_ix_i\\
-y &= \sum_{i=1}^{5}Y_iy_i
+x &= \sum_{i=1}^{n}X_ix_i\\
+y &= \sum_{i=1}^{n}Y_iy_i
 \end{align}
 
 \section{Rhombi}
