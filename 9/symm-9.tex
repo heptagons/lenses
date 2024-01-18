@@ -1,9 +1,10 @@
 \documentclass[11pt]{article}
 \title{Symmetry 9}
 \author{https://github.com/heptagons/lenses}
-\date{2024/1/16}
+\date{2024/1/17}
 
 \usepackage{graphicx}
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
 
 \usepackage[margin=0.75in]{geometry}
 \usepackage{float} % {figure}{H}
@@ -36,6 +37,39 @@ $9$ & $\delta$ & $2\pi/9$ \\ \hline
 \label{tbl:symm}
 \end{center}
 \end{table}
+
+\subsection{Symmetry 9}
+
+Figure \ref{fig:vectors-a} show the nine different vectors in symmetry $9$. We identify five independent abscissas $x_i$ and five independent ordinates $y_i$ where $i = 1,2,...,5$ and $\delta = 2\pi/9$ as mentioned already in table \ref{tbl:symm}:
+\begin{align}
+x_i &= \cos((i-1)\delta)\\
+y_i &= \sin((i-1)\delta)
+\end{align}
+We use the different abscissas and ordinates identify the positions of the nine points $P_1,P_2,P_3,P_4,P_5,P_6,P_7,P_8,P_9$ of the figure respect to origin point $O$ located at $(0,0)$:
+\begin{align}
+P_1 &= (x_1,+y_1) \quad\mapsto V([1,0,0,0,0],[1,0,0,0,0])\\
+P_2 &= (x_2,+y_2) \quad\mapsto V([0,1,0,0,0],[0,1,0,0,0])\\
+P_3 &= (x_3,+y_3) \quad\mapsto V([0,0,1,0,0],[0,0,1,0,0])\\
+P_4 &= (x_4,+y_4) \quad\mapsto V([0,0,0,1,0],[0,0,0,1,0])\\
+P_5 &= (x_5,+y_5) \quad\mapsto V([0,0,0,0,1],[0,0,0,0,1])\\
+P_6 &= (x_5,-y_5) \quad\mapsto V([0,0,0,0,1],[0,0,0,0,-1])\\
+P_7 &= (x_4,-y_4) \quad\mapsto V([0,0,0,1,0],[0,0,0,-1,0])\\
+P_8 &= (x_3,-y_3) \quad\mapsto V([0,0,1,0,0],[0,0,-1,0,0])\\
+P_9 &= (x_2,-y_2) \quad\mapsto V([0,1,0,0,0],[0,-1,0,0,0])
+\end{align}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{vectors-a}
+\caption{The symmetry $9$ vectors.}
+\label{fig:vectors-a}
+\end{figure}
+
+$V([X_1,X_2,X_3,X_4,X_5],[Y_1,Y_2,Y_3,Y_4,Y_5])$ where $X_i,Y_i \in \mathbb{Z}$ is the the \textbf{vertice} absolute position respect to origin vertice $V([0,0,0,0,0],[0,0,0,0,0])$ in our symmetry $9$ tesselations. The absolute abscissa and ordinate of such vertice $V(x,y)$ are calculated as:
+\begin{align}
+x &= \sum_{i=1}^{5}X_ix_i\\
+y &= \sum_{i=1}^{5}Y_iy_i
+\end{align}
 
 \section{Rhombi}
 
@@ -254,7 +288,13 @@ $\{\mathbi{G},\mathbi{H},\mathbi{I},\mathbi{J},\mathbi{K},\mathbi{A}\}$.
 \label{fig:octagons-9}
 \end{figure}
 
-
+\section{Vectors}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.85]{9}
+\caption{Vectors of symmetry $9$.}
+\label{fig:9}
+\end{figure}
 
 \end{document}
 
