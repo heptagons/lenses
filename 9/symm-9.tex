@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \title{Symmetry 9}
 \author{https://github.com/heptagons/lenses}
-\date{2024/1/18}
+\date{2024/1/19}
 
 \usepackage{graphicx}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
@@ -40,21 +40,32 @@ $9$ & $\delta$ & $2\pi/9$ \\ \hline
 
 \subsection{Symmetry $m=9$}
 
-Figure \ref{fig:vectors-a} show the nine different vectors in symmetry $9$. We identify $n = \dfrac{m-1}2 = 5$ independent abscissas and ordinates $\{ x_i, y_i \}$ where $\delta = 2\pi/9$ as mentioned already in table \ref{tbl:symm}:
+Figure \ref{fig:vectors-a} $(i)$ show the nine different vectors $\overline{op_1}$, $\overline{op_2}$, ... $\overline{op_9}$ in symmetry $m=9$. We identify $n = \dfrac{m-1}2 = 5$ independent abscissas and ordinates $\{ x_i, y_i \}$. Applying $\delta = 2\pi/9$ mentioned already in table \ref{tbl:symm} we get:
 \begin{align}
-\{ x_i, y_i \} &= \{ \cos((i-1)\delta), \sin((i-1)\delta) \} \quad i = 1,2,...,n=5
+\left[ \begin{array}{c} x_i \\ y_i \end{array} \right] &= 
+\left[ \begin{array}{c} \cos((i-1)\delta) \\ \sin((i-1)\delta) \end{array} \right]
+ \quad i = 1,2,...,n=5
 \end{align}
-We use the different $x_i,y_i$ to identify the positions of the $m=9$ points $P_1,P_2,...,P_9$ of the figure respect to origin point $O$ located at $(0,0)$:
+Respect to origin $o$ located at $(0,0)$ the nine points are located as follows:
+$p_1 \mapsto (x_1,y_1)$,
+$p_2 \mapsto (x_2,y_2)$,
+$p_3 \mapsto (x_3,y_3)$,
+$p_4 \mapsto (x_4,y_4)$,
+$p_5 \mapsto (x_5,y_5)$,
+$p_6 \mapsto (x_5,-y_5)$,
+$p_7 \mapsto (x_4,-y_4)$,
+$p_8 \mapsto (x_3,-y_3)$ and
+$p_9 \mapsto (x_2,-y_2)$. Simplyfing we have:
 \begin{align}
-P_1 &= (x_1,+y_1) \quad\mapsto V([1,0,0,0,0],[1,0,0,0,0])\\
-P_2 &= (x_2,+y_2) \quad\mapsto V([0,1,0,0,0],[0,1,0,0,0])\\
-P_3 &= (x_3,+y_3) \quad\mapsto V([0,0,1,0,0],[0,0,1,0,0])\\
-P_4 &= (x_4,+y_4) \quad\mapsto V([0,0,0,1,0],[0,0,0,1,0])\\
-P_5 &= (x_5,+y_5) \quad\mapsto V([0,0,0,0,1],[0,0,0,0,1])\\
-P_6 &= (x_5,-y_5) \quad\mapsto V([0,0,0,0,1],[0,0,0,0,-1])\\
-P_7 &= (x_4,-y_4) \quad\mapsto V([0,0,0,1,0],[0,0,0,-1,0])\\
-P_8 &= (x_3,-y_3) \quad\mapsto V([0,0,1,0,0],[0,0,-1,0,0])\\
-P_9 &= (x_2,-y_2) \quad\mapsto V([0,1,0,0,0],[0,-1,0,0,0])
+p_i \mapsto \left\{ \begin{array}{ccl}
+ (x_i,y_i) & \mbox{for} & i \leq 5 \\
+ (x_j, -y_j) & \mbox{for} & i > 5 \quad j = 11-i
+ \end{array}\right.
+\end{align}
+
+Any vector $p_m \mapsto (x_m, y_m)$ rotated by $180^\circ$ is denoted and calculated as:
+\begin{align}
+\overline{p_m} \mapsto (-x_m, -y_m)
 \end{align}
 
 \begin{figure}[H]
@@ -64,11 +75,25 @@ P_9 &= (x_2,-y_2) \quad\mapsto V([0,1,0,0,0],[0,-1,0,0,0])
 \label{fig:vectors-a}
 \end{figure}
 
+Figure \ref{fig:vectors-a} $(ii)$ and $(iii)$ show thick polylines of size $2$ and $3$ respectivelly. Polylines alternate edges of the type $p_m$ (show in red) and $\overline{p_m}$  (shown in blue) to guarantee any angle between edges are a multiple of $\delta$. The four vertices of the thick polyline at $(iii)$ are $o$, $p_1$, $p_1 + \overline{p_6}$ and $p_1 + \overline{p_6} + p_2$.
+\\
+To calculate the absolute values of the vertices of the polyline we add abscissas and ordinates. First we define two vectors holding $n=5$ integers:
+\begin{align}
+\textbf{X} &= [X_1, X_2, X_3, X_4, X_5] \quad X_i \in \mathbb{Z} \\
+\textbf{Y} &= [Y_1, Y_2, Y_3, Y_4, Y_5] \quad Y_i \in \mathbb{Z}
+\end{align}
+The vertice $o$ at the origin is assigned vectors $V[\textbf{X},\textbf{Y}]$ initialized to zero and the rest add a $+1$ or $-1$ to a single element. So we have:
+\begin{align}
+o   &\mapsto (0,0)     &= V([0,0,0,0,0],[0,0,0,0,0]) \\
+p_1 &\mapsto (x_1,y_1) &= V([1,0,0,0,0],[1,0,0,0,0])
+\end{align}
+\\
 $V([X_1,X_2,X_3,X_4,X_5],[Y_1,Y_2,Y_3,Y_4,Y_5])$ where $X_i,Y_i \in \mathbb{Z}$ is the the \textbf{vertice} absolute position respect to origin vertice $V([0,0,0,0,0],[0,0,0,0,0])$ in our symmetry $9$ tesselations. The absolute abscissa and ordinate of such vertice $V(x,y)$ are calculated as:
 \begin{align}
 x &= \sum_{i=1}^{n}X_ix_i\\
 y &= \sum_{i=1}^{n}Y_iy_i
 \end{align}
+
 
 \section{Rhombi}
 
