@@ -38,14 +38,51 @@ $9$ & $\delta$ & $2\pi/9$ \\ \hline
 \end{center}
 \end{table}
 
-\subsection{Symmetry $m=9$}
-
-Figure \ref{fig:vectors-a} $(i)$ show the nine different vectors $\overline{op_1}$, $\overline{op_2}$, ... $\overline{op_9}$ in symmetry $m=9$. We identify $n = \dfrac{m-1}2 = 5$ independent abscissas and ordinates $\{ x_i, y_i \}$. Applying $\delta = 2\pi/9$ mentioned already in table \ref{tbl:symm} we get:
+We identify $n = \dfrac{m+1}2$ independent abscissas and ordinates $\{ x_i, y_i \}$:
 \begin{align}
 \left[ \begin{array}{c} x_i \\ y_i \end{array} \right] &= 
-\left[ \begin{array}{c} \cos((i-1)\delta) \\ \sin((i-1)\delta) \end{array} \right]
- \quad i = 1,2,...,n=5
+\left[ \begin{array}{c} \cos((i-1)\theta) \\ \sin((i-1)\theta) \end{array} \right]
+ \quad i = 1,2,...,n
 \end{align}
+
+We define an origin vertice $o$ located at position $(0,0)$. There are $s$ points $p_1, p_2, ... p_s$ equidistant to $o$ defined with combinations of $x_i,y_i$ as follows.
+\begin{align}
+p_i &\equiv \left\{ \begin{array}{ccl}
+ (x_i,y_i) & \mbox{for} & i \leq n \\
+ (x_j, -y_j) & \mbox{for} & i > n \quad j = s+2-i
+ \end{array}\right.
+\end{align}
+
+Any point $p_m$ at $(x_m, y_m)$ can be rotated by $180^\circ$ around $(0,0)$ and is denoted and calculated as:
+\begin{align}
+\overline{p_m} &\equiv (-x_m, -y_m)
+\end{align}
+
+Any point $\textbf{P}$ can be defined with two vectors \textbf{X} and \textbf{Y} holding $n$ integers each:
+\begin{align}
+\textbf{X} &= \left[\begin{array}{ccccc}X_1&X_2&X_3&...&X_n
+ \end{array}\right]  \quad X_i \in \mathbb{Z}\\
+\textbf{Y} &= \left[\begin{array}{ccccc}Y_1&Y_2&Y_3&...&Y_n
+ \end{array}\right]  \quad Y_i \in \mathbb{Z}\\
+\textbf{P} \equiv \left[\begin{array}{c}\textbf{X} \\ \textbf{Y}
+ \end{array}\right]
+ &= \left[\begin{array}{ccccc}X_1&X_2&X_3&...&X_n
+  \\ Y_1&Y_2&Y_3&...&Y_n \end{array}\right]
+\end{align}
+
+The abscissa and ordinate $x,y$ of any vertice $V$ can be calculated as:
+\begin{align}
+V_x &= \sum_{i=1}^{n}X_ix_i\\
+V_y &= \sum_{i=1}^{n}Y_iy_i
+\end{align}
+
+
+
+
+
+\subsection{Symmetry $m=9$}
+
+Figure \ref{fig:vectors-a} $(i)$ show the nine different vectors $\overline{op_1}$, $\overline{op_2}$, ... $\overline{op_9}$ in symmetry $m=9$.
 Respect to origin $o$ located at $(0,0)$ we locate the nine points as follows:
 $p_1 \mapsto (x_1,y_1)$,
 $p_2 \mapsto (x_2,y_2)$,
@@ -55,18 +92,7 @@ $p_5 \mapsto (x_5,y_5)$,
 $p_6 \mapsto (x_5,-y_5)$,
 $p_7 \mapsto (x_4,-y_4)$,
 $p_8 \mapsto (x_3,-y_3)$ and
-$p_9 \mapsto (x_2,-y_2)$. Simplyfing we have:
-\begin{align}
-p_i \mapsto \left\{ \begin{array}{ccl}
- (x_i,y_i) & \mbox{for} & i \leq 5 \\
- (x_j, -y_j) & \mbox{for} & i > 5 \quad j = 11-i
- \end{array}\right.
-\end{align}
-
-Any vector $p_m \mapsto (x_m, y_m)$ rotated by $180^\circ$ is denoted and calculated as:
-\begin{align}
-\overline{p_m} \mapsto (-x_m, -y_m)
-\end{align}
+$p_9 \mapsto (x_2,-y_2)$.
 
 \begin{figure}[H]
 \centering
@@ -75,20 +101,8 @@ Any vector $p_m \mapsto (x_m, y_m)$ rotated by $180^\circ$ is denoted and calcul
 \label{fig:vectors-a}
 \end{figure}
 
-Figure \ref{fig:vectors-a} $(ii)$ and $(iii)$ show thick polylines of size $2$ and $3$ respectivelly. We form polylines alternating edges of the type $p_m$ (show in red) and $\overline{p_m}$  (shown in blue) to guarantee the angles between edges are always multiples of $\delta$. The new vertices are denoted as the sum of the preceding points, for example, the four vertices of the thick polyline at $(iii)$ are denoted as $o$, $p_1$, $p_1 + \overline{p_6}$ and $p_1 + \overline{p_6} + p_2$.
+Figure \ref{fig:vectors-a} $(ii)$ and $(iii)$ show thick polylines of size $2$ and $3$ respectivelly. We form polylines alternating edges of the type $...+p_a$ (show in red) and $...+p_a+\overline{p_b}$ (shown in blue) to guarantee the angles between edges are always multiples of $\delta$. The new vertices are denoted as the sum of the preceding points, for example, the four vertices of the thick polyline at $(iii)$ are denoted as $o$, $p_1$, $p_1 + \overline{p_6}$ and $p_1 + \overline{p_6} + p_2$.
 \\
-We can calculate the absolute value of any vertice $\textbf{V}$ of the polylines adding the abscissas and ordinates values using two vectors holding $n=5$ integers:
-\begin{align}
-\textbf{X} &= [X_1, X_2, X_3, X_4, X_5] \\
-\textbf{Y} &= [Y_1, Y_2, Y_3, Y_4, Y_5] \\
-\textbf{V} &= \left[\begin{array}{ccccc}X_1&X_2&X_3&X_4&X_5
-  \\ Y_1&Y_2&Y_3&Y_4&Y_5 \end{array}\right] \quad X_i,Y_i \in \mathbb{Z}
-\end{align}
-The abscissa and ordinate $x,y$ of any vertice $V$ can be calculated as:
-\begin{align}
-V_x &= \sum_{i=1}^{n}X_ix_i\\
-V_y &= \sum_{i=1}^{n}Y_iy_i
-\end{align}
 
 
 
