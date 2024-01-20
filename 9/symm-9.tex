@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \title{Symmetry 9}
 \author{https://github.com/heptagons/lenses}
-\date{2024/1/19}
+\date{2024/1/20}
 
 \usepackage{graphicx}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
@@ -46,7 +46,7 @@ Figure \ref{fig:vectors-a} $(i)$ show the nine different vectors $\overline{op_1
 \left[ \begin{array}{c} \cos((i-1)\delta) \\ \sin((i-1)\delta) \end{array} \right]
  \quad i = 1,2,...,n=5
 \end{align}
-Respect to origin $o$ located at $(0,0)$ the nine points are located as follows:
+Respect to origin $o$ located at $(0,0)$ we locate the nine points as follows:
 $p_1 \mapsto (x_1,y_1)$,
 $p_2 \mapsto (x_2,y_2)$,
 $p_3 \mapsto (x_3,y_3)$,
@@ -75,24 +75,76 @@ Any vector $p_m \mapsto (x_m, y_m)$ rotated by $180^\circ$ is denoted and calcul
 \label{fig:vectors-a}
 \end{figure}
 
-Figure \ref{fig:vectors-a} $(ii)$ and $(iii)$ show thick polylines of size $2$ and $3$ respectivelly. Polylines alternate edges of the type $p_m$ (show in red) and $\overline{p_m}$  (shown in blue) to guarantee any angle between edges are a multiple of $\delta$. The four vertices of the thick polyline at $(iii)$ are $o$, $p_1$, $p_1 + \overline{p_6}$ and $p_1 + \overline{p_6} + p_2$.
+Figure \ref{fig:vectors-a} $(ii)$ and $(iii)$ show thick polylines of size $2$ and $3$ respectivelly. We form polylines alternating edges of the type $p_m$ (show in red) and $\overline{p_m}$  (shown in blue) to guarantee the angles between edges are always multiples of $\delta$. The new vertices are denoted as the sum of the preceding points, for example, the four vertices of the thick polyline at $(iii)$ are denoted as $o$, $p_1$, $p_1 + \overline{p_6}$ and $p_1 + \overline{p_6} + p_2$.
 \\
-To calculate the absolute values of the vertices of the polyline we add abscissas and ordinates. First we define two vectors holding $n=5$ integers:
+We can calculate the absolute value of any vertice $\textbf{V}$ of the polylines adding the abscissas and ordinates values using two vectors holding $n=5$ integers:
 \begin{align}
-\textbf{X} &= [X_1, X_2, X_3, X_4, X_5] \quad X_i \in \mathbb{Z} \\
-\textbf{Y} &= [Y_1, Y_2, Y_3, Y_4, Y_5] \quad Y_i \in \mathbb{Z}
+\textbf{X} &= [X_1, X_2, X_3, X_4, X_5] \\
+\textbf{Y} &= [Y_1, Y_2, Y_3, Y_4, Y_5] \\
+\textbf{V} &= \left[\begin{array}{ccccc}X_1&X_2&X_3&X_4&X_5
+  \\ Y_1&Y_2&Y_3&Y_4&Y_5 \end{array}\right] \quad X_i,Y_i \in \mathbb{Z}
 \end{align}
-The vertice $o$ at the origin is assigned vectors $V[\textbf{X},\textbf{Y}]$ initialized to zero and the rest add a $+1$ or $-1$ to a single element. So we have:
+The abscissa and ordinate $x,y$ of any vertice $V$ can be calculated as:
 \begin{align}
-o   &\mapsto (0,0)     &= V([0,0,0,0,0],[0,0,0,0,0]) \\
-p_1 &\mapsto (x_1,y_1) &= V([1,0,0,0,0],[1,0,0,0,0])
+V_x &= \sum_{i=1}^{n}X_ix_i\\
+V_y &= \sum_{i=1}^{n}Y_iy_i
 \end{align}
-\\
-$V([X_1,X_2,X_3,X_4,X_5],[Y_1,Y_2,Y_3,Y_4,Y_5])$ where $X_i,Y_i \in \mathbb{Z}$ is the the \textbf{vertice} absolute position respect to origin vertice $V([0,0,0,0,0],[0,0,0,0,0])$ in our symmetry $9$ tesselations. The absolute abscissa and ordinate of such vertice $V(x,y)$ are calculated as:
+
+
+
+The vertice $o$ at the origin is assigned to vectors $(\textbf{X},\textbf{Y})$ initialized to zero. The next point is assigned to vector incrementing by $+1$ or $-1$ the corresponding $x_i, y_i$. So for example we have:
+\begin{align*}
+x_1 &\mapsto X[1,0,0,0,0] \\
+x_2 &\mapsto X[0,1,0,0,0] \\
+\overline{x_4} &\mapsto X[0,0,0,-1,0] \\
+\overline{y_5} &\mapsto Y[0,0,0,0,-1]
+\end{align*}
+
+Then we can assign accumulated vectors and calculate points of the polyline $o$, $p_1$, $p_1+\overline{p_6}$, $p_1+\overline{p_6}+p_3$. By definition $o \equiv (0,0) $ so we have:
 \begin{align}
-x &= \sum_{i=1}^{n}X_ix_i\\
-y &= \sum_{i=1}^{n}Y_iy_i
+o &\equiv (0,0) = (X[0,0,0,0,0],Y[0,0,0,0,0])\\
+  &= \left[\begin{array}{ccccc}0&0&0&0&0 \\ 0&0&0&0&0 \end{array}\right]
 \end{align}
+First we get the vectors for $p_1$:
+\begin{align}
+p_1 &\equiv (x_1,y_1) = (X[1,0,0,0,0],Y[1,0,0,0,0])\nonumber\\
+ &= \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right]
+\end{align}
+
+Then we get the vectors for $\overline{p_6}$:
+\begin{align}
+p_6 &\equiv (x_6,y_6) = (x_{11-6},-y_{11-6}) = (x_5,-y_5)\\
+    &= \left[\begin{array}{ccccc}0&0&0&0&1 \\ 0&0&0&0&-1 \end{array}\right]\\
+\overline{p_6} &= -(x_5,-y_5) = (-x_5,+y_5)\\
+    &= \left[\begin{array}{ccccc}0&0&0&0&-1 \\ 0&0&0&0&1 \end{array}\right]
+\end{align}
+
+Now we get the vectors for $p_1+\overline{p_6}$:
+\begin{align}
+p_1 + \overline{p_6} &= (x_1,y_1) + (-x_5,y_5)\\
+ &= \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right] +
+ \left[\begin{array}{ccccc}0&0&0&0&-1 \\ 0&0&0&0&1 \end{array}\right]\\
+ &= \left[\begin{array}{ccccc}1&0&0&0&-1 \\ 1&0&0&0&1 \end{array}\right]
+\end{align}
+
+Finally we get the vectors for $p_2$ and the vectors for $p_1 + \overline{p_6} + p_2$:
+\begin{align}
+p_2 &\equiv (x_2,y_2)\nonumber\\ 
+ &= \left[\begin{array}{ccccc}0&1&0&0&0 \\ 0&1&0&0&0 \end{array}\right]\\
+p_1 + \overline{p_6} + p_2
+ &= \left[\begin{array}{ccccc}1&0&0&0&-1 \\ 1&0&0&0&1 \end{array}\right]
+ + \left[\begin{array}{ccccc}0&1&0&0&0 \\ 0&1&0&0&0 \end{array}\right]\\
+ &= \left[\begin{array}{ccccc}1&1&0&0&-1 \\ 1&1&0&0&1 \end{array}\right]
+\end{align}
+So for example, for the vertice $C = p_1 + \overline{p_6} + p_2$ we have $X_1=X_2=1$, $X_5=-1$, $Y_1=Y_2=Y_5=1$ so:
+\begin{align*}
+C_x &= x_1 + x_2 - x_5\\
+    &= \cos(0) + \cos(\delta) - \cos(4\delta)\\
+    &= 1 + \cos(40^\circ) - \cos(160^\circ)\\
+C_y &= y_1 + y_2 + y_2\nonumber\\
+    &= \sin(0) + \sin(\delta) + \sin(4\delta)\\
+    &= \sin(40^\circ) + \sin(160^\circ)
+\end{align*}
 
 
 \section{Rhombi}
