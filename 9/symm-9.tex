@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \title{Symmetry 9}
 \author{https://github.com/heptagons/lenses}
-\date{2024/1/20}
+\date{2024/1/21}
 
 \usepackage{graphicx}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
@@ -16,49 +16,49 @@
 
 \maketitle
 \begin{abstract}
-We build equilateral polygons that can tesselate the plane using the symmetry $9$. We analyze lower odd symmetries $3,5,7$ also to find patterns. The polygons are rhombus, hexagons, octagons and stars.
+We build equilateral polygons that can tesselate the plane using the symmetry $9$. We analyze lower odd symmetries $3,5,7$ also to find patterns. We analize vectors which describe symmetry vertices. Then we define polygons as rhombus, hexagons, octagons and stars build with the vectors.
 \end{abstract}
 
 \section{Symmetries}
 
-We are interested in odd symmetries starting with $3$. Table \ref{tbl:symm} show the symmetries up to $9$. The value of the angle of the symmetry $m$ is $\theta = \dfrac{2\pi}m$. 
+We are interested in odd symmetries starting with $s=3$. Table \ref{tbl:symm} show the symmetries up to $s=9$. The value of the angle of the symmetry $s$ is $\theta = \dfrac{2\pi}s$. 
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c c|}
 \hline
-$m$ & Angle & $\theta$ \\ \hline\
+$s$ & Angle & $\theta$ \\ \hline\
 $3$ & $\alpha$ & $2\pi/3$ \\ \hline
 $5$ & $\beta$  & $2\pi/5$ \\ \hline
 $7$ & $\gamma$ & $2\pi/7$ \\ \hline
 $9$ & $\delta$ & $2\pi/9$ \\ \hline
 \end{tabular}
-\caption{Symmetries $m=\{3,5,7,9\}$.} 
+\caption{Symmetries $s=\{3,5,7,9\}$.} 
 \label{tbl:symm}
 \end{center}
 \end{table}
 
-We identify $n = \dfrac{m+1}2$ independent abscissas and ordinates $\{ x_i, y_i \}$:
+For every symmetry $s$ we identify $t = \dfrac{s+1}2$ independent abscissas and ordinates pairs $\langle x_i, y_i \rangle$:
 \begin{align}
 \left[ \begin{array}{c} x_i \\ y_i \end{array} \right] &= 
 \left[ \begin{array}{c} \cos((i-1)\theta) \\ \sin((i-1)\theta) \end{array} \right]
- \quad i = 1,2,...,n
+ \quad i = 1,2,...,t
 \end{align}
 
-We define an origin vertice $o$ located at position $(0,0)$. There are $s$ points $p_1, p_2, ... p_s$ equidistant to $o$ defined with combinations of $x_i,y_i$ as follows.
+We define the origin vertice $o$ located at position $(0,0)$. There are $s$ different vectors $v_1, v_2, ... v_s$ of magnitud $1$ and equidistant to $o$ defined with combinations of $x_i,y_i$ as follows.
 \begin{align}
-p_i &\equiv \left\{ \begin{array}{ccl}
- (x_i,y_i) & \mbox{for} & i \leq n \\
- (x_j, -y_j) & \mbox{for} & i > n \quad j = s+2-i
+v_i &\equiv \left\{ \begin{array}{ccl}
+ \langle x_i,y_i\rangle & \mbox{for} & i \leq t \\
+ \langle x_j, -y_j\rangle & \mbox{for} & i > t \quad j = s+2-i
  \end{array}\right.
 \end{align}
 
-Any point $p_m$ at $(x_m, y_m)$ can be rotated by $180^\circ$ around $(0,0)$ and is denoted and calculated as:
+Any vector $v_m \equiv \langle x_m, y_m\rangle$ where $1 \leq m \leq s$ can be rotated by $180^\circ$ around $o \equiv (0,0)$ and is denoted as $\overline{v_m}$ and the pair signs are changed:
 \begin{align}
-\overline{p_m} &\equiv (-x_m, -y_m)
+\overline{v_m} &\equiv \langle -x_m, -y_m\rangle
 \end{align}
 
-Any point $\textbf{P}$ can be defined with two vectors \textbf{X} and \textbf{Y} holding $n$ integers each:
+We form polylines starting at $o=(0,0)$ and adding vectors alternating the type $v_m$ and the type $\overline{v_m}$ in order the consecutive points angles were always multiples of $\theta$. New points accumulate previous vectors components pairs. Any point $\textbf{P}$ is assigned with \textbf{accumulators} consistent of two vectors \textbf{X} and \textbf{Y} holding $t$ integers each:
 \begin{align}
 \textbf{X} &= \left[\begin{array}{ccccc}X_1&X_2&X_3&...&X_n
  \end{array}\right]  \quad X_i \in \mathbb{Z}\\
@@ -70,10 +70,10 @@ Any point $\textbf{P}$ can be defined with two vectors \textbf{X} and \textbf{Y}
   \\ Y_1&Y_2&Y_3&...&Y_n \end{array}\right]
 \end{align}
 
-The abscissa and ordinate $x,y$ of any vertice $V$ can be calculated as:
+The absolute position of point $P$ can be calculated as follows:
 \begin{align}
-V_x &= \sum_{i=1}^{n}X_ix_i\\
-V_y &= \sum_{i=1}^{n}Y_iy_i
+P_x &= \sum_{i=1}^{n}X_ix_i\\
+P_y &= \sum_{i=1}^{n}Y_iy_i
 \end{align}
 
 
@@ -82,82 +82,85 @@ V_y &= \sum_{i=1}^{n}Y_iy_i
 
 \subsection{Symmetry $m=9$}
 
-Figure \ref{fig:vectors-a} $(i)$ show the nine different vectors $\overline{op_1}$, $\overline{op_2}$, ... $\overline{op_9}$ in symmetry $m=9$.
-Respect to origin $o$ located at $(0,0)$ we locate the nine points as follows:
-$p_1 \mapsto (x_1,y_1)$,
-$p_2 \mapsto (x_2,y_2)$,
-$p_3 \mapsto (x_3,y_3)$,
-$p_4 \mapsto (x_4,y_4)$,
-$p_5 \mapsto (x_5,y_5)$,
-$p_6 \mapsto (x_5,-y_5)$,
-$p_7 \mapsto (x_4,-y_4)$,
-$p_8 \mapsto (x_3,-y_3)$ and
-$p_9 \mapsto (x_2,-y_2)$.
+Figure \ref{fig:vectors-a} $(i)$ show the nine different vectors $v_1$, $v_2$, ... $v_9$ in symmetry $m=9$. Their components are:
+$v_1 = \langle x_1,y_1\rangle$,
+$v_2 = \langle x_2,y_2\rangle$,
+$v_3 = \langle x_3,y_3\rangle$,
+$v_4 = \langle x_4,y_4\rangle$,
+$v_5 = \langle x_5,y_5\rangle$,
+$v_6 = \langle x_5,-y_5\rangle$,
+$v_7 = \langle x_4,-y_4\rangle$,
+$v_8 = \langle x_3,-y_3\rangle$ and
+$v_9 = \langle x_2,-y_2\rangle$.
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{vectors-a}
-\caption{The symmetry $9$ vectors.}
+\caption{The symmetry $9$ vectors and polylines.}
 \label{fig:vectors-a}
 \end{figure}
 
-Figure \ref{fig:vectors-a} $(ii)$ and $(iii)$ show thick polylines of size $2$ and $3$ respectivelly. We form polylines alternating edges of the type $...+p_a$ (show in red) and $...+p_a+\overline{p_b}$ (shown in blue) to guarantee the angles between edges are always multiples of $\delta$. The new vertices are denoted as the sum of the preceding points, for example, the four vertices of the thick polyline at $(iii)$ are denoted as $o$, $p_1$, $p_1 + \overline{p_6}$ and $p_1 + \overline{p_6} + p_2$.
+Figure \ref{fig:vectors-a} $(ii)$ show polyline $\overline{ABC}$ and $(iii)$ show polyline $\overline{ABCD}$ alternating vectors of the type $... + v_m$ (show in red) with vectors of the type $... + v_m + \overline{v_n}$ (shown in blue) to guarantee the angles between edges are always multiples of $\delta$: angle $\angle{ABC} = 4\delta$, angle $\angle{BCD} = 2\delta$. New vertices accumulate the preceding vertices by notation. The four vertices $\{A,B,C,D\}$ are denoted as $\{ o, v_1, v_1 + \overline{v_6}, v_1 + \overline{v_6} + v_2 \}$.\
 \\
-
-
-
-The vertice $o$ at the origin is assigned to vectors $(\textbf{X},\textbf{Y})$ initialized to zero. The next point is assigned to vector incrementing by $+1$ or $-1$ the corresponding $x_i, y_i$. So for example we have:
+\\
+The vertice $o$ at the origin is assigned with accumulators $\textbf{X},\textbf{Y}$ initialized to zero. The next point accumulator increments by $+1$ or $-1$ the position $1 \leq j \leq t$ according the components $x_j, y_j$ the vector $p_m$ has defined. For example we have:
 \begin{align*}
-x_1 &\mapsto X[1,0,0,0,0] \\
-x_2 &\mapsto X[0,1,0,0,0] \\
-\overline{x_4} &\mapsto X[0,0,0,-1,0] \\
-\overline{y_5} &\mapsto Y[0,0,0,0,-1]
+X[a,b,c,d,e] + x_1 &= X[a+1,b,c,d,e] \\
+X[a,b,c,d,e] + x_2 &= X[a,b+1,c,d,e] \\
+X[a,b,c,d,e] - x_4 &= X[a,b,c,d-1,e] \\
+Y[a,b,c,d,e] - y_5 &= Y[a,b,c,d,e-1]
 \end{align*}
 
-Then we can assign accumulated vectors and calculate points of the polyline $o$, $p_1$, $p_1+\overline{p_6}$, $p_1+\overline{p_6}+p_3$. By definition $o \equiv (0,0) $ so we have:
+Lets get the accumulators of the polyline $o, v_1, v_1+\overline{v_6}, v_1+\overline{v_6}+v_4$ shown in figure $(iii)$. By definition $o \equiv (0,0) $ so we have:
 \begin{align}
-o &\equiv (0,0) = (X[0,0,0,0,0],Y[0,0,0,0,0])\\
+o &\equiv \langle 0,0\rangle\\
   &= \left[\begin{array}{ccccc}0&0&0&0&0 \\ 0&0&0&0&0 \end{array}\right]
 \end{align}
-First we get the vectors for $p_1$:
+First we get $v_1$ accumulators:
 \begin{align}
-p_1 &\equiv (x_1,y_1) = (X[1,0,0,0,0],Y[1,0,0,0,0])\nonumber\\
+v_1 &\equiv \langle x_1,y_1\rangle = (X[1,0,0,0,0],Y[1,0,0,0,0])\nonumber\\
  &= \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right]
 \end{align}
 
-Then we get the vectors for $\overline{p_6}$:
+Then we get accumulators of $\overline{v_6}$:
 \begin{align}
-p_6 &\equiv (x_6,y_6) = (x_{11-6},-y_{11-6}) = (x_5,-y_5)\\
+v_6 &\equiv \langle x_6,y_6 \rangle 
+    = \langle x_{11-6},-y_{11-6} \rangle 
+    = \langle x_5,-y_5 \rangle\\
     &= \left[\begin{array}{ccccc}0&0&0&0&1 \\ 0&0&0&0&-1 \end{array}\right]\\
-\overline{p_6} &= -(x_5,-y_5) = (-x_5,+y_5)\\
-    &= \left[\begin{array}{ccccc}0&0&0&0&-1 \\ 0&0&0&0&1 \end{array}\right]
+\overline{v_6} &=
+  -\langle x_5,-y_5 \rangle 
+  = \langle -x_5,y_5\rangle\\
+  &= \left[\begin{array}{ccccc}0&0&0&0&-1 \\ 0&0&0&0&1 \end{array}\right]
 \end{align}
 
-Now we get the vectors for $p_1+\overline{p_6}$:
+Now we get the accumulators of $v_1+\overline{v_6}$:
 \begin{align}
-p_1 + \overline{p_6} &= (x_1,y_1) + (-x_5,y_5)\\
+v_1 + \overline{v_6} &= \langle x_1,y_1\rangle + \langle -x_5,y_5 \rangle\\
  &= \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right] +
  \left[\begin{array}{ccccc}0&0&0&0&-1 \\ 0&0&0&0&1 \end{array}\right]\\
  &= \left[\begin{array}{ccccc}1&0&0&0&-1 \\ 1&0&0&0&1 \end{array}\right]
 \end{align}
 
-Finally we get the vectors for $p_2$ and the vectors for $p_1 + \overline{p_6} + p_2$:
+Finally we get the accumulator of $v_4$ and use it to get the accumulator of $v_1 + \overline{v_6} + v_4$:
 \begin{align}
-p_2 &\equiv (x_2,y_2)\nonumber\\ 
- &= \left[\begin{array}{ccccc}0&1&0&0&0 \\ 0&1&0&0&0 \end{array}\right]\\
-p_1 + \overline{p_6} + p_2
+v_4 &\equiv 
+ \langle x_4,y_4 \rangle\nonumber\\ 
+ &= \left[\begin{array}{ccccc}0&0&0&1&0 \\ 0&0&0&1&0 \end{array}\right]\\
+v_1 + \overline{v_6} + v_4
  &= \left[\begin{array}{ccccc}1&0&0&0&-1 \\ 1&0&0&0&1 \end{array}\right]
- + \left[\begin{array}{ccccc}0&1&0&0&0 \\ 0&1&0&0&0 \end{array}\right]\\
- &= \left[\begin{array}{ccccc}1&1&0&0&-1 \\ 1&1&0&0&1 \end{array}\right]
+ + \left[\begin{array}{ccccc}0&0&0&1&0 \\ 0&0&0&1&0 \end{array}\right]\\
+ &= \left[\begin{array}{ccccc}1&0&0&1&-1 \\ 1&0&0&1&1 \end{array}\right]
 \end{align}
-So for example, for the vertice $C = p_1 + \overline{p_6} + p_2$ we have $X_1=X_2=1$, $X_5=-1$, $Y_1=Y_2=Y_5=1$ so:
+
+Then for example, for the point $D = v_1 + \overline{v_6} + v_4$ we have the accumulators $X_1=X_4=1$, $X_5=-1$, $Y_1=Y_4=Y_5=1$ so point $D$ coordinates are:
 \begin{align*}
-C_x &= x_1 + x_2 - x_5\\
-    &= \cos(0) + \cos(\delta) - \cos(4\delta)\\
-    &= 1 + \cos(40^\circ) - \cos(160^\circ)\\
-C_y &= y_1 + y_2 + y_2\nonumber\\
-    &= \sin(0) + \sin(\delta) + \sin(4\delta)\\
-    &= \sin(40^\circ) + \sin(160^\circ)
+D_x &= x_1 + x_2 - x_5\\
+    &= \cos(0) + \cos(3\delta) - \cos(4\delta)\\
+    &= 1 + \cos(120^\circ) - \cos(160^\circ)\\
+D_y &= y_1 + y_2 + y_2\nonumber\\
+    &= \sin(0) + \sin(3\delta) + \sin(4\delta)\\
+    &= \sin(120^\circ) + \sin(160^\circ)
 \end{align*}
 
 
