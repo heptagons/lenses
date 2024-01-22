@@ -45,29 +45,37 @@ For every symmetry $s$ we identify $t = \dfrac{s+1}2$ independent abscissas and 
  \quad i = 1,2,...,t \label{eq:pairs}
 \end{align}
 
-We define a relative origin point $v_0$. There are $s$ different vectors $v_1, v_2, ... v_s$ of magnitud $1$ and equidistant to point $v_0$ defined with coordinates $x_i,y_i$ as follows.
+We define a relative origin point $p_0$. There are $s$ different points $p_1, p_2, ... p_s$ of magnitud $1$ and equidistant to point $p_0$ located at coordinates $x_i,y_i$ as follows.
+\begin{align}
+p_i &\equiv \left\{ \begin{array}{ccl}
+ \langle x_k,y_k\rangle & \mbox{for} & i \leq t  \quad k = i\\
+ \langle x_k, -y_k\rangle & \mbox{for} & i > t \quad k = s+2-i
+ \end{array}\right. \label{eq:coords}
+\end{align}
+
+The points are transformed into vectors holding only the $x$ and $y$ indices:
 \begin{align}
 v_i &\equiv \left\{ \begin{array}{ccl}
- \langle x_i,y_i\rangle & \mbox{for} & i \leq t \\
- \langle x_j, -y_j\rangle & \mbox{for} & i > t \quad j = s+2-i
+ ( k, k ) & \mbox{for} & i \leq t \quad k = i\\
+ ( k, -k ) & \mbox{for} & i > t \quad k = s+2-i
  \end{array}\right. \label{eq:vectors}
 \end{align}
 
-Any vector $v_m \equiv \langle x_m, y_m\rangle$ where $1 \leq m \leq s$ can be rotated by $180^\circ$ around $v_0$ and is denoted as $\overline{v_m}$ and the pair signs are changed:
+Any vector $v \equiv (k_x,k_y)$ can be rotated by $180^\circ$ around $p_0$ and is denoted as $\overline{v}$ and the pair indices signs are changed:
 \begin{align}
-\overline{v_m} &\equiv \langle -x_m, -y_m\rangle \label{eq:vector180}
+\overline{v} &\equiv (-k_x, -k_y) \label{eq:vector180}
 \end{align}
 
-We define an absolute origin point $o$ located at $(0,0)$. Starting at $o$ we can form polylines adding vectors alternating the type $v_m$ and the type $\overline{v_m}$ in order the consecutive points angles are always multiples of $\theta$. The polyline with vectors $v_a$, $\overline{v_b}$, $v_c$, ... is denoted as:
+We define an absolute origin point $o$ located at $(0,0)$. Starting at $o$ we can form polylines adding vectors alternating the type $v$ and the type $\overline{v}$ in order the consecutive points angles are always multiples of $\theta$. The polyline with vectors $v_a$, $\overline{v_b}$, $v_c$, ... is denoted as:
 \begin{align}
 \{P_1,P_2,P_3,P_4,...\} &= \{ [], [v_a], [v_a,\overline{v_b}],[v_a,\overline{v_b},v_c],... \} 
  \quad 1 \leq a,b,c \leq t
 \end{align}
-
 where point $P_1$ is at origin and the rest of points are array of vectors.
-If point $P_k = [...,v_m]$ and $P_{k+1} = [...,v_m,\overline{v_n}]$ for $k>0$ then the angle at point  $P_k$ is $u\theta$, where $u$ is:
+\\\\
+For two consecutive points $P_k = [...,v_m]$ and $P_{k+1} = [...,v_m,\overline{v_n}]$ for $k>0$ we have the angle at point $P_k$ is $u\theta$, where $u$ is:
 \begin{align}
-u &\equiv s + m - n \pmod{s} \quad  \quad 1 \leq m,n \leq t
+u &\equiv s + m - n \pmod{s} \quad  \quad 1 \leq m,n \leq t \label{eq:angle}
 \end{align}
 
 To record and draw polylines absolutely we assign to each point $\textbf{P}$ \texttt{accumulators} consistent of two vectors \textbf{X} and \textbf{Y} holding $t$ integers each:
@@ -79,49 +87,62 @@ To record and draw polylines absolutely we assign to each point $\textbf{P}$ \te
 \textbf{P}^A &\equiv \left[\begin{array}{c}\textbf{X} \\ \textbf{Y}
  \end{array}\right]
  = \left[\begin{array}{ccccc}X_1&X_2&X_3&...&X_t
-  \\ Y_1&Y_2&Y_3&...&Y_t \end{array}\right]
+  \\ Y_1&Y_2&Y_3&...&Y_t \end{array}\right] \label{eq:accums}
 \end{align}
 
-The absolute position of point $P$ can be calculated as follows:
+Accumulators are copied from previous points to the new ones and incremented in $+1$ or decremented in $-1$ depending in the indices of the vector $v = (k_x,k_y)$ which created the new point:
 \begin{align}
-(P_x,P_y) &= \left( \sum_{i=1}^{t}X_ix_i, \sum_{i=1}^{t}Y_iy_i \right) \label{eq:absolute}
+X_i &= \left\{ \begin{array}{ccl}
+ X_i + 1 & \mbox{for} & i = k_x \\
+ X_i - 1 & \mbox{for} & i = -k_x
+ \end{array}\right. \\
+Y_i &= \left\{ \begin{array}{ccl}
+ Y_i + 1 & \mbox{for} & i = k_y \\
+ Y_i - 1 & \mbox{for} & i = -k_y
+ \end{array}\right.
+\end{align}
+
+The absolute position coordinates of point $P$ are calculated adding the products of the accumulators $\textbf{P}^A$ of equation \ref{eq:accums} and the coordinates of points $p_i$ of equation \ref{eq:coords}:
+\begin{align}
+\langle P_x,P_y\rangle &= 
+ \biggl< \sum_{i=1}^{t}X_ix_i, \sum_{i=1}^{t}Y_iy_i \biggr> \label{eq:absolute}
 \end{align}
 
 
 
 
-\subsection{Symmetry $m=9$}
+\section{Symmetry $m=9$}
 
 Figure \ref{fig:vectors-a} $(i)$ show the nine different vectors $v_1$, $v_2$, ... $v_9$ in symmetry $m=9$. Using the vectors equation \ref{eq:vectors} we get the nine vectors:
-$v_1 = \langle x_1,y_1\rangle$,
-$v_2 = \langle x_2,y_2\rangle$,
-$v_3 = \langle x_3,y_3\rangle$,
-$v_4 = \langle x_4,y_4\rangle$,
-$v_5 = \langle x_5,y_5\rangle$,
-$v_6 = \langle x_5,-y_5\rangle$,
-$v_7 = \langle x_4,-y_4\rangle$,
-$v_8 = \langle x_3,-y_3\rangle$ and
-$v_9 = \langle x_2,-y_2\rangle$.
+$v_1 = (1,1)$,
+$v_2 = (2,2)$,
+$v_3 = (3,3)$,
+$v_4 = (4,4)$,
+$v_5 = (5,5)$,
+$v_6 = (11-6,-(11-6)) = (5,-5)$,
+$v_7 = (11-7,-(11-7)) = (4,-4)$,
+$v_8 = (11-8,-(11-8)) = (3,-3)$ and
+$v_9 = (11-9,-(11-9)) = (2,-2)$.
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{vectors-a}
-\caption{The symmetry $9$ vectors and polylines.}
+\caption{The symmetry $9$ vectors, points, angles and polylines.}
 \label{fig:vectors-a}
 \end{figure}
 
-Figure \ref{fig:vectors-a} $(ii)$ show polyline $\overline{ABC}$ and $(iii)$ show polyline $\overline{ABCD}$ alternating vectors of the type $[...,v_m]$ (show in red) with vectors of the type $[...,v_m,\overline{v_n}]$ (shown in blue) to guarantee the angles between edges are always multiples of $\delta$: angle $\angle{ABC} = 4\delta$, angle $\angle{BCD} = 2\delta$. New vertices accumulate the preceding vertices by notation. The four vertices $\{A,B,C,D\}$ are denoted as $\{ [\hspace{2pt}], [v_1], [v_1, \overline{v_6}], [v_1,\overline{v_6},v_2] \}$.\
+Figure \ref{fig:vectors-a} $(ii)$ show polyline $\overline{ABC}$ and $(iii)$ show polyline $\overline{ABCD}$ alternating vectors of the type $[...,v_m]$ (show in red) with vectors of the type $[...,v_m,\overline{v_n}]$ (shown in blue) to guarantee the angles between edges are always multiples of $\delta$: angle $\angle{ABC} = 4\delta$, angle $\angle{BCD} = 2\delta$. The polyline $\{A,B,C,D\}$ is denoted by $\{ [\hspace{2pt}], [v_1], [v_1, \overline{v_6}], [v_1,\overline{v_6},v_2] \}$ or in compact form $V_9(0,1,6,2)$.
 \\
 \\
-The vertice $o$ at the origin is assigned with accumulators $\textbf{X},\textbf{Y}$ initialized to zero. The next point accumulator increments by $+1$ or $-1$ the position $1 \leq j \leq t$ according the components $x_j, y_j$ the vector $v_m$ has defined. For example we have:
+The vertice $o$ at the origin is assigned with accumulators $\textbf{X},\textbf{Y}$ initialized to zero. For the next point the accumulators are updated at positions $1 \leq k \leq t$ according the components of the vector $v_m\equiv(k_x,k_y)$ of the new point:
 
 \begin{align}
-X[a,b,c,d,e] + v_m &= \left\{ \begin{array}{ccl}
- X[a+1,b,c,d,e] & \mbox{for} & v_1\equiv\langle x_1,y_1\rangle \\
- X[a,b+1,c,d,e] & \mbox{for} & v_2\equiv\langle x_2,y_2\rangle, v_9\equiv\langle x_2,-y_2\rangle\\
+X[a,b,c,d,e] + v_i &= \left\{ \begin{array}{ccl}
+ X[a+1,b,c,d,e] & \mbox{for} & v_1\equiv(1,1) \\
+ X[a,b+1,c,d,e] & \mbox{for} & v_2\equiv(2,2), v_9\equiv(2,-2)\\
  ... & & \\
- X[a,b,c,d,e+1] & \mbox{for} & v_5\equiv\langle x_5,y_5\rangle, v_6\equiv\langle x_5,-y_5\rangle\\
- X[a-1,b,c,d,e] & \mbox{for} & \overline{v_1}\equiv\langle -x_1,-y_1\rangle \\
+ X[a,b,c,d,e+1] & \mbox{for} & v_5\equiv(5,5), v_6\equiv(5,-5)\\
+ X[a-1,b,c,d,e] & \mbox{for} & \overline{v_1}\equiv(-1,-1) \\
  ... & &
  \end{array}\right.
 \end{align}
@@ -133,9 +154,9 @@ Lets get the accumulators of the polyline $\{[\hspace{2pt}], [v_1], [v_1,\overli
 
 First we get accumulators of vector $v_1$ and point $B=[v_1]$:
 \begin{align}
-v_1 &= \langle x_1,y_1\rangle \\
+v_1 &= (1,1) \nonumber\\
 v_1^A &= \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right]\\
-[v_1]^A &= []^A + v_1^A\\
+[v_1]^A &= [\hspace{2pt}]^A + v_1^A\\
  &= \left[\begin{array}{ccccc}0&0&0&0&0 \\ 0&0&0&0&0 \end{array}\right]
  + \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right]
  = \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right]
@@ -143,16 +164,12 @@ v_1^A &= \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right]\\
 
 Then we get accumulators of vector $\overline{v_6}$:
 \begin{align}
-v_6 &\equiv \langle x_6,y_6 \rangle 
-    = \langle x_{11-6},-y_{11-6} \rangle 
-    = \langle x_5,-y_5 \rangle\\
-\overline{v_6} &=
-  -\langle x_5,-y_5 \rangle 
-  = \langle -x_5,y_5\rangle\\
+v_6 &\equiv (5,-5)\nonumber\\
+\overline{v_6} &= (-5,5)\nonumber\\
 \overline{v_6}^A &= \left[\begin{array}{ccccc}0&0&0&0&-1 \\ 0&0&0&0&1 \end{array}\right]
 \end{align}
 
-And then we get the accumulators of point $C = [v_1,\overline{v_6}]$:
+And then we get the accumulators of point $C=[v_1,\overline{v_6}]$:
 \begin{align}
 [v_1, \overline{v_6}]^A &= v_1^A + \overline{v_6}^A
  = \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right] +
@@ -162,8 +179,7 @@ And then we get the accumulators of point $C = [v_1,\overline{v_6}]$:
 
 Finally we get the accumulator of vector $v_4$ and use it to get the accumulator of point $D = [v_1,\overline{v_6},v_4]$:
 \begin{align}
-v_4 &\equiv 
- \langle x_4,y_4 \rangle\nonumber\\
+v_4 &\equiv (4,4)\nonumber\\
 v_4^A &= \left[\begin{array}{ccccc}0&0&0&1&0 \\ 0&0&0&1&0 \end{array}\right]\\
 [v_1, \overline{v_6}, v_4]^A &= [v_1, \overline{v_6}]^A + v_4^A
  = \left[\begin{array}{ccccc}1&0&0&0&-1 \\ 1&0&0&0&1 \end{array}\right]
@@ -181,6 +197,14 @@ D_y &= y_1 + y_2 + y_2\nonumber\\
     &= \sin(120^\circ) + \sin(160^\circ)
 \end{align*}
 
+Using equation \ref{eq:angle} we calculate the angles multiples $u$ at points $B$ and $C$. From $C=[v_1,\overline{v_6}]$ we have that $m_B=1,n_B=6$ and we calculate $u$ at point $B$:
+\begin{align}
+u_B &= 9 + 1 - 6 \pmod{9} = 4
+\end{align}
+From $D = [v_1,\overline{v_6},v_4]$ we have that $m_C=6,n_C=4$ and we calculate $u$ at point $C$:
+\begin{align}
+u_C &= 9 + 6 - 4 \pmod{9} = 2
+\end{align}
 
 \section{Rhombi}
 

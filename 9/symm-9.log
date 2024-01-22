@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  22 JAN 2024 13:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2023.6.27)  22 JAN 2024 17:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -285,76 +285,85 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 17.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
+Underfull \hbox (badness 10000) in paragraph at lines 73--77
+
+ []
+
+[1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 <vectors-a.pdf, id=17, 517.36586pt x 161.43512pt>
 File: vectors-a.pdf Graphic file (type pdf)
  <use vectors-a.pdf>
-Package pdftex.def Info: vectors-a.pdf used on input line 108.
+Package pdftex.def Info: vectors-a.pdf used on input line 129.
 (pdftex.def)             Requested size: 517.3646pt x 161.43471pt.
 
-Overfull \hbox (11.4746pt too wide) in paragraph at lines 108--109
+Overfull \hbox (11.4746pt too wide) in paragraph at lines 129--130
  [][] 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 113--117
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 134--138
 
  []
 
-[2 <./vectors-a.pdf>] [3] [4] <rhombi-9.pdf, id=48, 338.79071pt x 323.12119pt>
-File: rhombi-9.pdf Graphic file (type pdf)
+[3 <./vectors-a.pdf>]
 
-<use rhombi-9.pdf>
-Package pdftex.def Info: rhombi-9.pdf used on input line 257.
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[4] <rhombi-9.pdf, id=48, 338.79071pt x 323.12119pt>
+File: rhombi-9.pdf Graphic file (type pdf)
+ <use rhombi-9.pdf>
+Package pdftex.def Info: rhombi-9.pdf used on input line 281.
 (pdftex.def)             Requested size: 338.78987pt x 323.12039pt.
- [5] [6 <./rhombi-9.pdf>]
+
+[5] [6 <./rhombi-9.pdf>]
 <hexagons-from-rhombi-9.pdf, id=72, 484.09657pt x 132.75798pt>
 File: hexagons-from-rhombi-9.pdf Graphic file (type pdf)
 
 <use hexagons-from-rhombi-9.pdf>
-Package pdftex.def Info: hexagons-from-rhombi-9.pdf used on input line 313.
+Package pdftex.def Info: hexagons-from-rhombi-9.pdf used on input line 337.
 (pdftex.def)             Requested size: 484.09538pt x 132.75764pt.
 
 <hexagons-from-hexagons-9.pdf, id=73, 482.83788pt x 95.76979pt>
 File: hexagons-from-hexagons-9.pdf Graphic file (type pdf)
 
 <use hexagons-from-hexagons-9.pdf>
-Package pdftex.def Info: hexagons-from-hexagons-9.pdf used on input line 330.
+Package pdftex.def Info: hexagons-from-hexagons-9.pdf used on input line 354.
 (pdftex.def)             Requested size: 482.83669pt x 95.76955pt.
  [7 <./hexagons-from-rhombi-9.pdf>]
 <hexagons-9.pdf, id=93, 311.57202pt x 319.4053pt>
 File: hexagons-9.pdf Graphic file (type pdf)
  <use hexagons-9.pdf>
-Package pdftex.def Info: hexagons-9.pdf used on input line 383.
+Package pdftex.def Info: hexagons-9.pdf used on input line 407.
 (pdftex.def)             Requested size: 311.57124pt x 319.40451pt.
  [8 <./hexagons-from-hexagons-9.pdf>]
 <octagons-9.pdf, id=110, 338.61105pt x 456.7725pt>
 File: octagons-9.pdf Graphic file (type pdf)
  <use octagons-9.pdf>
-Package pdftex.def Info: octagons-9.pdf used on input line 397.
+Package pdftex.def Info: octagons-9.pdf used on input line 421.
 (pdftex.def)             Requested size: 338.61021pt x 456.77138pt.
 
 [9 <./hexagons-9.pdf>] <9.pdf, id=130, 597.50786pt x 392.64803pt>
 File: 9.pdf Graphic file (type pdf)
  <use 9.pdf>
-Package pdftex.def Info: 9.pdf used on input line 405.
+Package pdftex.def Info: 9.pdf used on input line 429.
 (pdftex.def)             Requested size: 507.88408pt x 333.7524pt.
 
-Overfull \hbox (1.99408pt too wide) in paragraph at lines 405--406
+Overfull \hbox (1.99408pt too wide) in paragraph at lines 429--430
  [][] 
  []
 
 [10 <./octagons-9.pdf>] [11 <./9.pdf>] (./symm-9.aux) ) 
 Here is how much of TeX's memory you used:
- 3064 strings out of 494953
- 41004 string characters out of 6180977
- 121076 words of memory out of 5000000
- 6293 multiletter control sequences out of 15000+600000
- 15225 words of font info for 58 fonts, out of 8000000 for 9000
+ 3072 strings out of 494953
+ 41115 string characters out of 6180977
+ 122101 words of memory out of 5000000
+ 6301 multiletter control sequences out of 15000+600000
+ 16472 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 38i,16n,32p,585b,253s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,16n,32p,552b,253s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts
@@ -374,7 +383,7 @@ ts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type
 c/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/symbols/msbm10.pfb>
-Output written on symm-9.pdf (11 pages, 308726 bytes).
+Output written on symm-9.pdf (11 pages, 310383 bytes).
 PDF statistics:
  215 PDF objects out of 1000 (max. 8388607)
  172 compressed objects within 2 object streams
