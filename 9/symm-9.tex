@@ -45,35 +45,37 @@ For every symmetry $s$ we identify $t = \dfrac{s+1}2$ independent abscissas and 
  \quad i = 1,2,...,t \label{eq:pairs}
 \end{align}
 
-We define a relative origin point $p_0$. There are $s$ different points $p_1, p_2, ... p_s$ of magnitud $1$ and equidistant to point $p_0$ located at coordinates $x_i,y_i$ as follows.
+We define a relative origin point $p_0$. There are $s$ different points $p_1, p_2, ... p_s$  equidistant to point $p_0$ located at coordinates $\langle x_i,y_i \rangle$ as follows:
 \begin{align}
 p_i &\equiv \left\{ \begin{array}{ccl}
- \langle x_k,y_k\rangle & \mbox{for} & i \leq t  \quad k = i\\
- \langle x_k, -y_k\rangle & \mbox{for} & i > t \quad k = s+2-i
+ \langle x_j,y_j\rangle & \mbox{for} & i \leq t  \quad j = i\\
+ \langle x_j, -y_j\rangle & \mbox{for} & i > t \quad j = s+2-i
  \end{array}\right. \label{eq:coords}
 \end{align}
 
 The points are transformed into vectors holding only the $x$ and $y$ indices:
 \begin{align}
 v_i &\equiv \left\{ \begin{array}{ccl}
- ( k, k ) & \mbox{for} & i \leq t \quad k = i\\
- ( k, -k ) & \mbox{for} & i > t \quad k = s+2-i
+ ( j, j ) & \mbox{for} & i \leq t \quad j = i\\
+ ( j, -j ) & \mbox{for} & i > t \quad j = s+2-i
  \end{array}\right. \label{eq:vectors}
 \end{align}
 
-Any vector $v \equiv (k_x,k_y)$ can be rotated by $180^\circ$ around $p_0$ and is denoted as $\overline{v}$ and the pair indices signs are changed:
+Any vector $v_i \equiv (k_1,k_2)$ can be rotated by $180^\circ$ around $p_0$ and is denoted as $\overline{v_i}$ and the $k_1,k_2$ indices signs are changed:
 \begin{align}
-\overline{v} &\equiv (-k_x, -k_y) \label{eq:vector180}
+\overline{v_i} &\equiv (-k_1, -k_2) \label{eq:vector180}
 \end{align}
 
-We define an absolute origin point $o$ located at $(0,0)$. Starting at $o$ we can form polylines adding vectors alternating the type $v$ and the type $\overline{v}$ in order the consecutive points angles are always multiples of $\theta$. The polyline with vectors $v_a$, $\overline{v_b}$, $v_c$, ... is denoted as:
+We define an absolute origin point $o$ located at $(0,0)$. Starting at $o$ we can form polylines adding vectors alternating the type $v_i$ and the type $\overline{v_i}$ in order the points angles are always multiples of $\theta$. The polyline with vectors $\overrightarrow{P_1P_2}=v_a$, $\overrightarrow{P_2P_3}=\overline{v_b}$, $\overrightarrow{P_3P_4}=v_c$, ... is denoted as:
 \begin{align}
-\{P_1,P_2,P_3,P_4,...\} &= \{ [], [v_a], [v_a,\overline{v_b}],[v_a,\overline{v_b},v_c],... \} 
+\overline{P_1P_2P_3P_4...} &= \{ [], [v_a], [v_a,\overline{v_b}],[v_a,\overline{v_b},v_c],... \} 
  \quad 1 \leq a,b,c \leq t
 \end{align}
-where point $P_1$ is at origin and the rest of points are array of vectors.
-\\\\
-For two consecutive points $P_k = [...,v_m]$ and $P_{k+1} = [...,v_m,\overline{v_n}]$ for $k>0$ we have the angle at point $P_k$ is $u\theta$, where $u$ is:
+where the point $P_1$ is at origin and the rest of points are non-empty arrays of vectors. A simpler notation for the last polyline for symmetry $s$ is:
+\begin{align}
+\overline{P_1P_2P_3P_4...} &= P_s(0,a,b,c,...)
+\end{align}
+For two consecutive points $P_k = [...,v_m]$ and $P_{k+1} = [...,v_m,\overline{v_n}]$ for $k>0$ we have that the angle at point $P_k$ is $u\theta$, where $u$ is:
 \begin{align}
 u &\equiv s + m - n \pmod{s} \quad  \quad 1 \leq m,n \leq t \label{eq:angle}
 \end{align}
@@ -208,17 +210,17 @@ u_C &= 9 + 6 - 4 \pmod{9} = 2
 
 \section{Rhombi}
 
-Rhombi are equilateral tetragons. For every odd symmetry $m$ we find $n = \dfrac{m-1}2$ different rhombi. The rhombi smallest angles are defined as $\omega_1 \equiv \dfrac{i}2$ while the other as $\omega_2 \equiv n + \dfrac{i-1}2$ where $i = 1,...,n$. We identify the rhombi with the symmetry $m$ and angle $\omega_1$ only. So for symmetry $9$ we have the four rhombi: $R_9\left(\frac{1}2\right)$, $R_9(1)$, $R_9\left(\frac{3}2\right)$ and $R_9(2)$.
+Rhombi are equilateral tetragons. For every odd symmetry $s$ we have $n = \dfrac{s-1}2$ different rhombi. The rhombi smallest angles are defined as $u_1 \equiv \dfrac{i}2$ while the other as $u_2 \equiv n + \dfrac{i-1}2$ for $i = 1,...,n$. To identify any particular rhombus we use the symmetry $s$ and angle $u_1$ only. So for symmetry $s=9$ we have the four rhombi: $R_9\left(\frac{1}2\right)$, $R_9(1)$, $R_9\left(\frac{3}2\right)$ and $R_9(2)$.
+\\\\
+Figure \ref{tbl:rhombi} show the rhombi for symmetries up to $9$. Every rhombus is labeled with a consecutive lowercase letter $\mathbi{a}$, $\mathbi{b}$, $\mathbi{c}$,... The first rhombi $\mathbi{a}$ is found first in symmetry $s=3$ and then again in symmetry $s=9$ so we prevent renaming congruent rhombi.
 
-Figure \ref{tbl:rhombi} show the rhombi for symmetries up to $9$. Every rhombus is labeled with a consecutive lowercase letter $\mathbi{a}$, $\mathbi{b}$, $\mathbi{c}$,... The first rhombi $\mathbi{a}$ is found again in symmetry $9$ so we prevent renaming identical rhombi.
-
-The rhombi angles $\theta_1$ and $\theta_2$ are expressed in function of the angles $\{\alpha,\beta,\gamma,\delta\}$ of symmetries $m=\{3,5,7,9\}$ where $\theta_1 < \theta_2$ and $\theta_1 + \theta_2 = \pi$. We cannot use the rhombi isolated in our tessellations since not both $\omega_1$ and $\omega_2$ are integers. But we'll add and substract rhombi together to build hexagons, octagons and beyond where all polygon's angles $\omega_n$ are integers.
+The rhombi angles $\theta_1$ and $\theta_2$ are expressed in function of the angles $\{\alpha,\beta,\gamma,\delta\}$ of symmetries $s=\{3,5,7,9\}$ where $\theta_1 < \theta_2$ and $\theta_1 + \theta_2 = \pi$. We cannot use the rhombi isolated in our tessellations since not both $u_1$ and $u_2$ are integers. But we'll add and substract rhombi together to build hexagons, octagons and beyond where all polygon's angles $u_n$ are integers.
 
 \begin{table}[h]
 \begin{center}
 \begin{tabular}{|c|c|c|c c| r |}
 \hline
-$R_m(\omega_1)$ & $\omega_2$ & Name & $\theta_1$ & $\theta_2$ & Area \\ \hline\
+$R_s(u_1)$ & $u_2$ & Name & $\theta_1$ & $\theta_2$ & Area \\ \hline\
 $R_3(\frac{1}2)$ & $1$  & $\mathbi{a}$ & $\alpha/2$ & $2\alpha/2$  & $\sin(\alpha) \approx 0.866$ \\[0.5ex]
 \hline
 $R_5(\frac{1}2)$ & $2$  & $\mathbi{b}$ & $\beta/2$  & $4\beta/2$   & $\sin(2\beta) \approx 0.587$\\[0.5ex]
@@ -234,14 +236,14 @@ $R_9(\frac{3}2)$ & $3$ & $\mathbi{a}$ & $3\delta/2$ & $6\delta/2$ & $\sin(3\delt
 $R_9(2)$ & $\frac{5}2$ & $\mathbi{i}$ & $4\delta/2$ & $5\delta/2$ & $\sin(2\delta) \approx 0.984$\\[0.5ex]
 \hline
 \end{tabular}
-\caption{Rhombi $R_m(\omega_1,\omega_2)$ for symmetries $m=\{3,5,7,9\}$.} 
+\caption{Rhombi $R_s(u_1)$ for symmetries $s=\{3,5,7,9\}$.} 
 \label{tbl:rhombi}
 \end{center}
 \end{table}
 
 \section{Stars}
 
-For every odd symmetry $m$ we have several stars that are equilateral 2$m$-gons with at most two different angles $\omega_1$ and $\omega_2$ at the vertices. We find exactly $n = \dfrac{m-1}2$ different stars with angles $\omega_1 \leq \omega_2$ as integers.
+For every odd symmetry $s$ we have several stars that are equilateral 2$s$-gons with at most two different angles $u_1$ and $u_2$ at the vertices. We find exactly $n = \dfrac{s-1}2$ different stars with angles $u_1 \leq u_2$ as integers.
 
 Figure \ref{tbl:stars} show the stars for symmetries up to $9$. Every star with both $\omega_1$ and $\omega_2$ integers are labeled with a consecutive uppercase letter $\mathcal{A}, \mathcal{B}, \mathcal{C}...$. The stars are easily build with rhombi so the table show the stars area in function of them.
 
@@ -249,7 +251,7 @@ Figure \ref{tbl:stars} show the stars for symmetries up to $9$. Every star with 
 \begin{center}
 \begin{tabular}{|c|c|c|l|l|}
 \hline
-$S_m(\omega_1)$ & $\omega_2$ & Name & Area & Polygon \\ \hline\
+$S_s(u_1)$ & $u_2$ & Name & Area & Polygon \\ \hline\
 $S_3(\frac{1}2)$ & $2$ & -     & $6\mathbi{a}$ & $|6/2|$ (12-gon) \\[0.5ex]
 $S_3(1)$         & $1$ & $\mathcal{A}$ & $3\mathbi{a}$ & Regular hexagon \\[0.5ex]
 \hline
@@ -274,7 +276,7 @@ $S_9(4)$ & $4$ & $\mathcal{J}$ & $9(\mathbi{h}+\mathbi{i}+\mathbi{a}+\mathbi{g})
 \end{center}
 \end{table}
 
-Figure \ref{fig:rhombi-9} show nine copies of symmetry-9 rhombi $\{\mathbi{h},\mathbi{i},\mathbi{a},\mathbi{g}\}$ forming the four stars $S_9(1)$, $S_9(2)$, $S_9(3)$ and $S_9(4)$ named respectivelly $\mathcal{G}$, $\mathcal{H}$, $\mathcal{I}$ and $\mathcal{J}$.
+Figure \ref{fig:rhombi-9} show nine copies of symmetry-9 rhombi $\{\mathbi{h},\mathbi{i},\mathbi{a},\mathbi{g}\}$ forming the four stars $S_9(1)$, $S_9(2)$, $S_9(3)$ and $S_9(4)$ named respectivelly $\mathcal{G}$, $\mathcal{H}$, $\mathcal{I}$ and $\mathcal{J}$. All stars vertices angles are integers.
 
 \begin{figure}[H]
 \centering
@@ -293,18 +295,17 @@ $9\mathbi{h}$,
 
 \section{Hexagons}
 
-For any odd symmetry $m$, we can obtain equilateral hexagons by connecting six equal edges at integral values of $\omega$ or by adding and substracting rhombi or by dissecting the areas left after stars intersections. In any case we find the hexagons has at most three different internal angles in this order $(\omega_1, \omega_2, \omega_3, \omega_1, \omega_2, \omega_3)$ where $\omega_1 + \omega_2 + \omega_3 = m$.
+For any odd symmetry $s$, we can obtain equilateral hexagons by connecting six equal edges at integral values of $u$ or by adding and substracting rhombi or by dissecting the areas left after stars intersections. In any case we find the hexagons has at most three different internal angles in this order $(u_1, u_2, u_3, u_1, u_2, u_3)$ where $u_1 + u_2 + u_3 = s$.
 
 \subsection{Hexagons angles}
 
-
-Figure \ref{tbl:hexagons-angles} show the hexagons defined as $H_m(\omega_1,\omega_2)$ for symmetries $m = \{3,5,7,9\}$ where $\omega_1 \leq \omega_2 \leq \omega_3$. We labeled the non self-intersecting hexagons with uppercase letters $\mathbi{A}$, $\mathbi{B}$, $\mathbi{C}$, ... We prevent to name differently any hexagon which is equivalent to a previous one having the same angles as what happens with hexagon $\mathbi{A}$ of symmetries $3$ and $9$.
+Figure \ref{tbl:hexagons-angles} show the hexagons defined as $H_s(u_1,u_2)$ for symmetries $s = \{3,5,7,9\}$ where $u_1 \leq u_2 \leq u_3$. We labeled the non self-intersecting hexagons with uppercase letters $\mathbi{A}$, $\mathbi{B}$, $\mathbi{C}$, ... We prevent to name differently any hexagon which is equivalent to a previous one having the same angles as what happens with hexagon $\mathbi{A}$ of symmetries $3$ and $9$.
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{| c | c | c | l | }
 \hline
-$H_m(\omega_1,\omega_2)$ & Name & $(\omega_1, \omega_2, \omega_3)$ & Polygon \\ \hline\
+$H_s(u_1,u_2)$ & Name & $(u_1, u_2, u_3)$ & Polygon \\ \hline\
 $H_3(1,1)$ & \mathbi{A} & (\textbf{1, 1, 1}) & Regular hexagon \\[0.5ex]
 \hline
 $H_5(1,1)$ & \mathbi{B} & (\textbf{1, 1, 3}) & Sormeh Dan Girih tile\\[0.5ex]
@@ -324,7 +325,7 @@ $H_9(2,3)$ & \mathbi{K} & (\textbf{2, 3, 4}) & \\[0.5ex]
 $H_9(3,3)$ & \mathbi{A} & (\textbf{3, 3, 3}) & equivalent to $H_3(1,1)$\\[1.1ex]
 \hline
 \end{tabular}
-\caption{Hexagons $H_m(\omega_1,\omega_2)$ for symmetries $m = \{3,5,7,9\}$.} 
+\caption{Hexagons $H_s(u_1,u_2)$ for symmetries $s = \{3,5,7,9\}$.} 
 \label{tbl:hexagons-angles}
 \end{center}
 \end{table}
@@ -423,13 +424,13 @@ $\{\mathbi{G},\mathbi{H},\mathbi{I},\mathbi{J},\mathbi{K},\mathbi{A}\}$.
 \label{fig:octagons-9}
 \end{figure}
 
-\section{Vectors}
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.85]{9}
-\caption{Vectors of symmetry $9$.}
-\label{fig:9}
-\end{figure}
+%\section{Vectors}
+%\begin{figure}[H]
+%\centering
+%\includegraphics[scale=0.85]{9}
+%\caption{Vectors of symmetry $9$.}
+%\label{fig:9}
+%\end{figure}
 
 \end{document}
 
