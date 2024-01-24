@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \title{Symmetry 9}
 \author{https://github.com/heptagons/lenses}
-\date{2024/1/22}
+\date{2024/1/23}
 
 \usepackage{graphicx}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
@@ -38,7 +38,7 @@ $9$ & $\delta$ & $2\pi/9$ \\ \hline
 \end{center}
 \end{table}
 
-For every symmetry $s$ we identify $t = \dfrac{s+1}2$ independent abscissas and ordinates pairs $\langle x_i, y_i \rangle$:
+For every symmetry $s$ we identify $t = \dfrac{s+1}2$ independent abscissas $x_i$ and $t$ independent ordinates $y_i$:
 \begin{align}
 \left[ \begin{array}{c} x_i \\ y_i \end{array} \right] &= 
 \left[ \begin{array}{c} \cos((i-1)\theta) \\ \sin((i-1)\theta) \end{array} \right]
@@ -53,7 +53,7 @@ p_i &\equiv \left\{ \begin{array}{ccl}
  \end{array}\right. \label{eq:coords}
 \end{align}
 
-The points are transformed into vectors holding only the $x$ and $y$ indices:
+The points are transformed into vectors which hold only the $(x,y)$ pair of indices:
 \begin{align}
 v_i &\equiv \left\{ \begin{array}{ccl}
  ( j, j ) & \mbox{for} & i \leq t \quad j = i\\
@@ -61,7 +61,7 @@ v_i &\equiv \left\{ \begin{array}{ccl}
  \end{array}\right. \label{eq:vectors}
 \end{align}
 
-Any vector $v_i \equiv (k_1,k_2)$ can be rotated by $180^\circ$ around $p_0$ and is denoted as $\overline{v_i}$ and the $k_1,k_2$ indices signs are changed:
+Any vector $v_i \equiv (k_1,k_2)$ can be rotated by $180^\circ$ around $p_0$. The vector after the rotation is denoted as $\overline{v_i}$ and the original indices $k_1,k_2$ signs are changed:
 \begin{align}
 \overline{v_i} &\equiv (-k_1, -k_2) \label{eq:vector180}
 \end{align}
@@ -80,7 +80,7 @@ For two consecutive points $P_k = [...,v_m]$ and $P_{k+1} = [...,v_m,\overline{v
 u &\equiv s + m - n \pmod{s} \quad  \quad 1 \leq m,n \leq t \label{eq:angle}
 \end{align}
 
-To record and draw polylines absolutely we assign to each point $\textbf{P}$ \texttt{accumulators} consistent of two vectors \textbf{X} and \textbf{Y} holding $t$ integers each:
+Every point $\textbf{P}$ has \texttt{accumulators} composed of two vectors \textbf{X} and \textbf{Y} holding $t$ integers each:
 \begin{align}
 \textbf{X} &= \left[\begin{array}{ccccc}X_1&X_2&X_3&...&X_t
  \end{array}\right]  \quad X_i \in \mathbb{Z}\\
@@ -210,17 +210,24 @@ u_C &= 9 + 6 - 4 \pmod{9} = 2
 
 \section{Rhombi}
 
-Rhombi are equilateral tetragons. For every odd symmetry $s$ we have $n = \dfrac{s-1}2$ different rhombi. The rhombi smallest angles are defined as $u_1 \equiv \dfrac{i}2$ while the other as $u_2 \equiv n + \dfrac{i-1}2$ for $i = 1,...,n$. To identify any particular rhombus we use the symmetry $s$ and angle $u_1$ only. So for symmetry $s=9$ we have the four rhombi: $R_9\left(\frac{1}2\right)$, $R_9(1)$, $R_9\left(\frac{3}2\right)$ and $R_9(2)$.
+Rhombi are equilateral tetragons. For every odd symmetry $s$ we have $n = \dfrac{s-1}2$ different rhombi. The rhombi angles $u_1 < u_2$ are calculated as follows:
+\begin{align}
+(u_1, u_2) &= \left(\frac{i}{2},  n + \frac{i-1}{2}\right) \quad i = 1,...,n
+\end{align}
+We identify any rhombus as $R_s(u_1)$ so for symmetry $s=9$ we have the four rhombi:
+\begin{align}
+R_9 &= \left\{ R_9\left(\frac{1}2\right), R_9(1), R_9\left(\frac{3}2\right), R_9(2) \right\}
+\end{align}
 \\\\
-Figure \ref{tbl:rhombi} show the rhombi for symmetries up to $9$. Every rhombus is labeled with a consecutive lowercase letter $\mathbi{a}$, $\mathbi{b}$, $\mathbi{c}$,... The first rhombi $\mathbi{a}$ is found first in symmetry $s=3$ and then again in symmetry $s=9$ so we prevent renaming congruent rhombi.
+Table \ref{tbl:rhombi} show the rhombi for odd symmetries up to $9$. Every rhombus is labeled with a consecutive lowercase letter $\mathbi{a}$, $\mathbi{b}$, $\mathbi{c}$,... The first rhombi $\mathbi{a}$ is found first in symmetry $s=3$ and then again in symmetry $s=9$ so we prevent renaming congruent rhombi.
 
-The rhombi angles $\theta_1$ and $\theta_2$ are expressed in function of the angles $\{\alpha,\beta,\gamma,\delta\}$ of symmetries $s=\{3,5,7,9\}$ where $\theta_1 < \theta_2$ and $\theta_1 + \theta_2 = \pi$. We cannot use the rhombi isolated in our tessellations since not both $u_1$ and $u_2$ are integers. But we'll add and substract rhombi together to build hexagons, octagons and beyond where all polygon's angles $u_n$ are integers.
+The rhombi angles $\theta_1 = u_1\theta$ and $\theta_2 = u_2\theta$ are expressed in function of the angles $\{\alpha,\beta,\gamma,\delta\}$ of symmetries $s=\{3,5,7,9\}$ where $\theta_1 < \theta_2$ and $\theta_1 + \theta_2 = \pi$. We cannot use the rhombi isolated in our tessellations since not both $u_1$ and $u_2$ are integers. But we'll add and substract rhombi together to build hexagons, octagons and beyond where all polygon's angles $u_n$ are integers.
 
 \begin{table}[h]
 \begin{center}
 \begin{tabular}{|c|c|c|c c| r |}
 \hline
-$R_s(u_1)$ & $u_2$ & Name & $\theta_1$ & $\theta_2$ & Area \\ \hline\
+$R_s(u_1)$ & $u_2$ & Label & $\theta_1$ & $\theta_2$ & Area \\ \hline\
 $R_3(\frac{1}2)$ & $1$  & $\mathbi{a}$ & $\alpha/2$ & $2\alpha/2$  & $\sin(\alpha) \approx 0.866$ \\[0.5ex]
 \hline
 $R_5(\frac{1}2)$ & $2$  & $\mathbi{b}$ & $\beta/2$  & $4\beta/2$   & $\sin(2\beta) \approx 0.587$\\[0.5ex]
@@ -243,15 +250,15 @@ $R_9(2)$ & $\frac{5}2$ & $\mathbi{i}$ & $4\delta/2$ & $5\delta/2$ & $\sin(2\delt
 
 \section{Stars}
 
-For every odd symmetry $s$ we have several stars that are equilateral 2$s$-gons with at most two different angles $u_1$ and $u_2$ at the vertices. We find exactly $n = \dfrac{s-1}2$ different stars with angles $u_1 \leq u_2$ as integers.
+For every odd symmetry $s$ we have stars that are equilateral 2$s$-gons with at most two different angles $u_1$ and $u_2$ at the vertices. We find exactly $n = \dfrac{s-1}2$ different stars with angles $u_1 \leq u_2$ as integers.
 
-Figure \ref{tbl:stars} show the stars for symmetries up to $9$. Every star with both $\omega_1$ and $\omega_2$ integers are labeled with a consecutive uppercase letter $\mathcal{A}, \mathcal{B}, \mathcal{C}...$. The stars are easily build with rhombi so the table show the stars area in function of them.
+Table \ref{tbl:stars} show the stars for odd symmetries up to $9$. Every star with $u_1$ as integer are labeled with a consecutive calligraphy letter $\mathcal{A}, \mathcal{B}, \mathcal{C}...$. We indentify any stars as $S_s(u_1)$ for the symmetry $s$. We calculate the other angle as $u_2 = s - u_1 - 1$. The stars are easily build with rhombi so the table show the stars area in function of them.
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c|c|l|l|}
 \hline
-$S_s(u_1)$ & $u_2$ & Name & Area & Polygon \\ \hline\
+$S_s(u_1)$ & $u_2$ & Label & Area & Polygon \\ \hline\
 $S_3(\frac{1}2)$ & $2$ & -     & $6\mathbi{a}$ & $|6/2|$ (12-gon) \\[0.5ex]
 $S_3(1)$         & $1$ & $\mathcal{A}$ & $3\mathbi{a}$ & Regular hexagon \\[0.5ex]
 \hline
@@ -271,12 +278,12 @@ $S_9(3)$ & $5$ & $\mathcal{I}$ & $9(\mathbi{h}+\mathbi{i}+\mathbi{a})$ & $|(9/2)
 $S_9(4)$ & $4$ & $\mathcal{J}$ & $9(\mathbi{h}+\mathbi{i}+\mathbi{a}+\mathbi{g})$ & Regular 18-gon\\[0.5ex]
 \hline
 \end{tabular}
-\caption{Stars $S_m(\omega_1,\omega_2)$ for symmetries $m=\{3,5,7,9\}$.}
+\caption{Stars $S_s(u_1)$ for symmetries $s = \{3,5,7,9\}$.}
 \label{tbl:stars}
 \end{center}
 \end{table}
 
-Figure \ref{fig:rhombi-9} show nine copies of symmetry-9 rhombi $\{\mathbi{h},\mathbi{i},\mathbi{a},\mathbi{g}\}$ forming the four stars $S_9(1)$, $S_9(2)$, $S_9(3)$ and $S_9(4)$ named respectivelly $\mathcal{G}$, $\mathcal{H}$, $\mathcal{I}$ and $\mathcal{J}$. All stars vertices angles are integers.
+Figure \ref{fig:rhombi-9} show nine copies of symmetry-9 rhombi $\{\mathbi{h},\mathbi{i},\mathbi{a},\mathbi{g}\}$ forming the four stars $S_9(1)$, $S_9(2)$, $S_9(3)$ and $S_9(4)$ labeled respectivelly $\mathcal{G}$, $\mathcal{H}$, $\mathcal{I}$ and $\mathcal{J}$. Note how the rhombi half angles always are added together to produce only angles as integers for the stars.
 
 \begin{figure}[H]
 \centering
@@ -305,7 +312,7 @@ Figure \ref{tbl:hexagons-angles} show the hexagons defined as $H_s(u_1,u_2)$ for
 \begin{center}
 \begin{tabular}{| c | c | c | l | }
 \hline
-$H_s(u_1,u_2)$ & Name & $(u_1, u_2, u_3)$ & Polygon \\ \hline\
+$H_s(u_1,u_2)$ & Label & $(u_1, u_2, u_3)$ & Polygon \\ \hline\
 $H_3(1,1)$ & \mathbi{A} & (\textbf{1, 1, 1}) & Regular hexagon \\[0.5ex]
 \hline
 $H_5(1,1)$ & \mathbi{B} & (\textbf{1, 1, 3}) & Sormeh Dan Girih tile\\[0.5ex]
