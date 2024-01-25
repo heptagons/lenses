@@ -113,6 +113,15 @@ The coordinates of point $P$ in $\mathbb{R}^2$ is calculated adding the products
 
 \section{Symmetry $m=9$}
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{vectors-a}
+\caption{The symmetry $9$ vectors, points, angles and polylines.}
+\label{fig:vectors-a}
+\end{figure}
+
+\subsection{Vectors}
+
 Figure \ref{fig:vectors-a} $(i)$ show the nine different vectors $v_1$, $v_2$, ... $v_9$ in symmetry $m=9$. Using the vectors equation \ref{eq:vectors} we get the nine vectors:
 $v_1 = (1,1)$,
 $v_2 = (2,2)$,
@@ -124,18 +133,13 @@ $v_7 = (11-7,-(11-7)) = (4,-4)$,
 $v_8 = (11-8,-(11-8)) = (3,-3)$ and
 $v_9 = (11-9,-(11-9)) = (2,-2)$.
 
-\begin{figure}[H]
-\centering
-\includegraphics[scale=1]{vectors-a}
-\caption{The symmetry $9$ vectors, points, angles and polylines.}
-\label{fig:vectors-a}
-\end{figure}
+\subsection{Polylines}
 
-Figure \ref{fig:vectors-a} $(ii)$ show polyline $\overline{ABC}$ and $(iii)$ show polyline $\overline{ABCD}$ alternating vectors of the type $[...,v_m]$ (show in red) with vectors of the type $[...,v_m,\overline{v_n}]$ (shown in blue) to guarantee the angles between edges are always multiples of $\delta$: angle $\angle{ABC} = 4\delta$, angle $\angle{BCD} = 2\delta$. The polyline $\{A,B,C,D\}$ is denoted by $\{ [\hspace{2pt}], [v_1], [v_1, \overline{v_6}], [v_1,\overline{v_6},v_2] \}$ or in compact form $V_9(0,1,6,2)$.
-\\
-\\
-The vertice $o$ at the origin is assigned with accumulators $\textbf{X},\textbf{Y}$ initialized to zero. For the next point the accumulators are updated at positions $1 \leq k \leq t$ according the components of the vector $v_m\equiv(k_x,k_y)$ of the new point:
+Figure \ref{fig:vectors-a} $(ii)$ show polyline $\overline{ABC}$ and $(iii)$ show polyline $\overline{ABCD}$. The alternating vectors of the type $[...,v_m]$ are show in red and the vectors of the type $[...,v_m,\overline{v_n}]$ are shown in blue. Angle $\angle{ABC} = 4\delta$ and angle $\angle{BCD} = 2\delta$. The polyline $\{A,B,C,D\}$ is denoted by $\{ [\hspace{2pt}], [v_1], [v_1, \overline{v_6}], [v_1,\overline{v_6},v_4] \}$ or in compact form $P_9(0,1,6,4)$.
 
+\subsection{Accumulators}
+
+With the vertices $v_1,...v_9$ of symmetry $9$ already calculated, we know how to calculate the accumulators, for example, for the $\textbf{X}$ row we have:
 \begin{align}
 X[a,b,c,d,e] + v_i &= \left\{ \begin{array}{ccl}
  X[a+1,b,c,d,e] & \mbox{for} & v_1\equiv(1,1) \\
@@ -147,54 +151,56 @@ X[a,b,c,d,e] + v_i &= \left\{ \begin{array}{ccl}
  \end{array}\right.
 \end{align}
 
-Lets get the accumulators of the polyline $\{[\hspace{2pt}], [v_1], [v_1,\overline{v_6}], [v_1,\overline{v_6},v_4]\}$ shown in figure $(iii)$. By definition the accumulators at $o \equiv (0,0)$ which is point $A=[\hspace{2pt}]$ are:
+Lets get the accumulators of the points of polyline $\overline{ABCD} = \{[\hspace{2pt}], [v_1], [v_1,\overline{v_6}], [v_1,\overline{v_6},v_4]\} = P_9(0,1,6,4)$ shown in figure $(iii)$. First by definition the accumulators at $o \equiv (0,0)$ which is point $A=[\hspace{2pt}]$ are:
 \begin{align}
 [\hspace{2pt}]^A &= \left[\begin{array}{ccccc}0&0&0&0&0 \\ 0&0&0&0&0 \end{array}\right]
 \end{align}
 
-First we get accumulators of vector $v_1$ and point $B=[v_1]$:
+Then we use the accumulators of vector $v_1$ to get tha accumulators of point $B=[v_1]$:
 \begin{align}
 v_1 &= (1,1) \nonumber\\
-v_1^A &= \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right]\\
-[v_1]^A &= [\hspace{2pt}]^A + v_1^A\\
+v_1^A &= \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right]\nonumber\\
+[v_1]^A &= [\hspace{2pt}]^A + v_1^A\nonumber\\
  &= \left[\begin{array}{ccccc}0&0&0&0&0 \\ 0&0&0&0&0 \end{array}\right]
  + \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right]
  = \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right]
 \end{align}
 
-Then we get accumulators of vector $\overline{v_6}$:
+Then we get the accumulators of vector $\overline{v_6}$:
 \begin{align}
 v_6 &\equiv (5,-5)\nonumber\\
 \overline{v_6} &= (-5,5)\nonumber\\
 \overline{v_6}^A &= \left[\begin{array}{ccccc}0&0&0&0&-1 \\ 0&0&0&0&1 \end{array}\right]
 \end{align}
 
-And then we get the accumulators of point $C=[v_1,\overline{v_6}]$:
+And then use $\overline{v_6}^A$ to get the accumulators of point $C=[v_1,\overline{v_6}]$:
 \begin{align}
-[v_1, \overline{v_6}]^A &= v_1^A + \overline{v_6}^A
- = \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right] +
- \left[\begin{array}{ccccc}0&0&0&0&-1 \\ 0&0&0&0&1 \end{array}\right]\\
+[v_1, \overline{v_6}]^A = v_1^A + \overline{v_6}^A
+ &= \left[\begin{array}{ccccc}1&0&0&0&0 \\ 1&0&0&0&0 \end{array}\right] +
+ \left[\begin{array}{ccccc}0&0&0&0&-1 \\ 0&0&0&0&1 \end{array}\right]\nonumber\\
  &= \left[\begin{array}{ccccc}1&0&0&0&-1 \\ 1&0&0&0&1 \end{array}\right]
 \end{align}
 
 Finally we get the accumulator of vector $v_4$ and use it to get the accumulator of point $D = [v_1,\overline{v_6},v_4]$:
 \begin{align}
 v_4 &\equiv (4,4)\nonumber\\
-v_4^A &= \left[\begin{array}{ccccc}0&0&0&1&0 \\ 0&0&0&1&0 \end{array}\right]\\
-[v_1, \overline{v_6}, v_4]^A &= [v_1, \overline{v_6}]^A + v_4^A
- = \left[\begin{array}{ccccc}1&0&0&0&-1 \\ 1&0&0&0&1 \end{array}\right]
- + \left[\begin{array}{ccccc}0&0&0&1&0 \\ 0&0&0&1&0 \end{array}\right]\\
+v_4^A &= \left[\begin{array}{ccccc}0&0&0&1&0 \\ 0&0&0&1&0 \end{array}\right]\nonumber\\
+[v_1, \overline{v_6}, v_4]^A = [v_1, \overline{v_6}]^A + v_4^A
+ &= \left[\begin{array}{ccccc}1&0&0&0&-1 \\ 1&0&0&0&1 \end{array}\right]
+ + \left[\begin{array}{ccccc}0&0&0&1&0 \\ 0&0&0&1&0 \end{array}\right]\nonumber\\
  &= \left[\begin{array}{ccccc}1&0&0&1&-1 \\ 1&0&0&1&1 \end{array}\right]
 \end{align}
 
-Then the accumulators of point $D = [v_1,\overline{v_6},v_4]$ have different of zero these values: $X_1=X_4=1$, $X_5=-1$, $Y_1=Y_4=Y_5=1$. Using the equation \ref{eq:absolute} we calculate the absolute coordinates:
+From the last equation of the accumulators of point $D = [v_1,\overline{v_6},v_4]$ we have as different of zero these values: $X_1=X_4=1$, $X_5=-1$, $Y_1=Y_4=Y_5=1$. Using the equation \ref{eq:absolute} we calculate the absolute coordinates:
 \begin{align*}
 D_x &= x_1 + x_2 - x_5\\
     &= \cos(0) + \cos(3\delta) - \cos(4\delta)\\
     &= 1 + \cos(120^\circ) - \cos(160^\circ)\\
+    &\approx 1.439\\
 D_y &= y_1 + y_2 + y_2\nonumber\\
     &= \sin(0) + \sin(3\delta) + \sin(4\delta)\\
-    &= \sin(120^\circ) + \sin(160^\circ)
+    &= \sin(120^\circ) + \sin(160^\circ)\\
+    &\approx 1.208
 \end{align*}
 
 Using equation \ref{eq:angle} we calculate the angles multiples $u$ at points $B$ and $C$. From $C=[v_1,\overline{v_6}]$ we have that $m_B=1,n_B=6$ and we calculate $u$ at point $B$:
@@ -219,7 +225,7 @@ R_9 &= \left\{ R_9\left(\frac{1}2\right), R_9(1), R_9\left(\frac{3}2\right), R_9
 \\\\
 Table \ref{tbl:rhombi} show the rhombi for odd symmetries up to $9$. Every rhombus is labeled with a consecutive lowercase letter $\mathbi{a}$, $\mathbi{b}$, $\mathbi{c}$,... The first rhombi $\mathbi{a}$ is found first in symmetry $s=3$ and then again in symmetry $s=9$ so we prevent renaming congruent rhombi.
 
-The rhombi angles $\theta_1 = u_1\theta$ and $\theta_2 = u_2\theta$ are expressed in function of the angles $\{\alpha,\beta,\gamma,\delta\}$ of symmetries $s=\{3,5,7,9\}$ where $\theta_1 < \theta_2$ and $\theta_1 + \theta_2 = \pi$. We cannot use the rhombi isolated in our tessellations since not both $u_1$ and $u_2$ are integers. But we'll add and substract rhombi together to build hexagons, octagons and beyond where all polygon's angles $u_n$ are integers.
+The rhombi angles $\theta_1 = u_1\theta$ and $\theta_2 = u_2\theta$ are expressed in function of the angles $\{\alpha,\beta,\gamma,\delta\}$ of symmetries $s=\{3,5,7,9\}$ where $\theta_1 < \theta_2$ and $\theta_1 + \theta_2 = \pi$.
 
 \begin{table}[h]
 \begin{center}
@@ -246,11 +252,19 @@ $R_9(2)$ & $\frac{5}2$ & $\mathbi{i}$ & $4\delta/2$ & $5\delta/2$ & $\sin(2\delt
 \end{center}
 \end{table}
 
+\subsection{Rhombi as cycled polylines}
+
+We cannot use the rhombi alone in our symmetry tessellations since both $u_1$ and $u_2$ are not integers at the same time. But we can attach rhombi by their sides forming hexagons, octagons, decagons and more polygons with $n$ sides where $n=4+2i, i=1,2,3...$ always the polygons $n$ angles result all integers.
+\\\\
+By attaching we mean adding and substracting rhombi preventing the intersection of any edges. This method permits to calculate the n-gons areas as the additions and substraction of the known rhombi areas. Knowing any polygons area in function of the at most $(s-1)/2$ different rhombi of symmetry $s$ is very helpful as a necessary, but not suffient condition for dissections.
+
+
 \section{Stars}
 
-For every odd symmetry $s$ we have stars that are equilateral 2$s$-gons with at most two different angles $u_1$ and $u_2$ at the vertices. We find exactly $n = \dfrac{s-1}2$ different stars with angles $u_1 \leq u_2$ as integers.
+For every odd symmetry $s$ we have \textbf{stars} that are equilateral 2$s$-gons with at most two different angles $u_1$ and $u_2$ at the vertices. We find exactly $n = \dfrac{s-1}2$ different stars with angles $u_1 \leq u_2$ as integers.
 
-Table \ref{tbl:stars} show the stars for odd symmetries up to $9$. Every star with $u_1$ as integer are labeled with a consecutive calligraphy letter $\mathcal{A}, \mathcal{B}, \mathcal{C}...$. We indentify any stars as $S_s(u_1)$ for the symmetry $s$. We calculate the other angle as $u_2 = s - u_1 - 1$. The stars are easily build with rhombi so the table show the stars area in function of them.
+Table \ref{tbl:stars} show the stars for odd symmetries up to $9$. Every star with $u_1$ as integer are labeled with a consecutive calligraphy letter $\mathcal{A}, \mathcal{B}, \mathcal{C}...$.
+Any star is identified as $S_s(u_1)$ using only two numbers the the symmetry $s$ and the smallest angle $u_1$. The another angle is calculated as $u_2 = s - u_1 - 1$. The stars are easily build with copies of rhombi so the table show the stars area in function of them.
 
 \begin{table}[H]
 \begin{center}
