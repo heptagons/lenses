@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \title{Symmetry 9}
 \author{https://github.com/heptagons/lenses}
-\date{2024/1/23}
+\date{2024/1/25}
 
 \usepackage{graphicx}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
@@ -16,36 +16,36 @@
 
 \maketitle
 \begin{abstract}
-We build equilateral polygons that can tesselate the plane using the symmetry $9$. We analyze lower odd symmetries $3,5,7$ also to find patterns. We analize vectors which describe symmetry vertices. Then we define polygons as rhombus, hexagons, octagons and stars build with the vectors.
+The define odd symmetry $s=\{ 3,5,7,9,... \}$ as the set of pairs of lines of length $1$ connected at their vertices and forming angles equal to $2\pi u/s, u = 1,2,...,s-1$. We study here symmetry $s=9$ and found the lines can form hexagons, octagons and grater equilateral polygons.
 \end{abstract}
 
 \section{Symmetries}
 
-We are interested in odd symmetries starting with $s=3$. Table \ref{tbl:symm} show the symmetries up to $s=9$. The value of the angle of the symmetry $s$ is $\theta = \dfrac{2\pi}s$. 
+We are interested in odd symmetries starting with $s=3$. Table \ref{tbl:symm} show the symmetries up to $s=9$. The minimum possible angle of the symmetry $s$ is $\theta = \dfrac{2\pi}s$. 
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c c|}
 \hline
-$s$ & Angle & $\theta$ \\ \hline\
+$s$ & Angle $\theta$ & Minimal value \\ \hline\
 $3$ & $\alpha$ & $2\pi/3$ \\ \hline
 $5$ & $\beta$  & $2\pi/5$ \\ \hline
 $7$ & $\gamma$ & $2\pi/7$ \\ \hline
 $9$ & $\delta$ & $2\pi/9$ \\ \hline
 \end{tabular}
-\caption{Symmetries $s=\{3,5,7,9\}$.} 
+\caption{Angles of symmetries $s=\{3,5,7,9\}$.} 
 \label{tbl:symm}
 \end{center}
 \end{table}
 
-For every symmetry $s$ we identify $t = \dfrac{s+1}2$ independent abscissas $x_i$ and $t$ independent ordinates $y_i$:
+Let $t = \dfrac{s+1}2$. We define $t$ independent abscissas and ordinates $x_i, y_i$ as follows:
 \begin{align}
 \left[ \begin{array}{c} x_i \\ y_i \end{array} \right] &= 
 \left[ \begin{array}{c} \cos((i-1)\theta) \\ \sin((i-1)\theta) \end{array} \right]
  \quad i = 1,2,...,t \label{eq:pairs}
 \end{align}
 
-We define a relative origin point $p_0$. There are $s$ different points $p_1, p_2, ... p_s$  equidistant to point $p_0$ located at coordinates $\langle x_i,y_i \rangle$ as follows:
+Let define a point $p_0$ located at coordinates $(0,0)$. Then there are exactly $s$ different points $p_1, p_2, ... p_s$  equidistant to point $p_0$ located at coordinates $\langle x_i,y_i \rangle$ as follows:
 \begin{align}
 p_i &\equiv \left\{ \begin{array}{ccl}
  \langle x_j,y_j\rangle & \mbox{for} & i \leq t  \quad j = i\\
@@ -53,7 +53,7 @@ p_i &\equiv \left\{ \begin{array}{ccl}
  \end{array}\right. \label{eq:coords}
 \end{align}
 
-The points are transformed into vectors which hold only the $(x,y)$ pair of indices:
+We transform each point $p_i$ into a vector $v_i$ which holds only the $(x,y)$ pair of indices and the signs:
 \begin{align}
 v_i &\equiv \left\{ \begin{array}{ccl}
  ( j, j ) & \mbox{for} & i \leq t \quad j = i\\
@@ -66,21 +66,19 @@ Any vector $v_i \equiv (k_1,k_2)$ can be rotated by $180^\circ$ around $p_0$. Th
 \overline{v_i} &\equiv (-k_1, -k_2) \label{eq:vector180}
 \end{align}
 
-We define an absolute origin point $o$ located at $(0,0)$. Starting at $o$ we can form polylines adding vectors alternating the type $v_i$ and the type $\overline{v_i}$ in order the points angles are always multiples of $\theta$. The polyline with vectors $\overrightarrow{P_1P_2}=v_a$, $\overrightarrow{P_2P_3}=\overline{v_b}$, $\overrightarrow{P_3P_4}=v_c$, ... is denoted as:
+Lets build lines and connect them to form a \textbf{polyline}. First we start at the vertice $o$ located at coordinates $(0,0)$ and add vectors alternating the type $v_i$ and the type $\overline{v_i}$ in order the angles at the vertices are multiples of $\theta$. For example, the polyline with vectors $\overrightarrow{P_1P_2}=v_a$, $\overrightarrow{P_2P_3}=\overline{v_b}$, $\overrightarrow{P_3P_4}=v_c$, ... is denoted as:
 \begin{align}
 \overline{P_1P_2P_3P_4...} &= \{ [], [v_a], [v_a,\overline{v_b}],[v_a,\overline{v_b},v_c],... \} 
- \quad 1 \leq a,b,c \leq t
+ & 1 \leq a,b,c \leq t \\
+ &= P_s(0,a,b,c,...) & \mbox{simplifyed form}
 \end{align}
-where the point $P_1$ is at origin and the rest of points are non-empty arrays of vectors. A simpler notation for the last polyline for symmetry $s$ is:
-\begin{align}
-\overline{P_1P_2P_3P_4...} &= P_s(0,a,b,c,...)
-\end{align}
+
 For two consecutive points $P_k = [...,v_m]$ and $P_{k+1} = [...,v_m,\overline{v_n}]$ for $k>0$ we have that the angle at point $P_k$ is $u\theta$, where $u$ is:
 \begin{align}
 u &\equiv s + m - n \pmod{s} \quad  \quad 1 \leq m,n \leq t \label{eq:angle}
 \end{align}
 
-Every point $\textbf{P}$ has \texttt{accumulators} composed of two vectors \textbf{X} and \textbf{Y} holding $t$ integers each:
+Every point can be located independently by pre-calculating \textbf{accumulators} $\textbf{P}^S$ wich are integer matrices of size $t\times 2$:
 \begin{align}
 \textbf{X} &= \left[\begin{array}{ccccc}X_1&X_2&X_3&...&X_t
  \end{array}\right]  \quad X_i \in \mathbb{Z}\\
@@ -92,7 +90,7 @@ Every point $\textbf{P}$ has \texttt{accumulators} composed of two vectors \text
   \\ Y_1&Y_2&Y_3&...&Y_t \end{array}\right] \label{eq:accums}
 \end{align}
 
-Accumulators are copied from previous points to the new ones and incremented in $+1$ or decremented in $-1$ depending in the indices of the vector $v = (k_x,k_y)$ which created the new point:
+Within the polyline accumulators are copied from previous points and incremented by $+1$ or decremented by $-1$ depending in the indices of the vector $v = (k_x,k_y)$:
 \begin{align}
 X_i &= \left\{ \begin{array}{ccl}
  X_i + 1 & \mbox{for} & i = k_x \\
@@ -104,7 +102,7 @@ Y_i &= \left\{ \begin{array}{ccl}
  \end{array}\right.
 \end{align}
 
-The absolute position coordinates of point $P$ are calculated adding the products of the accumulators $\textbf{P}^A$ of equation \ref{eq:accums} and the coordinates of points $p_i$ of equation \ref{eq:coords}:
+The coordinates of point $P$ in $\mathbb{R}^2$ is calculated adding the products of the accumulators $\textbf{P}^A$ of equation \ref{eq:accums} and the coordinates of points $p_i$ of equation \ref{eq:coords}:
 \begin{align}
 \langle P_x,P_y\rangle &= 
  \biggl< \sum_{i=1}^{t}X_ix_i, \sum_{i=1}^{t}Y_iy_i \biggr> \label{eq:absolute}
