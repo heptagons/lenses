@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \title{Symmetry 9}
 \author{https://github.com/heptagons/lenses}
-\date{2024/1/25}
+\date{2024/1/26}
 
 \usepackage{graphicx}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
@@ -16,7 +16,7 @@
 
 \maketitle
 \begin{abstract}
-The define odd symmetry $s=\{ 3,5,7,9,... \}$ as the set of pairs of lines of length $1$ connected at their vertices and forming angles equal to $2\pi u/s, u = 1,2,...,s-1$. We study here symmetry $s=9$ and found the lines can form hexagons, octagons and grater equilateral polygons.
+We define the odd symmetry $s=\{ 3,5,7,9,... \}$ as the \textbf{set of pairs of lines} of length $1$ all connected at their vertices and forming always angles equal to $2\pi u/s, u = 1,2,...,s-1$. The lines form cyclic polylines as hexagons, octagons and grater equilateral polygons that can tesselate the Euclidean plane.
 \end{abstract}
 
 \section{Symmetries}
@@ -53,7 +53,7 @@ p_i &\equiv \left\{ \begin{array}{ccl}
  \end{array}\right. \label{eq:coords}
 \end{align}
 
-We transform each point $p_i$ into a vector $v_i$ which holds only the $(x,y)$ pair of indices and the signs:
+We transform each point $p_i$ into a vector $v_i$ which holds only the pairs $(x,y)$ indices and the signs:
 \begin{align}
 v_i &\equiv \left\{ \begin{array}{ccl}
  ( j, j ) & \mbox{for} & i \leq t \quad j = i\\
@@ -61,12 +61,12 @@ v_i &\equiv \left\{ \begin{array}{ccl}
  \end{array}\right. \label{eq:vectors}
 \end{align}
 
-Any vector $v_i \equiv (k_1,k_2)$ can be rotated by $180^\circ$ around $p_0$. The vector after the rotation is denoted as $\overline{v_i}$ and the original indices $k_1,k_2$ signs are changed:
+Any vector $v_i \equiv (k_1,k_2)$ can be rotated by $180^\circ$ around $p_0$. The vector after the rotation is denoted as $\overline{v_i}$ and the original vector indices $k_1,k_2$ signs are changed:
 \begin{align}
 \overline{v_i} &\equiv (-k_1, -k_2) \label{eq:vector180}
 \end{align}
 
-Lets build lines and connect them to form a \textbf{polyline}. First we start at the vertice $o$ located at coordinates $(0,0)$ and add vectors alternating the type $v_i$ and the type $\overline{v_i}$ in order the angles at the vertices are multiples of $\theta$. For example, the polyline with vectors $\overrightarrow{P_1P_2}=v_a$, $\overrightarrow{P_2P_3}=\overline{v_b}$, $\overrightarrow{P_3P_4}=v_c$, ... is denoted as:
+Consecutive lines connected at their vertices to form a \textbf{polyline}. First we start at the vertice $o$ located at coordinates $(0,0)$ and then add vectors alternating the type $v_i$ and the type $\overline{v_i}$ in order the angles at the vertices are multiples of $\theta$. For example, the polyline with vectors $\overrightarrow{P_1P_2}=v_a$, $\overrightarrow{P_2P_3}=\overline{v_b}$, $\overrightarrow{P_3P_4}=v_c$, ... is denoted as:
 \begin{align}
 \overline{P_1P_2P_3P_4...} &= \{ [], [v_a], [v_a,\overline{v_b}],[v_a,\overline{v_b},v_c],... \} 
  & 1 \leq a,b,c \leq t \\
@@ -78,7 +78,7 @@ For two consecutive points $P_k = [...,v_m]$ and $P_{k+1} = [...,v_m,\overline{v
 u &\equiv s + m - n \pmod{s} \quad  \quad 1 \leq m,n \leq t \label{eq:angle}
 \end{align}
 
-Every point can be located independently by pre-calculating \textbf{accumulators} $\textbf{P}^S$ wich are integer matrices of size $t\times 2$:
+Every point can be located independently by pre-calculating \textbf{accumulators} $\textbf{P}^A$ wich are integer matrices of size $t\times 2$:
 \begin{align}
 \textbf{X} &= \left[\begin{array}{ccccc}X_1&X_2&X_3&...&X_t
  \end{array}\right]  \quad X_i \in \mathbb{Z}\\
@@ -90,7 +90,7 @@ Every point can be located independently by pre-calculating \textbf{accumulators
   \\ Y_1&Y_2&Y_3&...&Y_t \end{array}\right] \label{eq:accums}
 \end{align}
 
-Within the polyline accumulators are copied from previous points and incremented by $+1$ or decremented by $-1$ depending in the indices of the vector $v = (k_x,k_y)$:
+By walking through the polyline the accumulators are copied from previous points and incremented by $+1$ or decremented by $-1$ depending in the indices of the vector $v = (k_x,k_y)$:
 \begin{align}
 X_i &= \left\{ \begin{array}{ccl}
  X_i + 1 & \mbox{for} & i = k_x \\
@@ -214,11 +214,13 @@ u_C &= 9 + 6 - 4 \pmod{9} = 2
 
 \section{Rhombi}
 
-Rhombi are equilateral tetragons. For every odd symmetry $s$ we have $n = \dfrac{s-1}2$ different rhombi. The rhombi angles $u_1 < u_2$ are calculated as follows:
+Rhombi are equilateral tetragons. For every odd symmetry $s$ we can build exactly $n = \dfrac{s-1}2$ different rhombi. The rhombi angles $u_1 < u_2$ are calculated as follows:
 \begin{align}
-(u_1, u_2) &= \left(\frac{i}{2},  n + \frac{i-1}{2}\right) \quad i = 1,...,n
+\left[ \begin{array}{c} u_1 \\ u_2 \end{array} \right]
+ &= \left[ \begin{array}{c} \frac{i}2 \\ n + \frac{i-1}2 \end{array} \right]
+ \quad i = 1,...,n
 \end{align}
-We identify any rhombus as $R_s(u_1)$ so for symmetry $s=9$ we have the four rhombi:
+Any rhombus can be identified with only two numbers, the symmetry $s$ and the angle $u_1$ with the notation $R_s(u_1)$ so for symmetry $s=9$ we have these four rhombi:
 \begin{align}
 R_9 &= \left\{ R_9\left(\frac{1}2\right), R_9(1), R_9\left(\frac{3}2\right), R_9(2) \right\}
 \end{align}
@@ -324,27 +326,29 @@ Figure \ref{tbl:hexagons-angles} show the hexagons defined as $H_s(u_1,u_2)$ for
 \begin{center}
 \begin{tabular}{| c | c | c | l | }
 \hline
-$H_s(u_1,u_2)$ & Label & $(u_1, u_2, u_3)$ & Polygon \\ \hline\
-$H_3(1,1)$ & \mathbi{A} & (\textbf{1, 1, 1}) & Regular hexagon \\[0.5ex]
+$H_s(u_1,u_2)$ & Label & $(u_1,u_2,u_3,u_4,u_5,u_6)$ & Polygon \\ \hline\
+$H_3(1)$   & \mathbi{A} & (\textbf{1,1,1,1,1,1}) & Regular hexagon \\[0.5ex]
 \hline
-$H_5(1,1)$ & \mathbi{B} & (\textbf{1, 1, 3}) & Sormeh Dan Girih tile\\[0.5ex]
-$H_5(1,2)$ & \mathbi{C} & (\textbf{1, 2, 2}) & Shesh Band Girih tite\\[0.5ex]
+$H_5(1,1,3)$ & \mathbi{B} & (\textbf{1,1,3,1,1,3}) & Sormeh Dan Girih tile\\[0.5ex]
+$H_5(1,2,2)$ & \mathbi{C} & (\textbf{1,2,2,1,2,2}) & Shesh Band Girih tite\\[0.5ex]
 \hline
-$H_7(1,1)$ & -          & (\textbf{1, 1, 5}) & self-intersecting \\[0.5ex]
-$H_7(1,2)$ & \mathbi{D} & (\textbf{1, 2, 4}) & \\[0.5ex]
-$H_7(1,3)$ & \mathbi{E} & (\textbf{1, 3, 3}) & \\[0.5ex]
-$H_7(2,2)$ & \mathbi{F} & (\textbf{2, 2, 3}) & \\[0.5ex]
+$H_7(1,1,5)$ & -          & (\textbf{1,1,5,1,1,5}) & self-intersecting \\[0.5ex]
+$H_7(1,2,4)$ & \mathbi{D} & (\textbf{1,2,4,1,2,4}) & \\[0.5ex]
+$H_7(1,3,3)$ & \mathbi{E} & (\textbf{1,3,3,1,3,3}) & \\[0.5ex]
+$H_7(2,2,3)$ & \mathbi{F} & (\textbf{2,2,3,2,2,3}) & \\[0.5ex]
 \hline
-$H_9(1,1)$ & -          & (\textbf{1, 1, 7}) & self-intersecting \\[0.5ex]
-$H_9(1,2)$ & \mathbi{G} & (\textbf{1, 2, 6}) & \\[0.5ex]
-$H_9(1,3)$ & \mathbi{H} & (\textbf{1, 3, 5}) & \\[0.5ex]
-$H_9(1,4)$ & \mathbi{I} & (\textbf{1, 4, 4}) & \\[0.5ex]
-$H_9(2,2)$ & \mathbi{J} & (\textbf{2, 2, 5}) & \\[0.5ex]
-$H_9(2,3)$ & \mathbi{K} & (\textbf{2, 3, 4}) & \\[0.5ex]
-$H_9(3,3)$ & \mathbi{A} & (\textbf{3, 3, 3}) & equivalent to $H_3(1,1)$\\[1.1ex]
+$H_9(3)$     & \mathbi{A} & (\textbf{3,3,3,3,3,3}) & congruent with $H_3(1)$\\[0.5ex]
+$H_9(1,5)$   & $\mathbi{A}_1$ & (\textbf{1,5,1,5,1,5}) & \\[0.5ex]
+$H_9(2,4)$   & $\mathbi{A}_2$ & (\textbf{2,4,2,4,2,4}) & \\[0.5ex]
+$H_9(1,1,7)$ & -          & (\textbf{1,1,7,1,1,7}) & self-intersecting \\[0.5ex]
+$H_9(1,2,6)$ & \mathbi{G} & (\textbf{1,2,6,1,2,6}) & \\[0.5ex]
+$H_9(1,3,5)$ & \mathbi{H} & (\textbf{1,3,5,1,3,5}) & \\[0.5ex]
+$H_9(1,4,4)$ & \mathbi{I} & (\textbf{1,4,4,1,4,4}) & \\[0.5ex]
+$H_9(2,2,5)$ & \mathbi{J} & (\textbf{2,2,5,2,2,5}) & \\[0.5ex]
+$H_9(2,3,4)$ & \mathbi{K} & (\textbf{2,3,4,2,3,4}) & \\[0.5ex]
 \hline
 \end{tabular}
-\caption{Hexagons $H_s(u_1,u_2)$ for symmetries $s = \{3,5,7,9\}$.} 
+\caption{Hexagons $H_s(u_1,u_2,u_3)$ for symmetries $s = \{3,5,7,9\}$.} 
 \label{tbl:hexagons-angles}
 \end{center}
 \end{table}
