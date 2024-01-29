@@ -2,6 +2,7 @@ package symm
 
 import (
 	"testing"
+	"reflect"
 )
 
 func TestSymm(t *testing.T) {
@@ -32,7 +33,16 @@ func TestPoly(t *testing.T) {
 		t.Fatalf("Accepted out of range vector: %v", err)
 	} else if p, err := pp.New(1,6,4); err != nil {
 		t.Fatalf("vectors 9[1,6,4] error:%v", err)
+	} else if !reflect.DeepEqual([]int{1,6,4}, p.vectors){
+		t.Fatalf("vectors expected [1,6,4] got %v", p.vectors)
+	} else if angles := p.Angles(); !reflect.DeepEqual([]int{4,2}, angles) {
+		t.Fatalf("angles expected [4,2] got %v", angles)
 	} else {
-		t.Logf("9[1,6,4] -> %v", p.vectors)
+		accums := p.Accums()
+		for _, a := range accums {
+			t.Logf("accum: %v", a)
+		}
+		x, y := s.XY(accums[2])
+		t.Logf("Third point x=%f y=%f", x, y)
 	}
 }
