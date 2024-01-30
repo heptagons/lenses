@@ -25,12 +25,48 @@ func (pp *Polylines) New(vectors ...int) (*Polyline, error) {
 	return NewPolyline(pp, vectors), nil
 }
 
+func (pp *Polylines) NewWithAngles(vector int, angles []int) (*Polyline, error) {
+	s := pp.s.s
+	if vector < 1 {
+		return nil, fmt.Errorf("Invalid vector %v", vector)
+	} else if vector > s {
+		return nil, fmt.Errorf("Invalid vector %v", vector)
+	}
+	for pos, angle := range angles {
+		if angle < 1 || angle > s {
+			return nil, fmt.Errorf("Invalid angle %v at position %v", angle, pos)
+		}
+	}
+	return NewPolylineWithAngles(pp, vector, angles), nil
+}
+
+
+
+
 type Polyline struct {
 	pp      *Polylines
 	vectors []int
 }
 
 func NewPolyline(pp *Polylines, vectors []int) *Polyline {
+	return &Polyline{
+		pp:      pp,
+		vectors: vectors,
+	}
+}
+
+func NewPolylineWithAngles(pp *Polylines, vector int, angles []int) *Polyline {
+	s := pp.s.s
+	n := len(angles) + 1
+	vectors := make([]int, n)
+	vectors[0] = vector
+	for i := 1; i < n; i++ {
+		m := vectors[i-1]
+		a := angles[i-1]
+		n := (s + m - a) % s
+		fmt.Println("n", n)
+		vectors[i] = n
+	}
 	return &Polyline{
 		pp:      pp,
 		vectors: vectors,
@@ -64,16 +100,15 @@ func (p *Polyline) Accums() []*Accum {
 	for i := 0; i < n; i++ {
 		vindex := p.vectors[i] 
 		if i % 2 == 0 {
-			// v normal
+			// even elements are taken as normal vector (v)
 			indices = p.pp.s.v[vindex-1]
 		} else {
-			// v overline
+			// odd elements are taken as vector rotated 180° (w)
 			indices = p.pp.s.w[vindex-1]
 		}
-		x := indices[0]
-		y := indices[1]
-		fmt.Printf("vindex=%d indices=%v\n", vindex, indices)
-		if x < 0 {
+		//fmt.Printf("vindex=%d indices=%v\n", vindex, indices)
+		// X array
+		if x := indices[0]; x < 0 {
 			pos = -x - 1
 			accum = -1
 		} else {
@@ -83,8 +118,8 @@ func (p *Polyline) Accums() []*Accum {
 		if pos < t {
 			base.x[pos] += accum
 		}
-		// y row
-		if y < 0 {
+		// Y array		
+		if y := indices[1]; y < 0 {
 			pos = -y - 1
 			accum = -1
 		} else {

@@ -14,7 +14,7 @@ type Symm struct {
 	w [][]int   // vector inverted 
 }
 
-func (s *Symm) XY(accum *Accum) (float64, float64) {
+func (s *Symm) XY(accum *Accum) []float64 {
 	ax := float64(0)
 	ay := float64(0)
 	for i := 0; i < s.t; i++ {
@@ -25,7 +25,7 @@ func (s *Symm) XY(accum *Accum) (float64, float64) {
 			ay += float64(y) * s.y[i]
 		}
 	}
-	return ax, ay
+	return []float64{ ax, ay }
 }
 
 func NewSymm(symm int) (*Symm, error) {
