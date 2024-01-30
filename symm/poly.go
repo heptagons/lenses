@@ -64,7 +64,10 @@ func NewPolylineWithAngles(pp *Polylines, vector int, angles []int) *Polyline {
 		m := vectors[i-1]
 		a := angles[i-1]
 		n := (s + m - a) % s
-		fmt.Println("n", n)
+		if n == 0 {
+			n = s
+		}
+		//fmt.Println("n", n)
 		vectors[i] = n
 	}
 	return &Polyline{

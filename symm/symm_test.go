@@ -73,10 +73,53 @@ func TestPoly(t *testing.T) {
 		t.Logf("3) accum:%v", accum)
 	}
 
-	p, _ = pp.NewWithAngles(1, []int{ 4,4,4,4,4,4,4,4,4,4,4 })
-	t.Logf("4) vectors:%v", p.vectors)
-	t.Logf("4) angles:%v", p.Angles()) 
-	for _, accum := range p.Accums() {
-		t.Logf("4) accum:%v", accum)
+}
+
+func TestPolyStars(t *testing.T) {
+
+	s7, _ := NewSymm(7)
+	p7 := NewPolylines(s7)
+	for s, star := range [][]int { // arrays of size 14-1=13
+		[]int{ 5,1,5,1,5,1,5,1,5,1,5,1,5 }, // S_7(1) = "D"
+		[]int{ 4,2,4,2,4,2,4,2,4,2,4,2,4 }, // S_7(2) = "E"
+		[]int{ 3,3,3,3,3,3,3,3,3,3,3,3,3 }, // S_7(3) = "F" = regular 14-gon 
+	} {
+		testPolyStars(t, p7, s, star)
+	}
+	s9, _ := NewSymm(9)
+	p9 := NewPolylines(s9)
+	for s, star := range [][]int{ // arrays size 18-1=17
+		[]int{ 7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7 }, // S_9(1) = "G"
+		[]int{ 6,2,6,2,6,2,6,2,6,2,6,2,6,2,6,2,6 }, // S_9(2) = "H"
+		[]int{ 5,3,5,3,5,3,5,3,5,3,5,3,5,3,5,3,5 }, // S_9(3) = "I"
+		[]int{ 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4 }, // S_9(4) = "J" = regular 18-gon 
+	} {
+		testPolyStars(t, p9, s, star)
+	}
+}
+
+func testPolyStars(t *testing.T, pp *Polylines, s int, star []int) {
+	if p, err := pp.NewWithAngles(1, star); err != nil {
+		t.Fatalf("star %v error:%v", star, err)
+	} else if angles := p.Angles(); !reflect.DeepEqual(star, angles) {
+		t.Fatalf("star expected %v got angles %v", star, angles)
+	} else {
+		t.Logf("star %d) vectors:%v", s, p.vectors)
+		t.Logf(" angles:%v", p.Angles()) 
+		accums := p.Accums()
+		for _, accum := range accums {
+			t.Logf(" accum:%v", accum)
+		}
+		last := accums[len(accums)-1]
+		for pos, x := range last.x {
+			if x != 0 {
+				t.Fatalf("x[%d] not zero: %d", pos, x)
+			}
+		}
+		for pos, y := range last.y {
+			if y != 0 {
+				t.Fatalf("y[%d] not zero: %d", pos, y)
+			}
+		}
 	}
 }
