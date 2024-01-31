@@ -65,8 +65,9 @@ func NewPolylineWithAngles(pp *Polylines, vector int, angles []int) *Polyline {
 		a := angles[i-1]
 		n := (s + m - a) % s
 		if n == 0 {
-			n = s
+			n = s // TODO document
 		}
+
 		//fmt.Println("n", n)
 		vectors[i] = n
 	}
@@ -163,6 +164,18 @@ func (a *Accum) Clone() *Accum {
 	}
 }
 
+func (a *Accum) Zero() bool {
+	for i := 0; i < len(a.x); i++ {
+		if a.x[i] != 0 {
+			return false
+		}
+		if a.y[i] != 0 {
+			return false
+		}
+	}
+	return true
+}
+
 func (a *Accum) String() string {
-	return fmt.Sprintf("[x=%v y=%v", a.x, a.y)
+	return fmt.Sprintf("xy=%v%v", a.x, a.y)
 }
