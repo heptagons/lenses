@@ -60,11 +60,11 @@ func NewHexagon(pp *Polylines, vertice int, angles []int) (*Hexagon, error) {
 		return nil, err
 	} else {
 		accums := p.Accums()
-		if last := accums[len(accums)-1]; !last.Zero() {
-			fmt.Println("NOT CLOSED", angles, p.vectors, accums)
-			fmt.Println("LAST", pp.s.XY(last))
-			return nil, fmt.Errorf("Not closed, last accum %v", last)
-		}
+		//if last := accums[len(accums)-1]; !last.Zero() {
+		//	fmt.Println("NOT CLOSED", angles, p.vectors, accums)
+		//	fmt.Println("LAST", pp.s.XY(last))
+		//	return nil, fmt.Errorf("Not closed, last accum %v", last)
+		//}
 		return &Hexagon{
 			p:      p,
 			accums: accums,

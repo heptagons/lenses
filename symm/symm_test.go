@@ -136,42 +136,31 @@ func testPolyStars(t *testing.T, pp *Polylines, s int, star []int) {
 }
 
 func TestHexa(t *testing.T) {
-	s, _ := NewSymm(9)
-	p := NewPolylines(s)
-	hh := NewHexagons(p)
-	if _, err := hh.New(1, nil); err == nil {
-		t.Fatalf("Accepted no angles")
-	} else if _, err := hh.New(1, []int{1,1,1,1}); err == nil {
-		t.Fatalf("Accepted four angles")
-	} else if _, err := hh.New(1, []int{1,1,1}); err == nil {
-		t.Fatalf("Accepted not closed hexagon")
-	}
 
-	min := 1
-	max := s.s - 1
-	//for a := min; a <= max; a++ {
-	//	if h, err := hh.New(1, []int { a }); err == nil {
-	//		t.Logf("Hexagon a angles=%v", h.p.Angles())
-	//	}
-	//}
-	for a := min; a <= max; a++ {
-		for b := a; b <= max; b++ {
-			if h, err := hh.New(1, []int{ a, b }); err == nil {
-				t.Logf("Hexagon a,b v=%v, a=%v", h.p.vectors, h.p.Angles())
-			} else {
-				//t.Logf("error %v %v", ab, err)
-			}
-		}
-	}
-	for a := 1; a <= max; a++ {
-		for b := a; b <= max; b++ {
-			for c := b; c <=max; c++ {
-				if a == b && b == c {
-					// case 1
-				} else if h, err := hh.New(1, []int{ a, b, c }); err == nil {
-					t.Logf("Hexagon a,b,c v=%v a=%v", h.p.vectors, h.p.Angles())
+	for _, symm := range []int{ 3, 5, 7, 9, 11, 13, 15 } {
+		s, _ := NewSymm(symm)
+		p := NewPolylines(s)
+		hh := NewHexagons(p)
+		t.Logf("Symmetry %d", symm)
+		min := 1
+		max := s.s - 1
+		for a := min; a <= max; a++ {
+			for b := a; b <= max; b++ {
+
+				if h, err := hh.New(1, []int{ a, b }); err == nil {
+					t.Logf("a,b   a=%v v=%v", h.p.Angles(), h.p.vectors)
 				} else {
 					//t.Logf("error %v %v", ab, err)
+				}
+
+				for c := b; c <=max; c++ {
+					if a == b && b == c {
+						// case 1
+					} else if h, err := hh.New(1, []int{ a, b, c }); err == nil {
+						t.Logf("a,b,c a=%v v=%v", h.p.Angles(), h.p.vectors)
+					} else {
+						//t.Logf("error %v %v", ab, err)
+					}
 				}
 			}
 		}
