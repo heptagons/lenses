@@ -8,8 +8,8 @@ import (
 	"github.com/heptagons/lenses/symm/server"
 )
 
+// go run ./symm/server/cmd/.
 func main() {
-
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 	server.New(r)
