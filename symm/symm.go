@@ -22,6 +22,10 @@ func (s *Symm) XYs() ([]float64, []float64) {
 	return s.x, s.y
 }
 
+func (s *Symm) Vectors() ([][]int, [][]int) {
+	return s.v, s.w
+}
+
 func (s *Symm) XY(accum *Accum) []float64 {
 	ax := float64(0)
 	ay := float64(0)

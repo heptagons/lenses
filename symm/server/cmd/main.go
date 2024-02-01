@@ -1,7 +1,9 @@
 package main
 	
 import (
+	"fmt"
 	"net/http"
+	
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/middleware"
 
@@ -13,5 +15,7 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 	server.New(r)
-	http.ListenAndServe(":8080", r)
+	port := ":8080"
+	fmt.Printf("symm service running at %s\n", port)
+	http.ListenAndServe(port, r)
 }

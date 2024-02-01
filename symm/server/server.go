@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"github.com/go-chi/chi/v5"
 
-	"github.com/heptagons/lenses/symm"
 	"github.com/heptagons/lenses/symm/dom"
 )
 
@@ -17,6 +16,9 @@ func style(h *dom.Html) {
 * { font-family:Arial; font-size:14px; }
 .h1 { font-size:20px; color:#08f; }
 .err { font-size:10px: color:#f00; }
+table { border-collapse: collapse; }
+table,td,th { border:1px solid #888888; }
+td,th { padding:0px 5px; }
 `	)
 }
 
@@ -50,7 +52,7 @@ func SymmCtx(next http.Handler) http.Handler {
   	if s, err := strconv.Atoi(chi.URLParam(r, "symm")); err != nil {
 		http.Error(w, http.StatusText(404), 404)
     	w.Write([]byte("Invalid symm number"))
-    } else if s, err := symm.NewSymm(s); err == nil {
+    } else if s, err := newS(s); err == nil {
 	    ctx := context.WithValue(r.Context(), "symm", s)
     	next.ServeHTTP(w, r.WithContext(ctx))
     } else {
@@ -95,25 +97,12 @@ func getSymm(w http.ResponseWriter, r *http.Request) {
 		})
 		h.Elem(dom.Body, nil, func(h *dom.Html) {
 			ctx := r.Context()
-  			if s, ok := ctx.Value("symm").(*symm.Symm); ok {
+  			if s, ok := ctx.Value("symm").(*S); ok {
 				h.Div(h1, fmt.Sprintf("Symmetry %d", s.S()))
 				h.Div(nil, func(h *dom.Html) {
 					buttonLink(h, fmt.Sprintf("/symm/%d/hexagons", s.S()), "Hexagons")
 				})
-				xs, ys := s.XYs()
-				h.Elem(dom.Table, nil, func(h *dom.Html) {
-					h.Elem(dom.Tr, nil, func(h *dom.Html) {
-						for _, c := range []string { "X", "Y" } {
-							h.Elem(dom.Th, nil, c)
-						}
-					})
-					for c := 0; c < len(xs); c++ {
-						h.Elem(dom.Tr, nil, func(h *dom.Html) {
-							h.Elem(dom.Td, nil, fmt.Sprintf("%f", xs[c]))	
-							h.Elem(dom.Td, nil, fmt.Sprintf("%f", ys[c]))	
-						})
-					}
-				})
+				s.getSymm(h)
   			} else {
   				h.Div(err, "Symmetry value error")
   			}
@@ -131,7 +120,7 @@ func getHexas(w http.ResponseWriter, r *http.Request) {
 		})
 		h.Elem(dom.Body, nil, func(h *dom.Html) {
 			ctx := r.Context()
-  			if symm, ok := ctx.Value("symm").(*symm.Symm); ok {
+  			if symm, ok := ctx.Value("symm").(*S); ok {
 				h.Div(h1, fmt.Sprintf("Symmetry %d hexagons", symm.S()))
 			}
 		})
