@@ -166,3 +166,14 @@ func TestHexa(t *testing.T) {
 		}
 	}
 }
+
+func TestOcta(t *testing.T) {
+	symm := 7
+	s, _ := NewSymm(symm)
+	p := NewPolylines(s)
+	oo := NewOctagons(p)
+	t.Logf("Symmetry %d", symm)
+	for c, o := range oo.All(1) {
+		t.Logf("%d %s", c+1, o.String())
+	}
+}

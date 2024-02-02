@@ -37,6 +37,9 @@ func New(r *chi.Mux) {
 			r.Get("/", getSymm)
 			r.Get("/hexagons", getHexas)
 			r.Get("/hexagon/{id}", getHexa)
+			r.Get("/octagons", getOctas)
+			r.Get("/octagon/{id}", getOcta)
+
 			r.Get("/stars", getStars)
 		})
 	})
@@ -81,112 +84,205 @@ func getPage(body func(h *dom.Html)) *dom.Html {
 func getIndex(w http.ResponseWriter, r *http.Request) {
 	h := getPage(func(h *dom.Html) {
 		h.Div(h1, "Symmetries")
-		h.Elem(dom.Table, nil, func(h *dom.Html) {
-			h.Elem(dom.Tr, nil, func(h *dom.Html) {
-				h.Elem(dom.Th, nil, "Symm")
-			})
-			for _, s := range[]int { 3, 5, 7, 9, 11, 13, 15, 17, 19, 21 } {
-				h.Elem(dom.Tr, nil, func(h *dom.Html) {
-					h.Elem(dom.Td, nil, func(h *dom.Html) {
-						link := fmt.Sprintf("/symm/%d", s)
-						buttonLink(h, link, fmt.Sprintf("%d", s))
-					})
-				})
-			}
-		})
+		for _, s := range[]int { 3, 5, 7, 9, 11, 13, 15, 17, 19, 21 } {
+			link := fmt.Sprintf("/symm/%d", s)
+			buttonLink(h, link, fmt.Sprintf("%d", s))
+		}
 	})
 	h.Write(w)
 }
 
 func getSymm(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	s, ok := ctx.Value("symm").(*S)
+	if !ok {
+		w.Write([]byte("symm context error"))
+		return
+	}
 	h := getPage(func(h *dom.Html) {
-		ctx := r.Context()
-		if s, ok := ctx.Value("symm").(*S); ok {
-			h.Elem(dom.Td, nil, func(h *dom.Html) {
-				link := "/symm"
-				buttonLink(h, link, "< Symmetries")
-			})
-			h.Div(h1, fmt.Sprintf("Symmetry %d", s.S()))
-			s.getSymm(h)
-			h.Div(nil, func(h *dom.Html) {
-				link := fmt.Sprintf("/symm/%d/hexagons", s.S())
-				buttonLink(h, link, fmt.Sprintf("Hexagons H<sub>%d</sub>", s.S()))
-			})
-		} else {
-			h.Div(domErr, "Symmetry value error")
-		}
+		// back button to return to symmetries
+		h.Elem(dom.Td, nil, func(h *dom.Html) {
+			link := "/symm"
+			buttonLink(h, link, "<")
+		})
+		// title
+		h.Div(h1, fmt.Sprintf("Symmetry %d", s.S()))
+		// button to go hexagons
+		h.Div(nil, func(h *dom.Html) {
+			link := fmt.Sprintf("/symm/%d/hexagons", s.S())
+			buttonLink(h, link, fmt.Sprintf("Hexagons H<sub>%d</sub>", s.S()))
+		})
+		// button to go to cotagons
+		h.Div(nil, func(h *dom.Html) {
+			link := fmt.Sprintf("/symm/%d/octagons", s.S())
+			buttonLink(h, link, fmt.Sprintf("Octagons O<sub>%d</sub>", s.S()))
+		})
+		// symmetry details tables
+		s.getSymm(h)
 	})
 	h.Write(w)
 }
 
 func getHexas(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	s, ok := ctx.Value("symm").(*S)
+	if !ok {
+		w.Write([]byte("symm context error"))
+		return
+	}
 	h := getPage(func(h *dom.Html) {
-		ctx := r.Context()
-		if s, ok := ctx.Value("symm").(*S); ok {
-			h.Div(nil, func(h *dom.Html) {
-				link := fmt.Sprintf("/symm/%d", s.S())
-				buttonLink(h, link, fmt.Sprintf("< Symmetry %d", s.S()))
-			})
-			h.Div(h1, fmt.Sprintf("Hexagons H<sub>%d</sub>", s.S()))
-			// todo add buttons
-			s.getHexas(h, func(id string, h *dom.Html) {
-				link := fmt.Sprintf("/symm/%d/hexagon/%s", s.S(), id)
-				buttonLink(h, link, id)
-			})
-		} else {
-			h.Div(domErr, "Symmetry value error")
-		}
+		// back button to return to symmetry s
+		h.Div(nil, func(h *dom.Html) {
+			link := fmt.Sprintf("/symm/%d", s.S())
+			buttonLink(h, link, "<")
+		})
+		// title
+		h.Div(h1, fmt.Sprintf("Hexagons H<sub>%d</sub>", s.S()))
+		// hexagons table and links for going to particular hexagon
+		s.getHexas(h, func(id string, h *dom.Html) {
+			link := fmt.Sprintf("/symm/%d/hexagon/%s", s.S(), id)
+			buttonLink(h, link, id)
+		})
 	})
 	h.Write(w)
 }
 
 func getHexa(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	s, ok := ctx.Value("symm").(*S)
+	if !ok {
+		w.Write([]byte("symm context error"))
+		return
+	}
 	h := getPage(func(h *dom.Html) {
-		ctx := r.Context()
-		if s, ok := ctx.Value("symm").(*S); ok {
-			h.Div(nil, func(h *dom.Html) {
-				link := fmt.Sprintf("/symm/%d/hexagons", s.S())
-				buttonLink(h, link, fmt.Sprintf("< Hexagons H<sub>%d</sub>", s.S()))
-			})
-			sids := chi.URLParam(r, "id") // is the six angles simplified example 1,1,7
-			var ids []int
-			for _, sid := range strings.Split(sids, ",") {
-				if id, err := strconv.Atoi(sid); err != nil || id < 1 {
-					h.Div(domErr, fmt.Sprintf("Invalid angle %s", sid))
-					h.Write(w)
-					return
-				} else {
-					ids = append(ids, id)
-				}
-			}
-			h.Div(h1, fmt.Sprintf("Hexagon H<sub>%d</sub>(%s)", s.S(), sids))
-
-			// row with buttons to change the first vector
-			vector := 1
-			h.Div(nil, func(h *dom.Html) {
-				h.Elem(dom.Span, nil, "First vector: ")
-				v := r.URL.Query().Get("vector")
-				if v, err := strconv.Atoi(v); err == nil && v > 0 && v <= s.S() {
-					vector = v
-				}
-				for v := 1; v < s.S(); v++ {
-					if v == vector {
-						h.Elem(dom.Span, h1, fmt.Sprintf("%d", v))
-					} else {
-						link := fmt.Sprintf("/symm/%d/hexagon/%s?vector=%d", s.S(), sids, v)
-						buttonLink(h, link, fmt.Sprintf("%d",v))
-					}
-				}
-			})
-			if err := s.getHexa(h, vector, ids); err != nil {
-				h.Div(domErr, fmt.Sprintf("%v", err))
+		// back button to return to hexagons
+		h.Div(nil, func(h *dom.Html) {
+			link := fmt.Sprintf("/symm/%d/hexagons", s.S())
+			buttonLink(h, link, "<")
+		})
+		// read is the six angles simplified example 1,1,7
+		sids := chi.URLParam(r, "id")
+		var ids []int
+		for _, sid := range strings.Split(sids, ",") {
+			if id, err := strconv.Atoi(sid); err != nil || id < 1 {
+				h.Div(domErr, fmt.Sprintf("Invalid angle %s", sid))
 				h.Write(w)
 				return
+			} else {
+				ids = append(ids, id)
 			}
+		}
+		// title including ids
+		h.Div(h1, fmt.Sprintf("Hexagon H<sub>%d</sub>(%s)", s.S(), sids))
+
+		// row with buttons to change the first vector
+		vector := 1
+		h.Div(nil, func(h *dom.Html) {
+			h.Elem(dom.Span, nil, "First vector: ")
+			v := r.URL.Query().Get("vector")
+			if v, err := strconv.Atoi(v); err == nil && v > 0 && v <= s.S() {
+				vector = v
+			}
+			for v := 1; v < s.S(); v++ {
+				if v == vector {
+					h.Elem(dom.Span, h1, fmt.Sprintf("%d", v))
+				} else {
+					link := fmt.Sprintf("/symm/%d/hexagon/%s?vector=%d", s.S(), sids, v)
+					buttonLink(h, link, fmt.Sprintf("%d",v))
+				}
+			}
+		})
+		// particular hexagon controls (svg and tables)
+		if err := s.getHexa(h, vector, ids); err != nil {
+			h.Div(domErr, fmt.Sprintf("%v", err))
+			h.Write(w)
+			return
 		}
 	})
 	h.Write(w)
 }
+
+
+func getOctas(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	s, ok := ctx.Value("symm").(*S)
+	if !ok {
+		w.Write([]byte("symm context error"))
+		return
+	}
+	h := getPage(func(h *dom.Html) {
+		// back button to return to symmetry s
+		h.Div(nil, func(h *dom.Html) {
+			link := fmt.Sprintf("/symm/%d", s.S())
+			buttonLink(h, link, "<")
+		})
+		// title
+		h.Div(h1, fmt.Sprintf("Octagons O<sub>%d</sub>", s.S()))
+		// hexagons table and links for going to particular hexagon
+		s.getOctas(h, func(id string, h *dom.Html) {
+			link := fmt.Sprintf("/symm/%d/octagon/%s", s.S(), id)
+			buttonLink(h, link, id)
+		})
+	})
+	h.Write(w)
+}
+
+func getOcta(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	s, ok := ctx.Value("symm").(*S)
+	if !ok {
+		w.Write([]byte("symm context error"))
+		return
+	}
+	h := getPage(func(h *dom.Html) {
+		// back button
+		h.Div(nil, func(h *dom.Html) {
+			link := fmt.Sprintf("/symm/%d/octagons", s.S())
+			buttonLink(h, link, "<")
+		})
+		// read is the eight angles simplified example 1,1,7
+		sids := chi.URLParam(r, "id")
+		var ids []int
+		for _, sid := range strings.Split(sids, ",") {
+			if id, err := strconv.Atoi(sid); err != nil || id < 1 {
+				h.Div(domErr, fmt.Sprintf("Invalid angle %s", sid))
+				h.Write(w)
+				return
+			} else {
+				ids = append(ids, id)
+			}
+		}
+		// title including ids
+		h.Div(h1, fmt.Sprintf("Octagon O<sub>%d</sub>(%s)", s.S(), sids))
+
+		// row with buttons to change the first vector
+		vector := 1
+		h.Div(nil, func(h *dom.Html) {
+			h.Elem(dom.Span, nil, "First vector: ")
+			v := r.URL.Query().Get("vector")
+			if v, err := strconv.Atoi(v); err == nil && v > 0 && v <= s.S() {
+				vector = v
+			}
+			for v := 1; v < s.S(); v++ {
+				if v == vector {
+					h.Elem(dom.Span, h1, fmt.Sprintf("%d", v))
+				} else {
+					link := fmt.Sprintf("/symm/%d/octagon/%s?vector=%d", s.S(), sids, v)
+					buttonLink(h, link, fmt.Sprintf("%d",v))
+				}
+			}
+		})
+		// particular hexagon controls (svg and tables)
+		if err := s.getOcta(h, vector, ids); err != nil {
+			h.Div(domErr, fmt.Sprintf("%v", err))
+			h.Write(w)
+			return
+		}
+	})
+	h.Write(w)
+}
+
+
 
 func getStars(w http.ResponseWriter, r *http.Request) {
 
