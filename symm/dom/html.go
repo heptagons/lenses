@@ -44,6 +44,26 @@ func (h *Html) Button(attrs []Attr, inner interface{}) {
 	h.Elem(Button, attrs, inner)
 }
 
+func (h *Html) Svg(width, height int, viewBox []int, inner interface{}) {
+	h.Elem(Svg, []Attr{
+		&Asvg{
+			width:   width,
+			height:  height,
+			viewBox: viewBox,
+		},
+	}, inner)
+}
+
+func (h *Html) Polygon(points [][]float64, fill, stroke string) {
+	h.Elem(Polygon, []Attr{
+		&Apolygon{
+			points: points,
+			fill:   fill,
+			stroke: stroke,
+		},
+	}, nil)
+}
+
 func (h *Html) WriteF(f string, args ...interface{}) {
 	h.sb.WriteString(fmt.Sprintf(f, args...))
 }
@@ -80,4 +100,7 @@ func (h *Html) inner(inner interface{}) {
 		}
 	}
 }
+
+
+
 

@@ -103,25 +103,52 @@ func (s *S) getHexas(h *dom.Html, hexagon func(id string, h *dom.Html)) {
 func (s *S) getHexa(h *dom.Html, vector int, angles []int) error {
 	p := symm.NewPolylines(s.Symm)
 	hh := symm.NewHexagons(p)
-	if hexa, err := hh.New(vector, angles); err != nil {
+	hexa, err := hh.New(vector, angles)
+	if err != nil {
 		return err
-	} else {
-		h.Elem(dom.Table, nil, func(h *dom.Html) {
-			h.Elem(dom.Tr, nil, func(h *dom.Html) {
-				h.Elem(dom.Th, nil, "Angles")
-				h.Elem(dom.Td, nil, fmt.Sprintf("%v", hexa.Angles()))
-			})
-			h.Elem(dom.Tr, nil, func(h *dom.Html) {
-				h.Elem(dom.Th, nil, "Vectors")
-				h.Elem(dom.Td, nil, fmt.Sprintf("%v", hexa.Vectors()))
-			})
-			for c, accum := range hexa.Accums() {
-				h.Elem(dom.Tr, nil, func(h *dom.Html) {
-					h.Elem(dom.Th, nil, fmt.Sprintf("Accum %d", c+1))
-					h.Elem(dom.Td, nil, fmt.Sprintf("%v", accum))
-				})
-			}
-		})
-		return nil
 	}
+	accums := hexa.Accums()
+	var points [][]float64
+	max := float64(0)
+	for _, accum := range accums {
+		xy := s.Symm.XY(accum)
+		x, y := 20*xy[0], 20*xy[1]
+		fmt.Println("xy", x, y)
+		if x > 0 {
+			if max < x { max = x }
+		} else {
+			if max < -x { max = -x }
+		}
+		if y > 0 {
+			if max < y { max = y }
+		} else {
+			if max < -y { max = -y }
+		}
+		points = append(points, []float64{ x, y })
+	}
+	max *= 1.4
+	a, b := int(-max), int(2*max)
+	viewBox := []int{ a, a, b, b }
+	h.Svg(250, 250, viewBox, func(h *dom.Html) {
+		fill := "cyan"
+		stroke := "blue"
+		h.Polygon(points, fill, stroke)
+	})
+	h.Elem(dom.Table, nil, func(h *dom.Html) {
+		h.Elem(dom.Tr, nil, func(h *dom.Html) {
+			h.Elem(dom.Th, nil, "Angles")
+			h.Elem(dom.Td, nil, fmt.Sprintf("%v", hexa.Angles()))
+		})
+		h.Elem(dom.Tr, nil, func(h *dom.Html) {
+			h.Elem(dom.Th, nil, "Vectors")
+			h.Elem(dom.Td, nil, fmt.Sprintf("%v", hexa.Vectors()))
+		})
+		for c, accum := range accums {
+			h.Elem(dom.Tr, nil, func(h *dom.Html) {
+				h.Elem(dom.Th, nil, fmt.Sprintf("Accum %d", c+1))
+				h.Elem(dom.Td, nil, fmt.Sprintf("%v", accum))
+			})
+		}
+	})
+	return nil
 }
