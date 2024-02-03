@@ -83,6 +83,17 @@ func (s *S) getOctas(h *dom.Html, call func(id string, h *dom.Html)) {
 	})
 }
 
+func (s *S) getStars(h *dom.Html, call func(id string, h *dom.Html)) {
+	p := symm.NewPolylines(s.Symm)
+	ss := symm.NewStars(p)
+	h.Elem(dom.Table, nil, func(h *dom.Html) {
+		s.gonTableHeader(h, "Star")
+		for c, gon := range ss.All(1) {
+			s.gonTableRow(h, c, gon, call)
+		}
+	})
+}
+
 func (s *S) getHexa(h *dom.Html, vector int, angles []int) error {
 	p := symm.NewPolylines(s.Symm)
 	g := symm.NewHexagons(p)
@@ -107,13 +118,27 @@ func (s *S) getOcta(h *dom.Html, vector int, angles []int) error {
 	}
 }
 
+func (s *S) getStar(h *dom.Html, vector int, angles []int) error {
+	p := symm.NewPolylines(s.Symm)
+	g := symm.NewStars(p)
+	if gon, err := g.New(vector, angles); err != nil {
+		return err
+	} else {
+		s.gonSvg(h, gon)
+		s.gonTables(h, gon)
+		return nil
+	}
+}
+
+// ---
+
 func (s *S) gonTableHeader(h *dom.Html, gon string) {
 	h.Elem(dom.Tr, nil, func(h *dom.Html) {
 		h.Elem(dom.Td, nil, "&nbsp;")
 		h.Elem(dom.Th, nil, gon)
 		h.Elem(dom.Th, nil, "Group")
 		h.Elem(dom.Th, nil, "Angles")
-		h.Elem(dom.Th, nil, "Vectors")
+		//h.Elem(dom.Th, nil, "Vectors")
 	})
 }
 
@@ -130,10 +155,10 @@ func (s *S) gonTableRow(h *dom.Html, c int, gon symm.Gon, call func(id string, h
 				call(gon.Id(), h)
 			})
 		}
-		letter, number := symm.Group.Name(gon.Group())
-		h.Elem(dom.Td, nil, fmt.Sprintf("%s<sub>%d</sub>", letter, number))
+		g := gon.Group()
+		h.Elem(dom.Td, nil, fmt.Sprintf("%s<sub>%d</sub>", g.Letter, g.Number))
 		h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Angles()))
-		h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Vectors()))
+		//h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Vectors()))
 	})
 }
 

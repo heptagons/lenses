@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+
 type Octagons struct {
 	p *Polylines
 }
@@ -19,7 +20,7 @@ func (oo *Octagons) New(vector int, angles []int) (Gon, error) {
 	switch n {
 	case 5:
 		a, b, c, d, e := angles[0], angles[1], angles[2], angles[3], angles[4]
-		return NewOctagon(oo.p, vector, []int{ a,b,c,d,e,d,c }, n, M1)
+		return NewOctagon(oo.p, vector, []int{ a,b,c,d,e,d,c }, n, NewGroupM())
 	default:
 		return nil, fmt.Errorf("Invalid number of angles not [4]")
 	}	
@@ -65,7 +66,7 @@ type Octagon struct {
 	*Polygon
 }
 
-func NewOctagon(pp *Polylines, vertice int, angles []int, size int, group Group) (Gon, error) {
+func NewOctagon(pp *Polylines, vertice int, angles []int, size int, group *Group) (Gon, error) {
 	if p, err := NewPolygon(pp, vertice, angles, size, group); err != nil {
 		return nil, err
 	} else {
@@ -74,8 +75,6 @@ func NewOctagon(pp *Polylines, vertice int, angles []int, size int, group Group)
 		}, nil
 	}
 }
-
-
 
 func (o *Octagon) Prime() bool {
 	s := o.p.pp.s.s // symmetry

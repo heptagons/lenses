@@ -8,6 +8,12 @@ type Hexagons struct {
 	p *Polylines
 }
 
+var (
+	C2 = NewGroupD(2)
+	D3 = NewGroupD(3)
+	D6 = NewGroupD(6)
+)
+
 func NewHexagons(p *Polylines) *Hexagons {
 	return &Hexagons{
 		p: p,
@@ -80,7 +86,7 @@ type Hexagon struct {
 	*Polygon
 }
 
-func NewHexagon(pp *Polylines, vertice int, angles []int, size int, group Group) (Gon, error) {
+func NewHexagon(pp *Polylines, vertice int, angles []int, size int, group *Group) (Gon, error) {
 	if p, err := NewPolygon(pp, vertice, angles, size, group); err != nil {
 		return nil, err
 	} else {
