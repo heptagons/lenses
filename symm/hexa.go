@@ -2,8 +2,6 @@ package symm
 
 import (
 	"fmt"
-	"strconv"
-	"strings"
 )
 
 type Hexagons struct {
@@ -16,7 +14,7 @@ func NewHexagons(p *Polylines) *Hexagons {
 	}
 }
 
-func (h *Hexagons) New(vertice int, angles []int) (Gon, error) {
+func (h *Hexagons) New(vector int, angles []int) (Gon, error) {
 	s := h.p.s.s
 	n := len(angles)
 	switch n {
@@ -24,7 +22,7 @@ func (h *Hexagons) New(vertice int, angles []int) (Gon, error) {
 		a := angles[0]
 		if 6*a == 2*s {
 			// try hexagon with angles a,a,a,a,a,a. Rotational symmetry D_6
-			return NewHexagon(h.p, vertice, []int{ a,a,a,a,a }, 1)
+			return NewHexagon(h.p, vector, []int{ a,a,a,a,a }, 1, D6)
 		} else {
 			return nil, fmt.Errorf("6(%d) != 2(%d)", a, s)
 		}
@@ -33,10 +31,10 @@ func (h *Hexagons) New(vertice int, angles []int) (Gon, error) {
 		a, b := angles[0], angles[1]
 		if 3*(a+b) == 2*s {
 			if a == b {
-				return NewHexagon(h.p, vertice, []int{ a,a,a,a,a }, 1)
+				return NewHexagon(h.p, vector, []int{ a,a,a,a,a }, 1, D6)
 			} else {
 				// try hexagon with angles a,b,a,b,a,b. Rotational symmetry D_3
-				return NewHexagon(h.p, vertice, []int{ a,b,a,b,a }, 2)
+				return NewHexagon(h.p, vector, []int{ a,b,a,b,a }, 2, D3)
 			}
 		} else {
 			return nil, fmt.Errorf("3(%d+%d) != 2(%d)", a,b,s)
@@ -46,7 +44,7 @@ func (h *Hexagons) New(vertice int, angles []int) (Gon, error) {
 		a, b, c := angles[0], angles[1], angles[2]
 		if 2*(a+b+c) == 2*s {
 			// try hexagon with angles:a,b,c,a,b,c. Rotational symmetry C_2
-			return NewHexagon(h.p, vertice, []int{ a,b,c,a,b }, 3)
+			return NewHexagon(h.p, vector, []int{ a,b,c,a,b }, 3, C2)
 		} else {
 			return nil, fmt.Errorf("2(%d+%d+%d) != 2(%d)", a,b,c,s)
 		}
@@ -79,39 +77,17 @@ func (hh *Hexagons) All() []Gon {
 
 
 type Hexagon struct {
-	p  *Polyline
-	id string // simplification of angles list
+	*Polygon
 }
 
-func NewHexagon(pp *Polylines, vertice int, angles []int, size int) (Gon, error) {
-	if p, err := pp.NewWithAngles(vertice, angles); err != nil {
+func NewHexagon(pp *Polylines, vertice int, angles []int, size int, group Group) (Gon, error) {
+	if p, err := NewPolygon(pp, vertice, angles, size, group); err != nil {
 		return nil, err
 	} else {
-		var ids []string
-		for i := 0; i < size; i++ {
-			ids = append(ids, strconv.Itoa(angles[i]))
-		}
 		return &Hexagon{
-			p:  p,
-			id: strings.Join(ids, ","),
+			Polygon: p,
 		}, nil
 	}
-}
-
-func (h *Hexagon) Accums() []*Accum {
-	return h.p.Accums()
-}
-
-func (h *Hexagon) Id() string {
-	return h.id
-}
-
-func (h *Hexagon) Angles() []int {
-	return h.p.Angles()
-}
-
-func (h *Hexagon) Vectors() []int {
-	return h.p.vectors
 }
 
 func (h *Hexagon) Prime() bool {

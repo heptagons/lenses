@@ -111,6 +111,7 @@ func (s *S) gonTableHeader(h *dom.Html, gon string) {
 	h.Elem(dom.Tr, nil, func(h *dom.Html) {
 		h.Elem(dom.Td, nil, "&nbsp;")
 		h.Elem(dom.Th, nil, gon)
+		h.Elem(dom.Th, nil, "Group")
 		h.Elem(dom.Th, nil, "Angles")
 		h.Elem(dom.Th, nil, "Vectors")
 	})
@@ -129,6 +130,8 @@ func (s *S) gonTableRow(h *dom.Html, c int, gon symm.Gon, call func(id string, h
 				call(gon.Id(), h)
 			})
 		}
+		letter, number := symm.Group.Name(gon.Group())
+		h.Elem(dom.Td, nil, fmt.Sprintf("%s<sub>%d</sub>", letter, number))
 		h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Angles()))
 		h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Vectors()))
 	})

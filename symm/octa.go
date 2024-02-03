@@ -2,8 +2,6 @@ package symm
 
 import (
 	"fmt"
-	"strconv"
-	"strings"
 )
 
 type Octagons struct {
@@ -21,7 +19,7 @@ func (oo *Octagons) New(vector int, angles []int) (Gon, error) {
 	switch n {
 	case 5:
 		a, b, c, d, e := angles[0], angles[1], angles[2], angles[3], angles[4]
-		return NewOctagon(oo.p, vector, []int{ a,b,c,d,e,d,c }, n)
+		return NewOctagon(oo.p, vector, []int{ a,b,c,d,e,d,c }, n, M1)
 	default:
 		return nil, fmt.Errorf("Invalid number of angles not [4]")
 	}	
@@ -64,44 +62,20 @@ func (oo *Octagons) All(vector int) []Gon {
 }
 
 type Octagon struct {
-	p  *Polyline
-	id string
+	*Polygon
 }
 
-func NewOctagon(pp *Polylines, vertice int, angles []int, size int) (Gon, error) {
-	if p, err := pp.NewWithAngles(vertice, angles); err != nil {
+func NewOctagon(pp *Polylines, vertice int, angles []int, size int, group Group) (Gon, error) {
+	if p, err := NewPolygon(pp, vertice, angles, size, group); err != nil {
 		return nil, err
 	} else {
-		var ids []string
-		for i := 0; i < size; i++ {
-			ids = append(ids, strconv.Itoa(angles[i]))
-		}
 		return &Octagon{
-			p:  p,
-			id: strings.Join(ids, ","),
+			Polygon: p,
 		}, nil
 	}
 }
 
-func (o *Octagon) String() string {
-	return fmt.Sprintf("id=%s angles=%v vectors=%v", o.id, o.p.Angles(), o.p.vectors)
-}
 
-func (o *Octagon) Accums() []*Accum {
-	return o.p.Accums()
-}
-
-func (o *Octagon) Id() string {
-	return o.id
-}
-
-func (o *Octagon) Angles() []int {
-	return o.p.Angles()
-}
-
-func (o *Octagon) Vectors() []int {
-	return o.p.vectors
-}
 
 func (o *Octagon) Prime() bool {
 	s := o.p.pp.s.s // symmetry
