@@ -56,7 +56,7 @@ func (h *Html) Svg(width, height int, viewBox []int, inner interface{}) {
 
 func (h *Html) Polygon(points [][]float64, fill, stroke string) {
 	h.Elem(Polygon, []Attr{
-		&Apolygon{
+		&APolygon{
 			points: points,
 			fill:   fill,
 			stroke: stroke,

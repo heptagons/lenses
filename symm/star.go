@@ -16,7 +16,7 @@ func NewStars(p *Polylines) *Stars {
 func (ss *Stars) New(vector int, angles []int) (Gon, error) {
 	n := len(angles)
 	symm := ss.p.s.s
-	all := make([]int, 2*symm)
+	all := make([]int, 2*symm-1)
 	switch n {
 	case 1: 
 		// regular polygon of size 2*symm

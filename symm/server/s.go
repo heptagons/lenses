@@ -100,7 +100,7 @@ func (s *S) getHexa(h *dom.Html, vector int, angles []int) error {
 	if gon, err := g.New(vector, angles); err != nil {
 		return err
 	} else {
-		s.gonSvg(h, gon)
+		s.gonSvg(h, gon, 200)
 		s.gonTables(h, gon)
 		return nil
 	}
@@ -112,7 +112,7 @@ func (s *S) getOcta(h *dom.Html, vector int, angles []int) error {
 	if gon, err := g.New(vector, angles); err != nil {
 		return err
 	} else {
-		s.gonSvg(h, gon)
+		s.gonSvg(h, gon, 250)
 		s.gonTables(h, gon)
 		return nil
 	}
@@ -124,7 +124,7 @@ func (s *S) getStar(h *dom.Html, vector int, angles []int) error {
 	if gon, err := g.New(vector, angles); err != nil {
 		return err
 	} else {
-		s.gonSvg(h, gon)
+		s.gonSvg(h, gon, 300)
 		s.gonTables(h, gon)
 		return nil
 	}
@@ -163,7 +163,7 @@ func (s *S) gonTableRow(h *dom.Html, c int, gon symm.Gon, call func(id string, h
 }
 
 
-func (s *S) gonSvg(h *dom.Html, gon symm.Gon) {
+func (s *S) gonSvg(h *dom.Html, gon symm.Gon, size int) {
 	accums := gon.Accums()
 	var points [][]float64
 	max := float64(0)
@@ -180,16 +180,20 @@ func (s *S) gonSvg(h *dom.Html, gon symm.Gon) {
 		} else {
 			if max < -y { max = -y }
 		}
-		points = append(points, []float64{ x, y })
+		// Invert y to make we page y increases to top (like latex/tikz)
+		points = append(points, []float64{ x, -y })
 	}
-	max *= 1.4
+	max *= 1.2
 	a, b := int(-max), int(2*max)
 	viewBox := []int{ a, a, b, b }
-	// first the svg of the gon
-	h.Svg(250, 250, viewBox, func(h *dom.Html) {
-		fill := "cyan"
-		stroke := "blue"
-		h.Polygon(points, fill, stroke)
+	fill0, stroke0 := "none", "#ddd"
+	fill1, stroke1 := "#0ff8", "blue"
+	lines := dom.NewAPath(fill0, stroke0)
+	lines.M(int(-max), 0); lines.H(int(2*max)) // horizontal axis
+	lines.M(0,int(-max));  lines.V(int(2*max)) // vertical axis
+	h.Svg(size, size, viewBox, func(h *dom.Html) {
+		h.Elem(dom.Path, []dom.Attr{ lines }, nil)
+		h.Polygon(points, fill1, stroke1)
 	})
 }
 

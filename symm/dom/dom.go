@@ -57,6 +57,7 @@ const (
 	Label   elem = "label"
 	Option  elem = "option"
 	P       elem = "p"
+	Path    elem = "path"
 	Polygon elem = "polygon"
 	Script  elem = "script"
 	Select  elem = "select"

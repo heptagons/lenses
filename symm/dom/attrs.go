@@ -140,15 +140,15 @@ func (a Asvg) WriteAttr(h *Html) {
 	h.WriteF(` xmlns="http://www.w3.org/2000/svg"`)
 }
 
-// Polygon are attributes used within elem "polygon"
-type Apolygon struct {
+// APolygon are attributes used within elem "polygon"
+type APolygon struct {
 	points [][]float64
 	fill   string
 	stroke string
 }
 
 // implements dom.Attr
-func (a Apolygon) WriteAttr(h *Html) {
+func (a APolygon) WriteAttr(h *Html) {
 	if p := a.points; len(p) > 0 {
 		h.WriteF(` points="`)
 		for c, pair := range p {
@@ -169,4 +169,52 @@ func (a Apolygon) WriteAttr(h *Html) {
 	}
 }
 
+type APath struct {
+	d      []string
+	fill   string
+	stroke string
+}
+
+func NewAPath(fill, stroke string) *APath {
+	return &APath{
+		d:      make([]string, 0),
+		fill:   fill,
+		stroke: stroke,
+	}
+}
+
+func (a *APath) M(x, y int) {
+	a.d = append(a.d, fmt.Sprintf("M %d %d", x, y))
+}
+
+func (a *APath) H(x int) {
+	a.d = append(a.d, fmt.Sprintf("H %d", x))
+}
+
+func (a *APath) V(y int) {
+	a.d = append(a.d, fmt.Sprintf("V %d", y))
+}
+
+func (a *APath) Z() {
+	a.d = append(a.d, "Z")
+}
+
+func (a *APath) WriteAttr(h *Html) {
+	if d := a.d; len(d) > 0 {
+		h.WriteF(` d="`)
+		for i, d := range a.d {
+			if i > 0 {
+				h.WriteF(` `)		
+			}
+			h.WriteF(d)
+		}
+		h.WriteF(`"`)
+	}
+	if f := a.fill; f != "" {
+		h.WriteF(` fill="%s"`, f)
+	}
+	if f := a.stroke; f != "" {
+		h.WriteF(` stroke="%s"`, f)
+	}
+}
 
