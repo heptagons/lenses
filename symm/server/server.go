@@ -252,7 +252,7 @@ func getStar(w http.ResponseWriter, r *http.Request) {
 		h.Div(nil, func(h *dom.Html) {
 			buttonLink(h, fmt.Sprintf("/symm/%d/stars", s.S()), "<")
 		})
-		sids, ids, err := idAngles(r)
+		sids, ids, err := idAngles(r) // read URL param "id"
 		if err != nil {
 			h.Div(domErr, err.Error())
 			return
@@ -324,11 +324,26 @@ func idAngles(r *http.Request) (string, []int, error) {
 // vectorOptions
 func shiftVectorOpts(r *http.Request, symm int, h *dom.Html, option func(s, v int,text string)) (int,int) {
 	shift := 1
+	s := r.URL.Query().Get("shift")
+	if s, err := strconv.Atoi(s); err == nil {
+		shift = s
+	}
 	vector := 1
 	v := r.URL.Query().Get("vector")
 	if v, err := strconv.Atoi(v); err == nil && v > 0 && v <= symm {
 		vector = v
 	}
+	h.Div(nil, func(h *dom.Html) {
+		h.Elem(dom.Span, nil, "Shift: ")
+		for v := 1; v <= symm; v++ {
+			if v == vector {
+				h.Elem(dom.Span, h1, fmt.Sprintf("%d", v))
+			} else {
+				text := fmt.Sprintf("%d",v)
+				option(shift, v, text)
+			}
+		}
+	})
 	h.Div(nil, func(h *dom.Html) {
 		h.Elem(dom.Span, nil, "Vector: ")
 		for v := 1; v <= symm; v++ {

@@ -2,53 +2,7 @@ package symm
 
 import (
 	"fmt"
-	"strconv"
-	"strings"
 )
-
-// https://mathstat.slu.edu/escher/index.php/Introduction_to_Symmetry
-type Group struct {
-	Letter string
-	Number int
-}
-
-// NewGroupC builds a rotational group
-// C2 is the symmetry of letters N,S,Z
-// C3 is the symmetry of triskelion
-// C4 is the symmetry of swastika
-func NewGroupC(number int) *Group {
-	return &Group{
-		Letter: "C",
-		Number: number,
-	}
-}
-
-// NewGroupD builds a diedral group
-// D1 is the single mirror symmetry (like of letters A,B,C,D,E,K,M,T,U,V,W,Y)
-// D2 is the symmetry of the rectangle (like of letters H,I,X,O)
-// D3 is the symmetry of the equilateral triangle 
-// D5 is the symmetry of the regular pentagon
-// D6 is the symmetry of the regular hexagon
-// D7 is the symmetry of the regular heptagon
-// D9 is the symmetry of the regular 9-gon
-// DN N >= 10 is the symmetry of the regular N-gon
-func NewGroupD(number int) *Group {
-	return &Group{
-		Letter: "D",
-		Number: number,
-	}
-}
-
-var (
-	C1 = NewGroupC(1) // only identity symmetry
-	C2 = NewGroupC(2) // 180°
-	D1 = NewGroupD(1) // mirror
-	D2 = NewGroupD(2) // rectangle symmetry
-	D3 = NewGroupD(3) // equilateral triangle
-	D6 = NewGroupD(6) // regular hexagon
-)
-
-
 
 // Gon has the common methods for a polygon such as:
 // hexagon, octagon or star.
@@ -56,8 +10,8 @@ type Gon interface {
 	// Id is the identifier of the polygon.
 	// Is the fewest number of angles separated by commas identifying the polygon.
 	Id() string
-	// The rotational group of the polygon
-	Group() *Group
+	// The transformations of the polygon
+	Transforms() *Transforms
 	// The accumulators of the polygon to locate the vertices
 	Accums() []*Accum
 	// Angles is the complete list of angles of the polygon in sort order.
@@ -72,29 +26,38 @@ type Gon interface {
 }
 
 type Polygon struct {
-	p     *Polyline
-	id    string
-	group *Group
+	p  *Polyline
+	id string // deprecate
+	t  *Transforms
 }
 
-func NewPolygon(pp *Polylines, vertice int, angles []int, size int, group *Group) (*Polygon, error) {
-	if p, err := pp.NewWithAngles(vertice, angles); err != nil {
+func NewPolygonT(pp *Polylines, t *Transforms, angles []int, vector int) (*Polygon, error) {
+	if p, err := pp.NewWithAngles(vector, angles); err != nil {
 		return nil, err
 	} else {
-		var ids []string
-		for i := 0; i < size; i++ {
-			ids = append(ids, strconv.Itoa(angles[i]))
-		}
 		return &Polygon{
-			p:     p,
-			id:    strings.Join(ids, ","),
-			group: group,
+			p:  p,
+			id: t.id,
+			t:  t,
 		}, nil
 	}
 }
 
-func (p *Polygon) Group() *Group {
-	return p.group
+// deprecate
+func NewPolygon(pp *Polylines, id string, vector int, angles []int, size int, t *Transforms) (*Polygon, error) {
+	if p, err := pp.NewWithAngles(vector, angles); err != nil {
+		return nil, err
+	} else {
+		return &Polygon{
+			p:  p,
+			id: id,
+			t:  t,
+		}, nil
+	}
+}
+
+func (p *Polygon) Transforms() *Transforms {
+	return p.t
 }
 
 func (p *Polygon) String() string {

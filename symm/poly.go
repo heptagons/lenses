@@ -7,24 +7,30 @@ import (
 )
 
 type Polylines struct {
-	s *Symm
+	s       *Symm
+	vectors []int
 }
 
 func NewPolylines(s *Symm) *Polylines {
+	vectors := make([]int, s.s)
+	for pos := range vectors {
+		vectors[pos] = pos + 1 // 1,2,3,...symm
+	}
 	return &Polylines{
-		s: s,
+		s:       s,
+		vectors: vectors, 
 	}
 }
 
-func (pp *Polylines) New(vectors ...int) (*Polyline, error) {
-	for v := 0; v < len(vectors); v++ {
-		if vectors[v] < 1 {
-			return nil, fmt.Errorf("Invalid vector %v at position %v", vectors[v], v)
-		} else if vectors[v] > pp.s.s {
-			return nil, fmt.Errorf("Invalid vector %v at position %v", vectors[v], v)
+func (pp *Polylines) New(edges ...int) (*Polyline, error) {
+	for v := 0; v < len(edges); v++ {
+		if edges[v] < 1 {
+			return nil, fmt.Errorf("Invalid edge vector %v at position %v", edges[v], v)
+		} else if edges[v] > pp.s.s {
+			return nil, fmt.Errorf("Invalid edge vector %v at position %v", edges[v], v)
 		}
 	}
-	return NewPolyline(pp, vectors), nil
+	return NewPolyline(pp, edges), nil
 }
 
 func (pp *Polylines) NewWithAngles(vector int, angles []int) (*Polyline, error) {

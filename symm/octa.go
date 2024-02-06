@@ -20,7 +20,7 @@ func NewOctagons(p *Polylines) *Octagons {
 	}
 }
 
-func (oo *Octagons) All(shift, vector int) []Gon {
+func (oo *Octagons) All() []Gon {
 	all := make([]Gon, 0)
 	min := oo.a.min
 	max := oo.a.max
@@ -42,11 +42,9 @@ func (oo *Octagons) All(shift, vector int) []Gon {
 						if a + e + 2*b + 2*c + 2*d != sum {
 							continue
 						}
-						if o, err := oo.New([]int{ a,b,c,d,e }, shift, vector); err == nil {
-							accums := o.Accums()
-							if accums[len(accums)-1].AtOrigin() {
-								all = append(all, o)
-							}
+						t := oo.newD1([]int{ a,b,c,d,e })
+						if o, err := oo.NewD1(t, 1, 1); err == nil {
+							all = append(all, o)
 						}
 					}
 				}
@@ -56,26 +54,22 @@ func (oo *Octagons) All(shift, vector int) []Gon {
 	return all
 }
 
-
-func (oo *Octagons) New(angles []int, shift, vector int) (Gon, error) {
-	n := len(angles)
-	switch n {
-	case 5:
-		a, b, c, d, e := angles[0], angles[1], angles[2], angles[3], angles[4]
-		return NewOctagon(oo.p, vector, []int{ a,b,c,d,e,d,c }, n, NewGroupD(1))
-	default:
-		return nil, fmt.Errorf("Invalid number of angles not [4]")
-	}	
+func (oo *Octagons) newD1(angles []int) *Transforms {
+	// group is mirror symmetry like letters A,B,C,D,E,K...
+	// shifts are eight vertices (no negative since no rotations)             
+	// vectors is list 1,2,3,...,symm
+	return &Transforms{
+		id:      oo.p.IdFromAngles(angles),
+		angles:  angles,
+		group:   NewGroupD(1),
+		shifts:  []int{ 1,2,3,4,5,6,7,8 }, 
+		vectors: oo.p.vectors,             
+	}
 }
 
-// NewD1 returns and octagon with symmetry dihedral 1
-// angles array must include five angles valid respect to octagons symmetry angles.
-// Angles a,b,c,d,e must have this conditions:
-//	min <= a,b,c,d,e <= max
-//	a <= e
-//  a + e + 2b + 2c + 2d == sum
-//  last accumulators must be zero (at origin)
-func (oo *Octagons) NewD1(angles []int, shift int, vector int) (Gon, error) {
+// Transforms validate the given minimal octagon angles and return
+// sanitized angles and possible shifts and vectors to transform the octagon.
+func (oo *Octagons) validD1(angles []int) (*Transforms, error) {
 	if len(angles) != 5 {
 		return nil, fmt.Errorf("Invalid number of angles")
 	}
@@ -89,22 +83,51 @@ func (oo *Octagons) NewD1(angles []int, shift int, vector int) (Gon, error) {
 		return nil, fmt.Errorf("Invalid angles: a > e")	
 	} else if !oo.a.ValidSum(a + 2*b + 2*c + 2*d + e) {
 		return nil, fmt.Errorf("Invalid angles: a + 2b + 2c + 2d + e != sum")
+	}
+	return oo.newD1(angles), nil
+}
+
+
+func (oo *Octagons) New(angles []int, shift, vector int) (Gon, error) {
+	if t, err := oo.validD1(angles); err != nil {
+		return nil, err
 	} else {
-		seven := []int{ a,b,c,d,e,d,c }
-		switch shift {
-		case +1: seven = []int{ a,b,c,d,e,d,c }
-		case +2: seven = []int{ b,c,d,e,d,c,b }
-		case +3: seven = []int{ c,d,e,d,c,b,a }
-		case +4: seven = []int{ d,e,d,c,b,a,b }
-		case +5: seven = []int{ e,d,c,b,a,b,c }
-		case +6: seven = []int{ d,c,b,a,b,c,d }
-		case +7: seven = []int{ c,b,a,b,c,d,e }
-		case +8: seven = []int{ b,a,b,c,d,e,a }
-		}
-		//id := oo.p.IdFromAngles(angles)
-		return NewOctagon(oo.p, vector, seven, 5, NewGroupD(1))
+		return oo.NewD1(t, shift, vector)	
 	}
 }
+
+// NewD1 returns and octagon with symmetry dihedral 1
+// angles array must include five angles valid respect to octagons symmetry angles.
+// Angles a,b,c,d,e must have this conditions:
+//	min <= a,b,c,d,e <= max
+//	a <= e
+//  a + e + 2b + 2c + 2d == sum
+//  last accumulators must be zero (at origin)
+func (oo *Octagons) NewD1(t *Transforms, shift int, vector int) (Gon, error) {
+	a, b, c, d, e := t.angles[0], t.angles[1], t.angles[2], t.angles[3], t.angles[4]
+	seven := []int{ a,b,c,d,e,d,c }
+	switch shift {
+	case +1: seven = []int{ a,b,c,d,e,d,c }
+	case +2: seven = []int{ b,c,d,e,d,c,b }
+	case +3: seven = []int{ c,d,e,d,c,b,a }
+	case +4: seven = []int{ d,e,d,c,b,a,b }
+	case +5: seven = []int{ e,d,c,b,a,b,c }
+	case +6: seven = []int{ d,c,b,a,b,c,d }
+	case +7: seven = []int{ c,b,a,b,c,d,e }
+	case +8: seven = []int{ b,a,b,c,d,e,a }
+	}
+	if o, err := NewOctagonT(oo.p, t, seven, vector); err != nil {
+		return nil, err
+	} else {
+		accums := o.Accums()
+		if accums[len(accums)-1].AtOrigin() {
+			return o, nil
+		} else {
+			return nil, fmt.Errorf("Not equilateral")
+		}
+	}
+}
+
 
 
 
@@ -112,8 +135,8 @@ type Octagon struct {
 	*Polygon
 }
 
-func NewOctagon(pp *Polylines, vector int, angles []int, size int, group *Group) (Gon, error) {
-	if p, err := NewPolygon(pp, vector, angles, size, group); err != nil {
+func NewOctagonT(pp *Polylines, t *Transforms, angles []int, vector int) (Gon, error) {
+	if p, err := NewPolygonT(pp, t, angles, vector); err != nil {
 		return nil, err
 	} else {
 		return &Octagon{

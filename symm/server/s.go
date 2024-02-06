@@ -77,7 +77,7 @@ func (s *S) getOctas(h *dom.Html, call func(id string, h *dom.Html)) {
 	oo := symm.NewOctagons(p)
 	h.Elem(dom.Table, nil, func(h *dom.Html) {
 		s.gonTableHeader(h, "Octagon")
-		for c, gon := range oo.All(1,1) {
+		for c, gon := range oo.All() {
 			s.gonTableRow(h, c, gon, call)
 		}
 	})
@@ -155,7 +155,7 @@ func (s *S) gonTableRow(h *dom.Html, c int, gon symm.Gon, call func(id string, h
 				call(gon.Id(), h)
 			})
 		}
-		g := gon.Group()
+		g := gon.Transforms().Group()
 		h.Elem(dom.Td, nil, fmt.Sprintf("%s<sub>%d</sub>", g.Letter, g.Number))
 		h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Angles()))
 		//h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Vectors()))

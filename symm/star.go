@@ -38,6 +38,7 @@ func (ss *Stars) New(angles []int, shift, vector int) (Gon, error) {
 	n := len(angles)
 	symm := ss.p.s.s
 	all := make([]int, 2*symm-1)
+	id := ss.p.IdFromAngles(angles)
 	switch n {
 	case 1: 
 		// regular polygon of size 2*symm
@@ -45,7 +46,7 @@ func (ss *Stars) New(angles []int, shift, vector int) (Gon, error) {
 		for i := range all {
 			all[i] = a
 		}
-		return NewStar(ss.p, vector, all, n, NewGroupD(2*symm))
+		return NewStar(ss.p, id, vector, all, n, NewGroupD(2*symm))
 
 	case 2:
 		// star
@@ -57,7 +58,7 @@ func (ss *Stars) New(angles []int, shift, vector int) (Gon, error) {
 				all[i] = b
 			}
 		}
-		return NewStar(ss.p, vector, all, n, NewGroupD(symm))
+		return NewStar(ss.p, id, vector, all, n, NewGroupD(symm))
 
 	default:
 		return nil, fmt.Errorf("Number of angles out of range [1,2]")
@@ -69,8 +70,11 @@ type Star struct {
 	*Polygon
 }
 
-func NewStar(pp *Polylines, vertice int, angles []int, size int, group *Group) (Gon, error) {
-	if p, err := NewPolygon(pp, vertice, angles, size, group); err != nil {
+func NewStar(pp *Polylines, id string, vertice int, angles []int, size int, group *Group) (Gon, error) {
+	t := &Transforms{
+		group: group,
+	}
+	if p, err := NewPolygon(pp, id, vertice, angles, size, t); err != nil {
 		return nil, err
 	} else {
 		return &Star{

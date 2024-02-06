@@ -84,7 +84,12 @@ func (hh *Hexagons) New(angles []int, shift, vector int) (Gon, error) {
 }
 
 func (hh *Hexagons) new(id string, vertice int, angles []int, size int, group *Group) (Gon, error) {
-	if p, err := NewPolygon(hh.p, vertice, angles, size, group); err != nil {
+	
+	t := &Transforms{
+		group: group,
+	}
+
+	if p, err := NewPolygon(hh.p, id, vertice, angles, size, t); err != nil {
 		return nil, err
 	} else {
 		return &Hexagon{
