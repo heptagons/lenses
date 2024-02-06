@@ -13,7 +13,28 @@ func NewStars(p *Polylines) *Stars {
 		p: p,
 	}
 }
-func (ss *Stars) New(vector int, angles []int) (Gon, error) {
+
+func (ss *Stars) All(shift, vector int) []Gon {
+	symm := ss.p.s.s
+	all := make([]Gon, 0)
+	min := 1
+	max := (symm-1) / 2
+	fmt.Println("Stars.All", vector, min, max)
+	for i := min; i <= max; i++ {
+		if i == max {
+			if s, err := ss.New([]int { i }, shift, vector); err == nil {
+				all = append(all, s)
+			}
+		} else {
+			if s, err := ss.New([]int { i, symm-1-i }, shift, vector); err == nil {
+				all = append(all, s)
+			}
+		}
+	}
+	return all
+}
+
+func (ss *Stars) New(angles []int, shift, vector int) (Gon, error) {
 	n := len(angles)
 	symm := ss.p.s.s
 	all := make([]int, 2*symm-1)
@@ -43,25 +64,6 @@ func (ss *Stars) New(vector int, angles []int) (Gon, error) {
 	}
 }
 
-func (ss *Stars) All(vector int) []Gon {
-	symm := ss.p.s.s
-	all := make([]Gon, 0)
-	min := 1
-	max := (symm-1) / 2
-	fmt.Println("Stars.All", vector, min, max)
-	for i := min; i <= max; i++ {
-		if i == max {
-			if s, err := ss.New(vector, []int { i }); err == nil {
-				all = append(all, s)
-			}
-		} else {
-			if s, err := ss.New(vector, []int { i, symm-1-i }); err == nil {
-				all = append(all, s)
-			}
-		}
-	}
-	return all
-}
 
 type Star struct {
 	*Polygon

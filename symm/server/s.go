@@ -66,7 +66,7 @@ func (s *S) getHexas(h *dom.Html, call func(id string, h *dom.Html)) {
 	hh := symm.NewHexagons(p)
 	h.Elem(dom.Table, nil, func(h *dom.Html) {
 		s.gonTableHeader(h, "Hexagon")
-		for c, gon := range hh.All() {
+		for c, gon := range hh.All(1,1) {
 			s.gonTableRow(h, c, gon, call)
 		}
 	})
@@ -77,7 +77,7 @@ func (s *S) getOctas(h *dom.Html, call func(id string, h *dom.Html)) {
 	oo := symm.NewOctagons(p)
 	h.Elem(dom.Table, nil, func(h *dom.Html) {
 		s.gonTableHeader(h, "Octagon")
-		for c, gon := range oo.All(1) {
+		for c, gon := range oo.All(1,1) {
 			s.gonTableRow(h, c, gon, call)
 		}
 	})
@@ -88,16 +88,16 @@ func (s *S) getStars(h *dom.Html, call func(id string, h *dom.Html)) {
 	ss := symm.NewStars(p)
 	h.Elem(dom.Table, nil, func(h *dom.Html) {
 		s.gonTableHeader(h, "Star")
-		for c, gon := range ss.All(1) {
+		for c, gon := range ss.All(1,1) {
 			s.gonTableRow(h, c, gon, call)
 		}
 	})
 }
 
-func (s *S) getHexa(h *dom.Html, vector int, angles []int) error {
+func (s *S) getHexa(h *dom.Html, angles []int, shift, vector int) error {
 	p := symm.NewPolylines(s.Symm)
 	g := symm.NewHexagons(p)
-	if gon, err := g.New(vector, angles); err != nil {
+	if gon, err := g.New(angles, shift, vector); err != nil {
 		return err
 	} else {
 		s.gonSvg(h, gon, 200)
@@ -106,10 +106,10 @@ func (s *S) getHexa(h *dom.Html, vector int, angles []int) error {
 	}
 }
 
-func (s *S) getOcta(h *dom.Html, vector int, angles []int) error {
+func (s *S) getOcta(h *dom.Html, angles []int, shift, vector int) error {
 	p := symm.NewPolylines(s.Symm)
 	g := symm.NewOctagons(p)
-	if gon, err := g.New(vector, angles); err != nil {
+	if gon, err := g.New(angles, shift, vector); err != nil {
 		return err
 	} else {
 		s.gonSvg(h, gon, 250)
@@ -118,10 +118,10 @@ func (s *S) getOcta(h *dom.Html, vector int, angles []int) error {
 	}
 }
 
-func (s *S) getStar(h *dom.Html, vector int, angles []int) error {
+func (s *S) getStar(h *dom.Html, angles []int, shift, vector int) error {
 	p := symm.NewPolylines(s.Symm)
 	g := symm.NewStars(p)
-	if gon, err := g.New(vector, angles); err != nil {
+	if gon, err := g.New(angles, shift, vector); err != nil {
 		return err
 	} else {
 		s.gonSvg(h, gon, 300)

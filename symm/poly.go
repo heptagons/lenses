@@ -2,6 +2,8 @@ package symm
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 )
 
 type Polylines struct {
@@ -40,8 +42,14 @@ func (pp *Polylines) NewWithAngles(vector int, angles []int) (*Polyline, error) 
 	return NewPolylineWithAngles(pp, vector, angles), nil
 }
 
-
-
+// IdFromAngles returns a string of angles array values separated by commas
+func (pp *Polylines) IdFromAngles(angles []int) string {
+	var ids []string
+	for _, angle := range angles {
+		ids = append(ids, strconv.Itoa(angle))
+	}
+	return strings.Join(ids, ",")
+}
 
 type Polyline struct {
 	pp      *Polylines

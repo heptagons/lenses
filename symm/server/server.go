@@ -196,13 +196,11 @@ func getHexa(w http.ResponseWriter, r *http.Request) {
 		// title
 		h.Div(h1, fmt.Sprintf("Hexagon H<sub>%d</sub>(%s)", s.S(), sids))
 
-		// row with buttons to change the first vector
-		vector := firstVectorOpts(r, s.S(), h, func(v int) {
-			link := fmt.Sprintf("/symm/%d/hexagon/%s?vector=%d", s.S(), sids, v)
-			buttonLink(h, link, fmt.Sprintf("%d",v))
-		})
+		// rows with buttons to change the shifts and vectors
+		link := fmt.Sprintf("/symm/%d/hexagon/%s", s.S(), sids)
+		shift, vector := buttonsShiftVector(r, s.S(), h, link)
 		// particular hexagon controls (svg and tables)
-		if err := s.getHexa(h, vector, ids); err != nil {
+		if err := s.getHexa(h, ids, shift, vector); err != nil {
 			h.Div(domErr, fmt.Sprintf("%v", err))
 			return
 		}
@@ -230,13 +228,11 @@ func getOcta(w http.ResponseWriter, r *http.Request) {
 		// title including ids
 		h.Div(h1, fmt.Sprintf("Octagon O<sub>%d</sub>(%s)", s.S(), sids))
 
-		// row with buttons to change the first vector
-		vector := firstVectorOpts(r, s.S(), h, func(v int) {
-			link := fmt.Sprintf("/symm/%d/octagon/%s?vector=%d", s.S(), sids, v)
-			buttonLink(h, link, fmt.Sprintf("%d",v))
-		})
+		// rows with buttons to change the shifts and vectors
+		link := fmt.Sprintf("/symm/%d/octagon/%s", s.S(), sids)
+		shift, vector := buttonsShiftVector(r, s.S(), h, link)
 		// particular octagon controls (svg and tables)
-		if err := s.getOcta(h, vector, ids); err != nil {
+		if err := s.getOcta(h, ids, shift, vector); err != nil {
 			h.Div(domErr, fmt.Sprintf("%v", err))
 			return
 		}
@@ -264,19 +260,24 @@ func getStar(w http.ResponseWriter, r *http.Request) {
 		// title including ids
 		h.Div(h1, fmt.Sprintf("Star S<sub>%d</sub>(%s)", s.S(), sids))
 
-		// row with buttons to change the first vector
-		vector := firstVectorOpts(r, s.S(), h, func(v int) {
-			link := fmt.Sprintf("/symm/%d/star/%s?vector=%d", s.S(), sids, v)
-			buttonLink(h, link, fmt.Sprintf("%d",v))
-		})
+		// rows with buttons to change the shifts and vectors
+		link := fmt.Sprintf("/symm/%d/star/%s", s.S(), sids)
+		shift, vector := buttonsShiftVector(r, s.S(), h, link)
 		// particular star controls (svg and tables)
-		if err := s.getStar(h, vector, ids); err != nil {
+		if err := s.getStar(h, ids, shift, vector); err != nil {
 			h.Div(domErr, fmt.Sprintf("%v", err))
 			return
 		}
 	})
 }
 
+
+func buttonsShiftVector(r *http.Request, symm int, h *dom.Html, prelink string) (int, int) {
+	return shiftVectorOpts(r, symm, h, func(shift,vector int, text string) {
+		link := fmt.Sprintf("%s?shift=%d&vector=%d", prelink, shift, vector)
+		buttonLink(h, link, text)
+	})
+}
 
 
 
@@ -321,22 +322,24 @@ func idAngles(r *http.Request) (string, []int, error) {
 }
 
 // vectorOptions
-func firstVectorOpts(r *http.Request, symm int, h *dom.Html, option func(int)) int {
+func shiftVectorOpts(r *http.Request, symm int, h *dom.Html, option func(s, v int,text string)) (int,int) {
+	shift := 1
 	vector := 1
+	v := r.URL.Query().Get("vector")
+	if v, err := strconv.Atoi(v); err == nil && v > 0 && v <= symm {
+		vector = v
+	}
 	h.Div(nil, func(h *dom.Html) {
-		h.Elem(dom.Span, nil, "First vector: ")
-		v := r.URL.Query().Get("vector")
-		if v, err := strconv.Atoi(v); err == nil && v > 0 && v <= symm {
-			vector = v
-		}
+		h.Elem(dom.Span, nil, "Vector: ")
 		for v := 1; v <= symm; v++ {
 			if v == vector {
 				h.Elem(dom.Span, h1, fmt.Sprintf("%d", v))
 			} else {
-				option(v)
+				text := fmt.Sprintf("%d",v)
+				option(shift, v, text)
 			}
 		}
 	})
-	return vector
+	return shift, vector
 }
 
