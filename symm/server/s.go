@@ -72,17 +72,6 @@ func (s *S) getHexas(h *dom.Html, call func(id string, h *dom.Html)) {
 	})
 }
 
-func (s *S) getOctas(h *dom.Html, call func(id string, h *dom.Html)) {
-	p := symm.NewPolylines(s.Symm)
-	oo := symm.NewOctagons(p)
-	h.Elem(dom.Table, nil, func(h *dom.Html) {
-		s.gonTableHeader(h, "Octagon")
-		for c, gon := range oo.All() {
-			s.gonTableRow(h, c, gon, call)
-		}
-	})
-}
-
 func (s *S) getStars(h *dom.Html, call func(id string, h *dom.Html)) {
 	p := symm.NewPolylines(s.Symm)
 	ss := symm.NewStars(p)
@@ -106,16 +95,14 @@ func (s *S) getHexa(h *dom.Html, angles []int, shift, vector int) error {
 	}
 }
 
-func (s *S) getOcta(h *dom.Html, angles []int, shift, vector int) error {
+func (s *S) getOcta() *symm.Octagons {
 	p := symm.NewPolylines(s.Symm)
-	g := symm.NewOctagons(p)
-	if gon, err := g.New(angles, shift, vector); err != nil {
-		return err
-	} else {
-		s.gonSvg(h, gon, 250)
-		s.gonTables(h, gon)
-		return nil
-	}
+	return symm.NewOctagons(p)
+}
+
+func (s *S) getGon(h *dom.Html, gon symm.Gon) {
+	s.gonSvg(h, gon, 250)
+	s.gonTables(h, gon)
 }
 
 func (s *S) getStar(h *dom.Html, angles []int, shift, vector int) error {
