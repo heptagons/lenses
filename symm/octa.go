@@ -20,7 +20,7 @@ func NewOctagons(p *Polylines) *Octagons {
 	}
 }
 
-// All returns all the types of octagons (of group D1)
+// All returns all the types of octagons (of symmetry group D1)
 func (oo *Octagons) All() []Gon {
 	all := make([]Gon, 0)
 	min := oo.a.min

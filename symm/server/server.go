@@ -146,7 +146,7 @@ func getOctas(w http.ResponseWriter, r *http.Request) {
 		// title
 		h.Div(h1, fmt.Sprintf("Octagons O<sub>%d</sub>", s.S()))
 		// octagons table and links to go to particular octagon
-		oo := s.getOcta()
+		oo := s.getOctas()
 		h.Elem(dom.Table, nil, func(h *dom.Html) {
 			s.gonTableHeader(h, "Octagon")
 			for c, gon := range oo.All() {
@@ -158,8 +158,6 @@ func getOctas(w http.ResponseWriter, r *http.Request) {
 	})
 	h.Write(w)
 }
-
-
 
 func getStars(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
@@ -176,12 +174,20 @@ func getStars(w http.ResponseWriter, r *http.Request) {
 		// title
 		h.Div(h1, fmt.Sprintf("Stars S<sub>%d</sub>", s.S()))
 		// stars table and links to go to particular star
-		s.getStars(h, func(id string, h *dom.Html) {
-			buttonLink(h, fmt.Sprintf("/symm/%d/star/%s", s.S(), id), id)
+		ss := s.getStars()
+		h.Elem(dom.Table, nil, func(h *dom.Html) {
+			s.gonTableHeader(h, "Star")
+			for c, gon := range ss.All() {
+				s.gonTableRow(h, c, gon, func(id string, h *dom.Html) {
+					buttonLink(h, fmt.Sprintf("/symm/%d/star/%s", s.S(), id), id)
+				})
+			}
 		})
 	})
 	h.Write(w)
 }
+
+
 
 
 func getHexa(w http.ResponseWriter, r *http.Request) {
@@ -237,7 +243,7 @@ func getOcta(w http.ResponseWriter, r *http.Request) {
 		// title including ids
 		h.Div(h1, fmt.Sprintf("Octagon O<sub>%d</sub>(%s)", s.S(), sids))
 
-		oo := s.getOcta()
+		oo := s.getOctas()
 		t, err := oo.Transforms(ids)
 		if err != nil {
 			h.Div(domErr, err.Error())
@@ -253,8 +259,6 @@ func getOcta(w http.ResponseWriter, r *http.Request) {
 		}
 	})
 }
-
-
 
 func getStar(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
@@ -277,16 +281,48 @@ func getStar(w http.ResponseWriter, r *http.Request) {
 		// title including ids
 		h.Div(h1, fmt.Sprintf("Star S<sub>%d</sub>(%s)", s.S(), sids))
 
-		// rows with buttons to change the shifts and vectors
-		link := fmt.Sprintf("/symm/%d/star/%s", s.S(), sids)
-		shift, vector := buttonsShiftVector(r, s.S(), h, link)
-		// particular star controls (svg and tables)
-		if err := s.getStar(h, ids, shift, vector); err != nil {
-			h.Div(domErr, fmt.Sprintf("%v", err))
+		ss := s.getStars()
+		t, err := ss.Transforms(ids)
+		if err != nil {
+			h.Div(domErr, err.Error())
 			return
 		}
+
+		link := fmt.Sprintf("/symm/%d/star/%s", s.S(), sids)
+		shift, vector := _buttonsShiftVector(r, h, t, link)
+		if gon, err := ss.New(t, shift, vector); err != nil {
+			h.Div(domErr, err.Error())
+			return
+		} else {
+			s.getGon(h, gon)
+		}
+
+		// rows with buttons to change the shifts and vectors
+		//
+		//shift, vector := buttonsShiftVector(r, s.S(), h, link)
+		// particular star controls (svg and tables)
+		//if err := s.getStar(h, ids, shift, vector); err != nil {
+		//	h.Div(domErr, fmt.Sprintf("%v", err))
+		//	return
+		//}
 	})
 }
+
+
+/*func (s *S) getStar(h *dom.Html, angles []int, shift, vector int) error {
+	p := symm.NewPolylines(s.Symm)
+	g := symm.NewStars(p)
+	if gon, err := g.New(angles, shift, vector); err != nil {
+		return err
+	} else {
+		s.gonSvg(h, gon, 300)
+		s.gonTables(h, gon)
+		return nil
+	}
+}*/
+
+
+
 
 
 func buttonLink(h *dom.Html, link, title string) {
