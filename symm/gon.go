@@ -25,6 +25,16 @@ type Gon interface {
 	Intersecting() bool
 }
 
+type Gons interface {
+	// All returns all the types of polygon of all symmetry groups possible.
+	All() []Gon
+	// Transforms validate the given minimal polygon angles and return
+	// sanitized angles and possible shifts and vectors to transform the polygon
+	Transforms(angles []int) (*Transforms, error)
+	// New returns a polygon given the angles in given transforms shifted and rotated
+	New(t *Transforms, shift int, vector int) (Gon, error)
+}
+
 type Polygon struct {
 	p  *Polyline
 	id string // deprecate

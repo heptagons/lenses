@@ -117,6 +117,7 @@ func getSymm(w http.ResponseWriter, r *http.Request) {
 }
 
 func getHexas(w http.ResponseWriter, r *http.Request) {
+	/*
 	s := symmOk(w, r)
 	if s == nil {
 		return
@@ -139,66 +140,54 @@ func getHexas(w http.ResponseWriter, r *http.Request) {
 			}
 		})
 		return nil
-	})
+	})*/
+	if s := symmOk(w, r); s == nil {
+		return
+	} else {
+		getPage(w, func(h *dom.Html) error {
+			return getGons(s, h, s.getHexas(),
+				"Hexagons H<sub>%d</sub>",
+				"Hexagon",
+				"/symm/%d/hexagon/%s",
+			)
+		})
+	}
 }
 
-
-
-
 func getOctas(w http.ResponseWriter, r *http.Request) {
-	s := symmOk(w, r)
-	if s == nil {
+	if s := symmOk(w, r); s == nil {
 		return
+	} else {
+		getPage(w, func(h *dom.Html) error {
+			return getGons(s, h, s.getOctas(),
+				"Octagons O<sub>%d</sub>",
+				"Octagon",
+				"/symm/%d/octagon/%s",
+			)
+		})
 	}
-	getPage(w, func(h *dom.Html) error {
-		// back button to return to symmetry s
-		h.Div(nil, func(h *dom.Html) {
-			buttonLink(h, fmt.Sprintf("/symm/%d", s.S()), "<")
-		})
-		// title
-		h.Div(h1, fmt.Sprintf("Octagons O<sub>%d</sub>", s.S()))
-		// octagons table and links to go to particular octagon
-		oo := s.getOctas()
-		h.Elem(dom.Table, nil, func(h *dom.Html) {
-			s.gonTableHeader(h, "Octagon")
-			for c, gon := range oo.All() {
-				s.gonTableRow(h, c+1, gon, func(id string, h *dom.Html) {
-					buttonLink(h, fmt.Sprintf("/symm/%d/octagon/%s", s.S(), id), id)
-				})
-			}
-		})
-		return nil
-	})
 }
 
 func getStars(w http.ResponseWriter, r *http.Request) {
-	s := symmOk(w, r)
-	if s == nil {
+	if s := symmOk(w, r); s == nil {
 		return
+	} else {
+		getPage(w, func(h *dom.Html) error {
+			return getGons(s, h, s.getStars(),
+				"Stars S<sub>%d</sub>",
+				"Star",
+				"/symm/%d/star/%s",
+			)
+		})
 	}
-	getPage(w, func(h *dom.Html) error {
-		// back button to return to symmetry s
-		h.Div(nil, func(h *dom.Html) {
-			buttonLink(h, fmt.Sprintf("/symm/%d", s.S()), "<")
-		})
-		// title
-		h.Div(h1, fmt.Sprintf("Stars S<sub>%d</sub>", s.S()))
-		// stars table and links to go to particular star
-		ss := s.getStars()
-		h.Elem(dom.Table, nil, func(h *dom.Html) {
-			s.gonTableHeader(h, "Star")
-			for c, gon := range ss.All() {
-				s.gonTableRow(h, c, gon, func(id string, h *dom.Html) {
-					buttonLink(h, fmt.Sprintf("/symm/%d/star/%s", s.S(), id), id)
-				})
-			}
-		})
-		return nil
-	})
 }
 
 
+
+
+
 func getHexa(w http.ResponseWriter, r *http.Request) {
+	/*
 	s := symmOk(w, r)
 	if s == nil {
 		return
@@ -226,75 +215,50 @@ func getHexa(w http.ResponseWriter, r *http.Request) {
 			s.gonTables(h, gon)
 			return nil
 		}
-	})
+	})*/
+	if s := symmOk(w, r); s == nil {
+		return
+	} else {
+		getPage(w, func(h *dom.Html) error {
+			return getGon(r, s, h, s.getHexas(),
+				"/symm/%d/hexagons",
+				"Hexagon H<sub>%d</sub>(%s)",
+				"/symm/%d/hexagon/%s",
+			)
+		})
+	}
 }
 
 
 func getOcta(w http.ResponseWriter, r *http.Request) {
-	s := symmOk(w, r)
-	if s == nil {
+	if s := symmOk(w, r); s == nil {
 		return
-	}
-	getPage(w, func(h *dom.Html) error {
-		// back button
-		h.Div(nil, func(h *dom.Html) {
-			buttonLink(h, fmt.Sprintf("/symm/%d/octagons", s.S()), "<")
+	} else {
+		getPage(w, func(h *dom.Html) error {
+			return getGon(r, s, h, s.getOctas(),
+				"/symm/%d/octagons",
+				"Octagon O<sub>%d</sub>(%s)",
+				"/symm/%d/octagon/%s",
+			)
 		})
-		sids, ids, err := idAngles(r)
-		if err != nil {
-			return err
-		}
-		// title
-		h.Div(h1, fmt.Sprintf("Octagon O<sub>%d</sub>(%s)", s.S(), sids))
-		link := fmt.Sprintf("/symm/%d/octagon/%s", s.S(), sids)
-
-		oo := s.getOctas()
-		t, err := oo.Transforms(ids)
-		if err != nil {
-			return err
-		}
-		shift, vector := _buttonsShiftVector(r, h, t, link)
-		if gon, err := oo.New(t, shift, vector); err != nil {
-			return err
-		} else {
-			s.getGon(h, gon)
-		}
-		return nil
-	})
+	}
 }
 
 func getStar(w http.ResponseWriter, r *http.Request) {
-	s := symmOk(w, r)
-	if s == nil {
+	if s := symmOk(w, r); s == nil {
 		return
-	}
-	getPage(w, func(h *dom.Html) error {
-		// back button
-		h.Div(nil, func(h *dom.Html) {
-			buttonLink(h, fmt.Sprintf("/symm/%d/stars", s.S()), "<")
+	} else {
+		getPage(w, func(h *dom.Html) error {
+			return getGon(r, s, h, s.getStars(),
+				"/symm/%d/stars",
+				"Star S<sub>%d</sub>(%s)",
+				"/symm/%d/star/%s",
+			)
 		})
-		sids, ids, err := idAngles(r) // read URL param "id"
-		if err != nil {
-			return err
-		}
-		// title including ids
-		h.Div(h1, fmt.Sprintf("Star S<sub>%d</sub>(%s)", s.S(), sids))
-		link := fmt.Sprintf("/symm/%d/star/%s", s.S(), sids)
-
-		ss := s.getStars()
-		t, err := ss.Transforms(ids)
-		if err != nil {
-			return err
-		}
-		shift, vector := _buttonsShiftVector(r, h, t, link)
-		if gon, err := ss.New(t, shift, vector); err != nil {
-			return err
-		} else {
-			s.getGon(h, gon)
-		}
-		return nil
-	})
+	}
 }
+
+
 
 func getPage(w http.ResponseWriter, body func(h *dom.Html) error) {
 	h := dom.NewHtml(nil, "<!DOCTYPE html>\n")
@@ -319,8 +283,48 @@ func buttonLink(h *dom.Html, link, title string) {
 }
 
 
+func getGons(s *S, h *dom.Html, gg symm.Gons, title, name, link string) error {
+	// back button to return to symmetry s
+	h.Div(nil, func(h *dom.Html) {
+		buttonLink(h, fmt.Sprintf("/symm/%d", s.S()), "<")
+	})
+	// title
+	h.Div(h1, fmt.Sprintf(title, s.S()))
+	// octagons table and links to go to particular octagon
+	h.Elem(dom.Table, nil, func(h *dom.Html) {
+		s.gonTableHeader(h, name)
+		for c, gon := range gg.All() {
+			s.gonTableRow(h, c+1, gon, func(id string, h *dom.Html) {
+				buttonLink(h, fmt.Sprintf(link, s.S(), id), id)
+			})
+		}
+	})
+	return nil
+}
 
-
+func getGon(r *http.Request, s *S, h *dom.Html, gg symm.Gons, back, title, link string) error {
+	// back button
+	h.Div(nil, func(h *dom.Html) {
+		buttonLink(h, fmt.Sprintf(back, s.S()), "<")
+	})
+	sids, ids, err := idAngles(r) // read URL param "id"
+	if err != nil {
+		return err
+	}
+	// title including ids
+	h.Div(h1, fmt.Sprintf(title, s.S(), sids))
+	t, err := gg.Transforms(ids)
+	if err != nil {
+		return err
+	}
+	shift, vector := btnsShiftVector(r, h, t, fmt.Sprintf(link, s.S(), sids))
+	if gon, err := gg.New(t, shift, vector); err != nil {
+		return err
+	} else {
+		s.getGon(h, gon)
+	}
+	return nil
+}
 
 // idAngles return the ids integer array from URL param id. 
 func idAngles(r *http.Request) (string, []int, error) {
@@ -337,7 +341,7 @@ func idAngles(r *http.Request) (string, []int, error) {
 	return sids, ids, nil
 }
 
-func _buttonsShiftVector(r *http.Request, h *dom.Html, t *symm.Transforms, link string) (int,int) {
+func btnsShiftVector(r *http.Request, h *dom.Html, t *symm.Transforms, link string) (int,int) {
 	// 
 	button := func(shift, vector int, text string) {
 		link := fmt.Sprintf("%s?s=%d&v=%d", link, shift, vector)

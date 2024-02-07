@@ -43,7 +43,7 @@ func (oo *Octagons) All() []Gon {
 						if a + e + 2*b + 2*c + 2*d != sum {
 							continue
 						}
-						t := oo.transforms([]int{ a,b,c,d,e })
+						t := oo.tD1([]int{ a,b,c,d,e })
 						if o, err := oo.New(t, 1, 1); err == nil {
 							all = append(all, o)
 						}
@@ -72,20 +72,7 @@ func (oo *Octagons) Transforms(angles []int) (*Transforms, error) {
 	} else if !oo.a.ValidSum(a + 2*b + 2*c + 2*d + e) {
 		return nil, fmt.Errorf("Invalid angles: a + 2b + 2c + 2d + e != sum")
 	}
-	return oo.transforms(angles), nil
-}
-
-func (oo *Octagons) transforms(angles []int) *Transforms {
-	// group is mirror symmetry like letters A,B,C,D,E,K...
-	// shifts are eight vertices (no negative since no rotations)             
-	// vectors is list 1,2,3,...,symm
-	return &Transforms{
-		id:      oo.p.IdFromAngles(angles),
-		angles:  angles,
-		group:   NewGroupD(1),
-		shifts:  []int{ 1,2,3,4,5,6,7,8 }, 
-		vectors: oo.p.vectors,             
-	}
+	return oo.tD1(angles), nil
 }
 
 // New returns and octagon with symmetry dihedral 1
@@ -115,10 +102,19 @@ func (oo *Octagons) New(t *Transforms, shift int, vector int) (Gon, error) {
 		if accums[len(accums)-1].AtOrigin() {
 			return o, nil
 		} else {
-			return nil, fmt.Errorf("Not equilateral")
+			return nil, fmt.Errorf("Octagon D1 is not equilateral")
 		}
 	}
 }
+
+
+// tD1 returns transforms with symmetry group of mirror symmetry like letters A,B,C,D,E,K...
+// shifts are eight positives: for eight vertices (no negative since no rotations)             
+func (oo *Octagons) tD1(angles []int) *Transforms {
+	shifts :=  []int{ 1,2,3,4,5,6,7,8 }
+	return NewTransforms(oo.p, angles, NewGroupD(1), shifts)
+}
+
 
 
 

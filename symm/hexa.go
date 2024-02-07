@@ -22,20 +22,31 @@ func NewHexagons(p *Polylines) *Hexagons {
 
 func (hh *Hexagons) All() []Gon {
 	all := make([]Gon, 0)
-	min := 1
-	max := hh.p.s.s - 1
-	shift := 1
-	vector := 1
-	for a := min; a <= max; a++ {
+	max := hh.a.max
+	for a := hh.a.min; a <= max; a++ {
 		for b := a; b <= max; b++ {
-			if h, err := hh.New([]int{ a, b }, shift, vector); err == nil {
-				all = append(all, h)
+			if a == b {
+				t := hh.tD6([]int{ a })
+				if h, err := hh.New(t, 1, 1); err == nil {
+					// equilateral hexagon
+					all = append(all, h)
+				}
+			} else {
+				t := hh.tD3([]int{ a,b })
+				if h, err := hh.New(t, 1, 1); err == nil {
+					// triangular star
+					all = append(all, h)
+				}
 			}
 			for c := b; c <=max; c++ {
 				if a == b && b == c {
-					// case 1
-				} else if h, err := hh.New([]int{ a, b, c }, shift, vector); err == nil {
-					all = append(all, h)
+					// append already above
+				} else {
+					t := hh.tC2([]int{ a,b,c })
+					if s, err := hh.New(t, 1, 1); err == nil {
+						// lense
+						all = append(all, s)
+					}
 				}
 			}
 		}
@@ -43,7 +54,94 @@ func (hh *Hexagons) All() []Gon {
 	return all
 }
 
+func (hh *Hexagons) Transforms(angles []int) (*Transforms, error) {
+	switch len(angles) {
 
+	case 1:
+		return hh.tD6(angles), nil
+
+	case 2:
+		if angles[0] == angles[1] {
+			return hh.tD6([]int{ angles[0] }), nil
+		} else {
+			return hh.tD3(angles), nil
+		}
+	case 3:
+		return hh.tC2(angles), nil
+
+	default:
+		return nil, fmt.Errorf("Invalid number of angles")
+	}
+}
+
+
+
+
+// tD6 returns a transformation with the symmetry group of the regular hexagon
+// shifts are only identity (all regular hexagon vertices are isogonal)
+func (hh *Hexagons) tD6(angles []int) *Transforms {
+	shifts :=  []int{ 1 }
+	return NewTransforms(hh.p, angles, NewGroupD(6), shifts)
+}
+
+// tD6 returns a transformation with the symmetry group of the equilateral triangle
+// shifts are two: star has two different vertices
+func (hh *Hexagons) tD3(angles []int) *Transforms {
+	shifts :=  []int{ 1, 2 }
+	return NewTransforms(hh.p, angles, NewGroupD(3), shifts)
+}
+
+// tD6 returns a transformation with the symmetry group of the isoscelles triangle
+// shifts are six: three for each different angle and other three after mirror reflection
+func (hh *Hexagons) tC2(angles []int) *Transforms {
+	shifts :=  []int{ -3, -2, -1, 1, 2, 3 }
+	return NewTransforms(hh.p, angles, NewGroupC(2), shifts)
+}
+
+func (hh *Hexagons) New(t *Transforms, shift int, vector int) (Gon, error) {
+	var five []int // the minimum five angles to form the equilateral hexagon
+	sum := hh.a.sum
+	switch len(t.angles) {
+	
+	case 1: // group D6 expected
+		a := t.angles[0]
+		if 6*a != sum {
+			return nil, fmt.Errorf("Angles sum error 6(%d) != %d", a, sum)
+		}
+		five = []int{ a,a,a,a,a } // shift=1 or default
+
+	case 2: // group D3 expected
+		a, b := t.angles[0], t.angles[1]
+		if 3*(a+b) != hh.a.sum {
+			return nil, fmt.Errorf("Angles sum error 3(%d+%d) != sum", a, b, sum)
+		}
+		switch shift {
+		default: five = []int{ a,b,a,b,a }
+		case 2:  five = []int{ b,a,b,a,b }
+		}
+
+	case 3: // group C2 expected
+		a, b, c := t.angles[0], t.angles[1], t.angles[2]
+		if 2*(a+b+c) != sum {
+			return nil, fmt.Errorf("Angles sum error 2(%d+%d+%d) != %d", a, b, c, sum)
+		}
+		switch shift {
+		default: five = []int { a,b,c,a,b } // +1
+		case +2: five = []int { b,c,a,b,c }
+		case +3: five = []int { c,a,b,c,a }
+		case -1: five = []int { b,a,c,b,a }
+		case -2: five = []int { c,b,a,c,b }
+		case -3: five = []int { a,c,b,a,c }
+		}
+
+	default:
+		return nil, fmt.Errorf("Number of angles out of range [1,2,3]")
+	}
+	return NewHexagon(hh.p, t, five, vector)
+}
+
+// to deprecate
+/*
 func (hh *Hexagons) New(angles []int, shift, vector int) (Gon, error) {
 	s := hh.p.s.s
 	n := len(angles)
@@ -98,7 +196,7 @@ func (hh *Hexagons) new(id string, vertice int, angles []int, size int, group *G
 			Polygon: p,
 		}, nil
 	}
-}
+}*/
 
 
 
@@ -106,6 +204,16 @@ func (hh *Hexagons) new(id string, vertice int, angles []int, size int, group *G
 
 type Hexagon struct {
 	*Polygon
+}
+
+func NewHexagon(pp *Polylines, t *Transforms, angles []int, vector int) (Gon, error) {
+	if p, err := NewPolygonT(pp, t, angles, vector); err != nil {
+		return nil, err
+	} else {
+		return &Star{
+			Polygon: p,
+		}, nil
+	}
 }
 
 func (h *Hexagon) Prime() bool {

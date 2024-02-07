@@ -24,13 +24,13 @@ func (ss *Stars) All() []Gon {
 	all := make([]Gon, 0)
 	// stars
 	for i := ss.a.min; i < ss.a.max; i++ {
-		t := ss.tStar([]int{ i, symm - 1 - i })
+		t := ss.tDsymm([]int{ i, symm - 1 - i })
 		if s, err := ss.New(t, 1, 1); err == nil {
 			all = append(all, s)
 		}
 	}
 	// single regular polygon
-	t := ss.tRegPolygon([]int{ ss.a.max })
+	t := ss.tD2symm([]int{ ss.a.max })
 	if s, err := ss.New(t, 1, 1); err == nil {
 		all = append(all, s)
 	}
@@ -41,43 +41,17 @@ func (ss *Stars) Transforms(angles []int) (*Transforms, error) {
 	switch len(angles) {
 
 	case 1:
-		return ss.tRegPolygon(angles), nil
+		return ss.tD2symm(angles), nil
 
 	case 2:
 		if angles[0] == angles[1] {
-			return ss.tRegPolygon([]int{ angles[0] }), nil
+			return ss.tD2symm([]int{ angles[0] }), nil
 		} else {
-			return ss.tStar(angles), nil
+			return ss.tDsymm(angles), nil
 		}
 
 	default:
 		return nil, fmt.Errorf("Invalid number of angles")
-	}
-}
-
-func (ss *Stars) tRegPolygon(angles []int) *Transforms {
-	// group is D_(2s) the regular 2s-gon
-	// shifts are only identity
-	// vectors is list 1,2,3,...,symm
-	return &Transforms{
-		id:      ss.p.IdFromAngles(angles),
-		angles:  angles,
-		group:   NewGroupD(2*ss.p.s.s),
-		shifts:  []int{ 1 }, 
-		vectors: ss.p.vectors,             
-	}
-}
-
-func (ss *Stars) tStar(angles []int) *Transforms {
-	// group is D_s for a start
-	// shifts are 2: internal and external vertices.
-	// vectors is list 1,2,3,...,symm
-	return &Transforms{
-		id:      ss.p.IdFromAngles(angles),
-		angles:  angles,
-		group:   NewGroupD(ss.p.s.s),
-		shifts:  []int{ 1,2 }, 
-		vectors: ss.p.vectors,             
 	}
 }
 
@@ -113,6 +87,33 @@ func (ss *Stars) New(t *Transforms, shift int, vector int) (Gon, error) {
 		return nil, fmt.Errorf("Number of angles out of range [1,2]")
 	}
 }
+
+// tD2symm returns a transformation with the group of the regular 2symm-gon
+// shifts are only identity (all regular polygon vertices are isogonal)
+// vectors is list 1,2,3,...,symm
+func (ss *Stars) tD2symm(angles []int) *Transforms {
+	return &Transforms{
+		id:      ss.p.IdFromAngles(angles),
+		angles:  angles,
+		group:   NewGroupD(2*ss.p.s.s),
+		shifts:  []int{ 1 }, 
+		vectors: ss.p.vectors,             
+	}
+}
+
+// tDsymm returns a transformation with the group of the star with symm points.
+// shifts are 2: internal and external vertices of stars are different.
+// vectors is list 1,2,3,...,symm
+func (ss *Stars) tDsymm(angles []int) *Transforms {
+	return &Transforms{
+		id:      ss.p.IdFromAngles(angles),
+		angles:  angles,
+		group:   NewGroupD(ss.p.s.s),
+		shifts:  []int{ 1,2 }, 
+		vectors: ss.p.vectors,             
+	}
+}
+
 
 
 type Star struct {

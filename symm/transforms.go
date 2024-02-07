@@ -8,6 +8,16 @@ type Transforms struct {
 	vectors []int
 }
 
+func NewTransforms(p *Polylines, angles []int, group *Group, shifts []int) *Transforms {
+	return &Transforms{
+		id:      p.IdFromAngles(angles),
+		angles:  angles,
+		group:   group,
+		shifts:  shifts, 
+		vectors: p.vectors,             
+	}
+}
+
 func (t *Transforms) Group() *Group {
 	return t.group
 }

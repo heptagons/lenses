@@ -66,12 +66,12 @@ func (s *S) getHexas() *symm.Hexagons {
 	return symm.NewHexagons(p)
 }
 
-func (s *S) getOctas() *symm.Octagons {
+func (s *S) getOctas() symm.Gons {
 	p := symm.NewPolylines(s.Symm)
 	return symm.NewOctagons(p)
 }
 
-func (s *S) getStars() *symm.Stars {
+func (s *S) getStars() symm.Gons {
 	p := symm.NewPolylines(s.Symm)
 	return symm.NewStars(p)
 }
