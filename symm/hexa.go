@@ -26,13 +26,13 @@ func (hh *Hexagons) All() []Gon {
 	for a := hh.a.min; a <= max; a++ {
 		for b := a; b <= max; b++ {
 			if a == b {
-				t := hh.tD6([]int{ a })
+				t := hh.t1(a)
 				if h, err := hh.New(t, 1, 1); err == nil {
-					// equilateral hexagon
+					// regular hexagon
 					all = append(all, h)
 				}
 			} else {
-				t := hh.tD3([]int{ a,b })
+				t := hh.t2(a, b)
 				if h, err := hh.New(t, 1, 1); err == nil {
 					// triangular star
 					all = append(all, h)
@@ -40,13 +40,12 @@ func (hh *Hexagons) All() []Gon {
 			}
 			for c := b; c <=max; c++ {
 				if a == b && b == c {
-					// append already above
-				} else {
-					t := hh.tC2([]int{ a,b,c })
-					if s, err := hh.New(t, 1, 1); err == nil {
-						// lense
-						all = append(all, s)
-					}
+					continue // regular hexagon already appended
+				}
+				t := hh.t3(a, b, c)
+				if h, err := hh.New(t, 1, 1); err == nil {
+					// lense C2/D2
+					all = append(all, h)
 				}
 			}
 		}
@@ -58,16 +57,23 @@ func (hh *Hexagons) Transforms(angles []int) (*Transforms, error) {
 	switch len(angles) {
 
 	case 1:
-		return hh.tD6(angles), nil
+		a := angles[0]
+		return hh.t1(a), nil // regular hexagon D6
 
 	case 2:
-		if angles[0] == angles[1] {
-			return hh.tD6([]int{ angles[0] }), nil
+		a, b := angles[0], angles[1]
+		if a == b {
+			return hh.t1(a), nil // regular hexagon D6
 		} else {
-			return hh.tD3(angles), nil
+			return hh.t2(a,b), nil // triangular start D3
 		}
 	case 3:
-		return hh.tC2(angles), nil
+		a, b, c := angles[0], angles[1], angles[2]
+		if a == b && b == c {
+			return hh.t1(a), nil // regular hexagon D6
+		} else {
+			return hh.t3(a,b,c), nil // lense C2/D2
+		}
 
 	default:
 		return nil, fmt.Errorf("Invalid number of angles")
@@ -77,25 +83,35 @@ func (hh *Hexagons) Transforms(angles []int) (*Transforms, error) {
 
 
 
-// tD6 returns a transformation with the symmetry group of the regular hexagon
+// t1 returns a transformation with the symmetry group D6 (regular hexagon)
 // shifts are only identity (all regular hexagon vertices are isogonal)
-func (hh *Hexagons) tD6(angles []int) *Transforms {
+func (hh *Hexagons) t1(a int) *Transforms {
+	angles := []int{ a }
 	shifts :=  []int{ 1 }
 	return NewTransforms(hh.p, angles, NewGroupD(6), shifts)
 }
 
-// tD6 returns a transformation with the symmetry group of the equilateral triangle
+// t2 returns a transformation with the symmetry group D3 (equilateral triangle)
 // shifts are two: star has two different vertices
-func (hh *Hexagons) tD3(angles []int) *Transforms {
+func (hh *Hexagons) t2(a, b int) *Transforms {
+	angles := []int{ a, b }
 	shifts :=  []int{ 1, 2 }
 	return NewTransforms(hh.p, angles, NewGroupD(3), shifts)
 }
 
-// tD6 returns a transformation with the symmetry group of the isoscelles triangle
-// shifts are six: three for each different angle and other three after mirror reflection
-func (hh *Hexagons) tC2(angles []int) *Transforms {
-	shifts :=  []int{ -3, -2, -1, 1, 2, 3 }
-	return NewTransforms(hh.p, angles, NewGroupC(2), shifts)
+// t3 returns a transformation with symmetry groups D2 or C2.
+// If at least two of the three angles a,b,c are equal then
+// return with symmetry group D2 (letters N,S,Z) with 3 possible shifts.
+// Otherwise return symmetry group C2 (letters H,I,X,O) with 6 possible shifts.
+func (hh *Hexagons) t3(a, b, c int) *Transforms {
+	angles := []int { a, b, c }
+	if a == b || b == c {
+		shifts :=  []int{ 1, 2, 3 }
+		return NewTransforms(hh.p, angles, NewGroupD(2), shifts)
+	} else {
+		shifts :=  []int{ -3, -2, -1, 1, 2, 3 }
+		return NewTransforms(hh.p, angles, NewGroupC(2), shifts)
+	}
 }
 
 func (hh *Hexagons) New(t *Transforms, shift int, vector int) (Gon, error) {
@@ -139,67 +155,6 @@ func (hh *Hexagons) New(t *Transforms, shift int, vector int) (Gon, error) {
 	}
 	return NewHexagon(hh.p, t, five, vector)
 }
-
-// to deprecate
-/*
-func (hh *Hexagons) New(angles []int, shift, vector int) (Gon, error) {
-	s := hh.p.s.s
-	n := len(angles)
-	id := hh.p.IdFromAngles(angles)
-	switch n {
-	case 1:
-		a := angles[0]
-		if 6*a == 2*s {
-			// try hexagon with angles a,a,a,a,a,a. Rotational symmetry D_6
-			return hh.new(id, vector, []int{ a,a,a,a,a }, 1, D6)
-		} else {
-			return nil, fmt.Errorf("6(%d) != 2(%d)", a, s)
-		}
-
-	case 2:
-		a, b := angles[0], angles[1]
-		if 3*(a+b) == 2*s {
-			if a == b {
-				return hh.new(id, vector, []int{ a,a,a,a,a }, 1, D6)
-			} else {
-				// try hexagon with angles a,b,a,b,a,b. Rotational symmetry D_3
-				return hh.new(id, vector, []int{ a,b,a,b,a }, 2, D3)
-			}
-		} else {
-			return nil, fmt.Errorf("3(%d+%d) != 2(%d)", a,b,s)
-		}
-
-	case 3:
-		a, b, c := angles[0], angles[1], angles[2]
-		if 2*(a+b+c) == 2*s {
-			// try hexagon with angles:a,b,c,a,b,c. Rotational symmetry C_2
-			return hh.new(id, vector, []int{ a,b,c,a,b }, 3, C2)
-		} else {
-			return nil, fmt.Errorf("2(%d+%d+%d) != 2(%d)", a,b,c,s)
-		}
-
-	default:
-		return nil, fmt.Errorf("Invalid number of angles not [1,2,3]")
-	}
-}
-
-func (hh *Hexagons) new(id string, vertice int, angles []int, size int, group *Group) (Gon, error) {
-	
-	t := &Transforms{
-		group: group,
-	}
-
-	if p, err := NewPolygon(hh.p, id, vertice, angles, size, t); err != nil {
-		return nil, err
-	} else {
-		return &Hexagon{
-			Polygon: p,
-		}, nil
-	}
-}*/
-
-
-
 
 
 type Hexagon struct {

@@ -43,7 +43,7 @@ func (oo *Octagons) All() []Gon {
 						if a + e + 2*b + 2*c + 2*d != sum {
 							continue
 						}
-						t := oo.tD1([]int{ a,b,c,d,e })
+						t := oo.t5([]int{ a,b,c,d,e })
 						if o, err := oo.New(t, 1, 1); err == nil {
 							all = append(all, o)
 						}
@@ -72,7 +72,7 @@ func (oo *Octagons) Transforms(angles []int) (*Transforms, error) {
 	} else if !oo.a.ValidSum(a + 2*b + 2*c + 2*d + e) {
 		return nil, fmt.Errorf("Invalid angles: a + 2b + 2c + 2d + e != sum")
 	}
-	return oo.tD1(angles), nil
+	return oo.t5(angles), nil
 }
 
 // New returns and octagon with symmetry dihedral 1
