@@ -20,10 +20,12 @@ func NewHexagons(p *Polylines) *Hexagons {
 	}
 }
 
-func (hh *Hexagons) All(shift, vector int) []Gon {
+func (hh *Hexagons) All() []Gon {
 	all := make([]Gon, 0)
 	min := 1
 	max := hh.p.s.s - 1
+	shift := 1
+	vector := 1
 	for a := min; a <= max; a++ {
 		for b := a; b <= max; b++ {
 			if h, err := hh.New([]int{ a, b }, shift, vector); err == nil {

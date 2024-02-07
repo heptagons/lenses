@@ -61,27 +61,9 @@ func (s *S) getSymm(h *dom.Html) {
 	})
 }
 
-func (s *S) getHexas(h *dom.Html, call func(id string, h *dom.Html)) {
+func (s *S) getHexas() *symm.Hexagons {
 	p := symm.NewPolylines(s.Symm)
-	hh := symm.NewHexagons(p)
-	h.Elem(dom.Table, nil, func(h *dom.Html) {
-		s.gonTableHeader(h, "Hexagon")
-		for c, gon := range hh.All(1,1) {
-			s.gonTableRow(h, c, gon, call)
-		}
-	})
-}
-
-func (s *S) getHexa(h *dom.Html, angles []int, shift, vector int) error {
-	p := symm.NewPolylines(s.Symm)
-	g := symm.NewHexagons(p)
-	if gon, err := g.New(angles, shift, vector); err != nil {
-		return err
-	} else {
-		s.gonSvg(h, gon, 200)
-		s.gonTables(h, gon)
-		return nil
-	}
+	return symm.NewHexagons(p)
 }
 
 func (s *S) getOctas() *symm.Octagons {
@@ -93,7 +75,6 @@ func (s *S) getStars() *symm.Stars {
 	p := symm.NewPolylines(s.Symm)
 	return symm.NewStars(p)
 }
-
 
 func (s *S) getGon(h *dom.Html, gon symm.Gon) {
 	s.gonSvg(h, gon, 250)

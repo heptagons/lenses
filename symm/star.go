@@ -6,35 +6,33 @@ import (
 
 type Stars struct {
 	p *Polylines
+	a *Angles
 }
 
 func NewStars(p *Polylines) *Stars {
 	return &Stars{
 		p: p,
+		a: &Angles {
+			min: 1,               // minimal possible individual angle
+			max: (p.s.s - 1) / 2, // maximum possible individual angle
+		},
 	}
 }
 
 func (ss *Stars) All() []Gon {
 	symm := ss.p.s.s
 	all := make([]Gon, 0)
-	min := 1            // todo create Angles in ss first
-	max := (symm-1) / 2 
-	for i := min; i <= max; i++ {
-		var t *Transforms
-		if i == max {
-			t = ss.transforms1([]int{ i })
-			//if s, err := ss.New([]int { i }, shift, vector); err == nil {
-			//	all = append(all, s)
-			//}
-		} else {
-			t = ss.transforms2([]int{ i, symm - 1 - i })
-			//if s, err := ss.New([]int { i, symm-1-i }, shift, vector); err == nil {
-			//	all = append(all, s)
-			//}
-		}
+	// stars
+	for i := ss.a.min; i < ss.a.max; i++ {
+		t := ss.tStar([]int{ i, symm - 1 - i })
 		if s, err := ss.New(t, 1, 1); err == nil {
 			all = append(all, s)
 		}
+	}
+	// single regular polygon
+	t := ss.tRegPolygon([]int{ ss.a.max })
+	if s, err := ss.New(t, 1, 1); err == nil {
+		all = append(all, s)
 	}
 	return all
 }
@@ -43,13 +41,13 @@ func (ss *Stars) Transforms(angles []int) (*Transforms, error) {
 	switch len(angles) {
 
 	case 1:
-		return ss.transforms1(angles), nil
+		return ss.tRegPolygon(angles), nil
 
 	case 2:
 		if angles[0] == angles[1] {
-			return ss.transforms1([]int{ angles[0] }), nil
+			return ss.tRegPolygon([]int{ angles[0] }), nil
 		} else {
-			return ss.transforms2(angles), nil
+			return ss.tStar(angles), nil
 		}
 
 	default:
@@ -57,7 +55,7 @@ func (ss *Stars) Transforms(angles []int) (*Transforms, error) {
 	}
 }
 
-func (ss *Stars) transforms1(angles []int) *Transforms {
+func (ss *Stars) tRegPolygon(angles []int) *Transforms {
 	// group is D_(2s) the regular 2s-gon
 	// shifts are only identity
 	// vectors is list 1,2,3,...,symm
@@ -70,7 +68,7 @@ func (ss *Stars) transforms1(angles []int) *Transforms {
 	}
 }
 
-func (ss *Stars) transforms2(angles []int) *Transforms {
+func (ss *Stars) tStar(angles []int) *Transforms {
 	// group is D_s for a start
 	// shifts are 2: internal and external vertices.
 	// vectors is list 1,2,3,...,symm
@@ -130,20 +128,6 @@ func NewStar(pp *Polylines, t *Transforms, angles []int, vector int) (Gon, error
 		}, nil
 	}
 }
-
-/*
-func NewStar(pp *Polylines, id string, vertice int, angles []int, size int, group *Group) (Gon, error) {
-	t := &Transforms{
-		group: group,
-	}
-	if p, err := NewPolygon(pp, id, vertice, angles, size, t); err != nil {
-		return nil, err
-	} else {
-		return &Star{
-			Polygon: p,
-		}, nil
-	}
-}*/
 
 func (s *Star) Prime() bool {
 	return true
