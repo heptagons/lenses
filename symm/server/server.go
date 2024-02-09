@@ -50,7 +50,7 @@ func New(r *chi.Mux) {
 func getIndex(w http.ResponseWriter, r *http.Request) {
 	getPage(w, func(h *dom.Html) error {
 		h.Div(h1, "Symmetries")
-		for _, s := range[]int { 3, 5, 7, 9, 11, 13, 15, 17, 19, 21 } {
+		for _, s := range symm.SYMMS {
 			link := fmt.Sprintf("/symm/%d", s)
 			buttonLink(h, link, fmt.Sprintf("%d", s))
 		}

@@ -99,7 +99,10 @@ func (oo *Octagons) New(t *Transforms, shift int, vector int) (Gon, error) {
 		return nil, err
 	} else {
 		accums := o.Accums()
-		if accums[len(accums)-1].AtOrigin() {
+		last := accums[len(accums)-1]
+		if ok, err := oo.p.s.Origin(last); err != nil { // last accum is at origin
+			return nil, err
+		} else if ok {
 			return o, nil
 		} else {
 			return nil, fmt.Errorf("Octagon D1 is not equilateral")
@@ -108,9 +111,9 @@ func (oo *Octagons) New(t *Transforms, shift int, vector int) (Gon, error) {
 }
 
 
-// tD1 returns transforms with symmetry group of mirror symmetry like letters A,B,C,D,E,K...
+// t5 returns transforms with symmetry group of mirror symmetry like letters A,B,C,D,E,K...
 // shifts are eight positives: for eight vertices (no negative since no rotations)             
-func (oo *Octagons) tD1(angles []int) *Transforms {
+func (oo *Octagons) t5(angles []int) *Transforms {
 	shifts :=  []int{ 1,2,3,4,5,6,7,8 }
 	return NewTransforms(oo.p, angles, NewGroupD(1), shifts)
 }

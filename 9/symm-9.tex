@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \title{Symmetry 9}
 \author{https://github.com/heptagons/lenses}
-\date{2024/1/26}
+\date{2024/2/8}
 
 \usepackage{graphicx}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
@@ -21,19 +21,25 @@ We define the odd symmetry $s=\{ 3,5,7,9,... \}$ as the \textbf{set of pairs of 
 
 \section{Symmetries}
 
-We are interested in odd symmetries starting with $s=3$. Table \ref{tbl:symm} show the symmetries up to $s=9$. The minimum possible angle of the symmetry $s$ is $\theta = \dfrac{2\pi}s$. 
+We are interested in odd symmetries starting with $s=3$. Table \ref{tbl:symm} show the symmetries up to $s=9$. The minimum possible angle of the symmetry $s$ is $\omega = \dfrac{2\pi}s$. 
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c c|}
 \hline
-$s$ & Angle $\theta$ & Minimal value \\ \hline\
+$s$ & Angle $\omega$ & Minimal value \\ \hline\
 $3$ & $\alpha$ & $2\pi/3$ \\ \hline
 $5$ & $\beta$  & $2\pi/5$ \\ \hline
 $7$ & $\gamma$ & $2\pi/7$ \\ \hline
 $9$ & $\delta$ & $2\pi/9$ \\ \hline
+$11$ & $\epsilon$ & $2\pi/11$ \\ \hline
+$13$ & $\zeta$ & $2\pi/13$ \\ \hline
+$15$ & $\eta$ & $2\pi/15$ \\ \hline
+$17$ & $\theta$ & $2\pi/17$ \\ \hline
+$19$ & $\iota$ & $2\pi/19$ \\ \hline
+$21$ & $\kappa$ & $2\pi/21$ \\ \hline
 \end{tabular}
-\caption{Angles of symmetries $s=\{3,5,7,9\}$.} 
+\caption{Angles of symmetries $s=\{3,5,7,9,11,13,15,17,19,21\}$.} 
 \label{tbl:symm}
 \end{center}
 \end{table}
@@ -41,7 +47,7 @@ $9$ & $\delta$ & $2\pi/9$ \\ \hline
 Let $t = \dfrac{s+1}2$. We define $t$ independent abscissas and ordinates $x_i, y_i$ as follows:
 \begin{align}
 \left[ \begin{array}{c} x_i \\ y_i \end{array} \right] &= 
-\left[ \begin{array}{c} \cos((i-1)\theta) \\ \sin((i-1)\theta) \end{array} \right]
+\left[ \begin{array}{c} \cos((i-1)\omega) \\ \sin((i-1)\omega) \end{array} \right]
  \quad i = 1,2,...,t \label{eq:pairs}
 \end{align}
 
@@ -66,14 +72,14 @@ Any vector $v_i \equiv (k_1,k_2)$ can be rotated by $180^\circ$ around $p_0$. Th
 \overline{v_i} &\equiv (-k_1, -k_2) \label{eq:vector180}
 \end{align}
 
-Consecutive lines connected at their vertices to form a \textbf{polyline}. First we start at the vertice $o$ located at coordinates $(0,0)$ and then add vectors alternating the type $v_i$ and the type $\overline{v_i}$ in order the angles at the vertices are multiples of $\theta$. For example, the polyline with vectors $\overrightarrow{P_1P_2}=v_a$, $\overrightarrow{P_2P_3}=\overline{v_b}$, $\overrightarrow{P_3P_4}=v_c$, ... is denoted as:
+Consecutive lines connected at their vertices to form a \textbf{polyline}. First we start at the vertice $o$ located at coordinates $(0,0)$ and then add vectors alternating the type $v_i$ and the type $\overline{v_i}$ in order the angles at the vertices are multiples of $\omega$. For example, the polyline with vectors $\overrightarrow{P_1P_2}=v_a$, $\overrightarrow{P_2P_3}=\overline{v_b}$, $\overrightarrow{P_3P_4}=v_c$, ... is denoted as:
 \begin{align}
 \overline{P_1P_2P_3P_4...} &= \{ [], [v_a], [v_a,\overline{v_b}],[v_a,\overline{v_b},v_c],... \} 
  & 1 \leq a,b,c \leq t \\
  &= P_s(0,a,b,c,...) & \mbox{simplifyed form}
 \end{align}
 
-For two consecutive points $P_k = [...,v_m]$ and $P_{k+1} = [...,v_m,\overline{v_n}]$ for $k>0$ we have that the angle at point $P_k$ is $u\theta$, where $u$ is:
+For two consecutive points $P_k = [...,v_m]$ and $P_{k+1} = [...,v_m,\overline{v_n}]$ for $k>0$ we have that the angle at point $P_k$ is $u\omega$, where $u$ is:
 \begin{align}
 u &\equiv s + m - n \pmod{s} \quad  \quad 1 \leq m,n \leq t \label{eq:angle}
 \end{align}
@@ -227,13 +233,13 @@ R_9 &= \left\{ R_9\left(\frac{1}2\right), R_9(1), R_9\left(\frac{3}2\right), R_9
 \\\\
 Table \ref{tbl:rhombi} show the rhombi for odd symmetries up to $9$. Every rhombus is labeled with a consecutive lowercase letter $\mathbi{a}$, $\mathbi{b}$, $\mathbi{c}$,... The first rhombi $\mathbi{a}$ is found first in symmetry $s=3$ and then again in symmetry $s=9$ so we prevent renaming congruent rhombi.
 
-The rhombi angles $\theta_1 = u_1\theta$ and $\theta_2 = u_2\theta$ are expressed in function of the angles $\{\alpha,\beta,\gamma,\delta\}$ of symmetries $s=\{3,5,7,9\}$ where $\theta_1 < \theta_2$ and $\theta_1 + \theta_2 = \pi$.
+The rhombi angles $\omega_1 = u_1\omega$ and $\omega_2 = u_2\omega$ are expressed in function of the angles $\{\alpha,\beta,\gamma,\delta\}$ of symmetries $s=\{3,5,7,9\}$ where $\omega_1 < \omega_2$ and $\omega_1 + \omega_2 = \pi$.
 
 \begin{table}[h]
 \begin{center}
 \begin{tabular}{|c|c|c|c c| r |}
 \hline
-$R_s(u_1)$ & $u_2$ & Label & $\theta_1$ & $\theta_2$ & Area \\ \hline\
+$R_s(u_1)$ & $u_2$ & Label & $\omega_1$ & $\omega_2$ & Area \\ \hline\
 $R_3(\frac{1}2)$ & $1$  & $\mathbi{a}$ & $\alpha/2$ & $2\alpha/2$  & $\sin(\alpha) \approx 0.866$ \\[0.5ex]
 \hline
 $R_5(\frac{1}2)$ & $2$  & $\mathbi{b}$ & $\beta/2$  & $4\beta/2$   & $\sin(2\beta) \approx 0.587$\\[0.5ex]

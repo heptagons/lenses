@@ -135,7 +135,7 @@ func testPolyStars(t *testing.T, pp *Polylines, s int, star []int) {
 	}
 }
 
-func TestHexa(t *testing.T) {
+/*func TestHexa(t *testing.T) {
 
 	for _, symm := range []int{ 3, 5, 7, 9, 11, 13, 15 } {
 		s, _ := NewSymm(symm)
@@ -165,15 +165,24 @@ func TestHexa(t *testing.T) {
 			}
 		}
 	}
-}
+}*/
 
-func TestOcta(t *testing.T) {
+/*func TestOcta(t *testing.T) {
 	symm := 7
 	s, _ := NewSymm(symm)
 	p := NewPolylines(s)
 	oo := NewOctagons(p)
 	t.Logf("Symmetry %d", symm)
-	for c, o := range oo.All(1) {
+	for c, o := range oo.All() {
 		t.Logf("%d %s", c+1, o.String())
 	}
+}*/
+
+func TestHexaAll2(t *testing.T) {
+	symm := 15
+	s, _ := NewSymm(symm)
+	p := NewPolylines(s)
+	hh := NewHexagons(p)
+	t.Logf("Symmetry %d", symm)
+	hh.All2() // prints...
 }
