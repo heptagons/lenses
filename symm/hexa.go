@@ -27,6 +27,7 @@ func (hh *Hexagons) All2() {
 	sum := hh.a.sum
 	i := 1
 	g := ""
+	p := NewPolylineN(hh.p, 6)
 	for a := min; a <= max; a++ {
 		for b := a; b <= max; b++ {
 			ab := a + b
@@ -37,9 +38,7 @@ func (hh *Hexagons) All2() {
 					for e := 1; e <= max; e++ {
 						abcde := abcd + e
 						if f := sum - abcde; min <= f && f <= max {
-							p := NewPolylineWithAngles(hh.p, 1, []int{
-								a,b,c,d,e,
-							})
+							_ = p.SetAngles(1, []int{ a,b,c,d,e })
 							accums := p.Accums()
 							last := accums[len(accums)-1]
 							if ok, err := hh.p.s.Origin(last); err != nil { // last accum is at origin

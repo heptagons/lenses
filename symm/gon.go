@@ -16,8 +16,8 @@ type Gon interface {
 	Accums() []*Accum
 	// Angles is the complete list of angles of the polygon in sort order.
 	Angles() []int
-	// Vectors is the complete list of vectors of the polygon (the edges).
-	Vectors() []int
+	// Edges is the complete list of edges vectors of the polygon.
+	Edges() []int
 	// Prime prints true if this polygon is congruent with another of smaller 
 	// symmetry
 	Prime() bool
@@ -71,7 +71,7 @@ func (p *Polygon) Transforms() *Transforms {
 }
 
 func (p *Polygon) String() string {
-	return fmt.Sprintf("id=%s angles=%v vectors=%v", p.id, p.p.Angles(), p.p.vectors)
+	return fmt.Sprintf("id=%s angles=%v edges=%v", p.id, p.p.Angles(), p.p.edges)
 }
 
 func (p *Polygon) Accums() []*Accum {
@@ -86,8 +86,8 @@ func (p *Polygon) Angles() []int {
 	return p.p.Angles()
 }
 
-func (p *Polygon) Vectors() []int {
-	return p.p.vectors
+func (p *Polygon) Edges() []int {
+	return p.p.edges
 }
 
 

@@ -45,7 +45,9 @@ func (pp *Polylines) NewWithAngles(vector int, angles []int) (*Polyline, error) 
 			return nil, fmt.Errorf("Invalid angle %v at position %v", angle, pos)
 		}
 	}
-	return NewPolylineWithAngles(pp, vector, angles), nil
+	p := NewPolylineN(pp, len(angles)+1)
+	p.SetAngles(vector, angles)
+	return p, nil
 }
 
 // IdFromAngles returns a string of angles array values separated by commas
@@ -58,48 +60,57 @@ func (pp *Polylines) IdFromAngles(angles []int) string {
 }
 
 type Polyline struct {
-	pp      *Polylines
-	vectors []int
+	pp    *Polylines
+	edges []int
 }
 
-func NewPolyline(pp *Polylines, vectors []int) *Polyline {
+func NewPolyline(pp *Polylines, edges []int) *Polyline {
 	return &Polyline{
 		pp:      pp,
-		vectors: vectors,
+		edges: edges,
 	}
 }
 
-func NewPolylineWithAngles(pp *Polylines, vector int, angles []int) *Polyline {
-	s := pp.s.s
+func NewPolylineN(pp *Polylines, numEdges int) *Polyline {
+	return &Polyline{
+		pp:    pp,
+		edges: make([]int, numEdges),
+	}
+}
+
+// SetAngles updates this polyline edges. First edge is set as given vector
+// The rest of edges is computed according the given angles
+// Returns an error if number of edges + 1 don't equal the number of angles.
+func (p *Polyline) SetAngles(vector int, angles []int) error {
 	n := len(angles) + 1
-	vectors := make([]int, n)
-	vectors[0] = vector
+	if n != len(p.edges) {
+		return fmt.Errorf("number of angles + 1 != number of edges")
+	}
+	//edges := make([]int, n)
+	s := p.pp.s.s
+	p.edges[0] = vector
 	for i := 1; i < n; i++ {
-		m := vectors[i-1]
+		m := p.edges[i-1]
 		a := angles[i-1]
 		n := (s + m - a) % s
 		if n == 0 {
 			n = s // TODO document
 		}
-
-		//fmt.Println("n", n)
-		vectors[i] = n
+		p.edges[i] = n
 	}
-	return &Polyline{
-		pp:      pp,
-		vectors: vectors,
-	}
+	return nil
 }
 
+// Angles return the angles of this polyline reading the internal edges
 func (p *Polyline) Angles() []int {
-	if n :=  len(p.vectors); n < 2 {
+	if n :=  len(p.edges); n < 2 {
 		return nil
 	} else {
 		angles := make([]int, n-1)
 		s := p.pp.s.s
 		for i := 1; i < n; i++ {
-			m := p.vectors[i-1]
-			n := p.vectors[i]
+			m := p.edges[i-1]
+			n := p.edges[i]
 			u := (s + m - n) % s
 			angles[i-1] = u
 		}
@@ -107,8 +118,10 @@ func (p *Polyline) Angles() []int {
 	}
 }
 
+// Accums return the accumulators of the vertices of this polyline
+// reading the internal edges.
 func (p *Polyline) Accums() []*Accum {
-	n := len(p.vectors)
+	n := len(p.edges)
 	t := p.pp.s.t
 	base := NewAccum(t)
 	pos := 0
@@ -116,7 +129,7 @@ func (p *Polyline) Accums() []*Accum {
 	accums := make([]*Accum, n)
 	var indices []int	
 	for i := 0; i < n; i++ {
-		vindex := p.vectors[i] 
+		vindex := p.edges[i] 
 		if i % 2 == 0 {
 			// even elements are taken as normal vector (v)
 			indices = p.pp.s.v[vindex-1]

@@ -55,44 +55,6 @@ func (oo *Octagons) all5() []Gon {
 }
 
 
-func (oo *Octagons) all7() {
-	min := oo.a.min
-	max := oo.a.max
-	sum := oo.a.sum
-	//all := make([]Gon, 0)
-	z := 0
-	for a := min; a <= max; a++ {
-		for b := a; b <= max; b++ {
-			for c := min; c <= max; c++ {
-				for d := min; d <= max; d++ {
-					for e := min; e <= max; e++ {
-						for f := min; f <= max; f++ {
-							for g := min; g <= max; g++ {
-								for h := min; h < sum - (a+b+c+d+e+f+g); h++ {
-
-									p := NewPolylineWithAngles(oo.p, 1, []int{
-										a,b,c,d,e,f,g,
-									})
-									accums := p.Accums()
-									last := accums[len(accums)-1]
-									if ok, err := oo.p.s.Origin(last); err != nil { // last accum is at origin
-										continue
-									} else if !ok {
-										continue
-									}
-									z++
-									fmt.Println(z,  a,b,c,d,e,f,g,h)
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}	
-}
-
-
 // Transforms validate the given minimal octagon angles and return
 // sanitized angles and possible shifts and vectors to transform the octagon.
 func (oo *Octagons) Transforms(angles []int) (*Transforms, error) {
@@ -156,6 +118,96 @@ func (oo *Octagons) t5(angles []int) *Transforms {
 	return NewTransforms(oo.p, angles, NewGroupD(1), shifts)
 }
 
+func (oo *Octagons) all7() {
+	min := oo.a.min
+	max := oo.a.max
+	sum := oo.a.sum
+	//all := make([]Gon, 0)
+	z := 0
+	p := NewPolylineN(oo.p, 8)
+	for a := min; a <= max; a++ {
+		for b := a; b <= max; b++ {
+			for c := min; c <= max; c++ {
+				for d := min; d <= max; d++ {
+					for e := min; e <= max; e++ {
+						for f := min; f <= max; f++ {
+							for g := min; g <= max; g++ {
+								for h := min; h < sum - (a+b+c+d+e+f+g); h++ {
+									_ = p.SetAngles(1, []int{ a,b,c,d,e,f,g })
+									accums := p.Accums()
+									last := accums[len(accums)-1]
+									if ok, err := oo.p.s.Origin(last); err != nil { // last accum is at origin
+										continue
+									} else if !ok {
+										continue
+									}
+									z++
+									fmt.Println(z,  a,b,c,d,e,f,g,h)
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}	
+}
+
+func (oo *Octagons) AllAngles() {
+	min := oo.a.min
+	max := oo.a.max
+	sum := oo.a.sum
+	N := uint64(0) // octaAngles
+	C := 1
+	p := NewPolylineN(oo.p, 8)
+	for a := min; a <= max; a++ { 
+		N = uint64(a) << 56
+		for b := min; b <= max; b++ { ab := a+b
+			N &= 0xFF00000000000000
+			N |= uint64(b) << 48
+			for c := min; c <= max; c++ { abc := ab+c
+				N &= 0xFFFF000000000000
+				N |= uint64(c) << 40
+				for d := min; d <= max; d++ { abcd := abc + d
+					N &= 0xFFFFFF0000000000
+					N |= uint64(d) << 32
+					for e := min; e <= max; e++ { abcde := abcd + e
+						N &= 0xFFFFFFFF00000000
+						N |= uint64(e) << 24
+						for f := min; f <= max; f++ { abcdef := abcde + f
+							N &= 0xFFFFFFFFFF000000
+							N |= uint64(f) << 16
+							for g := min; g <= max; g++ { abcdefg := abcdef + g
+								N &= 0xFFFFFFFFFFFF0000
+								N |= uint64(g) << 8
+								if h := sum - abcdefg; h >= min && h <= max {
+									N &= 0xFFFFFFFFFFFFFF00
+									N |= uint64(h)
+									out := octaAnglesReduce(N)
+									if out != N {
+										// rotation/reflection already appeared
+										continue
+									}
+									_ = p.SetAngles(1, []int{ a,b,c,d,e,f,g })
+									accums := p.Accums()
+									last := accums[len(accums)-1]
+									if ok, err := oo.p.s.Origin(last); err != nil {
+										// last accum is at origin
+										continue
+									} else if !ok {
+										continue
+									}
+									fmt.Printf("%016x %d\n", N, C); C++
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 
 
 
@@ -194,4 +246,53 @@ func (o *Octagon) Prime() bool {
 func (o *Octagon) Intersecting() bool {
 	return false
 }
+
+// octaReduce receive eight 8-bit numbers (8 bytes) disposed side by side in a uint64.
+// The bytes represent the eight consecutive angles an octagon (closed or not) has.
+// When the eight bytes are A,B,C,D,E,F,G and H then n is:
+//	n = A<<56 + B<<48 + C<<40 + D<<32 + E<<24 + F<<16 + G<<8 + H
+// The bytes set is shifted and then reflected and shifted to locate the transormed n lower
+// which is returned. Sixteen combinations are tested:
+//	ABCDEFGH, HABCDEFG, GHABCDEF, FGHABCDE
+//	EFGHABCD, DEFGHABC, CDEFGHAB, BCDEFGHA
+//	HGFEDCBA, AHGFEDCB, BAHGFEDC, CBAHGFED
+//	DCBAHGFE, EDCBAHGF, FEDCBAHG, GFEDCBAH
+func octaAnglesReduce(n uint64) uint64 {
+	m0 := uint64(0xFFFFFFFFFFFFFFFF) // the biggest (the first)
+	m1 := n
+	m2 := uint64(0)
+	for i := 0; i < 8; i++ {
+		if m0 > m1 {
+			m0 = m1
+		}
+		//fmt.Printf("\tm1 %016x\n", m1)
+		low := m1 & 0xFF
+		m2 |= low << (56-8*i)
+		m1 >>= 8
+		m1 |= low << 56
+	}
+	for i := 0; i < 8; i++ {
+		if m0 > m2 {
+			m0 = m2
+		}
+		//fmt.Printf("\tm2 %016x\n", m2)
+		low := m2 & 0xFF
+		m2 >>= 8
+		m2 |= low << 56
+	}
+	//fmt.Printf("\tm0 %016x\n", m0)
+	return m0
+}
+
+// Octagon symmetry groups
+
+// D_4 symmetry
+// p = 12345678
+// n = ABABABAB
+//   = BABABABA
+
+// D_2 symmetry
+// p = 12345678
+// n = A
+
 
