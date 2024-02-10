@@ -225,7 +225,7 @@ func TestOctaAnglesReduce(t *testing.T) {
 }
 
 func TestOctaAllAngles(t *testing.T) {
-	symm := 9
+	symm := 17
 	s, _ := NewSymm(symm)
 	p := NewPolylines(s)
 	oo := NewOctagons(p)

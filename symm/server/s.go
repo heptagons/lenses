@@ -155,8 +155,8 @@ func (s *S) gonTables(h *dom.Html, gon symm.Gon) {
 			h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Angles()))
 		})
 		h.Elem(dom.Tr, nil, func(h *dom.Html) {
-			h.Elem(dom.Th, nil, "Vectors")
-			h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Vectors()))
+			h.Elem(dom.Th, nil, "Edges")
+			h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Edges()))
 		})
 	})
 	h.Elem(dom.Table, nil, func(h *dom.Html) {

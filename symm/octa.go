@@ -26,7 +26,8 @@ func NewOctagons(p *Polylines) *Octagons {
 
 // All returns all the types of octagons (of symmetry group D1)
 func (oo *Octagons) All() []Gon {
-	return oo.all5()
+	//return oo.all5()
+	return oo.AllAngles()
 }
 
 func (oo *Octagons) all5() []Gon {
@@ -58,31 +59,68 @@ func (oo *Octagons) all5() []Gon {
 // Transforms validate the given minimal octagon angles and return
 // sanitized angles and possible shifts and vectors to transform the octagon.
 func (oo *Octagons) Transforms(angles []int) (*Transforms, error) {
-	if len(angles) != 5 {
-		return nil, fmt.Errorf("Invalid number of angles")
-	}
-	for pos, angle := range angles {
-		if !oo.a.ValidAngle(angle) {
-			return nil, fmt.Errorf("Invalid angle at position %d", pos)
+
+	n := len(angles)
+	switch n {
+	case 5:
+		for pos, angle := range angles {
+			if !oo.a.ValidAngle(angle) {
+				return nil, fmt.Errorf("Invalid angle at position %d", pos)
+			}
 		}
+		a, b, c, d, e := angles[0], angles[1], angles[2], angles[3], angles[4]
+		if a > e {
+			return nil, fmt.Errorf("Invalid angles: a > e")	
+		} else if !oo.a.ValidSum(a + 2*b + 2*c + 2*d + e) {
+			return nil, fmt.Errorf("Invalid angles: a + 2b + 2c + 2d + e != sum")
+		}
+		return oo.t5(angles), nil
+
+	case 8:
+		for pos, angle := range angles {
+			if !oo.a.ValidAngle(angle) {
+				return nil, fmt.Errorf("Invalid angle at position %d", pos)
+			}
+		}
+		return oo.t8(
+			angles[0],
+			angles[1],
+			angles[2],
+			angles[3],
+			angles[4],
+			angles[5],
+			angles[6],
+			angles[7],
+		), nil
+
+	default:
+		return nil, fmt.Errorf("Invalid number of angles:%d", n)
 	}
-	a, b, c, d, e := angles[0], angles[1], angles[2], angles[3], angles[4]
-	if a > e {
-		return nil, fmt.Errorf("Invalid angles: a > e")	
-	} else if !oo.a.ValidSum(a + 2*b + 2*c + 2*d + e) {
-		return nil, fmt.Errorf("Invalid angles: a + 2b + 2c + 2d + e != sum")
-	}
-	return oo.t5(angles), nil
+
+
 }
 
-// New returns and octagon with symmetry dihedral 1
+func (oo *Octagons) New(t *Transforms, shift, vector int) (Gon, error) {
+	n := len(t.angles)
+	switch n {
+	case 5:
+		return oo.new5(t, shift, vector)
+	case 8:
+		return oo.new8(t, shift, vector)
+	default:
+		return nil, fmt.Errorf("Invalid number of angles:%d", )
+	}
+}
+
+// deprecate
+// new5 returns and octagon with symmetry dihedral 1
 // angles array must include five angles valid respect to octagons symmetry angles.
 // Angles a,b,c,d,e must have this conditions:
 //	min <= a,b,c,d,e <= max
 //	a <= e
 //  a + e + 2b + 2c + 2d == sum
 //  last accumulators must be zero (at origin)
-func (oo *Octagons) New(t *Transforms, shift int, vector int) (Gon, error) {
+func (oo *Octagons) new5(t *Transforms, shift, vector int) (Gon, error) {
 	a, b, c, d, e := t.angles[0], t.angles[1], t.angles[2], t.angles[3], t.angles[4]
 	seven := []int{ a,b,c,d,e,d,c }
 	switch shift {
@@ -110,12 +148,18 @@ func (oo *Octagons) New(t *Transforms, shift int, vector int) (Gon, error) {
 	}
 }
 
-
-// t5 returns transforms with symmetry group of mirror symmetry like letters A,B,C,D,E,K...
-// shifts are eight positives: for eight vertices (no negative since no rotations)             
-func (oo *Octagons) t5(angles []int) *Transforms {
-	shifts :=  []int{ 1,2,3,4,5,6,7,8 }
-	return NewTransforms(oo.p, angles, NewGroupD(1), shifts)
+func (oo *Octagons) new8(t *Transforms, shift, vector int) (Gon, error) {
+	// TODO use group/shift to change seven bytes
+	seven := []int{
+		t.angles[0],
+		t.angles[1],
+		t.angles[2],
+		t.angles[3],
+		t.angles[4],
+		t.angles[5],
+		t.angles[6],
+	}
+	return NewOctagon(oo.p, t, seven, vector)
 }
 
 func (oo *Octagons) all7() {
@@ -153,12 +197,13 @@ func (oo *Octagons) all7() {
 	}	
 }
 
-func (oo *Octagons) AllAngles() {
+func (oo *Octagons) AllAngles() []Gon {
 	min := oo.a.min
 	max := oo.a.max
 	sum := oo.a.sum
+	gons := make([]Gon, 0)
 	N := uint64(0) // octaAngles
-	C := 1
+	//C := 1
 	p := NewPolylineN(oo.p, 8)
 	for a := min; a <= max; a++ { 
 		N = uint64(a) << 56
@@ -188,7 +233,8 @@ func (oo *Octagons) AllAngles() {
 										// rotation/reflection already appeared
 										continue
 									}
-									_ = p.SetAngles(1, []int{ a,b,c,d,e,f,g })
+									eight := []int{ a,b,c,d,e,f,g }
+									_ = p.SetAngles(1, eight)
 									accums := p.Accums()
 									last := accums[len(accums)-1]
 									if ok, err := oo.p.s.Origin(last); err != nil {
@@ -197,7 +243,11 @@ func (oo *Octagons) AllAngles() {
 									} else if !ok {
 										continue
 									}
-									fmt.Printf("%016x %d\n", N, C); C++
+									t := oo.t8(a,b,c,d,e,f,g,h)
+									//fmt.Printf("%016x %d %v\n", N, C, t.Group()); C++
+									if o, err := oo.New(t, 1, 1); err == nil {
+										gons = append(gons, o)
+									}
 								}
 							}
 						}
@@ -206,8 +256,75 @@ func (oo *Octagons) AllAngles() {
 			}
 		}
 	}
+	return gons
 }
 
+// t5 returns transforms with symmetry group of mirror symmetry like letters A,B,C,D,E,K...
+// shifts are eight positives: for eight vertices (no negative since no rotations)             
+func (oo *Octagons) t5(angles []int) *Transforms {
+	shifts :=  []int{ 1,2,3,4,5,6,7,8 }
+	return NewTransforms(oo.p, angles, NewGroupD(1), shifts)
+}
+
+// t8 returns the octagons Trasforms of eight valid angles
+// Pending to prove odd symmetries octagons groups are only C1 and D1.
+func (oo *Octagons) t8(a,b,c,d,e,f,g,h int) *Transforms {
+
+	t := func(group *Group, shifts ...int) *Transforms {
+		all := []int{ a,b,c,d,e,f,g,h }
+		return NewTransforms(oo.p, all, group, shifts)
+	}
+	aceg := a == c && c == e && e == g
+	bdfh := b == d && d == f && f == h
+	
+	// D4
+	if aceg && bdfh { // 1 && 2
+		// a b c d e f g h
+		// 1 2 1 2 1 2 1 2
+		return t(NewGroupD(4), 1,2)
+	}
+
+	// D2
+	if aceg && b == f && d == h {
+		// a b c d e f g h
+		// 1 2 1 3 1 2 1 3
+		return t(NewGroupD(2), 1,2,3,4)
+	}
+	if bdfh && a == e && c == g {
+		// a b c d e f g h
+		// 2 1 3 1 2 1 3 1
+		return t(NewGroupD(2), 1,2,3,4)
+	}
+
+	// C2
+	if a==e && b==f && c==g && d==h {
+		// a b c d e f g h
+		// 1 2 3 4 1 2 3 4
+		return t(NewGroupC(2), -4,-3,-2,-1, 1,2,3,4)
+	}
+
+	// D1
+	// a b c d e f g h
+	// - 1 2 3 - 3 2 1
+	// 1 2 3 - 3 2 1 -
+	// 2 3 - 3 2 1 - 1
+	// 3 - 3 1 2 - 2 1
+	if b==h && c==g && d==f {
+		return t(NewGroupD(1), 1,2,3,4,5,6,7,8)
+	}
+	if a==e && b==f && c==e {
+		return t(NewGroupD(1), 1,2,3,4,5,6,7,8)	
+	}
+	if f==h && a==e && b==d {
+		return t(NewGroupD(1), 1,2,3,4,5,6,7,8)
+	}
+	if d==h && e==g && a==c {
+		return t(NewGroupD(1), 1,2,3,4,5,6,7,8)	
+	}
+
+	// C1
+	return t(NewGroupC(1), -8,-7,-6,-5,-4,-3,-2,-1, 1,2,3,4,5,6,7,8)
+}
 
 
 
