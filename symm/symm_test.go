@@ -1,6 +1,7 @@
 package symm
 
 import (
+	//"fmt"
 	"testing"
 	"reflect"
 )
@@ -208,5 +209,102 @@ func TestOctaAll7(t *testing.T) {
 }
 
 func TestOctaArray(t *testing.T) {
-	
+
+	symm := 9
+
+	min := uint64(1)
+	max := uint64(symm-1) //
+	sum := uint64(3*max)  // octagon internal angles
+
+
+	//list := make([]uint64, 0)
+
+	N := uint64(0)
+	C := 1
+	for a := min; a <= max; a++ { 
+		N = a << 56
+		for b := min; b <= max; b++ { 
+			ab := a+b
+			N &= 0xFF00000000000000
+			N |= b << 48
+			for c := min; c <= max; c++ {
+				abc := ab+c
+				N &= 0xFFFF000000000000
+				N |= c << 40
+				for d := min; d <= max; d++ {
+					abcd := abc + d
+					N &= 0xFFFFFF0000000000
+					N |= d << 32
+					for e := min; e <= max; e++ {
+						abcde := abcd + e
+						N &= 0xFFFFFFFF00000000
+						N |= e << 24
+						for f := min; f <= max; f++ {
+							abcdef := abcde + f
+							N &= 0xFFFFFFFFFF000000
+							N |= f << 16
+							for g := min; g <= max; g++ {
+								abcdefg := abcdef + g
+								N &= 0xFFFFFFFFFFFF0000
+								N |= g << 8
+								if h := sum - abcdefg; h >= min && h <= max {
+									N &= 0xFFFFFFFFFFFFFF00
+									N |= h
+									out := rotate8(N)
+									if out == N {
+										//list = append(list, out)
+										t.Logf("N %016x %d %016x", N, C, out);
+										C++
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+func rotate8(n uint64) uint64 {
+	m0 := uint64(0xFFFFFFFFFFFFFFFF) // the biggest (the first)
+	m1 := n
+	m2 := uint64(0)
+	for i := 0; i < 8; i++ {
+		if m0 > m1 {
+			m0 = m1
+		}
+		//fmt.Printf("\tm1 %016x\n", m1)
+		low := m1 & 0xFF
+		m2 |= low << (56-8*i)
+		m1 >>= 8
+		m1 |= low << 56
+	}
+	for i := 0; i < 8; i++ {
+		if m0 > m2 {
+			m0 = m2
+		}
+		//fmt.Printf("\tm2 %016x\n", m2)
+		low := m2 & 0xFF
+		m2 >>= 8
+		m2 |= low << 56
+	}
+	//fmt.Printf("\tm0 %016x\n", m0)
+	return m0
+}
+
+func TestRotate8(t *testing.T) {
+	for _, io := range [][]uint64 {
+		[]uint64{ 0x0123456789ABCDEF, 0x0123456789ABCDEF },
+		[]uint64{ 0xFEDCBA9876543210, 0x1032547698BADCFE },
+		[]uint64{ 0x0000000002010000, 0x0000000000000102 },
+		[]uint64{ 0x0000000002010000, 0x0000000000000102 },
+		[]uint64{ 0x0101010101010100, 0x0001010101010101 },
+	} {
+		in := io[0]
+		exp := io[1]
+		if got := rotate8(in); got != exp {
+			t.Fatalf("in: %016x out: exp %016x got %016x", in, exp, got)
+		}
+	}
 }

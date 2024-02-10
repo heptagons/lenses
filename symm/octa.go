@@ -4,11 +4,11 @@ import (
 	"fmt"
 )
 
-func NewOctagonsAngles(s symm) *Angles {
+func NewOctagonsAngles(symm int) *Angles {
 	return &Angles {
-		min: 1,     // minimal possible individual angle
-		max: s - 1, // maximum possible individual angle
-		sum: 3*s,   // the sum of octagon internal angles
+		min: 1,        // minimal possible individual angle
+		max: symm - 1, // maximum possible individual angle
+		sum: 3*symm,   // the sum of octagon internal angles
 	}
 }
 
@@ -53,6 +53,7 @@ func (oo *Octagons) all5() []Gon {
 	}	
 	return all
 }
+
 
 func (oo *Octagons) all7() {
 	min := oo.a.min
