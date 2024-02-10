@@ -4,6 +4,14 @@ import (
 	"fmt"
 )
 
+func NewOctagonsAngles(s symm) *Angles {
+	return &Angles {
+		min: 1,     // minimal possible individual angle
+		max: s - 1, // maximum possible individual angle
+		sum: 3*s,   // the sum of octagon internal angles
+	}
+}
+
 type Octagons struct {
 	p *Polylines
 	a *Angles
@@ -12,33 +20,24 @@ type Octagons struct {
 func NewOctagons(p *Polylines) *Octagons {
 	return &Octagons{
 		p: p,
-		a: &Angles {
-			min: 1,         // minimal possible individual angle
-			max: p.s.s - 1, // maximum possible individual angle
-			sum: 3*p.s.s,   // the sum of octagon internal angles
-		},
+		a: NewOctagonsAngles(p.s.s),
 	}
 }
 
 // All returns all the types of octagons (of symmetry group D1)
 func (oo *Octagons) All() []Gon {
-	all := make([]Gon, 0)
+	return oo.all5()
+}
+
+func (oo *Octagons) all5() []Gon {
 	min := oo.a.min
 	max := oo.a.max
 	sum := oo.a.sum
+	all := make([]Gon, 0)
 	for a := min; a <= max; a++ {
 		for e := a; e <= max; e++ {
-			if a + e + 6 > sum {
-				continue
-			}
 			for b := min; b <= max; b++ {
-				if a + e + 2*b + 4 > sum {
-					continue
-				}
 				for c := min; c <= max; c++ {
-					if a + e + 2*b + 2*c + 2 > sum {
-						continue
-					}
 					for d := min; d <= max; d++ {
 						if a + e + 2*b + 2*c + 2*d != sum {
 							continue
@@ -54,6 +53,44 @@ func (oo *Octagons) All() []Gon {
 	}	
 	return all
 }
+
+func (oo *Octagons) all7() {
+	min := oo.a.min
+	max := oo.a.max
+	sum := oo.a.sum
+	//all := make([]Gon, 0)
+	z := 0
+	for a := min; a <= max; a++ {
+		for b := a; b <= max; b++ {
+			for c := min; c <= max; c++ {
+				for d := min; d <= max; d++ {
+					for e := min; e <= max; e++ {
+						for f := min; f <= max; f++ {
+							for g := min; g <= max; g++ {
+								for h := min; h < sum - (a+b+c+d+e+f+g); h++ {
+
+									p := NewPolylineWithAngles(oo.p, 1, []int{
+										a,b,c,d,e,f,g,
+									})
+									accums := p.Accums()
+									last := accums[len(accums)-1]
+									if ok, err := oo.p.s.Origin(last); err != nil { // last accum is at origin
+										continue
+									} else if !ok {
+										continue
+									}
+									z++
+									fmt.Println(z,  a,b,c,d,e,f,g,h)
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}	
+}
+
 
 // Transforms validate the given minimal octagon angles and return
 // sanitized angles and possible shifts and vectors to transform the octagon.

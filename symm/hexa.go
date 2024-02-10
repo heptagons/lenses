@@ -20,8 +20,8 @@ func NewHexagons(p *Polylines) *Hexagons {
 	}
 }
 
+// All2 returns all possible hexagons including possible existing symmetry group C_1
 func (hh *Hexagons) All2() {
-	//all := make([]Gon, 0)
 	min := hh.a.min
 	max := hh.a.max
 	sum := hh.a.sum
@@ -47,7 +47,7 @@ func (hh *Hexagons) All2() {
 							} else if !ok {
 								continue
 							}
-							g = ""
+							g = "???"
 							if a==b && b==c && c==d && d==e && e==f {
 								g = "D_6"
 
@@ -66,9 +66,9 @@ func (hh *Hexagons) All2() {
 							}
 							fmt.Printf("%d) %s [%d,%d,%d,%d,%d,%d]\n", i, g, a,b,c,d,e,f)
 							i++
-
-
-
+							if g == "???" {
+								fmt.Printf("\t%v\n", accums)
+							}
 						}
 					}
 				}
@@ -77,8 +77,10 @@ func (hh *Hexagons) All2() {
 	}
 }
 
+// All return all the hexagons of symmetries groups D6,D3,D2 and C2
+// ignoring possible (inexisting not prove available yet) C1
 func (hh *Hexagons) All() []Gon {
-	all := make([]Gon, 0)
+	gons := make([]Gon, 0)
 	max := hh.a.max
 	for a := hh.a.min; a <= max; a++ {
 		for b := a; b <= max; b++ {
@@ -86,13 +88,13 @@ func (hh *Hexagons) All() []Gon {
 				t := hh.t1(a)
 				if h, err := hh.New(t, 1, 1); err == nil {
 					// regular hexagon
-					all = append(all, h)
+					gons = append(gons, h)
 				}
 			} else {
 				t := hh.t2(a, b)
 				if h, err := hh.New(t, 1, 1); err == nil {
 					// triangular star
-					all = append(all, h)
+					gons = append(gons, h)
 				}
 			}
 			for c := b; c <=max; c++ {
@@ -102,12 +104,12 @@ func (hh *Hexagons) All() []Gon {
 				t := hh.t3(a, b, c)
 				if h, err := hh.New(t, 1, 1); err == nil {
 					// lense C2/D2
-					all = append(all, h)
+					gons = append(gons, h)
 				}
 			}
 		}
 	}
-	return all
+	return gons
 }
 
 func (hh *Hexagons) Transforms(angles []int) (*Transforms, error) {
@@ -235,7 +237,7 @@ func NewHexagon(pp *Polylines, t *Transforms, angles []int, vector int) (Gon, er
 	if p, err := NewPolygonT(pp, t, angles, vector); err != nil {
 		return nil, err
 	} else {
-		return &Star{
+		return &Hexagon{
 			Polygon: p,
 		}, nil
 	}

@@ -117,30 +117,6 @@ func getSymm(w http.ResponseWriter, r *http.Request) {
 }
 
 func getHexas(w http.ResponseWriter, r *http.Request) {
-	/*
-	s := symmOk(w, r)
-	if s == nil {
-		return
-	}
-	getPage(w, func(h *dom.Html) error {
-		// back button to return to symmetry s
-		h.Div(nil, func(h *dom.Html) {
-			buttonLink(h, fmt.Sprintf("/symm/%d", s.S()), "<")
-		})
-		// title
-		h.Div(h1, fmt.Sprintf("Hexagons H<sub>%d</sub>", s.S()))
-		// hexagons table and links to go to particular hexagon
-		hh := s.getHexas()
-		h.Elem(dom.Table, nil, func(h *dom.Html) {
-			s.gonTableHeader(h, "Hexagon")
-			for c, gon := range hh.All() {
-				s.gonTableRow(h, c, gon, func(id string, h *dom.Html) {
-					buttonLink(h, fmt.Sprintf("/symm/%d/hexagon/%s", s.S(), id), id)
-				})
-			}
-		})
-		return nil
-	})*/
 	if s := symmOk(w, r); s == nil {
 		return
 	} else {
@@ -183,39 +159,7 @@ func getStars(w http.ResponseWriter, r *http.Request) {
 }
 
 
-
-
-
 func getHexa(w http.ResponseWriter, r *http.Request) {
-	/*
-	s := symmOk(w, r)
-	if s == nil {
-		return
-	}
-	getPage(w, func(h *dom.Html) error {
-		// back button
-		h.Div(nil, func(h *dom.Html) {
-			buttonLink(h, fmt.Sprintf("/symm/%d/hexagons", s.S()), "<")
-		})
-		sids, ids, err := idAngles(r)
-		if err != nil {
-			return err
-		}
-		// title
-		h.Div(h1, fmt.Sprintf("Hexagon H<sub>%d</sub>(%s)", s.S(), sids))
-		link := fmt.Sprintf("/symm/%d/hexagon/%s", s.S(), sids)
-
-		hh := s.getHexas()
-		// TODO change below to use transformations
-		shift, vector := buttonsShiftVector(r, s.S(), h, link)
-		if gon, err := hh.New(ids, shift, vector); err != nil {
-			return err
-		} else {
-			s.gonSvg(h, gon, 200)
-			s.gonTables(h, gon)
-			return nil
-		}
-	})*/
 	if s := symmOk(w, r); s == nil {
 		return
 	} else {

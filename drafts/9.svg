@@ -46,7 +46,7 @@
      inkscape:object-nodes="true"
      inkscape:zoom="1.1502442"
      inkscape:cx="1146.3673"
-     inkscape:cy="-55.788746"
+     inkscape:cy="138.61776"
      inkscape:window-x="57"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
@@ -204,7 +204,7 @@
   </g>
   <g
      style="display:block"
-     transform="translate(977.5798,139.16118)"
+     transform="translate(1396.9501,214.28216)"
      id="g4-1">
     <line
        x1="0"
@@ -1073,7 +1073,7 @@
        y="-730.98181" /></text>
   <g
      style="display:block"
-     transform="translate(850.97905,105.17592)"
+     transform="translate(1389.1534,107.74575)"
      id="g26-7-1-2-3">
     <line
        x1="0"
@@ -5193,4 +5193,64 @@
        id="tspan4965"
        x="392.20724"
        y="332.58148">i</tspan></text>
+  <g
+     id="g4326"
+     transform="translate(12.171328,31.297702)">
+    <path
+       inkscape:connector-curvature="0"
+       id="path4318"
+       d="m 593.64497,-86.264993 49.2404,-8.68241 43.3013,-24.999997 -17.101,46.984627 0,50 -32.1394,-38.30222 z"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path4320"
+       d="m 686.18667,-119.9474 32.1394,-38.30222 0,50 -17.101,46.984617 -32.1395,38.30218 0,-49.99994 z"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4322"
+       y="-129.47401"
+       x="579.00751"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:FreeMono;-inkscape-font-specification:'FreeMono, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="-129.47401"
+         x="579.00751"
+         id="tspan4324"
+         sodipodi:role="line">C1 octagon</tspan></text>
+  </g>
+  <g
+     id="g4341"
+     transform="translate(-787.65883,-285.15684)">
+    <path
+       inkscape:connector-curvature="0"
+       id="path4332"
+       d="m 1275.2645,176.42682 0,50 -17.101,46.98462 -32.1395,38.30218 1e-4,-49.99995 17.101,-46.98463 32.1394,-38.30222"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path4334"
+       d="m 1258.1635,273.41144 49.2404,8.68241 0,-50 17.101,-46.98462 -49.2404,-8.68241"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4337"
+       y="333.90585"
+       x="1224.9573"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:FreeMono;-inkscape-font-specification:'FreeMono, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="333.90585"
+         x="1224.9573"
+         id="tspan4339"
+         sodipodi:role="line">C1 octagon</tspan></text>
+  </g>
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 838.81032,130.21077 49.2404,-8.68241 43.3013,-24.999996 -17.101,46.984626 0,50 -32.1394,-38.30222 -43.3013,-25"
+     id="path4347"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 838.81032,130.21077 49.2404,-8.68241 43.3013,-25 -32.13933,-38.3022 -43.30127,-25 -17.1011,46.98467 z"
+     id="path4349"
+     inkscape:connector-curvature="0" />
 </svg>
