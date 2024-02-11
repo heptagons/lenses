@@ -1,5 +1,9 @@
 package symm
 
+import (
+	"fmt"
+)
+
 // https://mathstat.slu.edu/escher/index.php/Introduction_to_Symmetry
 type Group struct {
 	Letter string
@@ -32,6 +36,18 @@ func NewGroupD(number int) *Group {
 		Letter: "D",
 		Number: number,
 	}
+}
+
+func (g *Group) IsC1() bool {
+	return g.Letter == "C" && g.Number == 1
+}
+
+func (g *Group) IsD1() bool {
+	return g.Letter == "D" && g.Number == 1
+}
+
+func (g *Group) String() string {
+	return fmt.Sprintf("%s%d", g.Letter, g.Number)
 }
 
 var (

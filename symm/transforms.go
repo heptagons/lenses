@@ -1,5 +1,9 @@
 package symm
 
+import (
+	"fmt"
+)
+
 type Transforms struct {
 	id      string
 	angles  []int
@@ -30,3 +34,8 @@ func (t *Transforms) Vectors() []int {
 	return t.vectors
 }
 
+func (t *Transforms) String() string {
+	return fmt.Sprintf("id=%s a=%v g=%s s=%v v=%v",
+		t.id, t.angles, t.group, t.shifts, t.vectors,
+	)
+}

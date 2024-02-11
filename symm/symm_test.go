@@ -179,16 +179,16 @@ func testPolyStars(t *testing.T, pp *Polylines, s int, star []int) {
 	}
 }*/
 
-func TestHexaAll2(t *testing.T) {
+/*func TestHexaAll2(t *testing.T) {
 	symm := 37
 	s, _ := NewSymm(symm)
 	p := NewPolylines(s)
 	hh := NewHexagons(p)
 	t.Logf("Symmetry %d", symm)
 	hh.All2() // prints...
-}
+}*/
 
-func TestOctaAll5(t *testing.T) {
+/*func TestOctaAll5(t *testing.T) {
 	symm := 9
 	s, _ := NewSymm(symm)
 	p := NewPolylines(s)
@@ -197,18 +197,37 @@ func TestOctaAll5(t *testing.T) {
 	for c, o := range oo.all5() {
 		t.Logf("%d %v", c+1, o.Angles())
 	}
+}*/
+
+func TestHexaReduce(t *testing.T) {
+	for _, io := range [][]uint64 {
+		[]uint64{ 0x0123456789AB, 0x0123456789AB },
+		[]uint64{ 0xBA9876543210, 0x1032547698BA },
+		[]uint64{ 0x000002010000, 0x000000000102 },
+		[]uint64{ 0x000002010000, 0x000000000102 },
+		[]uint64{ 0x010101010000, 0x000001010101 },
+	} {
+		in := io[0]
+		exp := io[1]
+		if got := hexaReduce(in); got != exp {
+			t.Fatalf("in: %016x out: exp %016x got %016x", in, exp, got)
+		}
+	}
 }
 
-func TestOctaAll7(t *testing.T) {
-	symm := 5
+func TestHexaAll6(t *testing.T) {
+	symm := 19
 	s, _ := NewSymm(symm)
 	p := NewPolylines(s)
-	oo := NewOctagons(p)
+	hh := NewHexagons(p)
 	t.Logf("Symmetry %d", symm)
-	oo.all7()
+	for c, gon := range hh.all6() {
+		t.Logf("%d) %v", c+1, gon.Transforms())
+	}
 }
 
-func TestOctaAnglesReduce(t *testing.T) {
+
+func TestOctaReduce(t *testing.T) {
 	for _, io := range [][]uint64 {
 		[]uint64{ 0x0123456789ABCDEF, 0x0123456789ABCDEF },
 		[]uint64{ 0xFEDCBA9876543210, 0x1032547698BADCFE },
@@ -218,16 +237,28 @@ func TestOctaAnglesReduce(t *testing.T) {
 	} {
 		in := io[0]
 		exp := io[1]
-		if got := octaAnglesReduce(in); got != exp {
+		if got := octaReduce(in); got != exp {
 			t.Fatalf("in: %016x out: exp %016x got %016x", in, exp, got)
 		}
 	}
 }
 
-func TestOctaAllAngles(t *testing.T) {
+func TestOctaAll8(t *testing.T) {
+	symm := 7
+	s, _ := NewSymm(symm)
+	p := NewPolylines(s)
+	oo := NewOctagons(p)
+	t.Logf("Symmetry %d", symm)
+	for c, gon := range oo.all8() {
+		t.Logf("%d) %v", c+1, gon)
+	}
+}
+
+
+/*func TestOctaAllAngles(t *testing.T) {
 	symm := 17
 	s, _ := NewSymm(symm)
 	p := NewPolylines(s)
 	oo := NewOctagons(p)
 	oo.AllAngles()
-}
+}*/

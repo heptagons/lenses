@@ -86,9 +86,9 @@ func (s *S) getGon(h *dom.Html, gon symm.Gon) {
 func (s *S) gonTableHeader(h *dom.Html, gon string) {
 	h.Elem(dom.Tr, nil, func(h *dom.Html) {
 		h.Elem(dom.Td, nil, "&nbsp;")
-		h.Elem(dom.Th, nil, gon)
 		h.Elem(dom.Th, nil, "Group")
 		h.Elem(dom.Th, nil, "Angles")
+		//h.Elem(dom.Th, nil, "Angles")
 		//h.Elem(dom.Th, nil, "Vectors")
 	})
 }
@@ -96,6 +96,8 @@ func (s *S) gonTableHeader(h *dom.Html, gon string) {
 func (s *S) gonTableRow(h *dom.Html, c int, gon symm.Gon, call func(id string, h *dom.Html)) {
 	h.Elem(dom.Tr, nil, func(h *dom.Html) {
 		h.Elem(dom.Th, nil, fmt.Sprintf("%d", c))
+		g := gon.Transforms().Group()
+		h.Elem(dom.Td, nil, fmt.Sprintf("%s<sub>%d</sub>", g.Letter, g.Number))
 		if !gon.Prime() {
 			h.Elem(dom.Td, nil, fmt.Sprintf("Not prime"))
 		} else if gon.Intersecting() {
@@ -106,9 +108,7 @@ func (s *S) gonTableRow(h *dom.Html, c int, gon symm.Gon, call func(id string, h
 				call(gon.Id(), h)
 			})
 		}
-		g := gon.Transforms().Group()
-		h.Elem(dom.Td, nil, fmt.Sprintf("%s<sub>%d</sub>", g.Letter, g.Number))
-		h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Angles()))
+		//h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Angles()))
 		//h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Vectors()))
 	})
 }

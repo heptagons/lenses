@@ -6,13 +6,13 @@ import (
 
 type Stars struct {
 	p *Polylines
-	a *Angles
+	a *GonAngles
 }
 
 func NewStars(p *Polylines) *Stars {
 	return &Stars{
 		p: p,
-		a: &Angles {
+		a: &GonAngles {
 			min: 1,               // minimal possible individual angle
 			max: (p.s.s - 1) / 2, // maximum possible individual angle
 		},

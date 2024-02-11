@@ -71,7 +71,8 @@ func (p *Polygon) Transforms() *Transforms {
 }
 
 func (p *Polygon) String() string {
-	return fmt.Sprintf("id=%s angles=%v edges=%v", p.id, p.p.Angles(), p.p.edges)
+	return fmt.Sprintf("id=%s a=%v e=%v t=%v",
+		p.id, p.p.Angles(), p.p.edges, p.t)
 }
 
 func (p *Polygon) Accums() []*Accum {
@@ -91,6 +92,32 @@ func (p *Polygon) Edges() []int {
 }
 
 
+type GonAngles struct {
+	min int
+	max int
+	num int
+	sum int
+}
+
+func (a *GonAngles) Valid(angles []int) error {
+	if a.num != len(angles) {
+		return fmt.Errorf("Angles error, num=%d != %d", a.num, len(angles))
+	}
+	sum := 0
+	for _, angle := range angles {
+		if a.min > angle {
+			return fmt.Errorf("Angle too small, min=%d > %d", a.min, angle)
+		}
+		if a.max < angle {
+			return fmt.Errorf("Angle too big, max=%d < %d", a.max, angle)
+		}
+		sum += angle
+	}
+	if a.sum != sum {
+		return fmt.Errorf("Angles sum error: sum=%d != %d", a.sum, sum)
+	}
+	return nil
+}
 
 
 
