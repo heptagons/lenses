@@ -98,18 +98,14 @@ func (s *S) gonTableRow(h *dom.Html, c int, gon symm.Gon, call func(id string, h
 		h.Elem(dom.Th, nil, fmt.Sprintf("%d", c))
 		g := gon.Transforms().Group()
 		h.Elem(dom.Td, nil, fmt.Sprintf("%s<sub>%d</sub>", g.Letter, g.Number))
-		if !gon.Prime() {
-			h.Elem(dom.Td, nil, fmt.Sprintf("Not prime"))
-		} else if gon.Intersecting() {
-			h.Elem(dom.Td, nil, fmt.Sprintf("Self intersecting"))
-		} else {
-			// button/link for particular valid hexagon
-			h.Elem(dom.Td, nil, func(h *dom.Html) {
-				call(gon.Id(), h)
-			})
-		}
-		//h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Angles()))
-		//h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Vectors()))
+		h.Elem(dom.Td, nil, func(h *dom.Html) {
+			call(gon.Id(), h)
+			if !gon.Prime() {
+				h.Elem(dom.Span, nil, fmt.Sprintf("Not prime"))
+			} else if gon.Intersecting() {
+				h.Elem(dom.Span, nil, fmt.Sprintf("Self intersecting"))
+			}
+		})
 	})
 }
 

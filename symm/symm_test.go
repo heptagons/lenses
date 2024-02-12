@@ -255,10 +255,13 @@ func TestOctaAll8(t *testing.T) {
 }
 
 
-/*func TestOctaAllAngles(t *testing.T) {
-	symm := 17
-	s, _ := NewSymm(symm)
-	p := NewPolylines(s)
-	oo := NewOctagons(p)
-	oo.AllAngles()
-}*/
+func TestAccumOrigin15(t *testing.T)  {
+	// H_15(1,9,1,9,1,9)
+	//         0   1  2  3   4  5   6  7
+	h_1_9 := [][]int{
+		[]int{ 1, -1, 0, 0, -1, 2, -1, 0 },
+		[]int{ 1,  1, 0, 0, -1, 0,  1, 0 },
+	}
+	t.Logf("H15(1,9,1,9,1,9) x=%t", accumOrigin15x(h_1_9[0]))
+	t.Logf("H15(1,9,1,9,1,9) y=%t", accumOrigin15y(h_1_9[1]))
+}
