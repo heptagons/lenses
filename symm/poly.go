@@ -56,12 +56,16 @@ func (pp *Polylines) NewWithAngles(vector int, angles []int) (*Polyline, error) 
 
 // IdFromAngles returns a string of angles array values separated by commas
 func (pp *Polylines) IdFromAngles(angles []int) string {
-	var ids []string
-	for _, angle := range angles {
-		ids = append(ids, strconv.Itoa(angle))
+	ids := make([]string, len(angles))
+	for a, angle := range angles {
+		ids[a] = strconv.Itoa(angle)
 	}
 	return strings.Join(ids, ",")
 }
+
+
+
+
 
 type Polyline struct {
 	pp    *Polylines

@@ -274,12 +274,15 @@ func TestSimple(t *testing.T) {
 	// not simple hexagon (intersecting)
 	t1, err := hh.Transforms([]int { 1,1,5, 1,1,5 })
 	if err != nil {
-		t.Fatalf("transform error:%v", err)
+		t.Fatalf("transform error: %v", err)
 	}
 	h1, err := hh.New(t1, 1, 1)
 	if err != nil {
-		t.Fatalf("hexagon error:%v", err)
+		t.Fatalf("hexagon error: %v", err)
 	}
 	t.Logf("h1 = %v", h1)
+	if err := simpleStrategy(h1.Polyline(), h1.Transforms()); err != nil {
+		t.Fatalf("strategy error: %v", err)
+	}
 
 }

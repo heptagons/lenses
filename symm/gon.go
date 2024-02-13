@@ -52,12 +52,12 @@ func NewPolygon(pp *Polylines, t *Transforms, angles []int, vector int) (*Polygo
 	}
 }
 
-func (p *Polygon) Transforms() *Transforms {
-	return p.t
-}
-
 func (p *Polygon) Polyline() *Polyline {
 	return p.p
+}
+
+func (p *Polygon) Transforms() *Transforms {
+	return p.t
 }
 
 func (p *Polygon) Simple() bool {
