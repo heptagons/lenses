@@ -313,7 +313,7 @@ func TestSimple(t *testing.T) {
 		} else if gon, err := test.gons.New(trs, 1, 1); err != nil {
 			t.Fatalf("hexagon error: %v", err)
 		} else {
-			if simple, err := Simple(gon); err != nil {
+			if simple, err := Simple(gon.Polyline()); err != nil {
 				t.Fatalf("simple error: %v", err)
 			} else if test.simple != simple {
 				t.Fatalf("simple exp: %t got %t", test.simple, simple)

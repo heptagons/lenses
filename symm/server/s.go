@@ -88,12 +88,11 @@ func (s *S) gonTableHeader(h *dom.Html, gon string) {
 		h.Elem(dom.Td, nil, "&nbsp;")
 		h.Elem(dom.Th, nil, "Group")
 		h.Elem(dom.Th, nil, "Angles")
-		//h.Elem(dom.Th, nil, "Angles")
-		//h.Elem(dom.Th, nil, "Vectors")
+		h.Elem(dom.Th, nil, "Simple")
 	})
 }
 
-func (s *S) gonTableRow(h *dom.Html, c int, gon symm.Gon, call func(id string, h *dom.Html)) {
+func (s *S) gonTableRow(h *dom.Html, c,simple int, gon symm.Gon, call func(id string, h *dom.Html)) {
 	h.Elem(dom.Tr, nil, func(h *dom.Html) {
 		h.Elem(dom.Th, nil, fmt.Sprintf("%d", c))
 		t := gon.Transforms()
@@ -103,8 +102,11 @@ func (s *S) gonTableRow(h *dom.Html, c int, gon symm.Gon, call func(id string, h
 			call(t.Id(), h)
 			if !gon.Prime() {
 				h.Elem(dom.Span, nil, fmt.Sprintf("Not prime"))
-			} else if !gon.Simple() {
-				h.Elem(dom.Span, nil, fmt.Sprintf("Not simple"))
+			}
+		})
+		h.Elem(dom.Th, nil, func(h *dom.Html) {
+			if gon.Simple() {
+				h.Elem(dom.Span, nil, fmt.Sprintf("%d", simple))
 			}
 		})
 	})

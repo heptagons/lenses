@@ -44,10 +44,11 @@ func NewPolygon(pp *Polylines, t *Transforms, angles []int, vector int) (*Polygo
 	if p, err := pp.NewWithAngles(vector, angles); err != nil {
 		return nil, err
 	} else {
+		simple, _ := Simple(p)
 		return &Polygon{
 			p:      p,
 			t:      t,
-			//simple: Simple(pp, t),
+			simple: simple,
 		}, nil
 	}
 }

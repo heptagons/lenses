@@ -237,8 +237,12 @@ func getGons(s *S, h *dom.Html, gg symm.Gons, title, name, link string) error {
 	// octagons table and links to go to particular octagon
 	h.Elem(dom.Table, nil, func(h *dom.Html) {
 		s.gonTableHeader(h, name)
+		simple := 0
 		for c, gon := range gg.All() {
-			s.gonTableRow(h, c+1, gon, func(id string, h *dom.Html) {
+			if gon.Simple() {
+				simple++
+			} 
+			s.gonTableRow(h, c+1, simple, gon, func(id string, h *dom.Html) {
 				buttonLink(h, fmt.Sprintf(link, s.S(), id), id)
 			})
 		}

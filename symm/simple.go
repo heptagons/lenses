@@ -49,9 +49,7 @@ Strategy, compare edges A..F by pairs with these results:
               |------>|                 DF   intersect
                   |-->|      adjacent
 */
-func Simple(gon Gon) (bool, error) {
-    p := gon.Polyline()
-    //t := gon.Transforms()
+func Simple(p *Polyline) (bool, error) {
 	edges := p.Edges()
 	n := len(edges) 
 	if n < 3 {
