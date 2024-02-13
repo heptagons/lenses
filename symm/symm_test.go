@@ -265,24 +265,61 @@ func TestAccumOrigin15(t *testing.T)  {
 	t.Logf("H15(1,9,1,9,1,9) x=%t", accumOrigin15(h_1_9[0], h_1_9[1]))
 }
 
-func TestSimple(t *testing.T) {
-	symm := 7
-	s, _ := NewSymm(symm)
-	p := NewPolylines(s)
-	hh := NewHexagons(p)
-	
-	// not simple hexagon (intersecting)
-	t1, err := hh.Transforms([]int { 1,1,5, 1,1,5 })
-	if err != nil {
-		t.Fatalf("transform error: %v", err)
-	}
-	h1, err := hh.New(t1, 1, 1)
-	if err != nil {
-		t.Fatalf("hexagon error: %v", err)
-	}
-	t.Logf("h1 = %v", h1)
-	if err := simpleStrategy(h1.Polyline(), h1.Transforms()); err != nil {
-		t.Fatalf("strategy error: %v", err)
-	}
 
+func TestSimple(t *testing.T) {
+	type T struct {
+		gons   Gons
+		angles []int
+		simple bool
+	}
+	s7, _  := NewSymm(7);   p7 := NewPolylines(s7)
+	s9, _  := NewSymm(9);   p9 := NewPolylines(s9)
+	s11, _ := NewSymm(11); p11 := NewPolylines(s11)
+	s13, _ := NewSymm(13); p13 := NewPolylines(s13)
+	s15, _ := NewSymm(15); p15 := NewPolylines(s15)
+
+
+	h7  := NewHexagons(p7)
+	h9  := NewHexagons(p9)
+	h11 := NewHexagons(p11)
+	h13 := NewHexagons(p13)
+	h15 := NewHexagons(p15)
+
+	for _, test := range []*T {
+		&T{ gons:h7, angles:[]int { 1,1,5, 1,1,5 }, simple:false },
+		&T{ gons:h7, angles:[]int { 1,2,4, 1,2,4 }, simple:true  },
+
+		&T{ gons:h9, angles:[]int { 1,1,7, 1,1,7 }, simple:false },
+		&T{ gons:h9, angles:[]int { 1,2,6, 1,2,6 }, simple:true  },
+
+		&T{ gons:h11, angles:[]int { 1,1,9, 1,1,9 }, simple:false },
+		&T{ gons:h11, angles:[]int { 1,2,8, 1,2,8 }, simple:false },
+		&T{ gons:h11, angles:[]int { 1,3,7, 1,3,7 }, simple:true  },
+
+		&T{ gons:h13, angles:[]int { 1,1,11, 1,1,11 }, simple:false },
+		&T{ gons:h13, angles:[]int { 1,2,10, 1,2,10 }, simple:false },
+		&T{ gons:h13, angles:[]int { 1,3, 9, 1,3, 9 }, simple:true  },
+
+		&T{ gons:h15, angles:[]int { 1,1,13, 1,1,13 }, simple:false },
+		&T{ gons:h15, angles:[]int { 1,2,12, 1,2,12 }, simple:false },
+		&T{ gons:h15, angles:[]int { 1,3,11, 1,3,11 }, simple:false },
+		&T{ gons:h15, angles:[]int { 1,4,10, 1,4,10 }, simple:true  },
+		&T{ gons:h15, angles:[]int { 2,2,11, 2,2,11 }, simple:false },
+		&T{ gons:h15, angles:[]int { 2,3,10, 2,3,10 }, simple:true  },
+
+	} {
+		if trs, err := test.gons.Transforms(test.angles); err != nil {
+			t.Fatalf("transform error: %v", err)
+		} else if gon, err := test.gons.New(trs, 1, 1); err != nil {
+			t.Fatalf("hexagon error: %v", err)
+		} else {
+			if simple, err := Simple(gon); err != nil {
+				t.Fatalf("simple error: %v", err)
+			} else if test.simple != simple {
+				t.Fatalf("simple exp: %t got %t", test.simple, simple)
+			} else {
+				t.Logf("%v simple=%t", gon.Transforms(), simple)
+			}
+		}
+	}
 }

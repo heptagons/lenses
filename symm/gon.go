@@ -47,7 +47,7 @@ func NewPolygon(pp *Polylines, t *Transforms, angles []int, vector int) (*Polygo
 		return &Polygon{
 			p:      p,
 			t:      t,
-			simple: Simple(pp, t),
+			//simple: Simple(pp, t),
 		}, nil
 	}
 }

@@ -37,5 +37,6 @@ func (t *Transforms) Vectors() []int {
 }
 
 func (t *Transforms) String() string {
-	return fmt.Sprintf("{a=%v g=%s s=%v}", t.angles, t.group, t.shifts)
+	return fmt.Sprintf("{symm=%d a=%v g=%s s=%v}",
+		t.p.s.s, t.angles, t.group, t.shifts)
 }
