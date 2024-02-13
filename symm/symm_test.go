@@ -262,6 +262,24 @@ func TestAccumOrigin15(t *testing.T)  {
 		[]int{ 1, -1, 0, 0, -1, 2, -1, 0 },
 		[]int{ 1,  1, 0, 0, -1, 0,  1, 0 },
 	}
-	t.Logf("H15(1,9,1,9,1,9) x=%t", accumOrigin15x(h_1_9[0]))
-	t.Logf("H15(1,9,1,9,1,9) y=%t", accumOrigin15y(h_1_9[1]))
+	t.Logf("H15(1,9,1,9,1,9) x=%t", accumOrigin15(h_1_9[0], h_1_9[1]))
+}
+
+func TestSimple(t *testing.T) {
+	symm := 7
+	s, _ := NewSymm(symm)
+	p := NewPolylines(s)
+	hh := NewHexagons(p)
+	
+	// not simple hexagon (intersecting)
+	t1, err := hh.Transforms([]int { 1,1,5, 1,1,5 })
+	if err != nil {
+		t.Fatalf("transform error:%v", err)
+	}
+	h1, err := hh.New(t1, 1, 1)
+	if err != nil {
+		t.Fatalf("hexagon error:%v", err)
+	}
+	t.Logf("h1 = %v", h1)
+
 }

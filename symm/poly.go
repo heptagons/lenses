@@ -22,6 +22,10 @@ func NewPolylines(s *Symm) *Polylines {
 	}
 }
 
+func (pp *Polylines) String() string {
+	return fmt.Sprintf("{s=%d v=%v}", pp.s.s, pp.vectors)
+}
+
 func (pp *Polylines) New(edges ...int) (*Polyline, error) {
 	for v := 0; v < len(edges); v++ {
 		if edges[v] < 1 {
@@ -76,6 +80,14 @@ func NewPolylineN(pp *Polylines, numEdges int) *Polyline {
 		pp:    pp,
 		edges: make([]int, numEdges),
 	}
+}
+
+func (p *Polyline) String() string {
+	return fmt.Sprintf("p=%v e=%v", p.pp, p.edges)
+}
+
+func (p *Polyline) Edges() []int {
+	return p.edges
 }
 
 // SetAngles updates this polyline edges. First edge is set as given vector

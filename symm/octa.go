@@ -237,7 +237,7 @@ type Octagon struct {
 }
 
 func NewOctagon(pp *Polylines, t *Transforms, angles []int, vector int) (Gon, error) {
-	if p, err := NewPolygonT(pp, t, angles, vector); err != nil {
+	if p, err := NewPolygon(pp, t, angles, vector); err != nil {
 		return nil, err
 	} else {
 		return &Octagon{
@@ -262,11 +262,6 @@ func (o *Octagon) Prime() bool {
 		return false
 	}
 }
-
-func (o *Octagon) Intersecting() bool {
-	return false
-}
-
 
 // Octagon symmetry groups
 

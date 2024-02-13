@@ -96,14 +96,15 @@ func (s *S) gonTableHeader(h *dom.Html, gon string) {
 func (s *S) gonTableRow(h *dom.Html, c int, gon symm.Gon, call func(id string, h *dom.Html)) {
 	h.Elem(dom.Tr, nil, func(h *dom.Html) {
 		h.Elem(dom.Th, nil, fmt.Sprintf("%d", c))
-		g := gon.Transforms().Group()
+		t := gon.Transforms()
+		g := t.Group()
 		h.Elem(dom.Td, nil, fmt.Sprintf("%s<sub>%d</sub>", g.Letter, g.Number))
 		h.Elem(dom.Td, nil, func(h *dom.Html) {
-			call(gon.Id(), h)
+			call(t.Id(), h)
 			if !gon.Prime() {
 				h.Elem(dom.Span, nil, fmt.Sprintf("Not prime"))
-			} else if gon.Intersecting() {
-				h.Elem(dom.Span, nil, fmt.Sprintf("Self intersecting"))
+			} else if !gon.Simple() {
+				h.Elem(dom.Span, nil, fmt.Sprintf("Not simple"))
 			}
 		})
 	})
@@ -111,7 +112,7 @@ func (s *S) gonTableRow(h *dom.Html, c int, gon symm.Gon, call func(id string, h
 
 
 func (s *S) gonSvg(h *dom.Html, gon symm.Gon, size int) {
-	accums := gon.Accums()
+	accums := gon.Polyline().Accums()
 	var points [][]float64
 	max := float64(0)
 	for _, accum := range accums {
@@ -145,14 +146,15 @@ func (s *S) gonSvg(h *dom.Html, gon symm.Gon, size int) {
 }
 
 func (s *S) gonTables(h *dom.Html, gon symm.Gon) {
+	p := gon.Polyline()
 	h.Elem(dom.Table, nil, func(h *dom.Html) {
 		h.Elem(dom.Tr, nil, func(h *dom.Html) {
 			h.Elem(dom.Th, nil, "Angles")
-			h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Angles()))
+			h.Elem(dom.Td, nil, fmt.Sprintf("%v", p.Angles()))
 		})
 		h.Elem(dom.Tr, nil, func(h *dom.Html) {
 			h.Elem(dom.Th, nil, "Edges")
-			h.Elem(dom.Td, nil, fmt.Sprintf("%v", gon.Edges()))
+			h.Elem(dom.Td, nil, fmt.Sprintf("%v", p.Edges()))
 		})
 	})
 	h.Elem(dom.Table, nil, func(h *dom.Html) {
@@ -162,7 +164,7 @@ func (s *S) gonTables(h *dom.Html, gon symm.Gon) {
 			h.Elem(dom.Th, nil, "X")
 			h.Elem(dom.Th, nil, "Y")
 		})
-		for c, accum := range gon.Accums() {
+		for c, accum := range p.Accums() {
 			h.Elem(dom.Tr, nil, func(h *dom.Html) {
 				h.Elem(dom.Th, nil, fmt.Sprintf("%d", c+1))
 				h.Elem(dom.Td, nil, fmt.Sprintf("%v", accum.X()))

@@ -7,61 +7,47 @@ import (
 // Gon has the common methods for a polygon such as:
 // hexagon, octagon or star.
 type Gon interface {
-	// Id is the identifier of the polygon.
-	// Is the fewest number of angles separated by commas identifying the polygon.
-	Id() string
-	// The transformations of the polygon
+	
+	// Polyline contains the edges and vertices of the polygon.
+	Polyline() *Polyline
+	
+	// The transformations of the polygon to be placed in the plane.
 	Transforms() *Transforms
-	// The accumulators of the polygon to locate the vertices
-	Accums() []*Accum
-	// Angles is the complete list of angles of the polygon in sort order.
-	Angles() []int
-	// Edges is the complete list of edges vectors of the polygon.
-	Edges() []int
-	// Prime prints true if this polygon is congruent with another of smaller 
-	// symmetry
+	
+	// Prime returns false when the polygon IS congruent with another one of of smaller symmetry.
 	Prime() bool
-	// Intersecting prints true if at least 
-	Intersecting() bool
+	
+	// Simple returns false when the polygon has intersecting edges.
+	Simple() bool
 }
 
 type Gons interface {
+
 	// All returns all the types of polygon of all symmetry groups possible.
 	All() []Gon
+	
 	// Transforms validate the given minimal polygon angles and return
-	// sanitized angles and possible shifts and vectors to transform the polygon
+	// sanitized angles and possible shifts and vectors to set the polygon on the plane
 	Transforms(angles []int) (*Transforms, error)
+	
 	// New returns a polygon given the angles in given transforms shifted and rotated
 	New(t *Transforms, shift int, vector int) (Gon, error)
 }
 
 type Polygon struct {
-	p  *Polyline
-	id string // deprecate
-	t  *Transforms
+	p      *Polyline
+	t      *Transforms
+	simple bool
 }
 
-func NewPolygonT(pp *Polylines, t *Transforms, angles []int, vector int) (*Polygon, error) {
+func NewPolygon(pp *Polylines, t *Transforms, angles []int, vector int) (*Polygon, error) {
 	if p, err := pp.NewWithAngles(vector, angles); err != nil {
 		return nil, err
 	} else {
 		return &Polygon{
-			p:  p,
-			id: t.id,
-			t:  t,
-		}, nil
-	}
-}
-
-// deprecate
-func NewPolygon(pp *Polylines, id string, vector int, angles []int, size int, t *Transforms) (*Polygon, error) {
-	if p, err := pp.NewWithAngles(vector, angles); err != nil {
-		return nil, err
-	} else {
-		return &Polygon{
-			p:  p,
-			id: id,
-			t:  t,
+			p:      p,
+			t:      t,
+			simple: Simple(pp, t),
 		}, nil
 	}
 }
@@ -70,26 +56,18 @@ func (p *Polygon) Transforms() *Transforms {
 	return p.t
 }
 
+func (p *Polygon) Polyline() *Polyline {
+	return p.p
+}
+
+func (p *Polygon) Simple() bool {
+	return p.simple
+}
+
 func (p *Polygon) String() string {
-	return fmt.Sprintf("id=%s a=%v e=%v t=%v",
-		p.id, p.p.Angles(), p.p.edges, p.t)
+	return fmt.Sprintf("%v t=%v simple=%t", p.p, p.t, p.simple)
 }
 
-func (p *Polygon) Accums() []*Accum {
-	return p.p.Accums()
-}
-
-func (p *Polygon) Id() string {
-	return p.id
-}
-
-func (p *Polygon) Angles() []int {
-	return p.p.Angles()
-}
-
-func (p *Polygon) Edges() []int {
-	return p.p.edges
-}
 
 
 type GonAngles struct {

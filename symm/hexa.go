@@ -232,7 +232,7 @@ type Hexagon struct {
 }
 
 func NewHexagon(pp *Polylines, t *Transforms, angles []int, vector int) (Gon, error) {
-	if p, err := NewPolygonT(pp, t, angles, vector); err != nil {
+	if p, err := NewPolygon(pp, t, angles, vector); err != nil {
 		return nil, err
 	} else {
 		return &Hexagon{
@@ -255,11 +255,6 @@ func (h *Hexagon) Prime() bool {
 		return false
 	}
 }
-
-func (h *Hexagon) Intersecting() bool {
-	return false
-}
-
 
 
 // Deprecate later:
@@ -307,7 +302,7 @@ func (hh *Hexagons) NewFast(t *Transforms, shift int, vector int) (Gon, error) {
 	if h, err := NewHexagon(hh.p, t, five, vector); err != nil {
 		return nil, err
 	} else {
-		accums := h.Accums()
+		accums := h.Polyline().Accums()
 		last := accums[len(accums)-1]
 		if ok, err := hh.p.s.Origin(last); err != nil { // last accum is at origin
 			return nil, err

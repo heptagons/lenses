@@ -92,26 +92,14 @@ func (ss *Stars) New(t *Transforms, shift int, vector int) (Gon, error) {
 // shifts are only identity (all regular polygon vertices are isogonal)
 // vectors is list 1,2,3,...,symm
 func (ss *Stars) tD2symm(angles []int) *Transforms {
-	return &Transforms{
-		id:      ss.p.IdFromAngles(angles),
-		angles:  angles,
-		group:   NewGroupD(2*ss.p.s.s),
-		shifts:  []int{ 1 }, 
-		vectors: ss.p.vectors,             
-	}
+	return NewTransforms(ss.p, angles, NewGroupD(2*ss.p.s.s), []int{ 1 })
 }
 
 // tDsymm returns a transformation with the group of the star with symm points.
 // shifts are 2: internal and external vertices of stars are different.
 // vectors is list 1,2,3,...,symm
 func (ss *Stars) tDsymm(angles []int) *Transforms {
-	return &Transforms{
-		id:      ss.p.IdFromAngles(angles),
-		angles:  angles,
-		group:   NewGroupD(ss.p.s.s),
-		shifts:  []int{ 1,2 }, 
-		vectors: ss.p.vectors,             
-	}
+	return NewTransforms(ss.p, angles, NewGroupD(ss.p.s.s), []int{ 1,2 })
 }
 
 
@@ -121,7 +109,7 @@ type Star struct {
 }
 
 func NewStar(pp *Polylines, t *Transforms, angles []int, vector int) (Gon, error) {
-	if p, err := NewPolygonT(pp, t, angles, vector); err != nil {
+	if p, err := NewPolygon(pp, t, angles, vector); err != nil {
 		return nil, err
 	} else {
 		return &Star{
@@ -133,11 +121,6 @@ func NewStar(pp *Polylines, t *Transforms, angles []int, vector int) (Gon, error
 func (s *Star) Prime() bool {
 	return true
 }
-
-func (s *Star) Intersecting() bool {
-	return false
-}
-
 
 
 
