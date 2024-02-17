@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \title{Symmetry 9}
 \author{https://github.com/heptagons/lenses}
-\date{2024/2/8}
+\date{2024/2/17}
 
 \usepackage{graphicx}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
@@ -16,18 +16,21 @@
 
 \maketitle
 \begin{abstract}
-We define the odd symmetry $s=\{ 3,5,7,9,... \}$ as the \textbf{set of pairs of lines} of length $1$ all connected at their vertices and forming always angles equal to $2\pi u/s, u = 1,2,...,s-1$. The lines form cyclic polylines as hexagons, octagons and grater equilateral polygons that can tesselate the Euclidean plane.
+Let $\mathcal{L}$ be a set of connected lines, all of them of length $1$ in $\mathbb{R}^2$.
+Let $S=\{ 3,5,7,9,... \}$ be a set of odd symmetries $\geq 3$. Then let $\mathcal{L}(s), s \in S$ be the set of connected lines forming exclusively angles equal to $2\pi u/s, u = 1,2,...,s-1$. We show $\mathcal{L}(s)$ lines can form simple or complex polygons of sizes $n=\{ 6,8,10,... \}$. With software we look for simple polygons and dissect bigger ones into smallers.
 \end{abstract}
 
 \section{Symmetries}
 
-We are interested in odd symmetries starting with $s=3$. Table \ref{tbl:symm} show the symmetries up to $s=9$. The minimum possible angle of the symmetry $s$ is $\omega = \dfrac{2\pi}s$. 
+\subsection{Odd symmetries}
+
+Let $S=\{ 3,5,7,9,... \}$ be a set of odd symmetries. For every symmetry $s \in S$ we define $\omega = 2\pi/s$ as the symmetry minimal angle. Table \ref{tbl:symm} show the symmetries up to $s=21$. 
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c c|}
 \hline
-$s$ & Angle $\omega$ & Minimal value \\ \hline\
+$s$ & Angle $\omega$ & Minimal \\ \hline\
 $3$ & $\alpha$ & $2\pi/3$ \\ \hline
 $5$ & $\beta$  & $2\pi/5$ \\ \hline
 $7$ & $\gamma$ & $2\pi/7$ \\ \hline
@@ -44,14 +47,16 @@ $21$ & $\kappa$ & $2\pi/21$ \\ \hline
 \end{center}
 \end{table}
 
-Let $t = \dfrac{s+1}2$. We define $t$ independent abscissas and ordinates $x_i, y_i$ as follows:
+For symmetry $s$ define $t = \dfrac{s+1}2$. Then we define $t$ independent abscissas and ordinates $x_i, y_i$ as follows:
 \begin{align}
 \left[ \begin{array}{c} x_i \\ y_i \end{array} \right] &= 
 \left[ \begin{array}{c} \cos((i-1)\omega) \\ \sin((i-1)\omega) \end{array} \right]
  \quad i = 1,2,...,t \label{eq:pairs}
 \end{align}
 
-Let define a point $p_0$ located at coordinates $(0,0)$. Then there are exactly $s$ different points $p_1, p_2, ... p_s$  equidistant to point $p_0$ located at coordinates $\langle x_i,y_i \rangle$ as follows:
+\subsection{Points}
+
+Let define a point $p_0$ in $\mathbb{R}^2$ located at coordinates $(0,0)$. Then for every symmetry $s$ there are exactly $s$ different points $p_1, p_2, ... p_s$  equidistant to point $p_0$ located at coordinates $\langle x_i,y_i \rangle$ of equation \ref{eq:pairs} as follows:
 \begin{align}
 p_i &\equiv \left\{ \begin{array}{ccl}
  \langle x_j,y_j\rangle & \mbox{for} & i \leq t  \quad j = i\\
@@ -59,20 +64,24 @@ p_i &\equiv \left\{ \begin{array}{ccl}
  \end{array}\right. \label{eq:coords}
 \end{align}
 
-We transform each point $p_i$ into a vector $v_i$ which holds only the pairs $(x,y)$ indices and the signs:
+\subsection{Vectors}
+
+We transform each point $p_i$ of equation \ref{eq:coords} into a vector $v_i$ which holds only the pairs $(x,y)$ indices and the signs:
 \begin{align}
 v_i &\equiv \left\{ \begin{array}{ccl}
- ( j, j ) & \mbox{for} & i \leq t \quad j = i\\
- ( j, -j ) & \mbox{for} & i > t \quad j = s+2-i
+ ( +j, +j ) & \mbox{for} & i \leq t \quad j = i\\
+ ( +j, -j ) & \mbox{for} & i > t \quad j = s+2-i
  \end{array}\right. \label{eq:vectors}
 \end{align}
 
-Any vector $v_i \equiv (k_1,k_2)$ can be rotated by $180^\circ$ around $p_0$. The vector after the rotation is denoted as $\overline{v_i}$ and the original vector indices $k_1,k_2$ signs are changed:
+Any vector $v_i \equiv (k_1,k_2)$ can be rotated by $180^\circ$ around $p_0$. The vector after the rotation is denoted as $\overline{v_i}$ and has the original vector indices $k_1,k_2$ but with the signs changed:
 \begin{align}
 \overline{v_i} &\equiv (-k_1, -k_2) \label{eq:vector180}
 \end{align}
 
-Consecutive lines connected at their vertices to form a \textbf{polyline}. First we start at the vertice $o$ located at coordinates $(0,0)$ and then add vectors alternating the type $v_i$ and the type $\overline{v_i}$ in order the angles at the vertices are multiples of $\omega$. For example, the polyline with vectors $\overrightarrow{P_1P_2}=v_a$, $\overrightarrow{P_2P_3}=\overline{v_b}$, $\overrightarrow{P_3P_4}=v_c$, ... is denoted as:
+\subsection{Polylines}
+
+Consecutive lines connected at their vertices form a \textbf{polyline}. First we start at the vertice $o$ located at coordinates $(0,0)$ and then add vectors alternating the type $v_i$ and the type $\overline{v_i}$ in order the angles at the vertices are multiples of $\omega$. For example, the polyline with vectors $\overrightarrow{P_1P_2}=v_a$, $\overrightarrow{P_2P_3}=\overline{v_b}$, $\overrightarrow{P_3P_4}=v_c$, ... is denoted as:
 \begin{align}
 \overline{P_1P_2P_3P_4...} &= \{ [], [v_a], [v_a,\overline{v_b}],[v_a,\overline{v_b},v_c],... \} 
  & 1 \leq a,b,c \leq t \\
@@ -84,7 +93,9 @@ For two consecutive points $P_k = [...,v_m]$ and $P_{k+1} = [...,v_m,\overline{v
 u &\equiv s + m - n \pmod{s} \quad  \quad 1 \leq m,n \leq t \label{eq:angle}
 \end{align}
 
-Every point can be located independently by pre-calculating \textbf{accumulators} $\textbf{P}^A$ wich are integer matrices of size $t\times 2$:
+\subsection{Accumulators}
+
+Every polyline vertice can be located independently by pre-calculating \textbf{accumulators} $\textbf{P}^A$ wich are integer matrices of size $t\times 2$:
 \begin{align}
 \textbf{X} &= \left[\begin{array}{ccccc}X_1&X_2&X_3&...&X_t
  \end{array}\right]  \quad X_i \in \mathbb{Z}\\
@@ -108,16 +119,41 @@ Y_i &= \left\{ \begin{array}{ccl}
  \end{array}\right.
 \end{align}
 
-The coordinates of point $P$ in $\mathbb{R}^2$ is calculated adding the products of the accumulators $\textbf{P}^A$ of equation \ref{eq:accums} and the coordinates of points $p_i$ of equation \ref{eq:coords}:
+\subsection{Coordinates}
+
+The coordinates of every polyline's point $P$ in $\mathbb{R}^2$ is calculated adding the products of the accumulators $\textbf{P}^A$ of equation \ref{eq:accums} and the coordinates of points $p_i$ of equation \ref{eq:coords}:
 \begin{align}
 \langle P_x,P_y\rangle &= 
  \biggl< \sum_{i=1}^{t}X_ix_i, \sum_{i=1}^{t}Y_iy_i \biggr> \label{eq:absolute}
 \end{align}
 
+\section{Symmetry $s=9$}
 
+Let $\mathcal{L}(9)$ be the set of connected lines of length $1$ forming angles exclusivelly of symmetry $9$. First we find the vectors to be used to build valid polylines.
+Using equation \ref{eq:vectors} we get the nine vectors:
+\begin{align*}
+v_1 &= (1,1)\\
+v_2 &= (2,2)\\
+v_3 &= (3,3)\\
+v_4 &= (4,4)\\
+v_5 &= (5,5)\\
+v_6 &= (11-6,-(11-6)) = (5,-5)\\
+v_7 &= (11-7,-(11-7)) = (4,-4)\\
+v_8 &= (11-8,-(11-8)) = (3,-3)\\
+v_9 &= (11-9,-(11-9)) = (2,-2)
+\end{align*}
+Figure \ref{fig:vectors-a} $(i)$ show the nine different vectors $v_1$, $v_2$, ... $v_9$ in symmetry $s=9$. With the vectors we can update the lines points accumulators. Some examples for the $\textbf{X}$ row:
+\begin{align*}
+X[a,b,c,d,e] + v_i &= \left\{ \begin{array}{ccl}
+ X[a+1,b,c,d,e] & \mbox{when} & v_1\equiv(1,1),\quad \mbox{ because } x = +1\\
+ X[a,b+1,c,d,e] & \mbox{when} & v_9\equiv(2,-2),\quad \mbox{ because } x = +2\\
+ ... & & \\
+ X[a,b,c,d,e+1] & \mbox{when} & v_6\equiv(5,-5),\quad \mbox{ because } x = +5\\
+ X[a-1,b,c,d,e] & \mbox{when} & \overline{v_1}\equiv(-1,-1),\quad \mbox{ because } x = -1\\
+ ... & &
+ \end{array}\right.
+\end{align*}
 
-
-\section{Symmetry $m=9$}
 
 \begin{figure}[H]
 \centering
@@ -126,36 +162,17 @@ The coordinates of point $P$ in $\mathbb{R}^2$ is calculated adding the products
 \label{fig:vectors-a}
 \end{figure}
 
-\subsection{Vectors}
 
-Figure \ref{fig:vectors-a} $(i)$ show the nine different vectors $v_1$, $v_2$, ... $v_9$ in symmetry $m=9$. Using the vectors equation \ref{eq:vectors} we get the nine vectors:
-$v_1 = (1,1)$,
-$v_2 = (2,2)$,
-$v_3 = (3,3)$,
-$v_4 = (4,4)$,
-$v_5 = (5,5)$,
-$v_6 = (11-6,-(11-6)) = (5,-5)$,
-$v_7 = (11-7,-(11-7)) = (4,-4)$,
-$v_8 = (11-8,-(11-8)) = (3,-3)$ and
-$v_9 = (11-9,-(11-9)) = (2,-2)$.
+\subsection{Example polylines}
 
-\subsection{Polylines}
+Figure \ref{fig:vectors-a} show polylines in three stages. At $(i)$ we have polyline $\overline{AB}$, at $(ii)$ we have the polyline $\overline{ABC}$ and at $(iii)$ we have the polyline $\overline{ABCD}$.
 
-Figure \ref{fig:vectors-a} $(ii)$ show polyline $\overline{ABC}$ and $(iii)$ show polyline $\overline{ABCD}$. The alternating vectors of the type $[...,v_m]$ are show in red and the vectors of the type $[...,v_m,\overline{v_n}]$ are shown in blue. Angle $\angle{ABC} = 4\delta$ and angle $\angle{BCD} = 2\delta$. The polyline $\{A,B,C,D\}$ is denoted by $\{ [\hspace{2pt}], [v_1], [v_1, \overline{v_6}], [v_1,\overline{v_6},v_4] \}$ or in compact form $P_9(0,1,6,4)$.
+The alternating vectors of the type $[...,v_m]$ are show in red and the vectors of the type $[...,v_m,\overline{v_n}]$ are shown in blue.
 
-\subsection{Accumulators}
+At $(ii)$ we notice the angle $\angle{ABC} = 4\delta$ and at $(iii)$ we notice the angle $\angle{BCD} = 2\delta$.
 
-With the vertices $v_1,...v_9$ of symmetry $9$ already calculated, we know how to calculate the accumulators, for example, for the $\textbf{X}$ row we have:
-\begin{align}
-X[a,b,c,d,e] + v_i &= \left\{ \begin{array}{ccl}
- X[a+1,b,c,d,e] & \mbox{for} & v_1\equiv(1,1) \\
- X[a,b+1,c,d,e] & \mbox{for} & v_2\equiv(2,2), v_9\equiv(2,-2)\\
- ... & & \\
- X[a,b,c,d,e+1] & \mbox{for} & v_5\equiv(5,5), v_6\equiv(5,-5)\\
- X[a-1,b,c,d,e] & \mbox{for} & \overline{v_1}\equiv(-1,-1) \\
- ... & &
- \end{array}\right.
-\end{align}
+At $(iii)$ we have the polyline $\{A,B,C,D\}$ is denoted by $\{ [\hspace{2pt}], [v_1], [v_1, \overline{v_6}], [v_1,\overline{v_6},v_4] \}$ or in compact form $P_9(0,1,6,4)$.
+\\\\
 
 Lets get the accumulators of the points of polyline $\overline{ABCD} = \{[\hspace{2pt}], [v_1], [v_1,\overline{v_6}], [v_1,\overline{v_6},v_4]\} = P_9(0,1,6,4)$ shown in figure $(iii)$. First by definition the accumulators at $o \equiv (0,0)$ which is point $A=[\hspace{2pt}]$ are:
 \begin{align}
@@ -197,7 +214,7 @@ v_4^A &= \left[\begin{array}{ccccc}0&0&0&1&0 \\ 0&0&0&1&0 \end{array}\right]\non
  &= \left[\begin{array}{ccccc}1&0&0&1&-1 \\ 1&0&0&1&1 \end{array}\right]
 \end{align}
 
-From the last equation of the accumulators of point $D = [v_1,\overline{v_6},v_4]$ we have as different of zero these values: $X_1=X_4=1$, $X_5=-1$, $Y_1=Y_4=Y_5=1$. Using the equation \ref{eq:absolute} we calculate the absolute coordinates:
+From the last equation of the accumulators of point $D = [v_1,\overline{v_6},v_4]$ we have as different of zero these values: $X_1=X_4=1$, $X_5=-1$, $Y_1=Y_4=Y_5=1$. Using the equation \ref{eq:absolute} we calculate the absolute coordinates of point at $D$:
 \begin{align*}
 D_x &= x_1 + x_2 - x_5\\
     &= \cos(0) + \cos(3\delta) - \cos(4\delta)\\
@@ -209,14 +226,22 @@ D_y &= y_1 + y_2 + y_2\nonumber\\
     &\approx 1.208
 \end{align*}
 
-Using equation \ref{eq:angle} we calculate the angles multiples $u$ at points $B$ and $C$. From $C=[v_1,\overline{v_6}]$ we have that $m_B=1,n_B=6$ and we calculate $u$ at point $B$:
-\begin{align}
-u_B &= 9 + 1 - 6 \pmod{9} = 4
-\end{align}
+\subsection{Example angles}
+
+Using equation \ref{eq:angle} we can calculate the angles $u\delta$ at vertices $B$ and $C$. From $C=[v_1,\overline{v_6}]$ we have that $m_B=1,n_B=6$ and we calculate $u$ at point $B$:
+\begin{align*}
+u_B &\equiv s + m_B - n_B \pmod{s}\\
+    &= 9 + 1 - 6 \pmod{9}\\
+    &= 4
+\end{align*}
 From $D = [v_1,\overline{v_6},v_4]$ we have that $m_C=6,n_C=4$ and we calculate $u$ at point $C$:
-\begin{align}
-u_C &= 9 + 6 - 4 \pmod{9} = 2
-\end{align}
+\begin{align*}
+u_C &\equiv s + m_C - n_C \pmod{s}\\
+    &= 9 + 6 - 4 \pmod{9}\\
+    &= 2
+\end{align*}
+
+From figure \ref{fig:vectors-a} we notice that the angles values at $B$ and $C$ which are $4\delta$ and $2\delta$ match our calculations above.
 
 \section{Rhombi}
 
