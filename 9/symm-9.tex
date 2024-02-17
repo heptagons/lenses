@@ -17,37 +17,38 @@
 \maketitle
 \begin{abstract}
 Let $\mathcal{L}$ be a set of connected lines, all of them of length $1$ in $\mathbb{R}^2$.
-Let $S=\{ 3,5,7,9,... \}$ be a set of odd symmetries $\geq 3$. Then let $\mathcal{L}(s), s \in S$ be the set of connected lines forming exclusively angles equal to $2\pi u/s, u = 1,2,...,s-1$. We show $\mathcal{L}(s)$ lines can form simple or complex polygons of sizes $n=\{ 6,8,10,... \}$. With software we look for simple polygons and dissect bigger ones into smallers.
+Let $S=\{ 3,5,7,9,... \}$ be a set of odd symmetries $\geq 3$. Then let $\mathcal{L}(s), s \in S$ be the set of connected lines forming exclusively angles equal to $2\pi u/s$ where $u = 1,2,...,s-1$. We show $\mathcal{L}(s)$ lines can form simple or complex polygons of sizes $n=\{ 6,8,10,... \}$. With software we look for simple polygons and dissect bigger ones into smallers.
 \end{abstract}
 
 \section{Symmetries}
 
 \subsection{Odd symmetries}
 
-Let $S=\{ 3,5,7,9,... \}$ be a set of odd symmetries. For every symmetry $s \in S$ we define $\omega = 2\pi/s$ as the symmetry minimal angle. Table \ref{tbl:symm} show the symmetries up to $s=21$. 
+Let $S=\{ 3,5,7,9,... \}$ be a set of odd symmetries. For every symmetry $s \in S$ we define $\omega = 2\pi/s$ as the symmetry minimal angle and we have $s-1$ different angles with values $u\omega$ for $u=1,2,3,...,s-1$.
+Table \ref{tbl:symm} show the symmetries angles up to $s=21$. 
 
 \begin{table}[H]
 \begin{center}
-\begin{tabular}{|c|c c|}
+\begin{tabular}{|c|c c| c |}
 \hline
-$s$ & Angle $\omega$ & Minimal \\ \hline\
-$3$ & $\alpha$ & $2\pi/3$ \\ \hline
-$5$ & $\beta$  & $2\pi/5$ \\ \hline
-$7$ & $\gamma$ & $2\pi/7$ \\ \hline
-$9$ & $\delta$ & $2\pi/9$ \\ \hline
-$11$ & $\epsilon$ & $2\pi/11$ \\ \hline
-$13$ & $\zeta$ & $2\pi/13$ \\ \hline
-$15$ & $\eta$ & $2\pi/15$ \\ \hline
-$17$ & $\theta$ & $2\pi/17$ \\ \hline
-$19$ & $\iota$ & $2\pi/19$ \\ \hline
-$21$ & $\kappa$ & $2\pi/21$ \\ \hline
+$s$ & Name & $\omega$ & Different angles \\ \hline
+$3$ & $\alpha$ & $2\pi/3$ & $\alpha$, $2\alpha$ \\ \hline
+$5$ & $\beta$  & $2\pi/5$ & $\beta$, $2\beta$, $3\beta$, $4\beta$ \\ \hline
+$7$ & $\gamma$ & $2\pi/7$ & $\gamma$, $2\gamma$, ..., $6\gamma$ \\ \hline
+$9$ & $\delta$ & $2\pi/9$ & $\delta$, $2\delta$, ..., $8\delta$ \\ \hline
+$11$ & $\epsilon$ & $2\pi/11$ & $\epsilon$, $2\epsilon$, ..., $10\epsilon$ \\ \hline
+$13$ & $\zeta$ & $2\pi/13$ & $\zeta$, $2\zeta$, ..., $11\zeta$ \\ \hline
+$15$ & $\eta$ & $2\pi/15$ & $\eta$, $2\eta$, ..., $14\eta$  \\ \hline
+$17$ & $\theta$ & $2\pi/17$ & $\theta$, $2\theta$, ..., $16\theta$  \\ \hline
+$19$ & $\iota$ & $2\pi/19$ & $\iota$, $2\iota$, ..., $18\iota$  \\ \hline
+$21$ & $\kappa$ & $2\pi/21$ & $\kappa$, $2\kappa$, ..., $20\kappa$\\ \hline
 \end{tabular}
-\caption{Angles of symmetries $s=\{3,5,7,9,11,13,15,17,19,21\}$.} 
+\caption{Angles of symmetries $\{3,5,7,9,11,13,15,17,19,21\}$.} 
 \label{tbl:symm}
 \end{center}
 \end{table}
 
-For symmetry $s$ define $t = \dfrac{s+1}2$. Then we define $t$ independent abscissas and ordinates $x_i, y_i$ as follows:
+For symmetry $s \in S$ we define $t = \dfrac{s+1}2$. Then we define $t$ independent abscissas and ordinates $x_i, y_i$ as follows:
 \begin{align}
 \left[ \begin{array}{c} x_i \\ y_i \end{array} \right] &= 
 \left[ \begin{array}{c} \cos((i-1)\omega) \\ \sin((i-1)\omega) \end{array} \right]
@@ -56,17 +57,17 @@ For symmetry $s$ define $t = \dfrac{s+1}2$. Then we define $t$ independent absci
 
 \subsection{Points}
 
-Let define a point $p_0$ in $\mathbb{R}^2$ located at coordinates $(0,0)$. Then for every symmetry $s$ there are exactly $s$ different points $p_1, p_2, ... p_s$  equidistant to point $p_0$ located at coordinates $\langle x_i,y_i \rangle$ of equation \ref{eq:pairs} as follows:
+Let define a point $p_0$ in $\mathbb{R}^2$ located at coordinates $(0,0)$. Then for every symmetry $s \in S$ there are exactly $s$ different points $p_1, p_2, ... p_s$  equidistant to point $p_0$ located at coordinates $\langle x_i,y_i \rangle$ of equation \ref{eq:pairs} as follows:
 \begin{align}
 p_i &\equiv \left\{ \begin{array}{ccl}
- \langle x_j,y_j\rangle & \mbox{for} & i \leq t  \quad j = i\\
- \langle x_j, -y_j\rangle & \mbox{for} & i > t \quad j = s+2-i
+ \langle +x_j, +y_j\rangle & \mbox{for} & i \leq t  \quad j = i\\
+ \langle +x_j, -y_j\rangle & \mbox{for} & i > t \quad j = s+2-i
  \end{array}\right. \label{eq:coords}
 \end{align}
 
 \subsection{Vectors}
 
-We transform each point $p_i$ of equation \ref{eq:coords} into a vector $v_i$ which holds only the pairs $(x,y)$ indices and the signs:
+We map every point $p_i$ of equation \ref{eq:coords} to a vector $v_i$ which holds only the pairs $(x,y)$ indices with the signs:
 \begin{align}
 v_i &\equiv \left\{ \begin{array}{ccl}
  ( +j, +j ) & \mbox{for} & i \leq t \quad j = i\\
@@ -81,7 +82,7 @@ Any vector $v_i \equiv (k_1,k_2)$ can be rotated by $180^\circ$ around $p_0$. Th
 
 \subsection{Polylines}
 
-Consecutive lines connected at their vertices form a \textbf{polyline}. First we start at the vertice $o$ located at coordinates $(0,0)$ and then add vectors alternating the type $v_i$ and the type $\overline{v_i}$ in order the angles at the vertices are multiples of $\omega$. For example, the polyline with vectors $\overrightarrow{P_1P_2}=v_a$, $\overrightarrow{P_2P_3}=\overline{v_b}$, $\overrightarrow{P_3P_4}=v_c$, ... is denoted as:
+We define $\mathcal{L}(s)$ the set of lines connected at their vertices and forming angles of the symmetry $s$. Consecutive lines connected at their vertices form a \textbf{polyline}. First we start at the vertice $o$ located at coordinates $(0,0)$ and then add vectors alternating the type $v_i$ and the type $\overline{v_i}$ in order the angles at the vertices are multiples of $\omega$. For example, the polyline with vectors $\overrightarrow{P_1P_2}=v_a$, $\overrightarrow{P_2P_3}=\overline{v_b}$, $\overrightarrow{P_3P_4}=v_c$, ... is denoted as:
 \begin{align}
 \overline{P_1P_2P_3P_4...} &= \{ [], [v_a], [v_a,\overline{v_b}],[v_a,\overline{v_b},v_c],... \} 
  & 1 \leq a,b,c \leq t \\
